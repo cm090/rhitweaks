@@ -1,0 +1,215 @@
+:root {
+    --bg-color: black;
+    --accent-color: #800000;
+    --primary: var(--accent-color);
+    --border-radius: 12px;
+}
+
+#ek-overlay,
+#ek-modal {
+    display: none;
+}
+
+section,
+.dashboard-card,
+#page-header .card,
+.dropdown-menu,
+.section-summary.main,
+.info,
+.formulation.clearfix,
+.comment.clearfix,
+#gridshadebox_content,
+.modal-dialog,
+.modal-content,
+.card,
+.filepicker>div {
+    border-radius: var(--border-radius);
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.section,
+.card,
+#region-main {
+    background: #eee;
+}
+
+.section-summary.main {
+    border: 0.25px solid gray !important;
+}
+
+.dashboard-card .card-img,
+.dashboard-card .card-footer,
+div#nav-drawer::-webkit-scrollbar,
+.evalkit-widget-surveys,
+.usernav li:first-child {
+    display: none !important;
+}
+
+body,
+#nav-drawer {
+    background: var(--bg-color) !important;
+}
+
+#nav-drawer .list-group-item {
+    border-radius: var(--border-radius);
+    margin: 5px 0;
+    background: #4e4e4e;
+    color: white;
+    transition: 0.3s;
+}
+
+#nav-drawer .list-group-item:hover {
+    background: #444444 !important;
+    border-inline-start: 10px solid transparent;
+}
+
+#nav-drawer .list-group-item.active {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color);
+}
+
+.d-inline-block.mr-3>button {
+    background-color: #00000000 !important;
+    border: none;
+    color: white;
+}
+
+.navbar-brand {
+    background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
+    background-size: 240px !important;
+    margin-top: 12px;
+}
+
+.btn {
+    border-radius: 100px !important;
+}
+
+input,
+select {
+    border-radius: 8px !important;
+    border: 1px solid gray !important;
+}
+
+.editor_atto_toolbar {
+    border-radius: 12px 12px 0 0;
+}
+
+.editor_atto_content_wrap {
+    border-radius: 0 0 12px 12px;
+}
+
+.simplesearchform input {
+    border-radius: 100px 0 0 100px !important;
+}
+
+.simplesearchform button {
+    border-radius: 0 100px 100px 0 !important;
+}
+
+.ablock .answer div {
+    border-radius: var(--border-radius);
+    padding: 5px;
+}
+
+#goto-top-link>a>i {
+    margin: 0 !important;
+}
+
+#goto-top-link a {
+    top: 20px;
+    right: 5px;
+}
+
+#page-footer {
+    border-radius: var(--border-radius);
+    margin: 10px;
+}
+
+nav.navbar.fixed-top {
+    border-radius: 0 0 12px 12px;
+    background-color: color-mix(in srgb, var(--accent-color), transparent 56.5%) !important;
+    border: none !important;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+div[data-region="grade-actions-panel"],
+div[data-region="grading-navigation-panel"] {
+    background: white;
+}
+
+.fp-viewbar.btn-group a {
+    margin: 0 5px;
+}
+
+#region-main>div.region_main_settings_menu_proxy,
+#toggledsection-2>ul {
+    background: transparent;
+}
+
+#nav-drawer>nav>ul>li>a>div.ml-1 {
+    margin-left: 0 !important;
+}
+
+#rmtSearch .modal-dialog {
+    top: 100px;
+}
+
+#rmtSearch .modal-body,
+#rmtSearch .modal-footer {
+    background: #000000dd;
+}
+
+#rmtSearch .modal-body {
+    border-radius: 12px 12px 0 0;
+}
+
+#rmtSearch .modal-footer {
+    border-radius: 0 0 12px 12px;
+    border-top-color: #6f6f6f !important;
+}
+
+#rmtSearch .modal-content {
+    background: transparent !important;
+    border: none !important;
+}
+
+#rmtSearch #rmtResultList div {
+    padding: 8px !important;
+    color: white;
+}
+
+#rmtSearch #rmtResultList div.active {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+#rmtSearch #rmtResultList div.active::after {
+    content: 'Enter';
+    color: #ffffffa6;
+    float: right;
+}
+
+#rmtSearch #rmtSearchInput {
+    background: transparent;
+    color: white;
+    width: calc(100% - 25px);
+    border: none !important;
+    outline: none;
+}
+
+body.modal-open {
+    overflow-y: scroll !important;
+}
+
+#searchform-navbar {
+    display: none;
+}
+
+.simplesearchform a.btn-open {
+    display: block !important;
+}
