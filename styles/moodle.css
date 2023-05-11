@@ -34,7 +34,7 @@ a,
     color: var(--accent-color);
 }
 
-a:not([role="menuitem"]) :not(.list-group-item) :not(.navbar a) :not(.btn-primary):hover,
+a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary):hover,
 .btn-link:hover {
     color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
