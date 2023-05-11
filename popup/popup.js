@@ -89,6 +89,7 @@ const listeners = () => {
     moodleSettings.addEventListener('click', () => {
         moodlePage.style.display = 'block';
         mainPage.style.display = 'none';
+        document.getElementById('reportBtn').style.display = 'none';
         document.getElementById('backBtn').style.display = '';
         document.getElementById('resetBtn').style.display = '';
         document.getElementById('resetBtn').setAttribute('page', 'moodle');
@@ -99,6 +100,7 @@ const listeners = () => {
     scheduleSettings.addEventListener('click', () => {
         schedulePage.style.display = 'block';
         mainPage.style.display = 'none';
+        document.getElementById('reportBtn').style.display = 'none';
         document.getElementById('backBtn').style.display = '';
         document.getElementById('resetBtn').style.display = '';
         document.getElementById('resetBtn').setAttribute('page', 'schedule');
@@ -132,6 +134,7 @@ const reset = () => {
     moodlePage.style.display = 'none';
     schedulePage.style.display = 'none';
     mainPage.style.display = 'block';
+    document.getElementById('reportBtn').style.display = '';
     document.getElementById('backBtn').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
     document.getElementById('resetBtn').removeAttribute('page');
