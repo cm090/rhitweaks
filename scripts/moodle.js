@@ -43,7 +43,9 @@ const setStyle = () => {
     chrome.storage.sync.get('moodle').then(data => {
         let root = document.querySelector(':root');
         root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
+        root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
+        root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
         root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
     });
     let url = chrome.runtime.getURL('styles/moodle.css');

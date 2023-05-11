@@ -21,14 +21,16 @@
                     Enable Moodle tweaks
                 </label>
                 <br />
-                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="moodleSettings">Moodle Settings</button>
+                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="moodleSettings">Moodle
+                    Settings</button>
             </div>
             <div class="option">
                 <input class="form-check-input" type="checkbox" value="" id="scheduleEnable">
                 <label class="form-check-label" for="scheduleEnable">
                     Enable schedule lookup tweaks
                 </label>
-                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="scheduleSettings">Schedule Lookup Settings</button>
+                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="scheduleSettings">Schedule Lookup
+                    Settings</button>
             </div>
         </div>
         <!-- Moodle -->
@@ -36,13 +38,23 @@
             <h3 class="text-center title">Moodle Settings</h3>
             <label for="bgColorText">Background color</label>
             <div class="input-group color-input">
-                <input type="text" id="bgColorText" class="form-control" title="Background color" disabled>
+                <input type="text" id="bgColorText" class="form-control" title="Background color" readonly>
                 <input type="color" id="bgColor" name="bgColor" value="#000000" title="Background color">
             </div>
-            <label for="bgColorText">Accent color</label>
+            <label for="cardColorText">Card color</label>
             <div class="input-group color-input">
-                <input type="text" id="accentColorText" class="form-control" title="Accent color" disabled>
+                <input type="text" id="cardColorText" class="form-control" title="Card color" readonly>
+                <input type="color" id="cardColor" name="cardColor" value="#eeeeee" title="Card color">
+            </div>
+            <label for="accentColorText">Accent color</label>
+            <div class="input-group color-input">
+                <input type="text" id="accentColorText" class="form-control" title="Accent color" readonly>
                 <input type="color" id="accentColor" name="accentColor" value="#800000" title="Accent color">
+            </div>
+            <label for="sbColorText">Sidebar color</label>
+            <div class="input-group color-input">
+                <input type="text" id="sbColorText" class="form-control" title="Sidebar color" readonly>
+                <input type="color" id="sbColor" name="sbColor" value="#4e4e4e" title="Sidebar color">
             </div>
             <label for="borderRadius">Border radius</label>
             <div class="input-group">
@@ -58,6 +70,7 @@
         <div class="footer">
             <div class="text-center">
                 <button class="btn btn-light btn-sm my-2" id="backBtn">Back</button>
+                <button class="btn btn-light btn-sm my-2" id="resetBtn">Reset to defaults</button>
                 <p>&copy; 2023 <a href="https://about.canon.click/" class="text-decoration-none link" target="_blank"
                         rel="noopener">Canon Maranda</a></p>
             </div>
