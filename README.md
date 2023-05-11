@@ -1,6 +1,8 @@
 # RHITweaks
 A Chromium extension to add functionality to RHIT websites
 
+This is the successor to [rhit-moodle-tweaks](https://github.com/cm090/rhit-moodle-tweaks)
+
 ### Visit the releases page to download
 
 ## Features
