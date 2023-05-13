@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "RHITweaks",
     "description": "Bring additional functionality to RHIT websites",
-    "version": "1.0",
+    "version": "1.1",
     "permissions": [
         "storage"
     ],

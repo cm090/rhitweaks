@@ -1,5 +1,3 @@
-const version = '2023.03.12';
-
 const cookieCheck = (search) => {
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(";");
@@ -19,24 +17,20 @@ if (cookieCheck('filterQuarter') && !localStorage.getItem('filterQuarter')) loca
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 const checkForUpdates = () => {
     const d = new Date();
-    if (localStorage.getItem('lastCheck') == `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`) return Promise.resolve(false);
-    return fetch('https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/moodle-main.js').then(res => {
-        return res.text();
-    }).then(data => {
-        let globalVersion = data.split("const version = '")[1].substring(0, 10);
-        if (version != globalVersion) {
+    const currentVersion = chrome.runtime.getManifest().version;
+    return fetch('https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json').then(res => res.text()).then(data => {
+        const globalVersion = data.split('\"version\": \"')[1].split('\"')[0];
+        if (currentVersion != globalVersion) {
             const element = document.querySelector("#nav-drawer > nav:nth-child(1) > ul > li:nth-child(1)").cloneNode(true);
             element.querySelector('a').classList.remove('active');
-            element.querySelector('a').href = 'https://github.com/cm090/rhit-moodle-tweaks';
+            element.querySelector('a').href = 'https://github.com/cm090/rhitweaks/releases';
             element.querySelector('a').target = '_blank';
             element.querySelector('.media-body').innerText = 'Update available!';
+            element.querySelector('.media-body').classList.remove('font-weight-bold');
             element.querySelector('.icon').classList = 'icon fa fa-info fa-fw';
             document.querySelector("#nav-drawer > nav > ul").prepend(element);
         }
-    }).then(() => {
-        localStorage.setItem('lastCheck', `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
-        return Promise.resolve(true);
-    });
+    }).then(() => Promise.resolve(true));
 }
 
 const setStyle = () => {
