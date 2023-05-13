@@ -40,14 +40,6 @@ const checkForUpdates = () => {
 }
 
 const setStyle = () => {
-    chrome.storage.sync.get('moodle').then(data => {
-        let root = document.querySelector(':root');
-        root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
-        root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
-        root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
-        root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
-        root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
-    });
     let url = chrome.runtime.getURL('styles/moodle.css');
     return fetch(url).then(res => res.text()).then(data => {
         var s = document.createElement("style");
@@ -242,6 +234,30 @@ const start = () => {
     });
 }
 
-chrome.storage.sync.get('moodle').then(data => {
-    if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
-});
+const storageListeners = () => {
+    chrome.storage.sync.get('moodle').then(data => {
+        let root = document.querySelector(':root');
+        root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
+        root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
+        root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
+        root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
+        root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
+        if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
+    });
+    chrome.storage.sync.onChanged.addListener(changes => {
+        const oldData = changes.moodle.oldValue;
+        const newData = changes.moodle.newValue;
+        if (oldData.enabled != newData.enabled) {
+            window.location.reload();
+            return;
+        }
+        let root = document.querySelector(':root');
+        root.style.setProperty('--bg-color', newData.bgColor || '#000000');
+        root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
+        root.style.setProperty('--accent-color', newData.accentColor || '#800000');
+        root.style.setProperty('--highlight-color', newData.sbColor || '#4e4e4e');
+        root.style.setProperty('--border-radius', (newData.borderRadius || 12) + 'px');
+    });
+}
+
+storageListeners();
