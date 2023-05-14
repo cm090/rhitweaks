@@ -120,6 +120,9 @@ const listeners = () => {
         document.querySelector(':root').style.height = '';
     });
     document.getElementById('resetBtn').addEventListener('click', defaults);
+    document.getElementById('reportBtn').addEventListener('click', () => {
+        window.open('https://github.com/cm090/rhitweaks/issues');
+    });
 }
 const getStorage = () => {
     chrome.storage.sync.get(['moodle', 'schedule']).then(data => {
