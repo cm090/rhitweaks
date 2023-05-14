@@ -76,8 +76,7 @@ const modifyURL = () => {
 const addButtons = () => {
     if (window.location.pathname != '/my/') return Promise.resolve(false);
     if (document.querySelector("#page-header > div > div > div").clientWidth <= 833) return Promise.resolve();
-    const d = new Date();
-    return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/header-buttons?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
+    return fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html')).then(res => {
         return res.text();
     }).then(data => {
         let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
@@ -149,8 +148,7 @@ const searchListener = () => {
 
 const searchCode = () => {
     if (window.location.href.includes('submission') || window.location.href.includes('#bypass')) return Promise.resolve();
-    const d = new Date();
-    return fetch(`https://raw.githubusercontent.com/cm090/rhit-moodle-tweaks/main/assets/search-modal?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => {
+    return fetch(chrome.runtime.getURL('assets/moodle/search-modal.html')).then(res => {
         return res.text();
     }).then(data => {
         if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;

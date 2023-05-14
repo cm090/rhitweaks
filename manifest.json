@@ -39,7 +39,8 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "styles/*"
+                "styles/*",
+                "assets/*"
             ],
             "matches": [
                 "https://moodle.rose-hulman.edu/*",
