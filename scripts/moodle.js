@@ -7,16 +7,15 @@ const checkForUpdates = () => {
     return fetch(`https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => res.text()).then(data => {
         const globalVersion = data.split('\"version\": \"')[1].split('\"')[0];
         if (currentVersion != globalVersion) {
-            const element = document.querySelector("#nav-drawer > nav:nth-child(1) > ul > li:nth-child(1)").cloneNode(true);
-            element.querySelector('a').classList.remove('active');
-            element.querySelector('a').href = 'https://github.com/cm090/rhitweaks/releases';
-            element.querySelector('a').target = '_blank';
-            element.querySelector('.media-body').innerText = 'Update available!';
-            element.querySelector('.media-body').classList.remove('font-weight-bold');
-            element.querySelector('.icon').classList = 'icon fa fa-info fa-fw';
-            document.querySelector("#nav-drawer > nav > ul").prepend(element);
+            const button = '<a class="btn btn-primary mr-1" href="https://github.com/cm090/rhitweaks" target="_blank" style="margin-left:5px"><div class="fa fa-info" style="margin-right:8px"></div>Update available</a>';
+            if (document.querySelector('#rmtButtons'))
+                document.querySelector('#rmtButtons').innerHTML = button + document.querySelector('#rmtButtons').innerHTML;
+            else
+                document.querySelector('#page-header .card-body div').innerHTML += button;
+            return true;
         }
-    }).then(() => Promise.resolve(true));
+        return false;
+    }).then(update => Promise.resolve(update));
 }
 
 const setStyle = () => {
@@ -70,6 +69,7 @@ const modifyURL = () => {
             link.target = '_blank';
         }
     });
+    document.querySelector('.navbar .navbar-brand').href = '/my';
     return Promise.resolve();
 }
 
@@ -183,21 +183,22 @@ const waitForjQuery = () => {
 
 const start = () => {
     console.log('Starting RHITweaks by cm090\nhttps://github.com/cm090/rhitweaks');
-    checkForUpdates().then(res => {
-        if (res) console.log('RHITweaks > Successfully checked for updates');
-        else console.log('RHITweaks > Skipped update check');
-        modifyURL();
-    }).then(() => {
+    modifyURL().then(() => {
         console.log('RHITweaks > Finished URL check');
         setStyle();
     }).then(() => {
         console.log('RHITweaks > Custom styles activated');
         cleanSideMenu();
     }).then(() => {
-        console.log('RHITweaks > Side menu modified, click "My courses" to change');
-        addButtons().then(res => {
-            if (res) console.log('RHITweaks > Added custom buttons');
-            else console.log('RHITweaks > Skipped custom buttons');
+        console.log('RHITweaks > Side menu modified');
+        addButtons();
+    }).then(res => {
+        if (res) console.log('RHITweaks > Added custom buttons');
+        else console.log('RHITweaks > Skipped custom buttons');
+        checkForUpdates().then(res => {
+            if (res) console.log('RHITweaks > Update available');
+            else console.log('RHITweaks > Up to date');
+        }).then(() => {
             document.addEventListener('keydown', e => {
                 if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
                     e.preventDefault();

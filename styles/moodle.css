@@ -53,7 +53,7 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
     border-color: var(--accent-color);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: color-mix(in srgb, var(--accent-color), #000000) !important;
     border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
