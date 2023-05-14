@@ -40,6 +40,7 @@ const moodleSettingsFn = () => {
         document.getElementById('sbColor').value = data.moodle.sbColor || '#4e4e4e';
         document.getElementById('sbColorText').value = document.getElementById('sbColor').value;
         document.getElementById('borderRadius').value = data.moodle.borderRadius || 12;
+        document.getElementById('courseList').value = data.moodle.quarter || '';
         moodleData = data.moodle;
     });
     document.getElementById('bgColor').addEventListener('change', () => {
