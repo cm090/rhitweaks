@@ -1,24 +1,10 @@
-const cookieCheck = (search) => {
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i].split("=");
-        if (c[0].substring(0, 1) == " ") {
-            c[0] = c[0].substring(1);
-        }
-        if (c[0] === search) {
-            return c[1];
-        }
-    }
-    return false;
-}
-if (cookieCheck('filterQuarter') && !localStorage.getItem('filterQuarter')) localStorage.setItem('filterQuarter', cookieCheck('filterQuarter'));
-
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
+let quarter;
+
 const checkForUpdates = () => {
     const d = new Date();
     const currentVersion = chrome.runtime.getManifest().version;
-    return fetch('https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json').then(res => res.text()).then(data => {
+    return fetch(`https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => res.text()).then(data => {
         const globalVersion = data.split('\"version\": \"')[1].split('\"')[0];
         if (currentVersion != globalVersion) {
             const element = document.querySelector("#nav-drawer > nav:nth-child(1) > ul > li:nth-child(1)").cloneNode(true);
@@ -43,12 +29,12 @@ const setStyle = () => {
 }
 
 const cleanSideMenu = () => {
-    let quarter = localStorage.getItem('filterQuarter');
     let start = false;
     const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
     if (document.querySelectorAll(".sectionname").length > 1)
         document.querySelectorAll(".sectionname").forEach(item => {
-            courseData.push([item.innerText, `#${item.id}`]);
+            if (!courseData.find(el => el[0] == item.innerText) && item.id)
+                courseData.push([item.innerText, `#${item.id}`]);
         });
     document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach((item, i) => {
         item.style.display = '';
@@ -56,20 +42,15 @@ const cleanSideMenu = () => {
         if (!start) {
             if (text == 'My courses') {
                 start = true;
-                item.onclick = () => {
-                    let newQuarter = prompt('Select a quarter (Ex: 2223F):');
-                    newQuarter = parseInt(newQuarter.substring(0, 4)) + newQuarter.charAt(4);
-                    document.cookie = `filterQuarter=${newQuarter};path=/;max-age=7884000;priority=high`;
-                    localStorage.setItem('filterQuarter', newQuarter);
-                    cleanSideMenu();
-                }
+                item.onclick = () => alert('Settings moved to the RHITweaks menu');
                 return;
             } else if (item.querySelector('a').href == window.location.href)
                 item.querySelector('a').classList.add('active');
-            else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text) && i != 0)
+            else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text)
+                && i != 0 && !courseData.find(el => el[0] == text))
                 courseData.push([text, item.querySelector('a').href]);
         } else {
-            if (text.length > 2)
+            if (text.length > 2 && !courseData.find(el => el[0] == text))
                 courseData.push([text, item.querySelector('a').href]);
             if (start && !text.includes(quarter))
                 item.style.display = 'none';
@@ -134,8 +115,9 @@ const searchListener = () => {
                 pos--;
                 document.querySelector(`#rmtSearch #rmtResultList div:nth-child(${pos})`).classList.add('active');
             }
-        } else if (event.key == 'Enter') {
+        } else if (e.key == 'Enter') {
             document.querySelector(`#rmtSearch #rmtResultList div:nth-child(${pos})`).click();
+            document.querySelector('#rmtSearchInput').value = '';
             $('#rmtSearch').modal('hide');
         }
     });
@@ -200,30 +182,30 @@ const waitForjQuery = () => {
 }
 
 const start = () => {
-    console.log('RMT > RHIT Moodle Tweaks by cm090\nhttps://github.com/cm090/rhit-moodle-tweaks');
+    console.log('Starting RHITweaks by cm090\nhttps://github.com/cm090/rhitweaks');
     checkForUpdates().then(res => {
-        if (res) console.log('RMT > Successfully checked for updates');
-        else console.log('RMT > Skipped update check');
+        if (res) console.log('RHITweaks > Successfully checked for updates');
+        else console.log('RHITweaks > Skipped update check');
         modifyURL();
     }).then(() => {
-        console.log('RMT > Finished URL check');
+        console.log('RHITweaks > Finished URL check');
         setStyle();
     }).then(() => {
-        console.log('RMT > Custom styles activated');
+        console.log('RHITweaks > Custom styles activated');
         cleanSideMenu();
     }).then(() => {
-        console.log('RMT > Side menu modified, click "My courses" to change');
+        console.log('RHITweaks > Side menu modified, click "My courses" to change');
         addButtons().then(res => {
-            if (res) console.log('RMT > Added custom buttons');
-            else console.log('RMT > Skipped custom buttons');
+            if (res) console.log('RHITweaks > Added custom buttons');
+            else console.log('RHITweaks > Skipped custom buttons');
             document.addEventListener('keydown', e => {
                 if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
                     e.preventDefault();
             });
             setTimeout(searchCode, 2000);
         }).then(() => {
-            console.log('RMT > Search program ready, press Ctrl+K to use');
-            console.log('RMT > Done!');
+            console.log('RHITweaks > Search program ready, press Ctrl+K to use');
+            console.log('RHITweaks > Done!');
         });
     });
 }
@@ -236,6 +218,7 @@ const storageListeners = () => {
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
         root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
         root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
+        quarter = data.moodle.quarter || '';
         if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
     });
     chrome.storage.sync.onChanged.addListener(changes => {
@@ -251,6 +234,10 @@ const storageListeners = () => {
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
         root.style.setProperty('--highlight-color', newData.sbColor || '#4e4e4e');
         root.style.setProperty('--border-radius', (newData.borderRadius || 12) + 'px');
+        if (oldData.quarter != newData.quarter) {
+            quarter = newData.quarter || '';
+            cleanSideMenu();
+        }
     });
 }
 

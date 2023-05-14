@@ -14,7 +14,8 @@ window['moodleDataTemplate'] = {
     'cardColor': '#eeeeee',
     'accentColor': '#800000',
     'sbColor': '#4e4e4e',
-    'borderRadius': 12
+    'borderRadius': 12,
+    'quarter': ''
 }
 window['scheduleDataTemplate'] = {
     'enabled': false
@@ -79,8 +80,20 @@ const moodleSettingsFn = () => {
             chrome.storage.sync.set({
                 moodle: moodleData
             });
+        } else if (e.target.value.isNaN || e.target.value == 0) {
+            moodleData.borderRadius = 0;
+            chrome.storage.sync.set({
+                moodle: moodleData
+            });
         } else
             e.target.value = e.target.value.replace('-', '');
+    });
+    document.getElementById('courseList').addEventListener('change', e => {
+        if (e.target.value.length < 5) return;
+        moodleData.quarter = parseInt(e.target.value.substring(0, 4)) + e.target.value.charAt(4);
+        chrome.storage.sync.set({
+            moodle: moodleData
+        });
     });
 }
 const listeners = () => {
