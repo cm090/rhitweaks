@@ -1,0 +1,212 @@
+:root {
+    --bg-color: #000000;
+    --accent-color: #800000;
+    --text-color: #ffffff;
+    --border-color: #808080;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+}
+
+.header {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 0 0 12px 12px;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.header h3 {
+    margin: 0;
+    margin-top: 5px;
+}
+
+.header div:last-child {
+    margin: auto 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header button,
+input[type="submit"],
+input[type="reset"] {
+    background-color: var(--text-color);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+body>table>tbody>tr:nth-child(1),
+body>table>tbody>tr:nth-child(2)>td.bw70>a:nth-child(5),
+body>table:nth-child(4)>tbody>tr:nth-child(1) {
+    display: none;
+}
+
+td,
+th,
+a {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+}
+
+body>table {
+    padding: 10px;
+}
+
+body>p {
+    padding: 10px;
+    margin: 0;
+}
+
+body>table>tbody>tr:nth-child(2)>td.bw70>a:nth-child(2) {
+    background: var(--text-color) !important;
+    color: var(--bg-color) !important;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 8px;
+    position: relative;
+    top: 20px;
+}
+
+p>table {
+    border-collapse: collapse;
+    border-radius: 8px;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--border-color);
+}
+
+table {
+    margin: auto;
+    margin-top: 20px;
+}
+
+table td {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+}
+
+select {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    padding: 5px 0;
+    cursor: pointer;
+    width: 200px;
+    height: 28.4px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+form input {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 200px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+form input[type="submit"],
+form button {
+    background-color: var(--accent-color) !important;
+    color: var(--text-color) !important;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: none !important;
+    width: auto;
+    height: 28.4px !important;
+    font-size: 14px;
+}
+
+.input-area {
+    width: min-content;
+    margin: auto;
+}
+
+.input-area div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px;
+}
+
+.checkbox {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color) !important;
+}
+
+.checkbox input {
+    width: min-content;
+    margin: 0 5px;
+}
+
+.buttons {
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+hr {
+    border-color: var(--border-color);
+}
+
+input {
+    background: transparent;
+    color: var(--text-color);
+    border-radius: 8px;
+    border: 1px solid var(--text-color);
+    padding: 2px 5px;
+}
+
+h5 {
+    font-size: 14px;
+    margin: 5px 2px;
+}
+
+body>form>table>tbody>tr:nth-child(2)>td.bw70>a:nth-child(2) {
+    background: var(--text-color) !important;
+    color: var(--bg-color) !important;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 8px;
+    position: relative;
+    top: 20px;
+}
+
+body>table {
+    border: none !important;
+}
+
+body>table>tbody>tr:first-child>th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+body>table>tbody>tr:first-child>th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+body>table>tbody>tr:last-child>td:first-child {
+    border-radius: 0 0 0 8px;
+}
+
+body>table>tbody>tr:last-child>td:last-child {
+    border-radius: 0 0 8px 0;
+}
