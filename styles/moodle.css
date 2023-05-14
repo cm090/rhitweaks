@@ -24,8 +24,10 @@ section,
 .modal-dialog,
 .modal-content,
 .card,
-.filepicker>div {
-    border-radius: var(--border-radius);
+.filepicker>div,
+.badge,
+.currentselected {
+    border-radius: var(--border-radius) !important;
 }
 
 .fa-star:before,
@@ -34,7 +36,7 @@ a,
     color: var(--accent-color);
 }
 
-a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary):hover,
+a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary, .dropdown-item):hover,
 .btn-link:hover {
     color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
@@ -45,7 +47,8 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 .dropdown-item:active,
 .dropdown-item:hover,
 .dropdown-item:focus,
-.dropdown-item:focus-within {
+.dropdown-item:focus-within,
+.badge-info {
     background: var(--accent-color);
     border-color: var(--accent-color);
 }
@@ -57,7 +60,8 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 
 .section,
 .card,
-#region-main {
+#region-main,
+#gridshadebox_content {
     background: var(--card-color);
 }
 
@@ -288,4 +292,24 @@ button.close:focus,
     color: white;
     position: relative;
     left: 4px;
+}
+
+#gridshadebox_content {
+    border-color: var(--accent-color);
+}
+
+.course-content ul.gridicons li.currentselected .icon_content {
+    color: var(--accent-color) !important;
+}
+
+.generalbox a:not(.btn-primary), .contentwithoutlink a, .contentafterlink a, a.autolink, .posting a {
+    color: color-mix(in srgb, var(--accent-color), #555) !important;
+}
+
+.course-content .current::before {
+    border-left: var(--accent-color) 4px solid;
+}
+
+.course-content .current {
+    background: var(--card-color) !important;
 }
