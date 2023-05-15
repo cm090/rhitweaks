@@ -2,9 +2,11 @@ const moodleEnable = document.getElementById('moodleEnable');
 const scheduleEnable = document.getElementById('scheduleEnable');
 const moodleSettings = document.getElementById('moodleSettings');
 const scheduleSettings = document.getElementById('scheduleSettings');
+const settingsBtn = document.getElementById('additionalSettings');
 const moodlePage = document.getElementById('moodleSettingsPage');
 const schedulePage = document.getElementById('scheduleSettingsPage');
 const mainPage = document.getElementById('main');
+const settingsPage = document.getElementById('additionalSettingsPage');
 
 window['moodleData'] = {};
 window['scheduleData'] = {};
@@ -43,6 +45,8 @@ const moodleSettingsFn = () => {
         document.getElementById('courseList').value = data.moodle.quarter || '';
         moodleData = data.moodle;
     });
+}
+const moodleSettingsListeners = () => {
     document.getElementById('bgColor').addEventListener('change', () => {
         document.getElementById('bgColorText').value = document.getElementById('bgColor').value;
         moodleData.bgColor = document.getElementById('bgColor').value;
@@ -97,6 +101,59 @@ const moodleSettingsFn = () => {
         });
     });
 }
+const additionalSettingsListeners = () => {
+    document.getElementById('import').addEventListener('click', () => {
+        const fileSelector = document.createElement('input');
+        fileSelector.type = 'file';
+        fileSelector.accept = 'application/json';
+        fileSelector.addEventListener('change', e => {
+            const file = e.target.files[0];
+            let reader = new FileReader();
+            reader.onload = data => {
+                let contents;
+                try {
+                    contents = JSON.parse(data.target.result);
+                } catch (e) {
+                    alert('Invalid file selected');
+                    return;
+                }
+                if (!contents.moodle || !contents.schedule || !contents.version) {
+                    alert('Invalid file selected');
+                    return;
+                }
+                if (contents.version != chrome.runtime.getManifest().version)
+                    alert('The data you\'re trying to import is from an older version of RHITweaks. Some of your settings may not be updated.');
+                chrome.storage.sync.set({
+                    moodle: contents.moodle,
+                    schedule: contents.schedule
+                });
+                document.getElementById('import').style.backgroundColor = 'green';
+                document.getElementById('import').style.border = '1px solid green';
+                setTimeout(() => {
+                    document.getElementById('import').style.background = '';
+                    document.getElementById('import').style.borderColor = '';
+                }, 2000);
+            }
+            reader.readAsText(file);
+        });
+        fileSelector.click();
+        fileSelector.remove();
+    });
+    document.getElementById('export').addEventListener('click', () => {
+        let data = { 'version': chrome.runtime.getManifest().version };
+        chrome.storage.sync.get(['moodle', 'schedule'], result => {
+            data.moodle = result.moodle;
+            data.schedule = result.schedule;
+            const a = document.createElement('a');
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            a.href = URL.createObjectURL(blob);
+            a.download = 'rhitweaks.json';
+            a.click();
+            URL.revokeObjectURL(a.href);
+            a.remove();
+        });
+    });
+}
 const listeners = () => {
     moodleEnable.addEventListener('change', () => toggleBtn('moodle', moodleEnable.checked));
     scheduleEnable.addEventListener('change', () => toggleBtn('schedule', scheduleEnable.checked));
@@ -108,9 +165,10 @@ const listeners = () => {
         document.getElementById('resetBtn').style.display = '';
         document.getElementById('resetBtn').setAttribute('page', 'moodle');
         document.querySelector(':root').style.height = '';
+        document.querySelector(':root').style.height = '';
         moodleSettingsFn();
     });
-    document.getElementById('backBtn').addEventListener('click', reset);
+    moodleSettingsListeners();
     scheduleSettings.addEventListener('click', () => {
         schedulePage.style.display = 'block';
         mainPage.style.display = 'none';
@@ -120,6 +178,15 @@ const listeners = () => {
         document.getElementById('resetBtn').setAttribute('page', 'schedule');
         document.querySelector(':root').style.height = '';
     });
+    settingsBtn.addEventListener('click', () => {
+        settingsPage.style.display = 'block';
+        mainPage.style.display = 'none';
+        document.getElementById('reportBtn').style.display = 'none';
+        document.getElementById('backBtn').style.display = '';
+        document.querySelector(':root').style.height = '';
+    });
+    additionalSettingsListeners();
+    document.getElementById('backBtn').addEventListener('click', reset);
     document.getElementById('resetBtn').addEventListener('click', defaults);
     document.getElementById('reportBtn').addEventListener('click', () => {
         window.open('https://github.com/cm090/rhitweaks/issues');
@@ -150,6 +217,7 @@ const getStorage = () => {
 const reset = () => {
     moodlePage.style.display = 'none';
     schedulePage.style.display = 'none';
+    settingsPage.style.display = 'none';
     mainPage.style.display = 'block';
     document.getElementById('reportBtn').style.display = '';
     document.getElementById('backBtn').style.display = 'none';

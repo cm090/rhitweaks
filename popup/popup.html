@@ -13,6 +13,7 @@
 
 <body>
     <div class="container" id="mainContainer">
+        <!-- Main -->
         <div id="main">
             <h1 class="text-center title">RHITweaks</h1>
             <div class="option">
@@ -32,6 +33,7 @@
                 <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="scheduleSettings">Schedule Lookup
                     Settings</button>
             </div>
+            <button class="btn btn-secondary btn-sm w-100 my-2 settings-btn" id="additionalSettings">Additional Settings</button>
         </div>
         <!-- Moodle -->
         <div id="moodleSettingsPage" class="settings-page">
@@ -63,7 +65,8 @@
             </div>
             <label for="courseList">Quarter filter</label>
             <div class="input-group">
-                <input type="text" id="courseList" class="form-control" title="Quarter filter" placeholder="Ex: 2223F" max="5">
+                <input type="text" id="courseList" class="form-control" title="Quarter filter" placeholder="Ex: 2223F"
+                    max="5">
             </div>
         </div>
         <!-- Schedule Lookup -->
@@ -90,6 +93,12 @@
                 <input type="text" id="schedBorderColorText" class="form-control" title="Border color" readonly>
                 <input type="color" id="schedBorderColor" name="schedBorderColor" value="#808080" title="Border color">
             </div>
+        </div>
+        <!-- Settings -->
+        <div id ="additionalSettingsPage" class="settings-page">
+            <h3 class="text-center title">Additional Settings</h3>
+            <button class="btn btn-primary btn-sm w-100 my-2 settings-btn" id="import">Import Settings</button>
+            <button class="btn btn-primary btn-sm w-100 my-2 settings-btn" id="export">Export Settings</button>
         </div>
         <div class="spacer"></div>
         <div class="footer">
