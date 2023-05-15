@@ -142,8 +142,11 @@ const searchListener = () => {
     document.getElementById('rmtSearchInput').addEventListener('input', createList);
     createList({ target: { value: '' } });
     document.addEventListener('keydown', e => {
-        if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
+        if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k') {
+            createList({ target: { value: '' } });
+            document.getElementById('rmtSearchInput').value = '';
             $('#rmtSearch').modal('show');
+        }
     });
     document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
     return Promise.resolve();
