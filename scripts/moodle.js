@@ -87,8 +87,6 @@ const addButtons = () => {
 }
 
 const checkButtons = () => {
-    if (document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a"))
-        document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a").onclick = () => { }
     document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
 }
 
@@ -180,6 +178,11 @@ const waitForjQuery = () => {
         $("#rmtSearch").on('show.bs.modal', () => {
             document.querySelector('#rmtResultList').style.display = 'none';
         });
+        if (document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a"))
+            document.querySelector("#ek-widget > ul.evalkit-widget-links > li > a").addEventListener('click', e => {
+                e.preventDefault();
+                window.open(e.target.href, '_blank');
+            });
     } catch (e) {
         setTimeout(waitForjQuery, 500);
     }
