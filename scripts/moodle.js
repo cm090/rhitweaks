@@ -127,7 +127,10 @@ const searchListener = () => {
         courseData.forEach(item => {
             if (item[0].length <= 1) return;
             if (item[0].toLowerCase().includes(e.target.value.toLowerCase()) && i < 5) {
-                document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}'">${item[0]}</div>`;
+                if (item[1].includes('#section-'))
+                    document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}';window.location.reload()">${item[0]}</div>`;
+                else
+                    document.getElementById('rmtResultList').innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}'">${item[0]}</div>`;
                 i++;
             }
             if (i == 5) return;
