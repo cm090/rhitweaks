@@ -7,7 +7,7 @@ const checkForUpdates = () => {
     return fetch(`https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => res.text()).then(data => {
         const globalVersion = data.split('\"version\": \"')[1].split('\"')[0];
         if (currentVersion != globalVersion) {
-            const button = '<a class="btn btn-primary mr-1" href="https://github.com/cm090/rhitweaks" target="_blank" style="margin-left:5px"><div class="fa fa-info" style="margin-right:8px"></div>Update available</a>';
+            const button = '<a class="btn btn-primary mr-1" href="https://github.com/cm090/rhitweaks/releases" target="_blank" style="margin-left:5px"><div class="fa fa-info" style="margin-right:8px"></div>Update available</a>';
             if (document.querySelector('#rmtButtons'))
                 document.querySelector('#rmtButtons').innerHTML = button + document.querySelector('#rmtButtons').innerHTML;
             else

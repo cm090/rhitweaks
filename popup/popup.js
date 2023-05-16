@@ -20,7 +20,11 @@ window['moodleDataTemplate'] = {
     'quarter': ''
 }
 window['scheduleDataTemplate'] = {
-    'enabled': false
+    'enabled': false,
+    'bgColor': '#000000',
+    'accentColor': '#800000',
+    'textColor': '#ffffff',
+    'borderColor': '#808080'
 }
 
 const toggleBtn = (selector, data) => {
@@ -101,6 +105,49 @@ const moodleSettingsListeners = () => {
         });
     });
 }
+const scheduleSettingsFn = () => {
+    chrome.storage.sync.get('schedule').then(data => {
+        document.getElementById('schedBgColor').value = data.schedule.bgColor || '#000000';
+        document.getElementById('schedBgColorText').value = document.getElementById('schedBgColor').value;
+        document.getElementById('schedAccentColor').value = data.schedule.accentColor || '#800000';
+        document.getElementById('schedAccentColorText').value = document.getElementById('schedAccentColor').value;
+        document.getElementById('schedTextColor').value = data.schedule.textColor || '#ffffff';
+        document.getElementById('schedTextColorText').value = document.getElementById('schedTextColor').value;
+        document.getElementById('schedBorderColor').value = data.schedule.borderColor || '#808080';
+        document.getElementById('schedBorderColorText').value = document.getElementById('schedBorderColor').value;
+        scheduleData = data.schedule;
+    });
+}
+const scheduleSettingsListeners = () => {
+    document.getElementById('schedBgColor').addEventListener('change', () => {
+        document.getElementById('schedBgColorText').value = document.getElementById('schedBgColor').value;
+        scheduleData.bgColor = document.getElementById('schedBgColor').value;
+        chrome.storage.sync.set({
+            schedule: scheduleData
+        });
+    });
+    document.getElementById('schedAccentColor').addEventListener('change', () => {
+        document.getElementById('schedAccentColorText').value = document.getElementById('schedAccentColor').value;
+        scheduleData.accentColor = document.getElementById('schedAccentColor').value;
+        chrome.storage.sync.set({
+            schedule: scheduleData
+        });
+    });
+    document.getElementById('schedTextColor').addEventListener('change', () => {
+        document.getElementById('schedTextColorText').value = document.getElementById('schedTextColor').value;
+        scheduleData.textColor = document.getElementById('schedTextColor').value;
+        chrome.storage.sync.set({
+            schedule: scheduleData
+        });
+    });
+    document.getElementById('schedBorderColor').addEventListener('change', () => {
+        document.getElementById('schedBorderColorText').value = document.getElementById('schedBorderColor').value;
+        scheduleData.borderColor = document.getElementById('schedBorderColor').value;
+        chrome.storage.sync.set({
+            schedule: scheduleData
+        });
+    });
+}
 const additionalSettingsListeners = () => {
     document.getElementById('import').addEventListener('click', () => {
         const fileSelector = document.createElement('input');
@@ -177,7 +224,9 @@ const listeners = () => {
         document.getElementById('resetBtn').style.display = '';
         document.getElementById('resetBtn').setAttribute('page', 'schedule');
         document.querySelector(':root').style.height = '';
+        scheduleSettingsFn();
     });
+    scheduleSettingsListeners();
     settingsBtn.addEventListener('click', () => {
         settingsPage.style.display = 'block';
         mainPage.style.display = 'none';
@@ -235,6 +284,9 @@ const defaults = e => {
     switch (selector) {
         case 'moodle':
             moodleSettingsFn();
+            break;
+        case 'schedule':
+            scheduleSettingsFn();
             break;
     }
 }
