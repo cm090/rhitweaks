@@ -1,3 +1,4 @@
+// Constants for buttons and pages
 const moodleEnable = document.getElementById('moodleEnable');
 const scheduleEnable = document.getElementById('scheduleEnable');
 const moodleSettings = document.getElementById('moodleSettings');
@@ -8,8 +9,11 @@ const schedulePage = document.getElementById('scheduleSettingsPage');
 const mainPage = document.getElementById('main');
 const settingsPage = document.getElementById('additionalSettingsPage');
 
+// Local data storage
 window['moodleData'] = {};
 window['scheduleData'] = {};
+
+// Template data
 window['moodleDataTemplate'] = {
     'enabled': false,
     'bgColor': '#000000',
@@ -27,14 +31,21 @@ window['scheduleDataTemplate'] = {
     'borderColor': '#808080'
 }
 
+/**
+ * Toggles the display of a settings element and updates the corresponding data based on a boolean value.
+ * @param selector the name of a setting or feature that the toggle button controls
+ * @param data boolean value that determines whether to display or hide the settings for the given selector
+ */
 const toggleBtn = (selector, data) => {
     document.getElementById(`${selector}Settings`).style.display = data ? 'block' : 'none';
     let dataSelector = window[`${selector}Data`];
     dataSelector.enabled = data;
-    chrome.storage.sync.set({
-        [selector]: dataSelector
-    });
+    chrome.storage.sync.set({ [selector]: dataSelector });
 }
+
+/**
+ * Retrieves Moodle settings from Chrome storage and sets the corresponding values in the HTML document
+ */
 const moodleSettingsFn = () => {
     chrome.storage.sync.get('moodle').then(data => {
         document.getElementById('bgColor').value = data.moodle.bgColor || '#000000';
@@ -50,61 +61,54 @@ const moodleSettingsFn = () => {
         moodleData = data.moodle;
     });
 }
+
+/**
+ * Sets event listeners for various HTML elements and updates the moodleData object and Chrome storage accordingly
+ */
 const moodleSettingsListeners = () => {
     document.getElementById('bgColor').addEventListener('change', () => {
         document.getElementById('bgColorText').value = document.getElementById('bgColor').value;
         moodleData.bgColor = document.getElementById('bgColor').value;
-        chrome.storage.sync.set({
-            moodle: moodleData
-        });
+        chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('bgColorText').addEventListener('click', () => document.getElementById('bgColor').click());
     document.getElementById('cardColor').addEventListener('change', () => {
         document.getElementById('cardColorText').value = document.getElementById('cardColor').value;
         moodleData.cardColor = document.getElementById('cardColor').value;
-        chrome.storage.sync.set({
-            moodle: moodleData
-        });
+        chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('cardColorText').addEventListener('click', () => document.getElementById('cardColor').click());
     document.getElementById('accentColor').addEventListener('change', () => {
         document.getElementById('accentColorText').value = document.getElementById('accentColor').value;
         moodleData.accentColor = document.getElementById('accentColor').value;
-        chrome.storage.sync.set({
-            moodle: moodleData
-        });
+        chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('accentColorText').addEventListener('click', () => document.getElementById('accentColor').click());
     document.getElementById('sbColor').addEventListener('change', () => {
         document.getElementById('sbColorText').value = document.getElementById('sbColor').value;
         moodleData.sbColor = document.getElementById('sbColor').value;
-        chrome.storage.sync.set({
-            moodle: moodleData
-        });
+        chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('accentColorText').addEventListener('click', () => document.getElementById('accentColor').click());
     document.getElementById('borderRadius').addEventListener('input', e => {
-        if (!e.target.value.includes('-')) {
+        if (!e.target.value.includes('-'))
             moodleData.borderRadius = parseInt(e.target.value);
-            chrome.storage.sync.set({
-                moodle: moodleData
-            });
-        } else if (e.target.value.isNaN || e.target.value == 0) {
+        else if (e.target.value.isNaN || e.target.value == 0)
             moodleData.borderRadius = 0;
-            chrome.storage.sync.set({
-                moodle: moodleData
-            });
-        } else
+        else
             e.target.value = e.target.value.replace('-', '');
+        chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('courseList').addEventListener('change', e => {
         if (e.target.value.length < 5) return;
         moodleData.quarter = parseInt(e.target.value.substring(0, 4)) + e.target.value.charAt(4);
-        chrome.storage.sync.set({
-            moodle: moodleData
-        });
+        chrome.storage.sync.set({ moodle: moodleData });
     });
 }
+
+/**
+ * Retrieves schedule settings from Chrome storage and sets the corresponding values in the HTML document
+ */
 const scheduleSettingsFn = () => {
     chrome.storage.sync.get('schedule').then(data => {
         document.getElementById('schedBgColor').value = data.schedule.bgColor || '#000000';
@@ -118,36 +122,36 @@ const scheduleSettingsFn = () => {
         scheduleData = data.schedule;
     });
 }
+
+/**
+ * Sets event listeners for various HTML elements and updates the scheduleData object and Chrome storage accordingly
+ */
 const scheduleSettingsListeners = () => {
     document.getElementById('schedBgColor').addEventListener('change', () => {
         document.getElementById('schedBgColorText').value = document.getElementById('schedBgColor').value;
         scheduleData.bgColor = document.getElementById('schedBgColor').value;
-        chrome.storage.sync.set({
-            schedule: scheduleData
-        });
+        chrome.storage.sync.set({ schedule: scheduleData });
     });
     document.getElementById('schedAccentColor').addEventListener('change', () => {
         document.getElementById('schedAccentColorText').value = document.getElementById('schedAccentColor').value;
         scheduleData.accentColor = document.getElementById('schedAccentColor').value;
-        chrome.storage.sync.set({
-            schedule: scheduleData
-        });
+        chrome.storage.sync.set({ schedule: scheduleData });
     });
     document.getElementById('schedTextColor').addEventListener('change', () => {
         document.getElementById('schedTextColorText').value = document.getElementById('schedTextColor').value;
         scheduleData.textColor = document.getElementById('schedTextColor').value;
-        chrome.storage.sync.set({
-            schedule: scheduleData
-        });
+        chrome.storage.sync.set({ schedule: scheduleData });
     });
     document.getElementById('schedBorderColor').addEventListener('change', () => {
         document.getElementById('schedBorderColorText').value = document.getElementById('schedBorderColor').value;
         scheduleData.borderColor = document.getElementById('schedBorderColor').value;
-        chrome.storage.sync.set({
-            schedule: scheduleData
-        });
+        chrome.storage.sync.set({ schedule: scheduleData });
     });
 }
+
+/**
+ * Adds event listeners to buttons for importing and exporting data in JSON format to and from Chrome storage
+ */
 const additionalSettingsListeners = () => {
     document.getElementById('import').addEventListener('click', () => {
         const fileSelector = document.createElement('input');
@@ -201,6 +205,10 @@ const additionalSettingsListeners = () => {
         });
     });
 }
+
+/**
+ * Adds event listeners to various elements
+ */
 const listeners = () => {
     moodleEnable.addEventListener('change', () => toggleBtn('moodle', moodleEnable.checked));
     scheduleEnable.addEventListener('change', () => toggleBtn('schedule', scheduleEnable.checked));
@@ -241,21 +249,22 @@ const listeners = () => {
         window.open('https://github.com/cm090/rhitweaks/issues');
     });
 }
+
+/**
+ * Retrieves data from Chrome storage and sets default values if the data is not present
+ * Updates the UI based on retrieved data
+ */
 const getStorage = () => {
     chrome.storage.sync.get(['moodle', 'schedule']).then(data => {
         moodleData = data.moodle;
         scheduleData = data.schedule;
         if (!moodleData) {
             moodleData = moodleDataTemplate;
-            chrome.storage.sync.set({
-                moodle: moodleData
-            });
+            chrome.storage.sync.set({ moodle: moodleData });
         }
         if (!scheduleData) {
             scheduleData = scheduleDataTemplate;
-            chrome.storage.sync.set({
-                schedule: scheduleData
-            });
+            chrome.storage.sync.set({ schedule: scheduleData });
         }
         Object.entries(data).forEach(item => {
             toggleBtn(item[0], item[1].enabled);
@@ -263,6 +272,10 @@ const getStorage = () => {
         });
     });
 }
+
+/**
+ * Resets the display and visibility of certain elements
+ */
 const reset = () => {
     moodlePage.style.display = 'none';
     schedulePage.style.display = 'none';
@@ -274,13 +287,15 @@ const reset = () => {
     document.getElementById('resetBtn').removeAttribute('page');
     document.querySelector(':root').style.height = (document.getElementById('main').clientHeight + document.querySelector("#mainContainer > div.footer").clientHeight) + 'px';
 }
+
+/**
+ * Sets default settings object and calls a corresponding function based on the page selector
+ */
 const defaults = e => {
     let selector = e.target.getAttribute('page');
     let dataSelector = window[`${selector}DataTemplate`];
     dataSelector.enabled = true;
-    chrome.storage.sync.set({
-        [selector]: dataSelector
-    });
+    chrome.storage.sync.set({ [selector]: dataSelector });
     switch (selector) {
         case 'moodle':
             moodleSettingsFn();
@@ -291,6 +306,9 @@ const defaults = e => {
     }
 }
 
+/**
+ * Initializes the program
+ */
 const main = () => {
     getStorage();
     reset();
