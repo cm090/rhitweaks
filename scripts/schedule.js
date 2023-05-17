@@ -28,6 +28,9 @@ const runApp = allowPrint => {
 		fetch(chrome.runtime.getURL('assets/schedule/detail.html')).then(res => res.text()).then(data => document.querySelector('body').innerHTML = data + document.querySelector('body').innerHTML);
 	else if (document.title.includes('Schedule Options'))
 		fetch(chrome.runtime.getURL('assets/schedule/lookup.html')).then(res => res.text()).then(data => document.querySelector('body').innerHTML = data + document.querySelector('body').innerHTML);
+	document.querySelectorAll('table').forEach(table => {
+		table.setAttribute('bgcolor', '');
+	})
 }
 
 chrome.storage.sync.get('schedule').then(data => {
