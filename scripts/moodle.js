@@ -69,7 +69,8 @@ const modifyURL = () => {
             link.target = '_blank';
         }
     });
-    document.querySelector('.navbar .navbar-brand').href = '/my';
+    if (document.querySelector('.navbar .navbar-brand'))
+        document.querySelector('.navbar .navbar-brand').href = '/my';
     return Promise.resolve();
 }
 
