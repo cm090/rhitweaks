@@ -1,23 +1,6 @@
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 let quarter;
 
-const checkForUpdates = () => {
-    const d = new Date();
-    const currentVersion = chrome.runtime.getManifest().version;
-    return fetch(`https://raw.githubusercontent.com/cm090/rhitweaks/main/manifest.json?${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}`).then(res => res.text()).then(data => {
-        const globalVersion = data.split('\"version\": \"')[1].split('\"')[0];
-        if (currentVersion != globalVersion) {
-            const button = '<a class="btn btn-primary mr-1" href="https://github.com/cm090/rhitweaks/releases" target="_blank" style="margin-left:5px"><div class="fa fa-info" style="margin-right:8px"></div>Update available</a>';
-            if (document.querySelector('#rmtButtons'))
-                document.querySelector('#rmtButtons').innerHTML = button + document.querySelector('#rmtButtons').innerHTML;
-            else
-                document.querySelector('#page-header .card-body div').innerHTML += button;
-            return true;
-        }
-        return false;
-    }).then(update => Promise.resolve(update));
-}
-
 const setStyle = () => {
     let url = chrome.runtime.getURL('styles/moodle.css');
     return fetch(url).then(res => res.text()).then(data => {
@@ -203,19 +186,13 @@ const start = () => {
     }).then(res => {
         if (res) console.log('RHITweaks > Added custom buttons');
         else console.log('RHITweaks > Skipped custom buttons');
-        checkForUpdates().then(res => {
-            if (res) console.log('RHITweaks > Update available');
-            else console.log('RHITweaks > Up to date');
-        }).then(() => {
-            document.addEventListener('keydown', e => {
-                if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
-                    e.preventDefault();
-            });
-            setTimeout(searchCode, 2000);
-        }).then(() => {
-            console.log('RHITweaks > Search program ready, press Ctrl+K to use');
-            console.log('RHITweaks > Done!');
+        document.addEventListener('keydown', e => {
+            if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
+                e.preventDefault();
         });
+        setTimeout(searchCode, 2000);
+        console.log('RHITweaks > Search program ready, press Ctrl+K to use');
+        console.log('RHITweaks > Done!');
     });
 }
 
