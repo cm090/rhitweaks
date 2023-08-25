@@ -19,9 +19,7 @@ window['moodleDataTemplate'] = {
     'bgColor': '#000000',
     'cardColor': '#eeeeee',
     'accentColor': '#800000',
-    'sbColor': '#4e4e4e',
-    'borderRadius': 12,
-    'quarter': ''
+    'sbColor': '#000000',
 }
 window['scheduleDataTemplate'] = {
     'enabled': false,
@@ -54,10 +52,8 @@ const moodleSettingsFn = () => {
         document.getElementById('cardColorText').value = document.getElementById('cardColor').value;
         document.getElementById('accentColor').value = data.moodle.accentColor || '#800000';
         document.getElementById('accentColorText').value = document.getElementById('accentColor').value;
-        document.getElementById('sbColor').value = data.moodle.sbColor || '#4e4e4e';
+        document.getElementById('sbColor').value = data.moodle.sbColor || '#000000';
         document.getElementById('sbColorText').value = document.getElementById('sbColor').value;
-        document.getElementById('borderRadius').value = data.moodle.borderRadius || 12;
-        document.getElementById('courseList').value = data.moodle.quarter || '';
         moodleData = data.moodle;
     });
 }
@@ -90,20 +86,6 @@ const moodleSettingsListeners = () => {
         chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('accentColorText').addEventListener('click', () => document.getElementById('accentColor').click());
-    document.getElementById('borderRadius').addEventListener('input', e => {
-        if (!e.target.value.includes('-'))
-            moodleData.borderRadius = parseInt(e.target.value);
-        else if (e.target.value.isNaN || e.target.value == 0)
-            moodleData.borderRadius = 0;
-        else
-            e.target.value = e.target.value.replace('-', '');
-        chrome.storage.sync.set({ moodle: moodleData });
-    });
-    document.getElementById('courseList').addEventListener('change', e => {
-        if (e.target.value.length < 5) return;
-        moodleData.quarter = parseInt(e.target.value.substring(0, 4)) + e.target.value.charAt(4);
-        chrome.storage.sync.set({ moodle: moodleData });
-    });
 }
 
 /**

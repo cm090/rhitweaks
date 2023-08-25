@@ -3,31 +3,12 @@
     --card-color: #eeeeee;
     --accent-color: #800000;
     --primary: var(--accent-color);
-    --highlight-color: #4e4e4e;
-    --border-radius: 12px;
+    --sidebar-color: #4e4e4e;
 }
 
 #ek-overlay,
 #ek-modal {
     display: none;
-}
-
-section,
-.dashboard-card,
-#page-header .card,
-.dropdown-menu,
-.section-summary.main,
-.info,
-.formulation.clearfix,
-.comment.clearfix,
-#gridshadebox_content,
-.modal-dialog,
-.modal-content,
-.card,
-.filepicker>div,
-.badge,
-.currentselected {
-    border-radius: var(--border-radius) !important;
 }
 
 .fa-star:before,
@@ -36,7 +17,7 @@ a,
     color: var(--accent-color);
 }
 
-a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary, .dropdown-item):hover,
+a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary, .dropdown-item, .courseindex-link, .courseindex-chevron):hover,
 .btn-link:hover {
     color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
@@ -53,25 +34,44 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
     border-color: var(--accent-color);
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
     background: color-mix(in srgb, var(--accent-color), #000000) !important;
     border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
 .section,
 .card,
-#region-main,
-#gridshadebox_content {
-    background: var(--card-color);
+#gridshadebox_content,
+.secondary-navigation nav,
+.secondary-navigation ul,
+div[role="main"] {
+    background: var(--card-color) !important;
 }
 
 .section-summary.main {
     border: 0.25px solid gray !important;
 }
 
+.secondary-navigation ul {
+    justify-content: center;
+}
+
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#page-header {
+    margin-top: 20px;
+}
+
 .dashboard-card .card-img,
 .dashboard-card .card-footer,
 div#nav-drawer::-webkit-scrollbar,
+#page.drawers::-webkit-scrollbar,
 .evalkit-widget-surveys,
 .usernav li:first-child {
     display: none !important;
@@ -82,26 +82,10 @@ body,
     background: var(--bg-color) !important;
 }
 
-#nav-drawer .list-group-item {
-    border-radius: var(--border-radius);
-    margin: 5px 0;
-    background: var(--highlight-color);
-    color: white;
-    transition: 0.3s;
-}
-
-#nav-drawer .list-group-item:hover {
-    background: color-mix(in srgb, var(--highlight-color), transparent 13.3%) !important;
-    border-inline-start: 10px solid transparent;
-}
-
 .calendar_event_course {
     background: color-mix(in srgb, var(--accent-color), transparent 85%);
 }
 
-#page-footer {
-    background: var(--highlight-color) !important;
-}
 
 #nav-drawer .list-group-item.active {
     background: var(--accent-color) !important;
@@ -117,37 +101,15 @@ body,
 .navbar-brand {
     background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
     background-size: 240px !important;
-    margin-top: 12px;
-}
-
-.btn {
-    border-radius: 100px !important;
+    margin-top: 14px !important;
 }
 
 input,
 select {
-    border-radius: 8px !important;
     border: 1px solid gray !important;
 }
 
-.editor_atto_toolbar {
-    border-radius: 12px 12px 0 0;
-}
-
-.editor_atto_content_wrap {
-    border-radius: 0 0 12px 12px;
-}
-
-.simplesearchform input {
-    border-radius: 100px 0 0 100px !important;
-}
-
-.simplesearchform button {
-    border-radius: 0 100px 100px 0 !important;
-}
-
 .ablock .answer div {
-    border-radius: var(--border-radius);
     padding: 5px;
 }
 
@@ -161,12 +123,10 @@ select {
 }
 
 #page-footer {
-    border-radius: var(--border-radius);
     margin: 10px;
 }
 
 nav.navbar.fixed-top {
-    border-radius: 0 0 12px 12px;
     background-color: color-mix(in srgb, var(--accent-color), transparent 56.5%) !important;
     border: none !important;
     -webkit-backdrop-filter: blur(5px);
@@ -242,7 +202,8 @@ body.modal-open {
     overflow-y: scroll !important;
 }
 
-#searchform-navbar {
+#searchform-navbar,
+#page-footer>div:nth-child(1)>button {
     display: none;
 }
 
@@ -302,7 +263,11 @@ button.close:focus,
     color: var(--accent-color) !important;
 }
 
-.generalbox a:not(.btn-primary), .contentwithoutlink a, .contentafterlink a, a.autolink, .posting a {
+.generalbox a:not(.btn-primary),
+.contentwithoutlink a,
+.contentafterlink a,
+a.autolink,
+.posting a {
     color: color-mix(in srgb, var(--accent-color), #555) !important;
 }
 
@@ -310,6 +275,67 @@ button.close:focus,
     border-left: var(--accent-color) 4px solid;
 }
 
-.course-content .current {
+.course-content .current,
+.main-inner {
     background: var(--card-color) !important;
+}
+
+.simplesearchform a.btn-open {
+    display: flex !important;
+}
+
+.card .list-group-item {
+    background: transparent !important;
+}
+
+.drawers .block_myoverview>.card-body {
+    padding: 1rem !important;
+}
+
+.drawer {
+    background: color-mix(in srgb, var(--sidebar-color), transparent 30%);
+    margin-top: -4px;
+    height: 100%;
+}
+
+.drawerheader {
+    height: 0 !important;
+    position: relative;
+    z-index: 1;
+    top: 18px;
+}
+
+.drawerheader button.drawertoggle {
+    background: white;
+    height: 26px;
+    width: 26px;
+}
+
+.drawercontent {
+    height: 100% !important;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.drawercontent>nav,
+.drawercontent>section {
+    margin-top: 35px !important;
+}
+
+.drawercontent::-webkit-scrollbar {
+    display: none;
+}
+
+#page.drawers {
+    margin-top: 0px !important;
+    padding-top: 56px !important;
+    height: 100%;
+}
+
+.courseindex-item a {
+    color: white !important;
+}
+
+.courseindex-item:hover:not(.pageitem) {
+    background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
 }

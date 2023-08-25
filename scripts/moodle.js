@@ -1,46 +1,13 @@
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
-let quarter;
 
-const setStyle = () => {
+const setStyle = async () => {
     let url = chrome.runtime.getURL('styles/moodle.css');
-    return fetch(url).then(res => res.text()).then(data => {
-        var s = document.createElement("style");
-        s.innerHTML = data;
-        document.getElementsByTagName("head")[0].appendChild(s);
-    }).then(() => Promise.resolve());
-}
-
-const cleanSideMenu = () => {
-    let start = false;
-    const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
-    if (document.querySelectorAll(".sectionname").length > 1)
-        document.querySelectorAll(".sectionname").forEach(item => {
-            if (!courseData.find(el => el[0] == item.innerText) && item.id)
-                courseData.push([item.innerText, `#${item.id}`]);
-        });
-    document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach((item, i) => {
-        item.style.display = '';
-        let text = item.querySelector('.media-body').innerText;
-        if (!start) {
-            if (text == 'My courses') {
-                start = true;
-                item.onclick = () => alert('Settings moved to the RHITweaks menu');
-                return;
-            } else if (item.querySelector('a').href == window.location.href)
-                item.querySelector('a').classList.add('active');
-            else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text)
-                && i != 0 && !courseData.find(el => el[0] == text))
-                courseData.push([text, item.querySelector('a').href]);
-        } else {
-            if (text.length > 2 && !courseData.find(el => el[0] == text))
-                courseData.push([text, item.querySelector('a').href]);
-            if (start && !text.includes(quarter))
-                item.style.display = 'none';
-            else if (text == activeCourse)
-                item.querySelector('a').classList.add('active');
-        }
-    });
-    return Promise.resolve();
+    const res = await fetch(url);
+    const data = await res.text();
+    var s = document.createElement("style");
+    s.innerHTML = data;
+    document.getElementsByTagName("head")[0].appendChild(s);
+    return await Promise.resolve();
 }
 
 const modifyURL = () => {
@@ -57,25 +24,39 @@ const modifyURL = () => {
     return Promise.resolve();
 }
 
-const addButtons = () => {
-    if (window.location.pathname != '/my/') return Promise.resolve(false);
-    if (document.querySelector("#page-header > div > div > div").clientWidth <= 833) return Promise.resolve();
-    return fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html')).then(res => {
-        return res.text();
-    }).then(data => {
-        let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
+const addButtons = async () => {
+    if (window.location.pathname != '/my/') return Promise.reject();
+    if (document.querySelector("#page-content").clientWidth > 833) {
+        const res = await fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html'));
+        const data = await res.text();
+        let element = document.querySelector("#page-content");
         element.innerHTML = data + element.innerHTML;
-        onresize = () => checkButtons();
-        checkButtons();
-    }).then(() => Promise.resolve(true));
+    }
+    onresize = () => checkButtons();
+    return await Promise.resolve();
 }
 
 const checkButtons = () => {
-    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
+    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-content").clientWidth <= 833) ? 'none' : 'flex';
 }
 
 const searchListener = () => {
+    const wait = () => {
+        const navItems = document.querySelectorAll('#course-index .courseindex-section');
+        if (navItems)
+            navItems.forEach(item => {
+                const header = item.querySelector('.courseindex-section-title .courseindex-link');
+                courseData.push([header.innerText, header.href]);
+            });
+        else setTimeout(wait, 500);
+    }
+    wait();
+
     let pos = 1;
+    if (window.location.href.includes('course/'))
+        courseData.push(['Grades',
+            Array.from(document.querySelectorAll(".more-nav > li")).find(item => item.querySelector('a').innerText.includes('Grades')).querySelector('a').href
+        ]);
     courseData.push(['My Rose-Hulman', 'https://rosehulman.sharepoint.com/sites/MyRH']);
     courseData.push(['Banner Web', 'https://bannerweb.rose-hulman.edu/login']);
     courseData.push(['Gradescope', 'https://www.gradescope.com']);
@@ -134,19 +115,18 @@ const searchListener = () => {
     return Promise.resolve();
 }
 
-const searchCode = () => {
+const searchCode = async () => {
     if (window.location.href.includes('submission') || window.location.href.includes('#bypass')) return Promise.resolve();
-    return fetch(chrome.runtime.getURL('assets/moodle/search-modal.html')).then(res => {
-        return res.text();
-    }).then(data => {
-        if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;
-        else document.querySelector('footer').innerHTML += data;
-        searchListener();
-        waitForjQuery();
-    }).then(() => Promise.resolve());
+    const res = await fetch(chrome.runtime.getURL('assets/moodle/search-modal.html'));
+    const data = await res.text();
+    if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;
+    else document.querySelector('footer').innerHTML += data;
+    searchListener();
+    waitForJQuery();
+    return await Promise.resolve();
 }
 
-const waitForjQuery = () => {
+const waitForJQuery = () => {
     try {
         $("#rmtSearch").on('shown.bs.modal', () => {
             document.querySelector('#rmtSearch .modal-body input').focus();
@@ -168,7 +148,7 @@ const waitForjQuery = () => {
                 window.open(e.target.href, '_blank');
             });
     } catch (e) {
-        setTimeout(waitForjQuery, 500);
+        setTimeout(waitForJQuery, 500);
     }
 }
 
@@ -179,13 +159,10 @@ const start = () => {
         setStyle();
     }).then(() => {
         console.log('RHITweaks > Custom styles activated');
-        cleanSideMenu();
+        addButtons()
+            .catch(() => console.log('RHITweaks > Skipped custom buttons'))
+            .then(() => console.log('RHITweaks > Added custom buttons'))
     }).then(() => {
-        console.log('RHITweaks > Side menu modified');
-        addButtons();
-    }).then(res => {
-        if (res) console.log('RHITweaks > Added custom buttons');
-        else console.log('RHITweaks > Skipped custom buttons');
         document.addEventListener('keydown', e => {
             if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
                 e.preventDefault();
@@ -202,9 +179,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
         root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
-        root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
-        root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
-        quarter = data.moodle.quarter || '';
+        root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#000000');
         if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
     });
     chrome.storage.sync.onChanged.addListener(changes => {
@@ -218,12 +193,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', newData.bgColor || '#000000');
         root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
-        root.style.setProperty('--highlight-color', newData.sbColor || '#4e4e4e');
-        root.style.setProperty('--border-radius', (newData.borderRadius || 12) + 'px');
-        if (oldData.quarter != newData.quarter) {
-            quarter = newData.quarter || '';
-            cleanSideMenu();
-        }
+        root.style.setProperty('--sidebar-color', newData.sbColor || '#000000');
     });
 }
 
