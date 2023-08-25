@@ -10,39 +10,6 @@ const setStyle = () => {
     }).then(() => Promise.resolve());
 }
 
-const cleanSideMenu = () => {
-    let start = false;
-    const activeCourse = (document.querySelector('[data-key="coursehome"] .media-body')) ? document.querySelector('[data-key="coursehome"] .media-body').innerText : '';
-    if (document.querySelectorAll(".sectionname").length > 1)
-        document.querySelectorAll(".sectionname").forEach(item => {
-            if (!courseData.find(el => el[0] == item.innerText) && item.id)
-                courseData.push([item.innerText, `#${item.id}`]);
-        });
-    document.querySelectorAll("#nav-drawer > nav.list-group > ul > li").forEach((item, i) => {
-        item.style.display = '';
-        let text = item.querySelector('.media-body').innerText;
-        if (!start) {
-            if (text == 'My courses') {
-                start = true;
-                item.onclick = () => alert('Settings moved to the RHITweaks menu');
-                return;
-            } else if (item.querySelector('a').href == window.location.href)
-                item.querySelector('a').classList.add('active');
-            else if (!['Participants', 'Badges', 'Download center', 'Dashboard', 'Site home', 'Calendar', 'Private files', 'Content bank'].includes(text)
-                && i != 0 && !courseData.find(el => el[0] == text))
-                courseData.push([text, item.querySelector('a').href]);
-        } else {
-            if (text.length > 2 && !courseData.find(el => el[0] == text))
-                courseData.push([text, item.querySelector('a').href]);
-            if (start && !text.includes(quarter))
-                item.style.display = 'none';
-            else if (text == activeCourse)
-                item.querySelector('a').classList.add('active');
-        }
-    });
-    return Promise.resolve();
-}
-
 const modifyURL = () => {
     if (((window.location.pathname.length < 2 && !window.location.search) || window.location.href.includes('enrol')) && !window.location.hash.includes('bypass'))
         window.location.pathname = '/my';
@@ -75,7 +42,22 @@ const checkButtons = () => {
 }
 
 const searchListener = () => {
+    const wait = () => {
+        const navItems = document.querySelectorAll('#course-index .courseindex-section');
+        if (navItems)
+            navItems.forEach(item => {
+                const header = item.querySelector('.courseindex-section-title .courseindex-link');
+                courseData.push([header.innerText, header.href]);
+            });
+        else setTimeout(wait, 500);
+    }
+    wait();
+
     let pos = 1;
+    if (window.location.href.includes('course'))
+        courseData.push(['Grades',
+            Array.from(document.querySelectorAll(".more-nav > li")).find(item => item.querySelector('a').innerText.includes('Grades')).querySelector('a').href
+        ]);
     courseData.push(['My Rose-Hulman', 'https://rosehulman.sharepoint.com/sites/MyRH']);
     courseData.push(['Banner Web', 'https://bannerweb.rose-hulman.edu/login']);
     courseData.push(['Gradescope', 'https://www.gradescope.com']);
@@ -179,9 +161,6 @@ const start = () => {
         setStyle();
     }).then(() => {
         console.log('RHITweaks > Custom styles activated');
-        cleanSideMenu();
-    }).then(() => {
-        console.log('RHITweaks > Side menu modified');
         addButtons();
     }).then(res => {
         if (res) console.log('RHITweaks > Added custom buttons');
