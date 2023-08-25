@@ -1,13 +1,14 @@
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 let quarter;
 
-const setStyle = () => {
+const setStyle = async () => {
     let url = chrome.runtime.getURL('styles/moodle.css');
-    return fetch(url).then(res => res.text()).then(data => {
-        var s = document.createElement("style");
-        s.innerHTML = data;
-        document.getElementsByTagName("head")[0].appendChild(s);
-    }).then(() => Promise.resolve());
+    const res = await fetch(url);
+    const data = await res.text();
+    var s = document.createElement("style");
+    s.innerHTML = data;
+    document.getElementsByTagName("head")[0].appendChild(s);
+    return await Promise.resolve();
 }
 
 const modifyURL = () => {
@@ -24,21 +25,20 @@ const modifyURL = () => {
     return Promise.resolve();
 }
 
-const addButtons = () => {
+const addButtons = async () => {
     if (window.location.pathname != '/my/') return Promise.resolve(false);
-    if (document.querySelector("#page-header > div > div > div").clientWidth <= 833) return Promise.resolve();
-    return fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html')).then(res => {
-        return res.text();
-    }).then(data => {
-        let element = document.querySelector("#page-header > div > div > div > div.d-flex.flex-wrap")
-        element.innerHTML = data + element.innerHTML;
-        onresize = () => checkButtons();
-        checkButtons();
-    }).then(() => Promise.resolve(true));
+    if (document.querySelector("#page-content").clientWidth <= 833) return Promise.resolve();
+    const res = await fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html'));
+    const data = await res.text();
+    let element = document.querySelector("#page-content");
+    element.innerHTML = data + element.innerHTML;
+    onresize = () => checkButtons();
+    checkButtons();
+    return await Promise.resolve(true);
 }
 
 const checkButtons = () => {
-    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-header > div > div > div").clientWidth <= 833) ? 'none' : 'flex';
+    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-content").clientWidth <= 833) ? 'none' : 'flex';
 }
 
 const searchListener = () => {
@@ -116,19 +116,18 @@ const searchListener = () => {
     return Promise.resolve();
 }
 
-const searchCode = () => {
+const searchCode = async () => {
     if (window.location.href.includes('submission') || window.location.href.includes('#bypass')) return Promise.resolve();
-    return fetch(chrome.runtime.getURL('assets/moodle/search-modal.html')).then(res => {
-        return res.text();
-    }).then(data => {
-        if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;
-        else document.querySelector('footer').innerHTML += data;
-        searchListener();
-        waitForjQuery();
-    }).then(() => Promise.resolve());
+    const res = await fetch(chrome.runtime.getURL('assets/moodle/search-modal.html'));
+    const data = await res.text();
+    if (document.querySelector("#page-header")) document.querySelector("#page-header").innerHTML += data;
+    else document.querySelector('footer').innerHTML += data;
+    searchListener();
+    waitForJQuery();
+    return await Promise.resolve();
 }
 
-const waitForjQuery = () => {
+const waitForJQuery = () => {
     try {
         $("#rmtSearch").on('shown.bs.modal', () => {
             document.querySelector('#rmtSearch .modal-body input').focus();
@@ -150,7 +149,7 @@ const waitForjQuery = () => {
                 window.open(e.target.href, '_blank');
             });
     } catch (e) {
-        setTimeout(waitForjQuery, 500);
+        setTimeout(waitForJQuery, 500);
     }
 }
 
