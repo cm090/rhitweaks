@@ -202,8 +202,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
         root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
-        root.style.setProperty('--highlight-color', data.moodle.sbColor || '#4e4e4e');
-        root.style.setProperty('--border-radius', (data.moodle.borderRadius || 12) + 'px');
+        root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#4e4e4e');
         quarter = data.moodle.quarter || '';
         if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
     });
@@ -218,8 +217,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', newData.bgColor || '#000000');
         root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
-        root.style.setProperty('--highlight-color', newData.sbColor || '#4e4e4e');
-        root.style.setProperty('--border-radius', (newData.borderRadius || 12) + 'px');
+        root.style.setProperty('--sidebar-color', newData.sbColor || '#4e4e4e');
         if (oldData.quarter != newData.quarter) {
             quarter = newData.quarter || '';
             cleanSideMenu();
