@@ -71,6 +71,7 @@ div[role="main"] {
 .dashboard-card .card-img,
 .dashboard-card .card-footer,
 div#nav-drawer::-webkit-scrollbar,
+#page.drawers::-webkit-scrollbar,
 .evalkit-widget-surveys,
 .usernav li:first-child {
     display: none !important;
@@ -326,7 +327,8 @@ a.autolink,
 }
 
 #page.drawers {
-    margin-top: 56px !important;
+    margin-top: 0px !important;
+    padding-top: 56px !important;
     height: 100%;
 }
 
