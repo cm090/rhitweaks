@@ -7,8 +7,6 @@ This is the successor to [rhit-moodle-tweaks](https://github.com/cm090/rhit-mood
 
 ## Features
 ### JavaScript
-CleanSideMenu:
-- Removes old courses from the sidebar. Click on "My courses" to set up
 
 ModifyURL:
 - Redirects to dashboard when on site home and course enrollment pages. Add `#bypass` to the end of the URL to avoid redirect.
