@@ -26,15 +26,15 @@ const modifyURL = () => {
 }
 
 const addButtons = async () => {
-    if (window.location.pathname != '/my/') return Promise.resolve(false);
-    if (document.querySelector("#page-content").clientWidth <= 833) return Promise.resolve();
-    const res = await fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html'));
-    const data = await res.text();
-    let element = document.querySelector("#page-content");
-    element.innerHTML = data + element.innerHTML;
+    if (window.location.pathname != '/my/') return Promise.reject();
+    if (document.querySelector("#page-content").clientWidth > 833) {
+        const res = await fetch(chrome.runtime.getURL('assets/moodle/header-buttons.html'));
+        const data = await res.text();
+        let element = document.querySelector("#page-content");
+        element.innerHTML = data + element.innerHTML;
+    }
     onresize = () => checkButtons();
-    checkButtons();
-    return await Promise.resolve(true);
+    return await Promise.resolve();
 }
 
 const checkButtons = () => {
@@ -54,7 +54,7 @@ const searchListener = () => {
     wait();
 
     let pos = 1;
-    if (window.location.href.includes('course'))
+    if (window.location.href.includes('course/'))
         courseData.push(['Grades',
             Array.from(document.querySelectorAll(".more-nav > li")).find(item => item.querySelector('a').innerText.includes('Grades')).querySelector('a').href
         ]);
@@ -160,10 +160,10 @@ const start = () => {
         setStyle();
     }).then(() => {
         console.log('RHITweaks > Custom styles activated');
-        addButtons();
-    }).then(res => {
-        if (res) console.log('RHITweaks > Added custom buttons');
-        else console.log('RHITweaks > Skipped custom buttons');
+        addButtons()
+            .catch(() => console.log('RHITweaks > Skipped custom buttons'))
+            .then(() => console.log('RHITweaks > Added custom buttons'))
+    }).then(() => {
         document.addEventListener('keydown', e => {
             if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
                 e.preventDefault();
