@@ -43,12 +43,29 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 
 .section,
 .card,
-#gridshadebox_content {
+#gridshadebox_content,
+.secondary-navigation nav,
+.secondary-navigation ul,
+div[role="main"] {
     background: var(--card-color) !important;
 }
 
 .section-summary.main {
     border: 0.25px solid gray !important;
+}
+
+.secondary-navigation ul {
+    justify-content: center;
+}
+
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#page-header {
+    margin-top: 20px;
 }
 
 .dashboard-card .card-img,
@@ -86,22 +103,9 @@ body,
     margin-top: 14px !important;
 }
 
-.btn:not([data-toggler="drawers"]) {
-    border-radius: 100px !important;
-}
-
 input,
 select {
-    border-radius: 8px !important;
     border: 1px solid gray !important;
-}
-
-.editor_atto_toolbar {
-    border-radius: 12px 12px 0 0;
-}
-
-.editor_atto_content_wrap {
-    border-radius: 0 0 12px 12px;
 }
 
 .ablock .answer div {
