@@ -1,5 +1,4 @@
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
-let quarter;
 
 const setStyle = async () => {
     let url = chrome.runtime.getURL('styles/moodle.css');
@@ -180,8 +179,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
         root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
-        root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#4e4e4e');
-        quarter = data.moodle.quarter || '';
+        root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#000000');
         if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
     });
     chrome.storage.sync.onChanged.addListener(changes => {
@@ -195,11 +193,7 @@ const storageListeners = () => {
         root.style.setProperty('--bg-color', newData.bgColor || '#000000');
         root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
-        root.style.setProperty('--sidebar-color', newData.sbColor || '#4e4e4e');
-        if (oldData.quarter != newData.quarter) {
-            quarter = newData.quarter || '';
-            cleanSideMenu();
-        }
+        root.style.setProperty('--sidebar-color', newData.sbColor || '#000000');
     });
 }
 
