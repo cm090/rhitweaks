@@ -111,7 +111,8 @@ const searchListener = () => {
             $('#rmtSearch').modal('show');
         }
     });
-    document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
+    if (document.querySelector('nav .simplesearchform'))
+        document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
     return Promise.resolve();
 }
 

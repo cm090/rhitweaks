@@ -46,7 +46,8 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 #gridshadebox_content,
 .secondary-navigation nav,
 .secondary-navigation ul,
-div[role="main"] {
+div[role="main"],
+.login-container {
     background: var(--card-color) !important;
 }
 
@@ -78,7 +79,8 @@ div#nav-drawer::-webkit-scrollbar,
 }
 
 body,
-#nav-drawer {
+#nav-drawer,
+#page-login-index #page {
     background: var(--bg-color) !important;
 }
 
