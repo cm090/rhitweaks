@@ -20,6 +20,7 @@ window['moodleDataTemplate'] = {
     'cardColor': '#eeeeee',
     'accentColor': '#800000',
     'sbColor': '#000000',
+    'timeFormat': 12,
 }
 window['scheduleDataTemplate'] = {
     'enabled': false,
@@ -54,6 +55,7 @@ const moodleSettingsFn = () => {
         document.getElementById('accentColorText').value = document.getElementById('accentColor').value;
         document.getElementById('sbColor').value = data.moodle.sbColor || '#000000';
         document.getElementById('sbColorText').value = document.getElementById('sbColor').value;
+        document.getElementById('timeFormat').value = data.moodle.timeFormat || 12;
         moodleData = data.moodle;
     });
 }
@@ -86,6 +88,10 @@ const moodleSettingsListeners = () => {
         chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('accentColorText').addEventListener('click', () => document.getElementById('accentColor').click());
+    document.getElementById('timeFormat').addEventListener('change', () => {
+        moodleData.timeFormat = document.getElementById('timeFormat').value;
+        chrome.storage.sync.set({ moodle: moodleData });
+    });
 }
 
 /**

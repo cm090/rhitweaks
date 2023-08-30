@@ -1,4 +1,7 @@
 let courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
+const additionalData = {
+    'timeFormat': 12,
+};
 
 const setStyle = async () => {
     let url = chrome.runtime.getURL('styles/moodle.css');
@@ -116,6 +119,26 @@ const searchListener = () => {
     return Promise.resolve();
 }
 
+const updateTimelineFormat = () => {
+    if (!document.querySelector('.block-timeline')) return;
+    document.querySelectorAll('.block-timeline').forEach(timeline => {
+        document.querySelectorAll('.timeline-event-list-item small.text-right').forEach(item => {
+            const time = item.innerText.split(' ')[0].split(':');
+            if (additionalData.timeFormat == 12) {
+                if (parseInt(time[0]) > 12) {
+                    time[0] = parseInt(time[0]) - 12;
+                    item.innerText = `${time[0]}:${time[1]} PM`;
+                    return;
+                } else if (parseInt(time[0]) == 0)
+                    time[0] = 12;
+                item.innerText = `${parseInt(time[0])}:${time[1]} AM`;
+            } else {
+                item.innerText = `${time[0]}:${time[1]}`;
+            }
+        });
+    });
+}
+
 const searchCode = async () => {
     if (window.location.href.includes('submission') || window.location.href.includes('#bypass')) return Promise.resolve();
     const res = await fetch(chrome.runtime.getURL('assets/moodle/search-modal.html'));
@@ -162,7 +185,7 @@ const start = () => {
         console.log('RHITweaks > Custom styles activated');
         addButtons()
             .catch(() => console.log('RHITweaks > Skipped custom buttons'))
-            .then(() => console.log('RHITweaks > Added custom buttons'))
+            .then(() => console.log('RHITweaks > Added custom buttons'));
     }).then(() => {
         document.addEventListener('keydown', e => {
             if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k')
@@ -181,7 +204,11 @@ const storageListeners = () => {
         root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
         root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#000000');
-        if (data.moodle.enabled && document.getElementById('page-wrapper')) start();
+        additionalData.timeFormat = data.moodle.timeFormat || 12;
+        if (data.moodle.enabled && document.getElementById('page-wrapper')) {
+            start();
+            setTimeout(() => updateTimelineFormat(), 2000);
+        }
     });
     chrome.storage.sync.onChanged.addListener(changes => {
         const oldData = changes.moodle.oldValue;
@@ -195,6 +222,8 @@ const storageListeners = () => {
         root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
         root.style.setProperty('--sidebar-color', newData.sbColor || '#000000');
+        additionalData.timeFormat = newData.timeFormat || 12;
+        updateTimelineFormat();
     });
 }
 
