@@ -59,8 +59,8 @@ div[role="main"],
     justify-content: center;
 }
 
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto>div>div,
+#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto {
     flex-grow: 1;
     text-align: center;
 }
@@ -145,8 +145,10 @@ div[data-region="grading-navigation-panel"] {
 }
 
 #region-main>div.region_main_settings_menu_proxy,
-#toggledsection-2>ul {
-    background: transparent;
+#toggledsection-2>ul,
+.activity-header,
+#region-main {
+    background: transparent !important;
 }
 
 #nav-drawer>nav>ul>li>a>div.ml-1 {
@@ -322,6 +324,7 @@ a.autolink,
 .drawercontent>nav,
 .drawercontent>section {
     margin-top: 35px !important;
+    margin-bottom: 65px;
 }
 
 .drawercontent::-webkit-scrollbar {
@@ -340,4 +343,28 @@ a.autolink,
 
 .courseindex-item:hover:not(.pageitem) {
     background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+}
+
+#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto>div>div,
+#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto {
+    flex-grow: 0 !important;
+}
+
+.header-maxwidth {
+    margin-left: 0 !important;
+}
+
+.page-header-headings {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    background: transparent !important;
+    color: white !important;
+    font-weight: 700;
+}
+
+#usernavigation .divider {
+    display: none;
 }
