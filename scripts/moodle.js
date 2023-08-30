@@ -132,8 +132,9 @@ const updateTimelineFormat = () => {
                 } else if (parseInt(time[0]) == 0)
                     time[0] = 12;
                 item.innerText = `${parseInt(time[0])}:${time[1]} AM`;
-            } else {
-                item.innerText = `${time[0]}:${time[1]}`;
+            } else if (item.innerText.split(' ').length > 1) {
+                const half = item.innerText.split(' ')[1] === "AM" ? time[0] === "12" ? -12 : 0 : 12;
+                item.innerText = `${String(parseInt(time[0]) + half).padStart(2, '0')}:${time[1]}`;
             }
         });
     });
@@ -207,7 +208,11 @@ const storageListeners = () => {
         additionalData.timeFormat = data.moodle.timeFormat || 12;
         if (data.moodle.enabled && document.getElementById('page-wrapper')) {
             start();
-            setTimeout(() => updateTimelineFormat(), 2000);
+            const wait = () => {
+                if (document.querySelector('.block_timeline [data-region="event-list-loading-placeholder"].hidden')) updateTimelineFormat();
+                else setTimeout(wait, 500);
+            }
+            if (document.querySelector('.block_timeline')) wait();
         }
     });
     chrome.storage.sync.onChanged.addListener(changes => {
