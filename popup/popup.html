@@ -22,7 +22,7 @@
                     Enable Moodle tweaks
                 </label>
                 <br />
-                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="moodleSettings">Moodle
+                <button type="button" class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="moodleSettings">Moodle
                     Settings</button>
             </div>
             <div class="option">
@@ -30,10 +30,12 @@
                 <label class="form-check-label" for="scheduleEnable">
                     Enable schedule lookup tweaks
                 </label>
-                <button class="btn btn-danger btn-sm w-100 my-2 settings-btn" id="scheduleSettings">Schedule Lookup
+                <button type="button" class="btn btn-danger btn-sm w-100 my-2 settings-btn"
+                    id="scheduleSettings">Schedule Lookup
                     Settings</button>
             </div>
-            <button class="btn btn-secondary btn-sm w-100 my-2 settings-btn" id="additionalSettings">Additional
+            <button type="button" class="btn btn-secondary btn-sm w-100 my-2 settings-btn"
+                id="additionalSettings">Additional
                 Settings</button>
         </div>
         <!-- Moodle -->
@@ -41,63 +43,73 @@
             <h3 class="text-center title">Moodle Settings</h3>
             <label for="bgColorText">Background color</label>
             <div class="input-group color-input">
-                <input type="text" id="bgColorText" class="form-control" title="Background color" readonly>
-                <input type="color" id="bgColor" name="bgColor" value="#000000" title="Background color">
+                <input type="text" id="bgColorText" class="form-control" title="Background color" readonly />
+                <input type="color" id="bgColor" name="bgColor" value="#000000" title="Background color" />
             </div>
             <label for="cardColorText">Card color</label>
             <div class="input-group color-input">
-                <input type="text" id="cardColorText" class="form-control" title="Card color" readonly>
-                <input type="color" id="cardColor" name="cardColor" value="#eeeeee" title="Card color">
+                <input type="text" id="cardColorText" class="form-control" title="Card color" readonly />
+                <input type="color" id="cardColor" name="cardColor" value="#eeeeee" title="Card color" />
             </div>
             <label for="accentColorText">Accent color</label>
             <div class="input-group color-input">
-                <input type="text" id="accentColorText" class="form-control" title="Accent color" readonly>
-                <input type="color" id="accentColor" name="accentColor" value="#800000" title="Accent color">
+                <input type="text" id="accentColorText" class="form-control" title="Accent color" readonly />
+                <input type="color" id="accentColor" name="accentColor" value="#800000" title="Accent color" />
             </div>
             <label for="sbColorText">Sidebar color</label>
             <div class="input-group color-input">
-                <input type="text" id="sbColorText" class="form-control" title="Sidebar color" readonly>
-                <input type="color" id="sbColor" name="sbColor" value="#4e4e4e" title="Sidebar color">
+                <input type="text" id="sbColorText" class="form-control" title="Sidebar color" readonly />
+                <input type="color" id="sbColor" name="sbColor" value="#4e4e4e" title="Sidebar color" />
             </div>
+            <label for="timeFormat">Timeline format</label>
+            <select id="timeFormat" class="form-control" title="Timeline format">
+                <option value="12">12 Hour (AM/PM)</option>
+                <option value="24">24 Hour</option>
+            </select>
+            <button type="button" class="btn btn-secondary btn-sm my-2 w-100" id="resetCourseList">Clear pinned courses</button>
         </div>
         <!-- Schedule Lookup -->
         <div id="scheduleSettingsPage" class="settings-page">
             <h3 class="text-center title">Schedule Lookup Settings</h3>
             <label for="schedBgColorText">Background color</label>
             <div class="input-group color-input">
-                <input type="text" id="schedBgColorText" class="form-control" title="Background color" readonly>
-                <input type="color" id="schedBgColor" name="schedBgColor" value="#000000" title="Background color">
+                <input type="text" id="schedBgColorText" class="form-control" title="Background color" readonly />
+                <input type="color" id="schedBgColor" name="schedBgColor" value="#000000" title="Background color" />
             </div>
             <label for="schedAccentColorText">Accent color</label>
             <div class="input-group color-input">
-                <input type="text" id="schedAccentColorText" class="form-control" title="Accent color" readonly>
-                <input type="color" id="schedAccentColor" name="schedAccentColor" value="#800000" title="Accent color">
+                <input type="text" id="schedAccentColorText" class="form-control" title="Accent color" readonly />
+                <input type="color" id="schedAccentColor" name="schedAccentColor" value="#800000"
+                    title="Accent color" />
             </div>
             <label for="schedTextColorText">Text color</label>
             <div class="input-group color-input">
-                <input type="text" id="schedTextColorText" class="form-control" title="Text color" readonly>
-                <input type="color" id="schedTextColor" name="schedTextColor" value="#ffffff" title="Text color">
+                <input type="text" id="schedTextColorText" class="form-control" title="Text color" readonly />
+                <input type="color" id="schedTextColor" name="schedTextColor" value="#ffffff" title="Text color" />
             </div>
             <label for="schedBorderColorText">Border color</label>
             <div class="input-group color-input">
-                <input type="text" id="schedBorderColorText" class="form-control" title="Border color" readonly>
-                <input type="color" id="schedBorderColor" name="schedBorderColor" value="#808080" title="Border color">
+                <input type="text" id="schedBorderColorText" class="form-control" title="Border color" readonly />
+                <input type="color" id="schedBorderColor" name="schedBorderColor" value="#808080"
+                    title="Border color" />
             </div>
         </div>
         <!-- Settings -->
         <div id="additionalSettingsPage" class="settings-page">
             <h3 class="text-center title">Additional Settings</h3>
             <div class="d-flex">
-                <button class="btn btn-primary btn-sm w-50 my-2 mx-1 settings-btn" id="import">Import data</button>
-                <button class="btn btn-primary btn-sm w-50 my-2 mx-1 settings-btn" id="export">Export data</button>
+                <button type="button" class="btn btn-primary btn-sm w-50 my-2 mx-1 settings-btn" id="import">Import
+                    data</button>
+                <button type="button" class="btn btn-primary btn-sm w-50 my-2 mx-1 settings-btn" id="export">Export
+                    data</button>
             </div>
         </div>
         <div class="spacer"></div>
         <div class="footer">
             <div class="text-center">
-                <button class="btn btn-light btn-sm my-2" id="reportBtn">Report a problem</button>
-                <button class="btn btn-light btn-sm my-2" id="backBtn">Back</button>
-                <button class="btn btn-light btn-sm my-2" id="resetBtn">Reset to defaults</button>
+                <button type="button" class="btn btn-light btn-sm my-2" id="reportBtn">Report a problem</button>
+                <button type="button" class="btn btn-light btn-sm my-2" id="backBtn">Back</button>
+                <button type="button" class="btn btn-light btn-sm my-2" id="resetBtn">Reset to defaults</button>
                 <p>&copy; 2023 <a href="https://about.canon.click/" class="text-decoration-none link" target="_blank"
                         rel="noopener">Canon Maranda</a></p>
             </div>
