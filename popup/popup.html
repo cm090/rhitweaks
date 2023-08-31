@@ -62,12 +62,11 @@
                 <input type="color" id="sbColor" name="sbColor" value="#4e4e4e" title="Sidebar color" />
             </div>
             <label for="timeFormat">Timeline format</label>
-            <div class="input-group color-input">
-                <select id="timeFormat" class="form-control" title="Timeline format">
-                    <option value="12">12 Hour (AM/PM)</option>
-                    <option value="24">24 Hour</option>
-                </select>
-            </div>
+            <select id="timeFormat" class="form-control" title="Timeline format">
+                <option value="12">12 Hour (AM/PM)</option>
+                <option value="24">24 Hour</option>
+            </select>
+            <button type="button" class="btn btn-secondary btn-sm my-2 w-100" id="resetCourseList">Clear pinned courses</button>
         </div>
         <!-- Schedule Lookup -->
         <div id="scheduleSettingsPage" class="settings-page">

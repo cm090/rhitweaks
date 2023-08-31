@@ -21,6 +21,7 @@ window['moodleDataTemplate'] = {
     'accentColor': '#800000',
     'sbColor': '#000000',
     'timeFormat': 12,
+    'pinnedCourses': [],
 }
 window['scheduleDataTemplate'] = {
     'enabled': false,
@@ -92,6 +93,10 @@ const moodleSettingsListeners = () => {
         moodleData.timeFormat = document.getElementById('timeFormat').value;
         chrome.storage.sync.set({ moodle: moodleData });
     });
+    document.getElementById('resetCourseList').addEventListener('click', () => {
+        moodleData.pinnedCourses = [];
+        chrome.storage.sync.set({ moodle: moodleData });
+    })
 }
 
 /**
