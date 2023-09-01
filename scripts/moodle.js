@@ -42,9 +42,8 @@ const addButtons = async () => {
     return await Promise.resolve();
 }
 
-const checkButtons = () => {
-    document.querySelector('#rmtButtons').style.display = (document.querySelector("#page-content").clientWidth <= 833) ? 'none' : 'flex';
-}
+const checkButtons = () => document.querySelector('#rmtButtons').style.display
+    = (document.querySelector("#page-content").clientWidth <= 833) ? 'none' : 'flex';
 
 const searchListener = () => {
     const wait = () => {
@@ -204,13 +203,12 @@ const updateCourseDropdown = () => {
             a.innerText = item[1];
             div.appendChild(a);
         });
-    menuItem.append(div);
-    menuItem.addEventListener('mouseenter', () => {
-        div.classList.add('show');
-    });
-    menuItem.addEventListener('mouseleave', () => {
-        div.classList.remove('show');
-    })
+    document.querySelector('body').appendChild(div);
+    menuItem.onmouseenter = () => div.classList.add('show');
+    div.onmouseenter = () => div.classList.add('show');
+    document.querySelector("#page-wrapper > nav > div.primary-navigation > nav").onmouseleave
+        = () => div.classList.remove('show');
+    div.onmouseleave = () => div.classList.remove('show');
 }
 
 const start = () => {

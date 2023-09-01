@@ -75,6 +75,7 @@ div[role="main"],
 
 #page-header {
     margin-top: 20px;
+    max-width: 100% !important;
 }
 
 body,
@@ -147,7 +148,8 @@ div[data-region="grading-navigation-panel"] {
 #toggledsection-2>ul,
 .activity-header,
 #region-main,
-.dashboard-card-footer {
+.dashboard-card-footer,
+input[type="text"] {
     background: transparent !important;
 }
 
@@ -357,6 +359,15 @@ a.autolink,
 }
 
 .custom-dropdown {
-    position: relative !important;
-    top: 0;
+    position: absolute !important;
+    top: 54px;
+    left: 420px;
+}
+
+.thegrid {
+    justify-content: center !important;
+}
+
+.grid-image.card-img-bottom {
+    background: white !important;
 }
