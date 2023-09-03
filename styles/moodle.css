@@ -9,7 +9,6 @@
 #ek-overlay,
 #ek-modal,
 div#nav-drawer::-webkit-scrollbar,
-#page.drawers::-webkit-scrollbar,
 .evalkit-widget-surveys,
 .usernav li:first-child,
 #usernavigation .divider,
@@ -80,7 +79,8 @@ div[role="main"],
 
 body,
 #nav-drawer,
-#page-login-index #page {
+#page-login-index #page,
+#sticky-footer {
     background: var(--bg-color) !important;
 }
 
@@ -370,4 +370,39 @@ a.autolink,
 
 .grid-image.card-img-bottom {
     background: white !important;
+}
+
+#sticky-footer label {
+    color: white;
+}
+
+#sticky-footer {
+    border-top: 0 !important;
+    z-index: -1;
+}
+
+#page.drawers::-webkit-scrollbar {
+    width: 0;
+}
+
+#page.drawers::-webkit-scrollbar-track {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+}
+
+#page.drawers::-webkit-scrollbar-thumb,
+#page.drawers::-webkit-scrollbar-thumb:hover,
+#page.drawers::-webkit-scrollbar-thumb:active {
+    border: none;
+    background: var(--accent-color);
+}
+
+#page {
+    flex-grow: 1;
+}
+
+.courseindex .courseindex-item.pageitem,
+.courseindex .courseindex-item.pageitem:hover {
+    background: var(--accent-color) !important;
 }
