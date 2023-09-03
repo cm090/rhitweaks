@@ -12,6 +12,8 @@ const setStyle = async () => {
     var s = document.createElement("style");
     s.innerHTML = data;
     document.getElementsByTagName("head")[0].appendChild(s);
+    if (document.querySelector('.gradeparent'))
+        document.querySelector("#available_shortcuts_popup").style.display = 'none';
     return await Promise.resolve();
 }
 

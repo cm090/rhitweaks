@@ -94,8 +94,10 @@ const moodleSettingsListeners = () => {
         chrome.storage.sync.set({ moodle: moodleData });
     });
     document.getElementById('resetCourseList').addEventListener('click', () => {
-        moodleData.pinnedCourses = [];
-        chrome.storage.sync.set({ moodle: moodleData });
+        if (confirm('Are you sure you want to reset your pinned courses?')) {
+            moodleData.pinnedCourses = [];
+            chrome.storage.sync.set({ moodle: moodleData });
+        }
     })
 }
 
@@ -285,6 +287,8 @@ const reset = () => {
  * Sets default settings object and calls a corresponding function based on the page selector
  */
 const defaults = e => {
+    if (!confirm('Are you sure you want to reset all settings?'))
+        return;
     let selector = e.target.getAttribute('page');
     let dataSelector = window[`${selector}DataTemplate`];
     dataSelector.enabled = true;
