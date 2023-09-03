@@ -3,7 +3,7 @@ A Chromium extension to add functionality to RHIT websites
 
 This is the successor to [rhit-moodle-tweaks](https://github.com/cm090/rhit-moodle-tweaks)
 
-### Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/boocpojecnmkjnapcfgfgejdglpamool) or the [Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/mfdodngbcfimieplcdkigdkinkcenako) to download
+### Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/boocpojecnmkjnapcfgfgejdglpamool) to download
 
 ## Features
 ### JavaScript
