@@ -21,7 +21,7 @@ jobs:
       - name: Publish to Chrome Web Store
         uses: mobilefirstllc/cws-publish@latest
         with:
-          action: 'upload'
+          action: 'publish'
           client_id: ${{ secrets.CLIENT }}
           client_secret: ${{ secrets.SECRET }}
           refresh_token: ${{ secrets.TOKEN }}
