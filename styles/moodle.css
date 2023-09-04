@@ -406,3 +406,8 @@ a.autolink,
 .courseindex .courseindex-item.pageitem:hover {
     background: var(--accent-color) !important;
 }
+
+body {
+    -webkit-user-select: auto;
+    user-select: auto;
+}
