@@ -299,6 +299,12 @@ a.autolink,
     height: 100%;
 }
 
+@media (max-width: 992px) {
+    .drawer {
+        margin-top: 0 !important;
+    }
+}
+
 .drawerheader {
     height: 0 !important;
     position: relative;
@@ -386,7 +392,7 @@ a.autolink,
 }
 
 #page.drawers::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--bg-color);
     border: 2px solid white;
     border-radius: 0.5rem;
 }
@@ -410,4 +416,34 @@ a.autolink,
 body {
     -webkit-user-select: auto;
     user-select: auto;
+}
+
+.drawer-right-toggle {
+    margin-right: 0 !important;
+}
+
+.popover-region-notifications .popover-region-container {
+    border-radius: 0.5rem;
+    top: 55px
+}
+
+.popover-region-notifications .popover-region-footer-container {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.content-item-container:hover,
+.maincalendar .calendarmonth td.today .day-number-circle {
+    background-color: var(--accent-color) !important;
+}
+
+.moremenu .nav-link.active {
+    border-bottom-color: var(--accent-color) !important;
+}
+
+button:focus {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+}
+
+a:hover {
+    color: color-mix(in srgb, var(--accent-color), #000000);
 }
