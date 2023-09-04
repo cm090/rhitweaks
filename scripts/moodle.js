@@ -12,8 +12,16 @@ const setStyle = async () => {
     var s = document.createElement("style");
     s.innerHTML = data;
     document.getElementsByTagName("head")[0].appendChild(s);
-    if (document.querySelector('.gradeparent'))
-        document.querySelector("#available_shortcuts_popup").style.display = 'none';
+    if (document.querySelector('.gradeparent')) {
+        const wait = () => {
+            try {
+                document.querySelector("#available_shortcuts_popup").style.display = 'none';
+            } catch {
+                setTimeout(wait, 500);
+            }
+        }
+        wait();
+    }
     return await Promise.resolve();
 }
 
@@ -111,9 +119,9 @@ const searchListener = () => {
             }
             if (i == 5) return;
         });
-        if (i == 0)
+        if (e.target.value.length > 0)
             document.getElementById('rmtResultList').innerHTML +=
-                `<div style="margin:0" onclick="window.location='https://moodle.rose-hulman.edu/search/index.php?q=${document.getElementById('rmtSearchInput').value}'">More results</div><p style="color:lightgray; font-size:12px; margin-top:5px; margin-bottom:0;">Courses older than 1 year might not show up in this list</p>`;
+                `<div style="margin:0" onclick="window.location='https://moodle.rose-hulman.edu/search/index.php?q=${document.getElementById('rmtSearchInput').value}'">More results</div>`;
         document.querySelector('#rmtSearch #rmtResultList div:first-child').classList.add('active');
     }
     document.getElementById('rmtSearchInput').addEventListener('input', createList);
