@@ -20,7 +20,8 @@ div#nav-drawer::-webkit-scrollbar,
 
 .fa-star:before,
 a,
-.btn-link {
+.btn-link,
+.page-link {
     color: var(--accent-color);
 }
 
@@ -384,7 +385,6 @@ a.autolink,
 
 #sticky-footer {
     border-top: 0 !important;
-    z-index: -1;
 }
 
 #page.drawers::-webkit-scrollbar {
@@ -440,10 +440,56 @@ body {
     border-bottom-color: var(--accent-color) !important;
 }
 
-button:focus {
+button:focus,
+select:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
 
 a:hover {
     color: color-mix(in srgb, var(--accent-color), #000000);
+}
+
+#sticky-footer {
+    height: 50px;
+}
+
+.onGradebookPage {
+    height: calc(100% + 52px) !important;
+}
+
+.btn-outline-primary {
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show>.btn-outline-primary.dropdown-toggle,
+.btn-outline-primary:hover,
+.page-item.active .page-link {
+    color: white !important;
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.activity-add, .block-add {
+    background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
+    border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+}
+
+.report-navigation .singleselect {
+    display: flex !important;
+}
+
+.report-navigation .pagination {
+    margin: 0 !important;
+}
+
+.report-navigation>.container>.ml-auto {
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.report-navigation .previous, .report-navigation .next {
+    height: 25px;
 }

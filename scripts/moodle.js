@@ -15,7 +15,9 @@ const setStyle = async () => {
     if (document.querySelector('.gradeparent')) {
         const wait = () => {
             try {
-                document.querySelector("#available_shortcuts_popup").style.display = 'none';
+                document.querySelector('#available_shortcuts_popup').style.display = 'none';
+                document.querySelector('#page').style.marginBottom = '62px';
+                document.querySelectorAll('.drawercontent').forEach(item => item.classList.add('onGradebookPage'));
             } catch {
                 setTimeout(wait, 500);
             }
