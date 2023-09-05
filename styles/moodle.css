@@ -437,7 +437,9 @@ body {
 }
 
 button:focus,
-select:focus {
+select:focus,
+input:focus,
+.atto_toolbar_row:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
 
@@ -500,4 +502,9 @@ a:hover {
 
 .timeline-event-list-item .timeline-name .text-right {
     width: 55px !important;
+}
+
+.editor_atto_content {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+    border-color: transparent !important;
 }
