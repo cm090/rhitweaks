@@ -112,10 +112,6 @@ select {
     border: 1px solid gray !important;
 }
 
-.ablock .answer div {
-    padding: 5px;
-}
-
 #goto-top-link>a>i {
     margin: 0 !important;
 }
@@ -492,4 +488,16 @@ a:hover {
 
 .report-navigation .previous, .report-navigation .next {
     height: 25px;
+}
+
+.editor_atto_content_wrap {
+    border-radius: 0.5rem;
+}
+
+.activityiconcontainer {
+    background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+}
+
+.timeline-event-list-item .timeline-name .text-right {
+    width: 55px !important;
 }
