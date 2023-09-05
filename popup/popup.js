@@ -307,6 +307,7 @@ const defaults = e => {
  * Initializes the program
  */
 const main = () => {
+    document.querySelector('#versionNumber').innerText += chrome.runtime.getManifest().version;
     getStorage();
     reset();
     listeners();
