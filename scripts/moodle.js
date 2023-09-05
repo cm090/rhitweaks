@@ -264,7 +264,12 @@ const start = () => {
                     card.getAttribute('data-course-id')) ? "Unpin from navbar" : "Pin to navbar";
                 navItem.addEventListener('click', () => {
                     if (navItem.innerText == "Pin to navbar") {
-                        const name = card.querySelector('.coursename .multiline').innerText;
+                        let name;
+                        try {
+                        name = card.querySelector('.coursename .multiline').innerText;
+                        } catch {
+                            name = card.querySelector('.coursename').innerText.split('\n').at(-1);
+                        }
                         additionalData.pinnedCourses.push([
                             card.getAttribute('data-course-id'),
                             name.split(' ')[0].search(/(?:\w+\d+)/) !== -1 ? name.split(' ')[0] : name
