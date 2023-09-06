@@ -500,6 +500,10 @@ a:hover {
     background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
+.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"] {
+    filter: invert(1);
+}
+
 .timeline-event-list-item .timeline-name .text-right {
     width: 55px !important;
 }
