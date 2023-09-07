@@ -508,7 +508,7 @@ a:hover {
     width: 55px !important;
 }
 
-.editor_atto_content {
+.editor_atto_content:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
     border-color: transparent !important;
 }
