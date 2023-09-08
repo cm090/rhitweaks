@@ -33,7 +33,7 @@ const getData = () => {
 }
 
 const setStyles = () => {
-	if (document.forms[0] && document.querySelector("body > form > table > tbody > tr:nth-child(4) > td:nth-child(1)") && document.querySelector("body > form > table > tbody > tr:nth-child(4) > td:nth-child(1)").innerText.includes('ID')) {
+	if (document.forms[0] && document.querySelector("body > form > table > tbody > tr:nth-child(4) > td:nth-child(1)") && document.querySelector("body > form > table > tbody > tr:nth-child(4) > td:nth-child(1)").innerText.includes('Last Name')) {
 		const quarters = document.forms[0].termcode.innerHTML;
 		fetch(chrome.runtime.getURL('assets/schedule/home.html')).then(res => res.text().then(data => {
 			document.querySelector('html').innerHTML = data;

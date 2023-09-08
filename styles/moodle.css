@@ -112,10 +112,6 @@ select {
     border: 1px solid gray !important;
 }
 
-.ablock .answer div {
-    padding: 5px;
-}
-
 #goto-top-link>a>i {
     margin: 0 !important;
 }
@@ -441,7 +437,9 @@ body {
 }
 
 button:focus,
-select:focus {
+select:focus,
+input:focus,
+.atto_toolbar_row:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
 
@@ -492,4 +490,25 @@ a:hover {
 
 .report-navigation .previous, .report-navigation .next {
     height: 25px;
+}
+
+.editor_atto_content_wrap {
+    border-radius: 0.5rem;
+}
+
+.activityiconcontainer {
+    background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+}
+
+.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"] {
+    filter: invert(1);
+}
+
+.timeline-event-list-item .timeline-name .text-right {
+    width: 55px !important;
+}
+
+.editor_atto_content:focus {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+    border-color: transparent !important;
 }
