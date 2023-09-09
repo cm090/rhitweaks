@@ -512,3 +512,9 @@ a:hover {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
     border-color: transparent !important;
 }
+
+.activityiconcontainer .fa {
+    color: white;
+    position: relative;
+    top: 4px;
+}
