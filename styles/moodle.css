@@ -518,3 +518,29 @@ a:hover {
     position: relative;
     top: 4px;
 }
+
+.custom-control-input:not(:disabled):active~.custom-control-label::before,
+.custom-control-input:focus~.custom-control-label::before,
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: white !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#available_shortcuts_tab,
+#available_shortcuts_inner {
+    border-radius: 0.5rem 0 0 0;
+}
+
+#available_shortcuts_tab {
+    font-size: 0 !important;
+}
+
+#available_shortcuts_tab:before {
+    content: "+";
+    font-size: 16px;
+}
+
+#available_shortcuts_popup {
+    background-color: transparent !important;
+}
