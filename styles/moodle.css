@@ -543,4 +543,5 @@ a:hover {
 
 #available_shortcuts_popup {
     background-color: transparent !important;
+    border: none !important;
 }
