@@ -285,7 +285,7 @@ const start = () => {
                         );
                     addNavItems();
                     updateCourseDropdown();
-                    chrome.storage.sync.set({ moodle: { ...moodleData, pinnedCourses: additionalData.pinnedCourses } });
+                    chrome.storage.local.set({ moodle: { ...moodleData, pinnedCourses: additionalData.pinnedCourses } });
                 });
                 card.querySelector('.dropdown-menu').append(navItem);
             });
@@ -308,20 +308,21 @@ const start = () => {
 }
 
 const storageListeners = () => {
-    chrome.storage.sync.get('moodle').then(data => {
+    chrome.storage.local.get('moodle').then(data => {
         moodleData = data.moodle;
         let root = document.querySelector(':root');
         root.style.setProperty('--bg-color', data.moodle.bgColor || '#000000');
         root.style.setProperty('--card-color', data.moodle.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', data.moodle.accentColor || '#800000');
         root.style.setProperty('--sidebar-color', data.moodle.sbColor || '#000000');
+        root.style.setProperty('--text-color', data.moodle.textColor || '#1d2125');
         additionalData.timeFormat = data.moodle.timeFormat || 12;
         additionalData.pinnedCourses = data.moodle.pinnedCourses || [];
         if (data.moodle.enabled && document.getElementById('page-wrapper')) {
             start();
         }
     });
-    chrome.storage.sync.onChanged.addListener(changes => {
+    chrome.storage.local.onChanged.addListener(changes => {
         const oldData = changes.moodle.oldValue;
         const newData = changes.moodle.newValue;
         if (oldData.enabled != newData.enabled) {
@@ -334,6 +335,7 @@ const storageListeners = () => {
         root.style.setProperty('--card-color', newData.cardColor || '#eeeeee');
         root.style.setProperty('--accent-color', newData.accentColor || '#800000');
         root.style.setProperty('--sidebar-color', newData.sbColor || '#000000');
+        root.style.setProperty('--text-color', newData.textColor || '#1d2125');
         additionalData.timeFormat = newData.timeFormat || 12;
         additionalData.pinnedCourses = newData.pinnedCourses || [];
         updateCourseDropdown();

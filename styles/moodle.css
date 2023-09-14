@@ -4,6 +4,11 @@
     --accent-color: #800000;
     --primary: var(--accent-color);
     --sidebar-color: #4e4e4e;
+    --text-color: #1d2125;
+}
+
+body {
+    color: var(--text-color) !important;
 }
 
 #ek-overlay,
