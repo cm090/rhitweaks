@@ -24,6 +24,10 @@ body,
     color: unset !important;
 }
 
+.gradereport-grader-table {
+    color: black !important;
+}
+
 #ek-overlay,
 #ek-modal,
 div#nav-drawer::-webkit-scrollbar,
