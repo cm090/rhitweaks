@@ -438,7 +438,7 @@ body {
 
 button:focus,
 select:focus,
-input:focus,
+input:not(#rmtSearchInput):focus,
 .atto_toolbar_row:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }

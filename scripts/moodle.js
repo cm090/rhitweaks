@@ -136,7 +136,11 @@ const searchListener = () => {
         }
     });
     if (document.querySelector('nav .simplesearchform'))
-        document.querySelector('nav .simplesearchform').addEventListener('click', e => $('#rmtSearch').modal('show'));
+        document.querySelector('nav .simplesearchform').addEventListener('click', e => {
+            createList({ target: { value: '' } });
+            document.getElementById('rmtSearchInput').value = '';
+            $('#rmtSearch').modal('show');
+        });
     return Promise.resolve();
 }
 
@@ -266,7 +270,7 @@ const start = () => {
                     if (navItem.innerText == "Pin to navbar") {
                         let name;
                         try {
-                        name = card.querySelector('.coursename .multiline').innerText;
+                            name = card.querySelector('.coursename .multiline').innerText;
                         } catch {
                             name = card.querySelector('.coursename').innerText.split('\n').at(-1);
                         }
