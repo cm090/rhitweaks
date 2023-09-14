@@ -9,7 +9,7 @@ const printListener = () => {
 }
 
 const getData = () => {
-	chrome.storage.sync.get('schedule').then(data => {
+	chrome.storage.local.get('schedule').then(data => {
 		let root = document.querySelector(':root');
 		root.style.setProperty('--bg-color', data.schedule.bgColor || '#000000');
 		root.style.setProperty('--accent-color', data.schedule.accentColor || '#800000');
@@ -17,7 +17,7 @@ const getData = () => {
 		root.style.setProperty('--border-color', data.schedule.borderColor || '#808080');
 		if (data.schedule.enabled) runApp(true);
 	});
-	chrome.storage.sync.onChanged.addListener(changes => {
+	chrome.storage.local.onChanged.addListener(changes => {
 		const oldData = changes.schedule.oldValue;
 		const newData = changes.schedule.newValue;
 		if (oldData.enabled != newData.enabled) {

@@ -4,6 +4,28 @@
     --accent-color: #800000;
     --primary: var(--accent-color);
     --sidebar-color: #4e4e4e;
+    --text-color: #1d2125;
+}
+
+body,
+.block .block-cards span.categoryname,
+.block .block-cards .btn-link,
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link,
+.course-section-header .btn,
+.generaltable,
+.generaltable tbody tr:hover,
+.path-grade-report-user .user-grade td.category a.toggle-category:not(:hover) i,
+.grade-report-user .user-grade td.category a.toggle-category:not(:hover) i {
+    color: var(--text-color) !important;
+}
+
+.btn:not(.btn-primary, .nav-link, #user-menu-toggle) {
+    color: unset !important;
+}
+
+.gradereport-grader-table {
+    color: black !important;
 }
 
 #ek-overlay,
@@ -146,6 +168,9 @@ div[data-region="grading-navigation-panel"] {
 .activity-header,
 #region-main,
 .dashboard-card-footer,
+.activity-altcontent,
+.bg-light,
+.bg-white,
 input[type="text"] {
     background: transparent !important;
 }
@@ -311,6 +336,7 @@ a.autolink,
 
 .drawerheader button.drawertoggle {
     background: white;
+    color: black !important;
     height: 26px;
     width: 26px;
 }
@@ -355,9 +381,9 @@ a.autolink,
     align-items: center;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
-    background: transparent !important;
-    color: white !important;
+.navbar-light .navbar-nav .nav-link:hover,
+.secondary-navigation .navigation .nav-tabs .nav-link:hover {
+    background-color: transparent !important;
     font-weight: 700;
 }
 
@@ -375,8 +401,9 @@ a.autolink,
     background: white !important;
 }
 
-#sticky-footer label {
-    color: white;
+#sticky-footer label,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white !important;
 }
 
 #sticky-footer {
@@ -438,7 +465,7 @@ body {
 
 button:focus,
 select:focus,
-input:focus,
+input:not(#rmtSearchInput):focus,
 .atto_toolbar_row:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
@@ -470,7 +497,8 @@ a:hover {
     border-color: var(--accent-color) !important;
 }
 
-.activity-add, .block-add {
+.activity-add,
+.block-add {
     background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
     border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
@@ -488,7 +516,8 @@ a:hover {
     flex-wrap: wrap;
 }
 
-.report-navigation .previous, .report-navigation .next {
+.report-navigation .previous,
+.report-navigation .next {
     height: 25px;
 }
 
@@ -511,4 +540,49 @@ a:hover {
 .editor_atto_content:focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
     border-color: transparent !important;
+}
+
+.activityiconcontainer .fa {
+    color: white;
+    position: relative;
+    top: 4px;
+}
+
+.custom-control-input:not(:disabled):active~.custom-control-label::before,
+.custom-control-input:focus~.custom-control-label::before,
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: white !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#available_shortcuts_tab,
+#available_shortcuts_inner {
+    border-radius: 0.5rem 0 0 0;
+}
+
+#available_shortcuts_tab {
+    font-size: 0 !important;
+}
+
+#available_shortcuts_tab:before {
+    content: "+";
+    font-size: 16px;
+}
+
+#available_shortcuts_popup {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.user-report-container,
+.path-grade-report-user .user-grade thead th,
+.grade-report-user .user-grade thead th,
+.path-grade-report-user .user-grade td.category,
+.grade-report-user .user-grade td.category,
+.path-grade-report-user .user-grade td,
+.grade-report-user .user-grade td,
+.path-grade-report-user .user-grade tbody tr,
+.grade-report-user .user-grade tbody tr {
+    background-color: transparent !important;
 }

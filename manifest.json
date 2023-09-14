@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "RHITweaks",
-    "description": "Bring additional functionality to RHIT websites (https://github.com/cm090/rhitweaks)",
-    "version": "2.5",
+    "description": "Customize the look and feel of your most used RHIT pages (https://github.com/cm090/rhitweaks)",
+    "version": "3.0",
     "permissions": [
         "storage"
     ],
