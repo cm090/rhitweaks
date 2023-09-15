@@ -20,7 +20,7 @@ body,
     color: var(--text-color) !important;
 }
 
-.btn:not(.btn-primary, .nav-link, #user-menu-toggle) {
+.btn:not(.btn-primary, .nav-link, #user-menu-toggle, .drawertoggle) {
     color: unset !important;
 }
 
@@ -76,6 +76,7 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 #gridshadebox_content,
 .secondary-navigation nav,
 .secondary-navigation ul,
+.message-app,
 div[role="main"],
 .login-container {
     background: var(--card-color) !important;
@@ -171,6 +172,7 @@ div[data-region="grading-navigation-panel"] {
 .activity-altcontent,
 .bg-light,
 .bg-white,
+.activity-item .description div,
 input[type="text"] {
     background: transparent !important;
 }
@@ -447,11 +449,13 @@ body {
 
 .popover-region-notifications .popover-region-container {
     border-radius: 0.5rem;
-    top: 55px
+    top: 56px;
+    background: var(--card-color) !important;
 }
 
 .popover-region-notifications .popover-region-footer-container {
     border-radius: 0 0 0.5rem 0.5rem;
+    background: var(--card-color) !important;
 }
 
 .content-item-container:hover,
@@ -521,7 +525,8 @@ a:hover {
     height: 25px;
 }
 
-.editor_atto_content_wrap {
+.editor_atto_content_wrap,
+.activity-item .description div {
     border-radius: 0.5rem;
 }
 
@@ -585,4 +590,31 @@ a:hover {
 .path-grade-report-user .user-grade tbody tr,
 .grade-report-user .user-grade tbody tr {
     background-color: transparent !important;
+}
+
+.format-grid .thegrid .grid-image img {
+    max-width: 95%;
+    max-height: 99%;
+}
+
+.card-header:first-child {
+    text-align: center;
+}
+
+.activity-item .description .course-description-item {
+    border: .25px solid gray;
+    padding-block: 1rem;
+}
+
+.activity-item .description .course-description-item:nth-child(2) {
+    margin-top: 5px;
+}
+
+.description .course-description-item .description-inner {
+    border-bottom: none !important;
+    padding: 0;
+}
+
+.message-app .simplesearchform .btn .icon {
+    color: black;
 }
