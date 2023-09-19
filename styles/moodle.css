@@ -124,10 +124,12 @@ body,
     color: white;
 }
 
-.navbar-brand {
-    background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
-    background-size: 240px !important;
-    margin-top: 14px !important;
+@media (min-width: 770px) {
+    .navbar-brand {
+        background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
+        background-size: 240px !important;
+        margin-top: 14px !important;
+    }
 }
 
 input,
