@@ -618,3 +618,10 @@ a:hover {
 .message-app .simplesearchform .btn .icon {
     color: black;
 }
+
+a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
+    background-color: color-mix(in srgb, var(--accent-color), #ffffff 75%) !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-radius: 0.5rem;
+}
