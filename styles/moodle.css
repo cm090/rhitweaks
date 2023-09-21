@@ -60,8 +60,12 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 .dropdown-item:focus,
 .dropdown-item:focus-within,
 .badge-info {
-    background: var(--accent-color);
+    background: var(--accent-color) !important;
     border-color: var(--accent-color);
+}
+
+.dropdown-item.active {
+    background-color: color-mix(in srgb, var(--accent-color), #00000070);
 }
 
 .btn-primary:hover,
@@ -528,7 +532,8 @@ a:hover {
 }
 
 .editor_atto_content_wrap,
-.activity-item .description div {
+.activity-item .description div,
+.que .info {
     border-radius: 0.5rem;
 }
 
@@ -580,6 +585,10 @@ a:hover {
 #available_shortcuts_popup {
     background-color: transparent !important;
     border: none !important;
+}
+
+.available_shortcuts_items {
+    margin-bottom: 4px;
 }
 
 .user-report-container,
