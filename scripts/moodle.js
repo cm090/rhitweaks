@@ -135,8 +135,8 @@ const searchListener = () => {
         if (e.target.value.length > 0) {
             document.getElementById('rmtResultList').innerHTML +=
                 `<div style="margin:0" onclick="window.location='https://moodle.rose-hulman.edu/search/index.php?q=${document.getElementById('rmtSearchInput').value}'">More results</div>`;
-            document.querySelector('#rmtSearch #rmtResultList div:first-child').classList.add('active');
         }
+        document.querySelector('#rmtSearch #rmtResultList div:first-child').classList.add('active');
     }
     document.getElementById('rmtSearchInput').addEventListener('input', createList);
     createList({ target: { value: '' } });
@@ -228,12 +228,12 @@ const waitForJQuery = () => {
 
 const updateCourseDropdown = () => {
     const menuItem = document.querySelector('.navbar-nav [data-key="mycourses"]');
-    if (menuItem.querySelector('.custom-dropdown')) {
-        try {
+    try {
+        if (menuItem.querySelector('.custom-dropdown')) {
             menuItem.querySelector('.custom-dropdown').remove();
-        } catch (e) {
-            // Ignore
         }
+    } catch (e) {
+        // Ignore
     }
     const div = document.createElement('div');
     div.classList.add('dropdown-menu', 'custom-dropdown');
