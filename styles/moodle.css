@@ -20,7 +20,7 @@ body,
     color: var(--text-color) !important;
 }
 
-.btn:not(.btn-primary, .nav-link, #user-menu-toggle) {
+.btn:not(.btn-primary, .nav-link, #user-menu-toggle, .drawertoggle) {
     color: unset !important;
 }
 
@@ -60,8 +60,12 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 .dropdown-item:focus,
 .dropdown-item:focus-within,
 .badge-info {
-    background: var(--accent-color);
+    background: var(--accent-color) !important;
     border-color: var(--accent-color);
+}
+
+.dropdown-item.active {
+    background-color: color-mix(in srgb, var(--accent-color), #00000070);
 }
 
 .btn-primary:hover,
@@ -76,6 +80,7 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 #gridshadebox_content,
 .secondary-navigation nav,
 .secondary-navigation ul,
+.message-app,
 div[role="main"],
 .login-container {
     background: var(--card-color) !important;
@@ -123,10 +128,12 @@ body,
     color: white;
 }
 
-.navbar-brand {
-    background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
-    background-size: 240px !important;
-    margin-top: 14px !important;
+@media (min-width: 770px) {
+    .navbar-brand {
+        background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
+        background-size: 240px !important;
+        margin-top: 14px !important;
+    }
 }
 
 input,
@@ -171,6 +178,7 @@ div[data-region="grading-navigation-panel"] {
 .activity-altcontent,
 .bg-light,
 .bg-white,
+.activity-item .description div,
 input[type="text"] {
     background: transparent !important;
 }
@@ -447,11 +455,13 @@ body {
 
 .popover-region-notifications .popover-region-container {
     border-radius: 0.5rem;
-    top: 55px
+    top: 56px;
+    background: var(--card-color) !important;
 }
 
 .popover-region-notifications .popover-region-footer-container {
     border-radius: 0 0 0.5rem 0.5rem;
+    background: var(--card-color) !important;
 }
 
 .content-item-container:hover,
@@ -521,7 +531,9 @@ a:hover {
     height: 25px;
 }
 
-.editor_atto_content_wrap {
+.editor_atto_content_wrap,
+.activity-item .description div,
+.que .info {
     border-radius: 0.5rem;
 }
 
@@ -575,6 +587,10 @@ a:hover {
     border: none !important;
 }
 
+.available_shortcuts_items {
+    margin-bottom: 4px;
+}
+
 .user-report-container,
 .path-grade-report-user .user-grade thead th,
 .grade-report-user .user-grade thead th,
@@ -585,4 +601,43 @@ a:hover {
 .path-grade-report-user .user-grade tbody tr,
 .grade-report-user .user-grade tbody tr {
     background-color: transparent !important;
+}
+
+.format-grid .thegrid .grid-image img {
+    max-width: 95%;
+    max-height: 99%;
+}
+
+.card-header:first-child {
+    text-align: center;
+}
+
+.activity-item .description .course-description-item {
+    border: .25px solid gray;
+    padding-block: 1rem;
+}
+
+.activity-item .description .course-description-item:nth-child(2) {
+    margin-top: 5px;
+}
+
+.description .course-description-item .description-inner {
+    border-bottom: none !important;
+    padding: 0;
+}
+
+.message-app .simplesearchform .btn .icon {
+    color: black;
+}
+
+a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
+    background-color: color-mix(in srgb, var(--accent-color), #ffffff 75%) !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-radius: 0.5rem;
+}
+
+.btn:focus,
+.btn.focus {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
