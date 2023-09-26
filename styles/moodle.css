@@ -636,3 +636,8 @@ a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
     box-shadow: none !important;
     border-radius: 0.5rem;
 }
+
+.btn:focus,
+.btn.focus {
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+}
