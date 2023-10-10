@@ -596,7 +596,7 @@ a:hover {
 .grade-report-user .user-grade thead th,
 .path-grade-report-user .user-grade td.category,
 .grade-report-user .user-grade td.category,
-.path-grade-report-user .user-grade td,
+.path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t)),
 .grade-report-user .user-grade td,
 .path-grade-report-user .user-grade tbody tr,
 .grade-report-user .user-grade tbody tr {
@@ -640,4 +640,12 @@ a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
 .btn:focus,
 .btn.focus {
     box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+}
+
+.path-grade-report-user .user-grade .column-itemname.baggt {
+    padding-left: 24px !important;
+}
+
+.path-grade-report-user .user-grade tbody tr.spacer {
+    height: 0 !important;
 }
