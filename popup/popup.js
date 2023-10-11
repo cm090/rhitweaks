@@ -136,6 +136,8 @@ const moodleSettingsListeners = () => {
     document.getElementById('pinnedCoursesSettings').addEventListener('click', () => {
         moodlePage.style.display = 'none';
         pinnedCoursesSettingsPage.style.display = 'block';
+        document.querySelector(':root').style.height = '387px';
+        pinnedCoursesSettingsFn();
         document.getElementById('resetBtn').setAttribute('page', 'pinnedCourses');
     });
 }
@@ -158,7 +160,7 @@ const scheduleSettingsFn = () => {
 }
 
 /**
- * Sets event listeners for various HTML elements and updates the scheduleData object and Chrome storage accordingly
+ * Adds event listeners for various HTML elements and updates the scheduleData object and Chrome storage accordingly
  */
 const scheduleSettingsListeners = () => {
     document.getElementById('schedBgColor').addEventListener('input', () => {
@@ -211,12 +213,51 @@ const scheduleSettingsListeners = () => {
     document.getElementById('schedBorderColorText').addEventListener('click', () => document.getElementById('schedBorderColor').click());
 }
 
+/**
+ * Adds event listeners for modifying the pinned courses menu
+ */
 const pinnedCoursesSettingsListeners = () => {
+    document.getElementById('selectCourse').addEventListener('change', e => {
+        const selected = e.target.value.split(',');
+        document.getElementById('courseLabel').disabled = (selected === '');
+        document.getElementById('courseLabel').value = (selected === '' ? '' : selected[1]);
+    });
+    document.getElementById('courseLabel').addEventListener('focusout', () => {
+        const selected = document.getElementById('selectCourse').value.split(',');
+        const item = moodleData.pinnedCourses.findIndex(item => item[0] === selected[0])
+        moodleData.pinnedCourses[item] = [selected[0], document.getElementById('courseLabel').value];
+        chrome.storage.local.set({ moodle: moodleData });
+        pinnedCoursesSettingsFn(selected[0]);
+    });
+    document.getElementById('deleteCourseFromList').addEventListener('click', () => {
+        if (confirm('Are you sure you want to remove this course?')) {
+            const index = document.getElementById('selectCourse').selectedIndex - 1;
+            moodleData.pinnedCourses.splice(index, 1);
+            chrome.storage.local.set({ moodle: moodleData });
+            document.getElementById('selectCourse').selectedIndex = 0;
+            document.getElementById('courseLabel').disabled = true;
+            document.getElementById('courseLabel').value = '';
+            pinnedCoursesSettingsFn();
+        }
+    });
     document.getElementById('resetCourseList').addEventListener('click', () => {
         if (confirm('Are you sure you want to reset your pinned courses?')) {
             moodleData.pinnedCourses = [];
             chrome.storage.local.set({ moodle: moodleData });
         }
+    });
+}
+
+/**
+ * Retrieves pinned courses settings from Chrome storage and sets the corresponding values in the HTML document
+*/
+const pinnedCoursesSettingsFn = (selected = '') => {
+    chrome.storage.local.get('moodle').then(data => {
+        data = data.moodle.pinnedCourses || moodleDataTemplate.pinnedCourses;
+        const courses = data.map(course => {
+            return `<option value="${course}" ${selected === course[0] ? 'selected' : ''}>${course[1]}</option>`;
+        });
+        document.getElementById('selectCourse').innerHTML = `<option value="" ${selected === '' ? 'selected' : ''} disabled>Select a course</option>${courses.join('')}`;
     });
 }
 
@@ -326,6 +367,7 @@ const listeners = () => {
         document.getElementById('backBtn').style.display = '';
         document.querySelector(':root').style.height = '';
     });
+    pinnedCoursesSettingsListeners();
     additionalSettingsListeners();
     document.getElementById('backBtn').addEventListener('click', reset);
     document.getElementById('resetBtn').addEventListener('click', defaults);
@@ -364,6 +406,7 @@ const reset = () => {
     if (pinnedCoursesSettingsPage.style.display === 'block') {
         pinnedCoursesSettingsPage.style.display = 'none';
         moodlePage.style.display = 'block';
+        document.querySelector(':root').style.height = '';
     } else {
         moodlePage.style.display = 'none';
         schedulePage.style.display = 'none';
@@ -394,6 +437,9 @@ const defaults = e => {
             break;
         case 'schedule':
             scheduleSettingsFn();
+            break;
+        case 'pinnedCourses':
+            pinnedCoursesSettingsFn();
             break;
     }
 }

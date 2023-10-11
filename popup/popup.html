@@ -95,7 +95,16 @@
         <!-- Pinned Courses -->
         <div id="pinnedCoursesSettingsPage" class="settings-page">
             <h3 class="text-center title">Pinned Courses Settings</h3>
-            <button type="button" class="btn btn-danger btn-sm my-2 w-100" id="resetCourseList">Clear pinned
+            <label for="selectCourse">Edit course</label>
+            <select id="selectCourse" class="form-control" title="Edit course"></select>
+            <label for="courseLabel">Label</label>
+            <div class="input-group color-input">
+                <input type="text" id="courseLabel" class="form-control" title="Label" disabled />
+                <button type="button" class="btn btn-light" id="deleteCourseFromList" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm mt-5 w-100" id="resetCourseList">Clear pinned
                 courses</button>
         </div>
         <!-- Schedule Lookup -->
