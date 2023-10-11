@@ -1,63 +1,65 @@
 :root {
-    --bg: white;
-    --text: black;
+  --bg: white;
+  --text: black;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --bg: rgb(58, 58, 58);
-        --text: white;
-    }
+  :root {
+    --bg: rgb(58, 58, 58);
+    --text: white;
+  }
 }
 
 body {
-    min-width: 300px;
+  min-width: 300px;
 }
 
 #mainContainer {
-    height: 100%;
-    background-color: var(--bg);
-    color: var(--text);
-    display: flex;
-    flex-flow: column;
-    height: 100%;
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
 .option {
-    padding: 10px 0;
-    height: 90px;
+  padding: 10px 0;
+  height: 90px;
 }
 
 .title {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .link {
-    color: var(--text);
-    font-weight: bold;
-    padding-bottom: 10px;
+  color: var(--text);
+  font-weight: bold;
+  padding-bottom: 10px;
 }
 
 input[type="color"] {
-    border-radius: 0 .375rem .375rem 0;
-    height: 38px;
-    width: 60px;
-    padding: .375rem;
-    border: none;
+  border-radius: 0 0.375rem 0.375rem 0;
+  height: 38px;
+  width: 60px;
+  padding: 0.375rem;
+  border: none;
 }
 
 .settings-page {
-    display: none;
+  display: none;
 }
 
-#main, .settings-page, .footer {
-    flex: 0 1 auto;
+#main,
+.settings-page,
+.footer {
+  flex: 0 1 auto;
 }
 
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .settings-btn {
-    display: none;
+  display: none;
 }

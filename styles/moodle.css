@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #000000;
-    --card-color: #eeeeee;
-    --accent-color: #800000;
-    --primary: var(--accent-color);
-    --sidebar-color: #4e4e4e;
-    --text-color: #1d2125;
+  --bg-color: #000000;
+  --card-color: #eeeeee;
+  --accent-color: #800000;
+  --primary: var(--accent-color);
+  --sidebar-color: #4e4e4e;
+  --text-color: #1d2125;
 }
 
 body,
@@ -17,15 +17,15 @@ body,
 .generaltable tbody tr:hover,
 .path-grade-report-user .user-grade td.category a.toggle-category:not(:hover) i,
 .grade-report-user .user-grade td.category a.toggle-category:not(:hover) i {
-    color: var(--text-color) !important;
+  color: var(--text-color) !important;
 }
 
 .btn:not(.btn-primary, .nav-link, #user-menu-toggle, .drawertoggle) {
-    color: unset !important;
+  color: unset !important;
 }
 
 .gradereport-grader-table {
-    color: black !important;
+  color: black !important;
 }
 
 #ek-overlay,
@@ -35,21 +35,29 @@ div#nav-drawer::-webkit-scrollbar,
 .usernav li:first-child,
 #usernavigation .divider,
 #searchform-navbar,
-#page-footer>div:nth-child(1)>button,
+#page-footer > div:nth-child(1) > button,
 .drawercontent::-webkit-scrollbar {
-    display: none !important;
+  display: none !important;
 }
 
 .fa-star:before,
 a,
 .btn-link,
 .page-link {
-    color: var(--accent-color);
+  color: var(--accent-color);
 }
 
-a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a, .btn-primary, .dropdown-item, .courseindex-link, .courseindex-chevron):hover,
+a:not([role="menuitem"]):not(
+    .list-group-item,
+    .list-group-item span,
+    .navbar a,
+    .btn-primary,
+    .dropdown-item,
+    .courseindex-link,
+    .courseindex-chevron
+  ):hover,
 .btn-link:hover {
-    color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
 .btn-primary,
@@ -60,19 +68,19 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 .dropdown-item:focus,
 .dropdown-item:focus-within,
 .badge-info {
-    background: var(--accent-color) !important;
-    border-color: var(--accent-color);
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color);
 }
 
 .dropdown-item.active {
-    background-color: color-mix(in srgb, var(--accent-color), #00000070);
+  background-color: color-mix(in srgb, var(--accent-color), #00000070);
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-    background: color-mix(in srgb, var(--accent-color), #000000) !important;
-    border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  background: color-mix(in srgb, var(--accent-color), #000000) !important;
+  border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
 .section,
@@ -83,95 +91,104 @@ a:not([role="menuitem"]):not(.list-group-item, .list-group-item span, .navbar a,
 .message-app,
 div[role="main"],
 .login-container {
-    background: var(--card-color) !important;
+  background: var(--card-color) !important;
 }
 
 .section-summary.main {
-    border: 0.25px solid gray !important;
+  border: 0.25px solid gray !important;
 }
 
 .secondary-navigation ul {
-    justify-content: center;
+  justify-content: center;
 }
 
-#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto>div>div,
-#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto {
-    flex-grow: 1;
-    text-align: center;
+#page-header
+  > div.w-100
+  > div.d-flex.align-items-center
+  > div.mr-auto
+  > div
+  > div,
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+  flex-grow: 1;
+  text-align: center;
 }
 
 #page-header {
-    margin-top: 20px;
-    max-width: 100% !important;
+  margin-top: 20px;
+  max-width: 100% !important;
 }
 
 body,
 #nav-drawer,
 #page-login-index #page,
 #sticky-footer {
-    background: var(--bg-color) !important;
+  background: var(--bg-color) !important;
 }
 
 .calendar_event_course {
-    background: color-mix(in srgb, var(--accent-color), transparent 85%);
+  background: color-mix(in srgb, var(--accent-color), transparent 85%);
 }
-
 
 #nav-drawer .list-group-item.active {
-    background: var(--accent-color) !important;
-    border-color: var(--accent-color);
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color);
 }
 
-.d-inline-block.mr-3>button {
-    background-color: #00000000 !important;
-    border: none;
-    color: white;
+.d-inline-block.mr-3 > button {
+  background-color: #00000000 !important;
+  border: none;
+  color: white;
 }
 
 @media (min-width: 770px) {
-    .navbar-brand {
-        background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
-        background-size: 240px !important;
-        margin-top: 14px !important;
-    }
+  .navbar-brand {
+    background: url("https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png")
+      no-repeat 0 0 !important;
+    background-size: 240px !important;
+    margin-top: 14px !important;
+  }
 }
 
 input,
 select {
-    border: 1px solid gray !important;
+  border: 1px solid gray !important;
 }
 
-#goto-top-link>a>i {
-    margin: 0 !important;
+#goto-top-link > a > i {
+  margin: 0 !important;
 }
 
 #goto-top-link a {
-    top: 20px;
-    right: 5px;
+  top: 20px;
+  right: 5px;
 }
 
 #page-footer {
-    margin: 10px;
+  margin: 10px;
 }
 
 nav.navbar.fixed-top {
-    background-color: color-mix(in srgb, var(--accent-color), transparent 56.5%) !important;
-    border: none !important;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+  background-color: color-mix(
+    in srgb,
+    var(--accent-color),
+    transparent 56.5%
+  ) !important;
+  border: none !important;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 
 div[data-region="grade-actions-panel"],
 div[data-region="grading-navigation-panel"] {
-    background: white;
+  background: white;
 }
 
 .fp-viewbar.btn-group a {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
-#region-main>div.region_main_settings_menu_proxy,
-#toggledsection-2>ul,
+#region-main > div.region_main_settings_menu_proxy,
+#toggledsection-2 > ul,
 .activity-header,
 #region-main,
 .dashboard-card-footer,
@@ -180,66 +197,66 @@ div[data-region="grading-navigation-panel"] {
 .bg-white,
 .activity-item .description div,
 input[type="text"] {
-    background: transparent !important;
+  background: transparent !important;
 }
 
-#nav-drawer>nav>ul>li>a>div.ml-1 {
-    margin-left: 0 !important;
+#nav-drawer > nav > ul > li > a > div.ml-1 {
+  margin-left: 0 !important;
 }
 
 #rmtSearch .modal-dialog {
-    top: 100px;
+  top: 100px;
 }
 
 #rmtSearch .modal-body,
 #rmtSearch .modal-footer {
-    background: #000000dd;
+  background: #000000dd;
 }
 
 #rmtSearch .modal-body {
-    border-radius: 12px 12px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 #rmtSearch .modal-footer {
-    border-radius: 0 0 12px 12px;
-    border-top-color: #6f6f6f !important;
+  border-radius: 0 0 12px 12px;
+  border-top-color: #6f6f6f !important;
 }
 
 #rmtSearch .modal-content {
-    background: transparent !important;
-    border: none !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 #rmtSearch #rmtResultList div {
-    padding: 8px !important;
-    color: white;
+  padding: 8px !important;
+  color: white;
 }
 
 #rmtSearch #rmtResultList div.active {
-    background: var(--accent-color);
-    border-radius: 4px;
+  background: var(--accent-color);
+  border-radius: 4px;
 }
 
 #rmtSearch #rmtResultList div.active::after {
-    content: 'Enter';
-    color: #ffffffa6;
-    float: right;
+  content: "Enter";
+  color: #ffffffa6;
+  float: right;
 }
 
 #rmtSearch #rmtSearchInput {
-    background: transparent;
-    color: white;
-    width: calc(100% - 25px);
-    border: none !important;
-    outline: none;
+  background: transparent;
+  color: white;
+  width: calc(100% - 25px);
+  border: none !important;
+  outline: none;
 }
 
 body.modal-open {
-    overflow-y: scroll !important;
+  overflow-y: scroll !important;
 }
 
 .simplesearchform a.btn-open {
-    display: block !important;
+  display: block !important;
 }
 
 .aabtn.focus,
@@ -276,22 +293,22 @@ button.close:focus,
 .form-autocomplete-selection:focus,
 [role="treeitem"]:not([aria-expanded="true"]).focus,
 [role="treeitem"]:not([aria-expanded="true"]):focus {
-    --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
-    box-shadow: 0 0 0 0.2rem var(--bxs-color);
+  --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  box-shadow: 0 0 0 0.2rem var(--bxs-color);
 }
 
 .text-info[title="Help with Cookies must be enabled in your browser"]::before {
-    color: white;
-    position: relative;
-    left: 4px;
+  color: white;
+  position: relative;
+  left: 4px;
 }
 
 #gridshadebox_content {
-    border-color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .course-content ul.gridicons li.currentselected .icon_content {
-    color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
 }
 
 .generalbox a:not(.btn-primary),
@@ -299,296 +316,304 @@ button.close:focus,
 .contentafterlink a,
 a.autolink,
 .posting a {
-    color: color-mix(in srgb, var(--accent-color), #555) !important;
+  color: color-mix(in srgb, var(--accent-color), #555) !important;
 }
 
 .course-content .current::before {
-    border-left: var(--accent-color) 4px solid;
+  border-left: var(--accent-color) 4px solid;
 }
 
 .course-content .current,
 .main-inner {
-    background: var(--card-color) !important;
+  background: var(--card-color) !important;
 }
 
 .simplesearchform a.btn-open {
-    display: flex !important;
+  display: flex !important;
 }
 
 .card .list-group-item {
-    background: transparent !important;
+  background: transparent !important;
 }
 
-.drawers .block_myoverview>.card-body {
-    padding: 1rem !important;
+.drawers .block_myoverview > .card-body {
+  padding: 1rem !important;
 }
 
 .drawer {
-    background: color-mix(in srgb, var(--sidebar-color), transparent 30%);
-    margin-top: -4px;
-    height: 100%;
+  background: color-mix(in srgb, var(--sidebar-color), transparent 30%);
+  margin-top: -4px;
+  height: 100%;
 }
 
 @media (max-width: 992px) {
-    .drawer {
-        margin-top: 0 !important;
-    }
+  .drawer {
+    margin-top: 0 !important;
+  }
 }
 
 .drawerheader {
-    height: 0 !important;
-    position: relative;
-    z-index: 1;
-    top: 18px;
+  height: 0 !important;
+  position: relative;
+  z-index: 1;
+  top: 18px;
 }
 
 .drawerheader button.drawertoggle {
-    background: white;
-    color: black !important;
-    height: 26px;
-    width: 26px;
+  background: white;
+  color: black !important;
+  height: 26px;
+  width: 26px;
 }
 
 .drawercontent {
-    height: 100% !important;
-    padding-top: 0;
-    margin-top: 0;
+  height: 100% !important;
+  padding-top: 0;
+  margin-top: 0;
 }
 
-.drawercontent>nav,
-.drawercontent>section {
-    margin-top: 35px !important;
-    margin-bottom: 65px;
+.drawercontent > nav,
+.drawercontent > section {
+  margin-top: 35px !important;
+  margin-bottom: 65px;
 }
 
 #page.drawers {
-    margin-top: 0px !important;
-    padding-top: 56px !important;
-    height: 100%;
+  margin-top: 0px !important;
+  padding-top: 56px !important;
+  height: 100%;
 }
 
 .courseindex-item a {
-    color: white !important;
+  color: white !important;
 }
 
 .courseindex-item:hover:not(.pageitem) {
-    background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
 }
 
-#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto>div>div,
-#page-header>div.w-100>div.d-flex.align-items-center>div.mr-auto {
-    flex-grow: 0 !important;
+#page-header
+  > div.w-100
+  > div.d-flex.align-items-center
+  > div.mr-auto
+  > div
+  > div,
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+  flex-grow: 0 !important;
 }
 
 .header-maxwidth {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 .page-header-headings {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
 .secondary-navigation .navigation .nav-tabs .nav-link:hover {
-    background-color: transparent !important;
-    font-weight: 700;
+  background-color: transparent !important;
+  font-weight: 700;
 }
 
 .custom-dropdown {
-    position: absolute !important;
-    top: 54px;
-    left: 420px;
+  position: absolute !important;
+  top: 54px;
+  left: 420px;
 }
 
 .thegrid {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 
 .grid-image.card-img-bottom {
-    background: white !important;
+  background: white !important;
 }
 
 #sticky-footer label,
 .navbar-light .navbar-nav .nav-link:hover {
-    color: white !important;
+  color: white !important;
 }
 
 #sticky-footer {
-    border-top: 0 !important;
+  border-top: 0 !important;
 }
 
 #page.drawers::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 #page.drawers::-webkit-scrollbar-track {
-    background: var(--bg-color);
-    border: 2px solid white;
-    border-radius: 0.5rem;
+  background: var(--bg-color);
+  border: 2px solid white;
+  border-radius: 0.5rem;
 }
 
 #page.drawers::-webkit-scrollbar-thumb,
 #page.drawers::-webkit-scrollbar-thumb:hover,
 #page.drawers::-webkit-scrollbar-thumb:active {
-    border: none;
-    background: var(--accent-color);
+  border: none;
+  background: var(--accent-color);
 }
 
 #page {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .courseindex .courseindex-item.pageitem,
 .courseindex .courseindex-item.pageitem:hover {
-    background: var(--accent-color) !important;
+  background: var(--accent-color) !important;
 }
 
 body {
-    -webkit-user-select: auto;
-    user-select: auto;
+  -webkit-user-select: auto;
+  user-select: auto;
 }
 
 .drawer-right-toggle {
-    margin-right: 0 !important;
+  margin-right: 0 !important;
 }
 
 .popover-region-notifications .popover-region-container {
-    border-radius: 0.5rem;
-    top: 56px;
-    background: var(--card-color) !important;
+  border-radius: 0.5rem;
+  top: 56px;
+  background: var(--card-color) !important;
 }
 
 .popover-region-notifications .popover-region-footer-container {
-    border-radius: 0 0 0.5rem 0.5rem;
-    background: var(--card-color) !important;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: var(--card-color) !important;
 }
 
 .content-item-container:hover,
 .maincalendar .calendarmonth td.today .day-number-circle {
-    background-color: var(--accent-color) !important;
+  background-color: var(--accent-color) !important;
 }
 
 .moremenu .nav-link.active {
-    border-bottom-color: var(--accent-color) !important;
+  border-bottom-color: var(--accent-color) !important;
 }
 
 button:focus,
 select:focus,
 input:not(#rmtSearchInput):focus,
 .atto_toolbar_row:focus {
-    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
 
 a:hover {
-    color: color-mix(in srgb, var(--accent-color), #000000);
+  color: color-mix(in srgb, var(--accent-color), #000000);
 }
 
 #sticky-footer {
-    height: 50px;
+  height: 50px;
 }
 
 .onGradebookPage {
-    height: calc(100% + 52px) !important;
+  height: calc(100% + 52px) !important;
 }
 
 .btn-outline-primary {
-    color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
-.show>.btn-outline-primary.dropdown-toggle,
+.show > .btn-outline-primary.dropdown-toggle,
 .btn-outline-primary:hover,
 .page-item.active .page-link {
-    color: white !important;
-    background-color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
+  color: white !important;
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
 }
 
 .activity-add,
 .block-add {
-    background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
-    border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
+  border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
 .report-navigation .singleselect {
-    display: flex !important;
+  display: flex !important;
 }
 
 .report-navigation .pagination {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
-.report-navigation>.container>.ml-auto {
-    align-content: center;
-    flex-wrap: wrap;
+.report-navigation > .container > .ml-auto {
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .report-navigation .previous,
 .report-navigation .next {
-    height: 25px;
+  height: 25px;
 }
 
 .editor_atto_content_wrap,
 .activity-item .description div,
 .que .info {
-    border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .activityiconcontainer {
-    background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
-.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"] {
-    filter: invert(1);
+.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"]
+{
+  filter: invert(1);
 }
 
 .timeline-event-list-item .timeline-name .text-right {
-    width: 55px !important;
+  width: 55px !important;
 }
 
 .editor_atto_content:focus {
-    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
-    border-color: transparent !important;
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+  border-color: transparent !important;
 }
 
 .activityiconcontainer .fa {
-    color: white;
-    position: relative;
-    top: 4px;
+  color: white;
+  position: relative;
+  top: 4px;
 }
 
-.custom-control-input:not(:disabled):active~.custom-control-label::before,
-.custom-control-input:focus~.custom-control-label::before,
-.custom-control-input:checked~.custom-control-label::before {
-    background-color: white !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before,
+.custom-control-input:focus ~ .custom-control-label::before,
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: white !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 #available_shortcuts_tab,
 #available_shortcuts_inner {
-    border-radius: 0.5rem 0 0 0;
+  border-radius: 0.5rem 0 0 0;
 }
 
 #available_shortcuts_tab {
-    font-size: 0 !important;
+  font-size: 0 !important;
 }
 
 #available_shortcuts_tab:before {
-    content: "+";
-    font-size: 16px;
+  content: "+";
+  font-size: 16px;
 }
 
 #available_shortcuts_popup {
-    background-color: transparent !important;
-    border: none !important;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .available_shortcuts_items {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .user-report-container,
@@ -600,52 +625,57 @@ a:hover {
 .grade-report-user .user-grade td,
 .path-grade-report-user .user-grade tbody tr,
 .grade-report-user .user-grade tbody tr {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .format-grid .thegrid .grid-image img {
-    max-width: 95%;
-    max-height: 99%;
+  max-width: 95%;
+  max-height: 99%;
 }
 
 .card-header:first-child {
-    text-align: center;
+  text-align: center;
 }
 
 .activity-item .description .course-description-item {
-    border: .25px solid gray;
-    padding-block: 1rem;
+  border: 0.25px solid gray;
+  padding-block: 1rem;
 }
 
 .activity-item .description .course-description-item:nth-child(2) {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .description .course-description-item .description-inner {
-    border-bottom: none !important;
-    padding: 0;
+  border-bottom: none !important;
+  padding: 0;
 }
 
 .message-app .simplesearchform .btn .icon {
-    color: black;
+  color: black;
 }
 
 a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
-    background-color: color-mix(in srgb, var(--accent-color), #ffffff 75%) !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border-radius: 0.5rem;
+  background-color: color-mix(
+    in srgb,
+    var(--accent-color),
+    #ffffff 75%
+  ) !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-radius: 0.5rem;
 }
 
 .btn:focus,
 .btn.focus {
-    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent-color), transparent 25%) !important;
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--accent-color), transparent 25%) !important;
 }
 
 .path-grade-report-user .user-grade .column-itemname.baggt {
-    padding-left: 24px !important;
+  padding-left: 24px !important;
 }
 
 .path-grade-report-user .user-grade tbody tr.spacer {
-    height: 0 !important;
+  height: 0 !important;
 }
