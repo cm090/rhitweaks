@@ -8,6 +8,7 @@ const moodlePage = document.getElementById('moodleSettingsPage');
 const schedulePage = document.getElementById('scheduleSettingsPage');
 const mainPage = document.getElementById('main');
 const settingsPage = document.getElementById('additionalSettingsPage');
+const pinnedCoursesSettingsPage = document.getElementById('pinnedCoursesSettingsPage');
 
 // Local data storage
 window['moodleData'] = {};
@@ -132,11 +133,10 @@ const moodleSettingsListeners = () => {
         moodleData.timeFormat = document.getElementById('timeFormat').value;
         chrome.storage.local.set({ moodle: moodleData });
     });
-    document.getElementById('resetCourseList').addEventListener('click', () => {
-        if (confirm('Are you sure you want to reset your pinned courses?')) {
-            moodleData.pinnedCourses = [];
-            chrome.storage.local.set({ moodle: moodleData });
-        }
+    document.getElementById('pinnedCoursesSettings').addEventListener('click', () => {
+        moodlePage.style.display = 'none';
+        pinnedCoursesSettingsPage.style.display = 'block';
+        document.getElementById('resetBtn').setAttribute('page', 'pinnedCourses');
     });
 }
 
@@ -209,6 +209,15 @@ const scheduleSettingsListeners = () => {
         chrome.storage.local.set({ schedule: scheduleData });
     });
     document.getElementById('schedBorderColorText').addEventListener('click', () => document.getElementById('schedBorderColor').click());
+}
+
+const pinnedCoursesSettingsListeners = () => {
+    document.getElementById('resetCourseList').addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset your pinned courses?')) {
+            moodleData.pinnedCourses = [];
+            chrome.storage.local.set({ moodle: moodleData });
+        }
+    });
 }
 
 /**
@@ -352,15 +361,21 @@ const getStorage = () => {
  * Resets the display and visibility of certain elements
  */
 const reset = () => {
-    moodlePage.style.display = 'none';
-    schedulePage.style.display = 'none';
-    settingsPage.style.display = 'none';
-    mainPage.style.display = 'block';
-    document.getElementById('reportBtn').style.display = '';
-    document.getElementById('backBtn').style.display = 'none';
-    document.getElementById('resetBtn').style.display = 'none';
-    document.getElementById('resetBtn').removeAttribute('page');
-    document.querySelector(':root').style.height = (document.getElementById('main').clientHeight + document.querySelector("#mainContainer > div.footer").clientHeight) + 'px';
+    if (pinnedCoursesSettingsPage.style.display === 'block') {
+        pinnedCoursesSettingsPage.style.display = 'none';
+        moodlePage.style.display = 'block';
+    } else {
+        moodlePage.style.display = 'none';
+        schedulePage.style.display = 'none';
+        settingsPage.style.display = 'none';
+        pinnedCoursesSettingsPage.style.display = 'none';
+        mainPage.style.display = 'block';
+        document.getElementById('reportBtn').style.display = '';
+        document.getElementById('backBtn').style.display = 'none';
+        document.getElementById('resetBtn').style.display = 'none';
+        document.getElementById('resetBtn').removeAttribute('page');
+        document.querySelector(':root').style.height = (document.getElementById('main').clientHeight + document.querySelector("#mainContainer > div.footer").clientHeight) + 'px';
+    }
 }
 
 /**
