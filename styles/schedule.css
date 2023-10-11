@@ -226,7 +226,7 @@ html[page="lookup"]
 }
 
 html[page="matrix"] body > table > tbody > tr:first-child > th:first-child {
-  border-radius: 8px 0 0 0;
+  border-radius: 8px 0 0;
 }
 
 html[page="matrix"] body > table > tbody > tr:first-child > th:last-child {
@@ -238,5 +238,5 @@ html[page="matrix"] body > table > tbody > tr:last-child > td:first-child {
 }
 
 html[page="matrix"] body > table > tbody > tr:last-child > td:last-child {
-  border-radius: 0 0 8px 0;
+  border-radius: 0 0 8px;
 }

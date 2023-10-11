@@ -109,7 +109,7 @@ div[role="main"],
   > div
   > div,
 #page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
-  flex-grow: 1;
+  flex-grow: 0 !important;
   text-align: center;
 }
 
@@ -255,10 +255,6 @@ body.modal-open {
   overflow-y: scroll !important;
 }
 
-.simplesearchform a.btn-open {
-  display: block !important;
-}
-
 .aabtn.focus,
 .aabtn:focus,
 .btn-link.focus,
@@ -392,16 +388,6 @@ a.autolink,
   background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
 }
 
-#page-header
-  > div.w-100
-  > div.d-flex.align-items-center
-  > div.mr-auto
-  > div
-  > div,
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
-  flex-grow: 0 !important;
-}
-
 .header-maxwidth {
   margin-left: 0 !important;
 }
@@ -434,10 +420,6 @@ a.autolink,
 #sticky-footer label,
 .navbar-light .navbar-nav .nav-link:hover {
   color: white !important;
-}
-
-#sticky-footer {
-  border-top: 0 !important;
 }
 
 #page.drawers::-webkit-scrollbar {
@@ -509,6 +491,7 @@ a:hover {
 
 #sticky-footer {
   height: 50px;
+  border-top: 0 !important;
 }
 
 .onGradebookPage {
@@ -595,7 +578,7 @@ a:hover {
 
 #available_shortcuts_tab,
 #available_shortcuts_inner {
-  border-radius: 0.5rem 0 0 0;
+  border-radius: 0.5rem 0 0;
 }
 
 #available_shortcuts_tab {
