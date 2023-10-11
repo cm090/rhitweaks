@@ -1,10 +1,16 @@
 <div class="header">
-    <div> <img src="https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png"
-            alt="Rose-Hulman Institute of Technology" height="30">
-        <h3>Schedule Lookup</h3>
-    </div>
-    <div> <button type="button" onclick="userSignOut()">Sign out</button> </div>
+  <div>
+    <img
+      src="https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png"
+      alt="Rose-Hulman Institute of Technology"
+      height="30"
+    />
+    <h3>Schedule Lookup</h3>
+  </div>
+  <div><button type="button" onclick="userSignOut()">Sign out</button></div>
 </div>
 <script>
-    const userSignOut = () => window.location.href = 'https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl';
+  const userSignOut = () =>
+    (window.location.href =
+      "https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl");
 </script>
