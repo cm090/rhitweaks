@@ -315,7 +315,8 @@ a.autolink,
   color: color-mix(in srgb, var(--accent-color), #555) !important;
 }
 
-.course-content .current::before {
+.course-content .current::before,
+.courseindex .courseindex-section.current {
   border-left: var(--accent-color) 4px solid;
 }
 
@@ -507,7 +508,11 @@ a:hover {
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle,
 .btn-outline-primary:hover,
-.page-item.active .page-link {
+.page-item.active .page-link,
+.badge-primary,
+.form-autocomplete-suggestions li:hover,
+.form-autocomplete-suggestions li:focus,
+.form-autocomplete-suggestions li[aria-selected="true"] {
   color: white !important;
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
@@ -556,7 +561,9 @@ a:hover {
   width: 55px !important;
 }
 
-.editor_atto_content:focus {
+.editor_atto_content:focus,
+.form-autocomplete-suggestions li[aria-selected="true"],
+.form-autocomplete-selection [data-active-selection=true] {
   box-shadow: 0 0 0 0.2rem
     color-mix(in srgb, var(--accent-color), transparent 25%) !important;
   border-color: transparent !important;
