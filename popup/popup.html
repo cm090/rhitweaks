@@ -206,9 +206,10 @@
           <option value="12">12 Hour (AM/PM)</option>
           <option value="24">24 Hour</option>
         </select>
+        <hr class="my-2" />
         <button
           type="button"
-          class="btn btn-secondary btn-sm my-2 w-100"
+          class="btn btn-secondary btn-sm my-1 w-100"
           id="pinnedCoursesSettings"
         >
           Pinned courses settings
@@ -217,6 +218,16 @@
       <!-- Pinned Courses -->
       <div id="pinnedCoursesSettingsPage" class="settings-page">
         <h3 class="text-center title">Pinned Courses Settings</h3>
+        <label for="selectCourseDisplay">Display mode</label>
+        <select
+          id="selectCourseDisplay"
+          class="form-control"
+          title="Display mode"
+        >
+          <option value="dropdown">Dropdown (default)</option>
+          <option value="header">In header</option>
+        </select>
+        <hr class="my-2" />
         <label for="selectCourse">Edit course</label>
         <select
           id="selectCourse"
@@ -241,9 +252,10 @@
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
+        <hr class="my-2" />
         <button
           type="button"
-          class="btn btn-danger btn-sm mt-5 w-100"
+          class="btn btn-danger btn-sm my-1 w-100"
           id="resetCourseList"
         >
           Clear pinned courses
@@ -384,6 +396,7 @@
       </div>
       <div class="spacer"></div>
       <div class="footer">
+        <hr class="my-2" />
         <div class="text-center">
           <button
             type="button"

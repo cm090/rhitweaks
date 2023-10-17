@@ -1,7 +1,19 @@
 let courseData = [["Dashboard", "https://moodle.rose-hulman.edu/my"]];
 let moodleData = {};
+const defaults = {
+  enabled: false,
+  bgColor: "#000000",
+  textColor: "#1d2125",
+  cardColor: "#eeeeee",
+  accentColor: "#800000",
+  sbColor: "#000000",
+  timeFormat: 12,
+  pinnedCoursesDisplay: "dropdown",
+  pinnedCourses: [],
+};
 const additionalData = {
   timeFormat: 12,
+  pinnedCoursesDisplay: "dropdown",
   pinnedCourses: [],
 };
 
@@ -105,20 +117,14 @@ const searchListener = () => {
   additionalData.pinnedCourses.forEach((item) =>
     courseData.push([item[1], `/course/view.php?id=${item[0]}`])
   );
-  courseData.push([
-    "My Rose-Hulman",
-    "https://rosehulman.sharepoint.com/sites/MyRH",
-  ]);
-  courseData.push(["Banner Web", "https://bannerweb.rose-hulman.edu/login"]);
-  courseData.push(["Gradescope", "https://www.gradescope.com"]);
-  courseData.push([
-    "Campus Groups",
-    "https://www.campusgroups.com/shibboleth/rosehulman",
-  ]);
-  courseData.push([
-    "Dining Hall Menu",
-    "https://rose-hulman.cafebonappetit.com",
-  ]);
+  courseData.push(
+    ["My Rose-Hulman", "https://rosehulman.sharepoint.com/sites/MyRH"],
+    ["Banner Web", "https://bannerweb.rose-hulman.edu/login"],
+    ["Gradescope", "https://www.gradescope.com"],
+    ["Campus Groups", "https://www.campusgroups.com/shibboleth/rosehulman"],
+    ["Dining Hall Menu", "https://rose-hulman.cafebonappetit.com"],
+    ["My Courses", "/my/courses.php"]
+  );
   document.getElementById("rmtSearchInput").addEventListener("keydown", (e) => {
     if (e.key == "ArrowDown") {
       e.preventDefault();
@@ -152,6 +158,7 @@ const searchListener = () => {
       $("#rmtSearch").modal("hide");
     }
   });
+
   const createList = (e) => {
     pos = 1;
     let i = 0;
@@ -301,33 +308,53 @@ const waitForJQuery = () => {
 const updateCourseDropdown = () => {
   const menuItem = document.querySelector('.navbar-nav [data-key="mycourses"]');
   try {
-    if (menuItem.querySelector(".custom-dropdown")) {
-      menuItem.querySelector(".custom-dropdown").remove();
-    }
+    menuItem.style.display = "";
+    document
+      .querySelectorAll(".custom-courses")
+      .forEach((item) => item.remove());
   } catch (e) {
     // Ignore
   }
-  const div = document.createElement("div");
-  div.classList.add("dropdown-menu", "custom-dropdown");
-  if (additionalData.pinnedCourses.length == 0) {
-    div.innerHTML =
-      '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
+  if (additionalData.pinnedCoursesDisplay === "dropdown") {
+    const div = document.createElement("div");
+    div.classList.add("dropdown-menu", "custom-courses");
+    if (additionalData.pinnedCourses.length == 0) {
+      div.innerHTML =
+        '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
+    } else {
+      additionalData.pinnedCourses.forEach((item) => {
+        const a = document.createElement("a");
+        a.classList.add("dropdown-item");
+        a.href = `/course/view.php?id=${item[0]}`;
+        a.innerText = item[1];
+        div.appendChild(a);
+      });
+    }
+    document.querySelector("body").appendChild(div);
+    menuItem.onmouseenter = () => div.classList.add("show");
+    div.onmouseenter = () => div.classList.add("show");
+    document.querySelector(
+      "#page-wrapper > nav > div.primary-navigation > nav"
+    ).onmouseleave = () => div.classList.remove("show");
+    div.onmouseleave = () => div.classList.remove("show");
   } else {
+    menuItem.style.display = "none";
     additionalData.pinnedCourses.forEach((item) => {
+      const li = document.createElement("li");
+      li.classList.add("nav-item", "custom-courses");
       const a = document.createElement("a");
-      a.classList.add("dropdown-item");
+      a.classList.add("nav-link");
+      if (document.body.classList.contains(`course-${item[0]}`)) {
+        a.classList.add("active");
+      }
       a.href = `/course/view.php?id=${item[0]}`;
       a.innerText = item[1];
-      div.appendChild(a);
+      li.appendChild(a);
+      document
+        .querySelector(".primary-navigation .moremenu ul")
+        .appendChild(li);
     });
   }
-  document.querySelector("body").appendChild(div);
-  menuItem.onmouseenter = () => div.classList.add("show");
-  div.onmouseenter = () => div.classList.add("show");
-  document.querySelector(
-    "#page-wrapper > nav > div.primary-navigation > nav"
-  ).onmouseleave = () => div.classList.remove("show");
-  div.onmouseleave = () => div.classList.remove("show");
 };
 
 const start = () => {
@@ -459,16 +486,31 @@ const storageListeners = () => {
   chrome.storage.local.get("moodle").then((data) => {
     moodleData = data.moodle;
     let root = document.querySelector(":root");
-    root.style.setProperty("--bg-color", data.moodle.bgColor || "#000000");
-    root.style.setProperty("--card-color", data.moodle.cardColor || "#eeeeee");
+    root.style.setProperty(
+      "--bg-color",
+      data.moodle.bgColor || defaults.bgColor
+    );
+    root.style.setProperty(
+      "--card-color",
+      data.moodle.cardColor || defaults.cardColor
+    );
     root.style.setProperty(
       "--accent-color",
-      data.moodle.accentColor || "#800000"
+      data.moodle.accentColor || defaults.accentColor
     );
-    root.style.setProperty("--sidebar-color", data.moodle.sbColor || "#000000");
-    root.style.setProperty("--text-color", data.moodle.textColor || "#1d2125");
-    additionalData.timeFormat = data.moodle.timeFormat || 12;
-    additionalData.pinnedCourses = data.moodle.pinnedCourses || [];
+    root.style.setProperty(
+      "--sidebar-color",
+      data.moodle.sbColor || defaults.sbColor
+    );
+    root.style.setProperty(
+      "--text-color",
+      data.moodle.textColor || defaults.textColor
+    );
+    additionalData.timeFormat = data.moodle.timeFormat || defaults.timeFormat;
+    additionalData.pinnedCoursesDisplay =
+      data.moodle.pinnedCoursesDisplay || defaults.pinnedCoursesDisplay;
+    additionalData.pinnedCourses =
+      data.moodle.pinnedCourses || defaults.pinnedCourses;
     if (data.moodle.enabled && document.getElementById("page-wrapper")) {
       start();
     }
@@ -482,13 +524,28 @@ const storageListeners = () => {
     }
     moodleData = newData;
     let root = document.querySelector(":root");
-    root.style.setProperty("--bg-color", newData.bgColor || "#000000");
-    root.style.setProperty("--card-color", newData.cardColor || "#eeeeee");
-    root.style.setProperty("--accent-color", newData.accentColor || "#800000");
-    root.style.setProperty("--sidebar-color", newData.sbColor || "#000000");
-    root.style.setProperty("--text-color", newData.textColor || "#1d2125");
-    additionalData.timeFormat = newData.timeFormat || 12;
-    additionalData.pinnedCourses = newData.pinnedCourses || [];
+    root.style.setProperty("--bg-color", newData.bgColor || defaults.bgColor);
+    root.style.setProperty(
+      "--card-color",
+      newData.cardColor || defaults.cardColor
+    );
+    root.style.setProperty(
+      "--accent-color",
+      newData.accentColor || defaults.accentColor
+    );
+    root.style.setProperty(
+      "--sidebar-color",
+      newData.sbColor || defaults.sbColor
+    );
+    root.style.setProperty(
+      "--text-color",
+      newData.textColor || defaults.textColor
+    );
+    additionalData.timeFormat = newData.timeFormat || defaults.timeFormat;
+    additionalData.pinnedCoursesDisplay =
+      newData.pinnedCoursesDisplay || defaults.pinnedCoursesDisplay;
+    additionalData.pinnedCourses =
+      newData.pinnedCourses || defaults.pinnedCourses;
     updateCourseDropdown();
     updateTimelineFormat().catch(() => null);
   });

@@ -87,7 +87,7 @@ a:not([role="menuitem"]):not(
 .card,
 #gridshadebox_content,
 .secondary-navigation nav,
-.secondary-navigation ul,
+.secondary-navigation ul:not(.dropdown-menu),
 .message-app,
 div[role="main"],
 .login-container {
@@ -109,7 +109,7 @@ div[role="main"],
   > div
   > div,
 #page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
-  flex-grow: 1;
+  flex-grow: 0 !important;
   text-align: center;
 }
 
@@ -196,6 +196,7 @@ div[data-region="grading-navigation-panel"] {
 .bg-light,
 .bg-white,
 .activity-item .description div,
+.activity-item.hiddenactivity,
 input[type="text"] {
   background: transparent !important;
 }
@@ -253,10 +254,6 @@ input[type="text"] {
 
 body.modal-open {
   overflow-y: scroll !important;
-}
-
-.simplesearchform a.btn-open {
-  display: block !important;
 }
 
 .aabtn.focus,
@@ -319,7 +316,8 @@ a.autolink,
   color: color-mix(in srgb, var(--accent-color), #555) !important;
 }
 
-.course-content .current::before {
+.course-content .current::before,
+.courseindex .courseindex-section.current {
   border-left: var(--accent-color) 4px solid;
 }
 
@@ -392,16 +390,6 @@ a.autolink,
   background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
 }
 
-#page-header
-  > div.w-100
-  > div.d-flex.align-items-center
-  > div.mr-auto
-  > div
-  > div,
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
-  flex-grow: 0 !important;
-}
-
 .header-maxwidth {
   margin-left: 0 !important;
 }
@@ -414,10 +402,15 @@ a.autolink,
 .navbar-light .navbar-nav .nav-link:hover,
 .secondary-navigation .navigation .nav-tabs .nav-link:hover {
   background-color: transparent !important;
-  font-weight: 700;
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--accent-color),
+    white 50%
+  ) !important;
+  transition: 0.2s;
 }
 
-.custom-dropdown {
+.custom-courses.dropdown-menu {
   position: absolute !important;
   top: 54px;
   left: 420px;
@@ -434,10 +427,6 @@ a.autolink,
 #sticky-footer label,
 .navbar-light .navbar-nav .nav-link:hover {
   color: white !important;
-}
-
-#sticky-footer {
-  border-top: 0 !important;
 }
 
 #page.drawers::-webkit-scrollbar {
@@ -509,6 +498,7 @@ a:hover {
 
 #sticky-footer {
   height: 50px;
+  border-top: 0 !important;
 }
 
 .onGradebookPage {
@@ -524,7 +514,11 @@ a:hover {
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle,
 .btn-outline-primary:hover,
-.page-item.active .page-link {
+.page-item.active .page-link,
+.badge-primary,
+.form-autocomplete-suggestions li:hover,
+.form-autocomplete-suggestions li:focus,
+.form-autocomplete-suggestions li[aria-selected="true"] {
   color: white !important;
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
@@ -573,7 +567,9 @@ a:hover {
   width: 55px !important;
 }
 
-.editor_atto_content:focus {
+.editor_atto_content:focus,
+.form-autocomplete-suggestions li[aria-selected="true"],
+.form-autocomplete-selection [data-active-selection="true"] {
   box-shadow: 0 0 0 0.2rem
     color-mix(in srgb, var(--accent-color), transparent 25%) !important;
   border-color: transparent !important;
@@ -595,7 +591,7 @@ a:hover {
 
 #available_shortcuts_tab,
 #available_shortcuts_inner {
-  border-radius: 0.5rem 0 0 0;
+  border-radius: 0.5rem 0 0;
 }
 
 #available_shortcuts_tab {
@@ -655,7 +651,7 @@ a:hover {
   color: black;
 }
 
-a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
+a:not(.courseindex-link):focus {
   background-color: color-mix(
     in srgb,
     var(--accent-color),
@@ -663,6 +659,15 @@ a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
   ) !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+}
+
+a:not(
+    .courseindex-link,
+    .dropdown-item,
+    .nav-link,
+    .btn,
+    [role="button"]
+  ):focus {
   border-radius: 0.5rem;
 }
 
