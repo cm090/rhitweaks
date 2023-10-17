@@ -87,7 +87,7 @@ a:not([role="menuitem"]):not(
 .card,
 #gridshadebox_content,
 .secondary-navigation nav,
-.secondary-navigation ul,
+.secondary-navigation ul:not(.dropdown-menu),
 .message-app,
 div[role="main"],
 .login-container {
@@ -196,6 +196,7 @@ div[data-region="grading-navigation-panel"] {
 .bg-light,
 .bg-white,
 .activity-item .description div,
+.activity-item.hiddenactivity,
 input[type="text"] {
   background: transparent !important;
 }
@@ -401,10 +402,15 @@ a.autolink,
 .navbar-light .navbar-nav .nav-link:hover,
 .secondary-navigation .navigation .nav-tabs .nav-link:hover {
   background-color: transparent !important;
-  font-weight: 700;
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--accent-color),
+    white 50%
+  ) !important;
+  transition: 0.2s;
 }
 
-.custom-dropdown {
+.custom-courses.dropdown-menu {
   position: absolute !important;
   top: 54px;
   left: 420px;
@@ -563,7 +569,7 @@ a:hover {
 
 .editor_atto_content:focus,
 .form-autocomplete-suggestions li[aria-selected="true"],
-.form-autocomplete-selection [data-active-selection=true] {
+.form-autocomplete-selection [data-active-selection="true"] {
   box-shadow: 0 0 0 0.2rem
     color-mix(in srgb, var(--accent-color), transparent 25%) !important;
   border-color: transparent !important;
@@ -645,7 +651,7 @@ a:hover {
   color: black;
 }
 
-a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
+a:not(.courseindex-link):focus {
   background-color: color-mix(
     in srgb,
     var(--accent-color),
@@ -653,6 +659,15 @@ a:not(.courseindex-link, .dropdown-item, .btn, [role="button"]):focus {
   ) !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+}
+
+a:not(
+    .courseindex-link,
+    .dropdown-item,
+    .nav-link,
+    .btn,
+    [role="button"]
+  ):focus {
   border-radius: 0.5rem;
 }
 

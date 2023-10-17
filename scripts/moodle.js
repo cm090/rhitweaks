@@ -117,20 +117,14 @@ const searchListener = () => {
   additionalData.pinnedCourses.forEach((item) =>
     courseData.push([item[1], `/course/view.php?id=${item[0]}`])
   );
-  courseData.push([
-    "My Rose-Hulman",
-    "https://rosehulman.sharepoint.com/sites/MyRH",
-  ]);
-  courseData.push(["Banner Web", "https://bannerweb.rose-hulman.edu/login"]);
-  courseData.push(["Gradescope", "https://www.gradescope.com"]);
-  courseData.push([
-    "Campus Groups",
-    "https://www.campusgroups.com/shibboleth/rosehulman",
-  ]);
-  courseData.push([
-    "Dining Hall Menu",
-    "https://rose-hulman.cafebonappetit.com",
-  ]);
+  courseData.push(
+    ["My Rose-Hulman", "https://rosehulman.sharepoint.com/sites/MyRH"],
+    ["Banner Web", "https://bannerweb.rose-hulman.edu/login"],
+    ["Gradescope", "https://www.gradescope.com"],
+    ["Campus Groups", "https://www.campusgroups.com/shibboleth/rosehulman"],
+    ["Dining Hall Menu", "https://rose-hulman.cafebonappetit.com"],
+    ["My Courses", "/my/courses.php"]
+  );
   document.getElementById("rmtSearchInput").addEventListener("keydown", (e) => {
     if (e.key == "ArrowDown") {
       e.preventDefault();
@@ -164,6 +158,7 @@ const searchListener = () => {
       $("#rmtSearch").modal("hide");
     }
   });
+
   const createList = (e) => {
     pos = 1;
     let i = 0;
@@ -313,33 +308,53 @@ const waitForJQuery = () => {
 const updateCourseDropdown = () => {
   const menuItem = document.querySelector('.navbar-nav [data-key="mycourses"]');
   try {
-    if (menuItem.querySelector(".custom-dropdown")) {
-      menuItem.querySelector(".custom-dropdown").remove();
-    }
+    menuItem.style.display = "";
+    document
+      .querySelectorAll(".custom-courses")
+      .forEach((item) => item.remove());
   } catch (e) {
     // Ignore
   }
-  const div = document.createElement("div");
-  div.classList.add("dropdown-menu", "custom-dropdown");
-  if (additionalData.pinnedCourses.length == 0) {
-    div.innerHTML =
-      '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
+  if (additionalData.pinnedCoursesDisplay === "dropdown") {
+    const div = document.createElement("div");
+    div.classList.add("dropdown-menu", "custom-courses");
+    if (additionalData.pinnedCourses.length == 0) {
+      div.innerHTML =
+        '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
+    } else {
+      additionalData.pinnedCourses.forEach((item) => {
+        const a = document.createElement("a");
+        a.classList.add("dropdown-item");
+        a.href = `/course/view.php?id=${item[0]}`;
+        a.innerText = item[1];
+        div.appendChild(a);
+      });
+    }
+    document.querySelector("body").appendChild(div);
+    menuItem.onmouseenter = () => div.classList.add("show");
+    div.onmouseenter = () => div.classList.add("show");
+    document.querySelector(
+      "#page-wrapper > nav > div.primary-navigation > nav"
+    ).onmouseleave = () => div.classList.remove("show");
+    div.onmouseleave = () => div.classList.remove("show");
   } else {
+    menuItem.style.display = "none";
     additionalData.pinnedCourses.forEach((item) => {
+      const li = document.createElement("li");
+      li.classList.add("nav-item", "custom-courses");
       const a = document.createElement("a");
-      a.classList.add("dropdown-item");
+      a.classList.add("nav-link");
+      if (document.body.classList.contains(`course-${item[0]}`)) {
+        a.classList.add("active");
+      }
       a.href = `/course/view.php?id=${item[0]}`;
       a.innerText = item[1];
-      div.appendChild(a);
+      li.appendChild(a);
+      document
+        .querySelector(".primary-navigation .moremenu ul")
+        .appendChild(li);
     });
   }
-  document.querySelector("body").appendChild(div);
-  menuItem.onmouseenter = () => div.classList.add("show");
-  div.onmouseenter = () => div.classList.add("show");
-  document.querySelector(
-    "#page-wrapper > nav > div.primary-navigation > nav"
-  ).onmouseleave = () => div.classList.remove("show");
-  div.onmouseleave = () => div.classList.remove("show");
 };
 
 const start = () => {
