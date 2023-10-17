@@ -18,11 +18,13 @@
         "popup/jquery.min.js",
         "popup/bootstrap.min.js"
       ],
+      "css": ["styles/moodle.css"],
       "matches": ["https://moodle.rose-hulman.edu/*"],
       "run_at": "document_end"
     },
     {
       "js": ["scripts/schedule.js", "popup/jquery.min.js"],
+      "css": ["styles/schedule.css"],
       "matches": ["https://prodwebxe-hv.rose-hulman.edu/*"],
       "run_at": "document_end"
     }
