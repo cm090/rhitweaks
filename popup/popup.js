@@ -25,6 +25,7 @@ window["moodleDataTemplate"] = {
   accentColor: "#800000",
   sbColor: "#000000",
   timeFormat: 12,
+  pinnedCoursesDisplay: "dropdown",
   pinnedCourses: [],
 };
 window["scheduleDataTemplate"] = {
@@ -184,7 +185,7 @@ const moodleSettingsListeners = () => {
     .addEventListener("click", () => {
       moodlePage.style.display = "none";
       pinnedCoursesSettingsPage.style.display = "block";
-      document.querySelector(":root").style.height = "387px";
+      document.querySelector(":root").style.height = "430px";
       pinnedCoursesSettingsFn();
       document.getElementById("resetBtn").setAttribute("page", "pinnedCourses");
     });
@@ -311,6 +312,12 @@ const scheduleSettingsListeners = () => {
  * Adds event listeners for modifying the pinned courses menu
  */
 const pinnedCoursesSettingsListeners = () => {
+  document
+    .getElementById("selectCourseDisplay")
+    .addEventListener("change", (e) => {
+      moodleData.pinnedCoursesDisplay = e.target.value;
+      chrome.storage.local.set({ moodle: moodleData });
+    });
   document.getElementById("selectCourse").addEventListener("change", (e) => {
     const splitAt = e.target.value.indexOf(",");
     const selected = [
@@ -360,6 +367,9 @@ const pinnedCoursesSettingsListeners = () => {
 const pinnedCoursesSettingsFn = (selected = "") => {
   document.getElementById("courseLabel").value = "";
   chrome.storage.local.get("moodle").then((data) => {
+    document.getElementById("selectCourseDisplay").value =
+      data.moodle.pinnedCoursesDisplay ||
+      moodleDataTemplate.pinnedCoursesDisplay;
     data = data.moodle.pinnedCourses || moodleDataTemplate.pinnedCourses;
     const courses = data.map((course) => {
       return `<option value="${course}" ${
