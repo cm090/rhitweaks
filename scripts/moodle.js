@@ -1,7 +1,19 @@
 let courseData = [["Dashboard", "https://moodle.rose-hulman.edu/my"]];
 let moodleData = {};
+const defaults = {
+  enabled: false,
+  bgColor: "#000000",
+  textColor: "#1d2125",
+  cardColor: "#eeeeee",
+  accentColor: "#800000",
+  sbColor: "#000000",
+  timeFormat: 12,
+  pinnedCoursesDisplay: "dropdown",
+  pinnedCourses: [],
+};
 const additionalData = {
   timeFormat: 12,
+  pinnedCoursesDisplay: "dropdown",
   pinnedCourses: [],
 };
 
@@ -459,16 +471,31 @@ const storageListeners = () => {
   chrome.storage.local.get("moodle").then((data) => {
     moodleData = data.moodle;
     let root = document.querySelector(":root");
-    root.style.setProperty("--bg-color", data.moodle.bgColor || "#000000");
-    root.style.setProperty("--card-color", data.moodle.cardColor || "#eeeeee");
+    root.style.setProperty(
+      "--bg-color",
+      data.moodle.bgColor || defaults.bgColor
+    );
+    root.style.setProperty(
+      "--card-color",
+      data.moodle.cardColor || defaults.cardColor
+    );
     root.style.setProperty(
       "--accent-color",
-      data.moodle.accentColor || "#800000"
+      data.moodle.accentColor || defaults.accentColor
     );
-    root.style.setProperty("--sidebar-color", data.moodle.sbColor || "#000000");
-    root.style.setProperty("--text-color", data.moodle.textColor || "#1d2125");
-    additionalData.timeFormat = data.moodle.timeFormat || 12;
-    additionalData.pinnedCourses = data.moodle.pinnedCourses || [];
+    root.style.setProperty(
+      "--sidebar-color",
+      data.moodle.sbColor || defaults.sbColor
+    );
+    root.style.setProperty(
+      "--text-color",
+      data.moodle.textColor || defaults.textColor
+    );
+    additionalData.timeFormat = data.moodle.timeFormat || defaults.timeFormat;
+    additionalData.pinnedCoursesDisplay =
+      data.moodle.pinnedCoursesDisplay || defaults.pinnedCoursesDisplay;
+    additionalData.pinnedCourses =
+      data.moodle.pinnedCourses || defaults.pinnedCourses;
     if (data.moodle.enabled && document.getElementById("page-wrapper")) {
       start();
     }
@@ -482,13 +509,28 @@ const storageListeners = () => {
     }
     moodleData = newData;
     let root = document.querySelector(":root");
-    root.style.setProperty("--bg-color", newData.bgColor || "#000000");
-    root.style.setProperty("--card-color", newData.cardColor || "#eeeeee");
-    root.style.setProperty("--accent-color", newData.accentColor || "#800000");
-    root.style.setProperty("--sidebar-color", newData.sbColor || "#000000");
-    root.style.setProperty("--text-color", newData.textColor || "#1d2125");
-    additionalData.timeFormat = newData.timeFormat || 12;
-    additionalData.pinnedCourses = newData.pinnedCourses || [];
+    root.style.setProperty("--bg-color", newData.bgColor || defaults.bgColor);
+    root.style.setProperty(
+      "--card-color",
+      newData.cardColor || defaults.cardColor
+    );
+    root.style.setProperty(
+      "--accent-color",
+      newData.accentColor || defaults.accentColor
+    );
+    root.style.setProperty(
+      "--sidebar-color",
+      newData.sbColor || defaults.sbColor
+    );
+    root.style.setProperty(
+      "--text-color",
+      newData.textColor || defaults.textColor
+    );
+    additionalData.timeFormat = newData.timeFormat || defaults.timeFormat;
+    additionalData.pinnedCoursesDisplay =
+      newData.pinnedCoursesDisplay || defaults.pinnedCoursesDisplay;
+    additionalData.pinnedCourses =
+      newData.pinnedCourses || defaults.pinnedCourses;
     updateCourseDropdown();
     updateTimelineFormat().catch(() => null);
   });
