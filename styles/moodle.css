@@ -464,7 +464,9 @@ a.autolink,
 }
 
 .courseindex .courseindex-item.pageitem,
-.courseindex .courseindex-item.pageitem:hover {
+.courseindex .courseindex-item.pageitem:hover,
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background: var(--accent-color) !important;
 }
 
