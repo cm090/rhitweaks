@@ -187,7 +187,6 @@ const moodleSettingsListeners = () => {
       pinnedCoursesSettingsPage.style.display = "block";
       document.querySelector(":root").style.height = "430px";
       pinnedCoursesSettingsFn();
-      document.getElementById("resetBtn").setAttribute("page", "pinnedCourses");
     });
 };
 
@@ -365,12 +364,14 @@ const pinnedCoursesSettingsListeners = () => {
  * Retrieves pinned courses settings from Chrome storage and sets the corresponding values in the HTML document
  */
 const pinnedCoursesSettingsFn = (selected = "") => {
-  document.getElementById("courseLabel").value = "";
+  document.getElementById("resetBtn").style.display = "none";
   chrome.storage.local.get("moodle").then((data) => {
     document.getElementById("selectCourseDisplay").value =
       data.moodle.pinnedCoursesDisplay ||
       moodleDataTemplate.pinnedCoursesDisplay;
     data = data.moodle.pinnedCourses || moodleDataTemplate.pinnedCourses;
+    document.getElementById("courseLabel").value =
+      selected !== "" ? data.find((item) => item[0] === selected)[1] : "";
     const courses = data.map((course) => {
       return `<option value="${course}" ${
         selected === course[0] ? "selected" : ""
@@ -472,6 +473,7 @@ const listeners = () => {
   moodleSettings.addEventListener("click", () => {
     moodlePage.style.display = "block";
     mainPage.style.display = "none";
+    document.getElementById("helpBtn").style.display = "none";
     document.getElementById("reportBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "";
     document.getElementById("resetBtn").style.display = "";
@@ -484,6 +486,7 @@ const listeners = () => {
   scheduleSettings.addEventListener("click", () => {
     schedulePage.style.display = "block";
     mainPage.style.display = "none";
+    document.getElementById("helpBtn").style.display = "none";
     document.getElementById("reportBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "";
     document.getElementById("resetBtn").style.display = "";
@@ -495,6 +498,7 @@ const listeners = () => {
   settingsBtn.addEventListener("click", () => {
     settingsPage.style.display = "block";
     mainPage.style.display = "none";
+    document.getElementById("helpBtn").style.display = "none";
     document.getElementById("reportBtn").style.display = "none";
     document.getElementById("backBtn").style.display = "";
     document.querySelector(":root").style.height = "";
@@ -503,8 +507,11 @@ const listeners = () => {
   additionalSettingsListeners();
   document.getElementById("backBtn").addEventListener("click", reset);
   document.getElementById("resetBtn").addEventListener("click", defaults);
+  document.getElementById("helpBtn").addEventListener("click", () => {
+    window.open("https://link.canon.click/rhitweaks/wiki");
+  });
   document.getElementById("reportBtn").addEventListener("click", () => {
-    window.open("https://github.com/cm090/rhitweaks/issues");
+    window.open("https://link.canon.click/rhitweaks/issues");
   });
 };
 
@@ -538,6 +545,7 @@ const reset = () => {
   if (pinnedCoursesSettingsPage.style.display === "block") {
     pinnedCoursesSettingsPage.style.display = "none";
     moodlePage.style.display = "block";
+    document.getElementById("resetBtn").style.display = "";
     document.querySelector(":root").style.height = "";
   } else {
     moodlePage.style.display = "none";
@@ -545,6 +553,7 @@ const reset = () => {
     settingsPage.style.display = "none";
     pinnedCoursesSettingsPage.style.display = "none";
     mainPage.style.display = "block";
+    document.getElementById("helpBtn").style.display = "";
     document.getElementById("reportBtn").style.display = "";
     document.getElementById("backBtn").style.display = "none";
     document.getElementById("resetBtn").style.display = "none";
@@ -571,9 +580,6 @@ const defaults = (e) => {
       break;
     case "schedule":
       scheduleSettingsFn();
-      break;
-    case "pinnedCourses":
-      pinnedCoursesSettingsFn();
       break;
   }
 };

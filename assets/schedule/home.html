@@ -32,7 +32,7 @@
       <h3>Schedule Lookup</h3>
     </div>
     <div>
-      <button type="button" onclick="userSignOut()">Sign out</button>
+      <button type="button" id="signOut">Sign out</button>
     </div>
   </div>
   <form
@@ -109,18 +109,18 @@
           onkeypress="if (event.keyCode == 13) this.form.deptbt.click();"
         >
           <option value="" disabled selected>Department</option>
-          <option value="BBE">Biology and Biomedical Engr</option>
-          <option value="CHE">Chemical Engineering</option>
-          <option value="CHEM">Chemistry and Biochemistry</option>
-          <option value="CE">Civil &amp; Environmental Engr</option>
-          <option value="CSSE">Comp Science and Software Engr</option>
-          <option value="ECE">Electrical and Computer Engr</option>
-          <option value="ENGD">Engineering Design</option>
-          <option value="EMGT">Engineering Management</option>
-          <option value="HSSA">Humanities,Social Science,Arts</option>
-          <option value="MA">Mathematics</option>
-          <option value="ME">Mechanical Engineering</option>
-          <option value="PHOE">Physics and Optical Eng</option>
+          <option value="BBE">Bio &amp; Biomed</option>
+          <option value="CHE">ChemE</option>
+          <option value="CHEM">Chem &amp; Biochem</option>
+          <option value="CE">Civil &amp; Environmental Eng</option>
+          <option value="CSSE">CSSE</option>
+          <option value="ECE">ECE</option>
+          <option value="ENGD">EngD</option>
+          <option value="EMGT">Eng Management</option>
+          <option value="HSSA">HSSA</option>
+          <option value="MA">Math</option>
+          <option value="ME">ME</option>
+          <option value="PHOE">Physics &amp; OE</option>
         </select>
         <input
           type="submit"
@@ -131,19 +131,44 @@
       </div>
     </div>
     <div class="buttons">
-      <input type="submit" name="matrix" value="Class Schedule Options" />
-      <input type="submit" name="ad_hoc" value="Ad-hoc Group Schedules" />
-      <button type="button" onclick="resetPage()">
+      <input
+        class="actionButton"
+        type="submit"
+        name="matrix"
+        value="Class Schedule Options"
+      />
+      <input
+        class="actionButton"
+        type="submit"
+        name="ad_hoc"
+        value="Ad-hoc Group Schedules"
+      />
+    </div>
+    <br />
+    <div class="buttons">
+      <button class="actionButton" type="button" id="downloadRoster">
+        Download Class Roster
+      </button>
+      <button
+        class="actionButton"
+        type="button"
+        onclick="window.location.href = 'https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl'"
+      >
         Reset Schedule Lookup Page
       </button>
     </div>
-    <script type="text/javascript">
-      const userSignOut = () =>
-        (window.location.href =
-          "https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl");
-      const resetPage = () =>
-        (window.location.href =
-          "https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl");
-    </script>
+  </form>
+  <form
+    action="/regweb-cgi/reg-download.pl"
+    method="POST"
+    id="courseRosterDownload"
+  >
+    <input type="hidden" name="id" />
+    <input
+      style="display: none"
+      type="submit"
+      value="Download"
+      name="download"
+    />
   </form>
 </body>

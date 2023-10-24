@@ -191,6 +191,18 @@ html[page="home"] .buttons {
   align-items: center;
 }
 
+html[page="home"] .buttons .actionButton {
+  width: 210px !important;
+  color: var(--text-color);
+  background: transparent !important;
+  border: 2px solid var(--accent-color) !important;
+  transition: 0.2s;
+}
+
+html[page="home"] .buttons .actionButton:hover {
+  background: var(--accent-color) !important;
+}
+
 hr {
   border-color: var(--border-color);
 }
