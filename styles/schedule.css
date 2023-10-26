@@ -91,6 +91,14 @@ html[page="detail"]
   > tbody
   > tr:nth-child(2)
   > td.bw70
+  > a:nth-child(2),
+html[page="lookup"]
+  body
+  > form
+  > table
+  > tbody
+  > tr:nth-child(2)
+  > td.bw70
   > a:nth-child(2) {
   background: var(--text-color) !important;
   color: var(--bg-color) !important;
@@ -218,23 +226,6 @@ html[page="lookup"] input:not(input[type="submit"], input[type="reset"]) {
 html[page="lookup"] h5 {
   font-size: 14px;
   margin: 5px 2px;
-}
-
-html[page="lookup"]
-  body
-  > form
-  > table
-  > tbody
-  > tr:nth-child(2)
-  > td.bw70
-  > a:nth-child(2) {
-  background: var(--text-color) !important;
-  color: var(--bg-color) !important;
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 8px;
-  position: relative;
-  top: 20px;
 }
 
 html[page="matrix"] body > table > tbody > tr:first-child > th:first-child {

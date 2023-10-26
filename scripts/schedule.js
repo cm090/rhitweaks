@@ -115,7 +115,7 @@ const runApp = (allowPrint) => {
       (window.location.href =
         "https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl");
     document.getElementById("downloadRoster").onclick = () => {
-      const name = prompt("Enter course name").toUpperCase();
+      const name = prompt("Enter course name with section number (ex. MA111-01)").toUpperCase();
       document.querySelectorAll("#courseRosterDownload input")[0].value = name;
       document.querySelectorAll("#courseRosterDownload input")[1].click();
     };

@@ -656,7 +656,7 @@ a:hover {
   color: black;
 }
 
-a:not(.courseindex-link):focus {
+a:not(.courseindex-link, .btn):focus {
   background-color: color-mix(
     in srgb,
     var(--accent-color),
