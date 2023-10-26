@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "4.3",
+  "version": "4.4",
   "permissions": ["storage"],
   "icons": {
     "128": "images/icon.png"
@@ -18,13 +18,11 @@
         "popup/jquery.min.js",
         "popup/bootstrap.min.js"
       ],
-      "css": ["styles/moodle.css"],
       "matches": ["https://moodle.rose-hulman.edu/*"],
       "run_at": "document_end"
     },
     {
       "js": ["scripts/schedule.js", "popup/jquery.min.js"],
-      "css": ["styles/schedule.css"],
       "matches": ["https://prodwebxe-hv.rose-hulman.edu/*"],
       "run_at": "document_end"
     }
