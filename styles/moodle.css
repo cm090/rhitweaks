@@ -20,7 +20,13 @@ body,
   color: var(--text-color) !important;
 }
 
-.btn:not(.btn-primary, .nav-link, #user-menu-toggle, .drawertoggle) {
+.btn:not(
+    .btn-primary,
+    .btn-success,
+    .nav-link,
+    #user-menu-toggle,
+    .drawertoggle
+  ) {
   color: unset !important;
 }
 
@@ -583,7 +589,6 @@ a:hover {
 .activityiconcontainer .fa {
   color: white;
   position: relative;
-  top: 4px;
 }
 
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before,
