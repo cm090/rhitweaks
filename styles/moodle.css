@@ -304,7 +304,8 @@ input:not(#rmtSearchInput):focus,
 .form-autocomplete-suggestions li[aria-selected="true"],
 .form-autocomplete-selection [data-active-selection="true"],
 .btn:focus,
-.btn.focus {
+.btn.focus,
+.custom-select:focus {
   --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
   box-shadow: 0 0 0 0.2rem var(--bxs-color);
 }
