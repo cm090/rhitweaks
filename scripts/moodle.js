@@ -69,7 +69,7 @@ const addButtons = async () => {
   if (window.location.pathname != "/my/") {
     return Promise.reject();
   }
-  if (document.querySelector("#page-content").clientWidth > 833) {
+  if (document.querySelector("#page-content").clientWidth > 850) {
     const res = await fetch(
       chrome.runtime.getURL("assets/moodle/header-buttons.html")
     );
@@ -83,7 +83,7 @@ const addButtons = async () => {
 
 const checkButtons = () =>
   (document.querySelector("#rmtButtons").style.display =
-    document.querySelector("#page-content").clientWidth <= 833
+    document.querySelector("#page-content").clientWidth <= 850
       ? "none"
       : "flex");
 

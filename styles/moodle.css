@@ -20,7 +20,13 @@ body,
   color: var(--text-color) !important;
 }
 
-.btn:not(.btn-primary, .nav-link, #user-menu-toggle, .drawertoggle) {
+.btn:not(
+    .btn-primary,
+    .btn-success,
+    .nav-link,
+    #user-menu-toggle,
+    .drawertoggle
+  ) {
   color: unset !important;
 }
 
@@ -298,7 +304,8 @@ input:not(#rmtSearchInput):focus,
 .form-autocomplete-suggestions li[aria-selected="true"],
 .form-autocomplete-selection [data-active-selection="true"],
 .btn:focus,
-.btn.focus {
+.btn.focus,
+.custom-select:focus {
   --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
   box-shadow: 0 0 0 0.2rem var(--bxs-color);
 }
@@ -583,7 +590,6 @@ a:hover {
 .activityiconcontainer .fa {
   color: white;
   position: relative;
-  top: 4px;
 }
 
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before,

@@ -83,7 +83,8 @@
             id="bgColorText"
             class="form-control"
             title="Background color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -108,7 +109,8 @@
             id="textColorText"
             class="form-control"
             title="Text color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -133,7 +135,8 @@
             id="cardColorText"
             class="form-control"
             title="Card color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -158,7 +161,8 @@
             id="accentColorText"
             class="form-control"
             title="Accent color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -183,7 +187,8 @@
             id="sbColorText"
             class="form-control"
             title="Sidebar color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -271,7 +276,8 @@
             id="schedBgColorText"
             class="form-control"
             title="Background color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -296,7 +302,8 @@
             id="schedAccentColorText"
             class="form-control"
             title="Accent color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -321,7 +328,8 @@
             id="schedTextColorText"
             class="form-control"
             title="Text color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -346,7 +354,8 @@
             id="schedBorderColorText"
             class="form-control"
             title="Border color"
-            readonly
+            pattern="^#([A-Fa-f0-9]{6})$"
+            maxlength="7"
           />
           <input
             type="color"
@@ -398,11 +407,7 @@
       <div class="footer">
         <hr class="my-2" />
         <div class="text-center">
-          <button
-            type="button"
-            class="btn btn-light btn-sm my-2"
-            id="helpBtn"
-          >
+          <button type="button" class="btn btn-light btn-sm my-2" id="helpBtn">
             Docs
           </button>
           <button

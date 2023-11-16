@@ -98,11 +98,14 @@ const moodleSettingsListeners = () => {
     moodleData.bgColor = document.getElementById("bgColor").value;
     chrome.storage.local.set({ moodle: moodleData });
   });
-  document
-    .getElementById("bgColorText")
-    .addEventListener("click", () =>
-      document.getElementById("bgColor").click()
-    );
+  document.getElementById("bgColorText").addEventListener("input", () => {
+    if (document.getElementById("bgColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("bgColor").value =
+      document.getElementById("bgColorText").value;
+    document.getElementById("bgColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("textColor").addEventListener("input", () => {
     document.getElementById("textColorText").value =
       document.getElementById("textColor").value;
@@ -116,11 +119,14 @@ const moodleSettingsListeners = () => {
     moodleData.textColor = document.getElementById("textColor").value;
     chrome.storage.local.set({ moodle: moodleData });
   });
-  document
-    .getElementById("textColorText")
-    .addEventListener("click", () =>
-      document.getElementById("textColor").click()
-    );
+  document.getElementById("textColorText").addEventListener("input", () => {
+    if (document.getElementById("textColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("textColor").value =
+      document.getElementById("textColorText").value;
+    document.getElementById("textColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("cardColor").addEventListener("input", () => {
     document.getElementById("cardColorText").value =
       document.getElementById("cardColor").value;
@@ -134,11 +140,14 @@ const moodleSettingsListeners = () => {
     moodleData.cardColor = document.getElementById("cardColor").value;
     chrome.storage.local.set({ moodle: moodleData });
   });
-  document
-    .getElementById("cardColorText")
-    .addEventListener("click", () =>
-      document.getElementById("cardColor").click()
-    );
+  document.getElementById("cardColorText").addEventListener("input", () => {
+    if (document.getElementById("cardColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("cardColor").value =
+      document.getElementById("cardColorText").value;
+    document.getElementById("cardColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("accentColor").addEventListener("input", () => {
     document.getElementById("accentColorText").value =
       document.getElementById("accentColor").value;
@@ -153,11 +162,14 @@ const moodleSettingsListeners = () => {
     moodleData.accentColor = document.getElementById("accentColor").value;
     chrome.storage.local.set({ moodle: moodleData });
   });
-  document
-    .getElementById("accentColorText")
-    .addEventListener("click", () =>
-      document.getElementById("accentColor").click()
-    );
+  document.getElementById("accentColorText").addEventListener("input", () => {
+    if (document.getElementById("accentColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("accentColor").value =
+      document.getElementById("accentColorText").value;
+    document.getElementById("accentColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("sbColor").addEventListener("input", () => {
     document.getElementById("sbColorText").value =
       document.getElementById("sbColor").value;
@@ -171,11 +183,14 @@ const moodleSettingsListeners = () => {
     moodleData.sbColor = document.getElementById("sbColor").value;
     chrome.storage.local.set({ moodle: moodleData });
   });
-  document
-    .getElementById("sbColorText")
-    .addEventListener("click", () =>
-      document.getElementById("sbColor").click()
-    );
+  document.getElementById("sbColorText").addEventListener("input", () => {
+    if (document.getElementById("sbColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("sbColor").value =
+      document.getElementById("sbColorText").value;
+    document.getElementById("sbColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("timeFormat").addEventListener("change", () => {
     moodleData.timeFormat = document.getElementById("timeFormat").value;
     chrome.storage.local.set({ moodle: moodleData });
@@ -233,11 +248,14 @@ const scheduleSettingsListeners = () => {
     scheduleData.bgColor = document.getElementById("schedBgColor").value;
     chrome.storage.local.set({ schedule: scheduleData });
   });
-  document
-    .getElementById("schedBgColorText")
-    .addEventListener("click", () =>
-      document.getElementById("schedBgColor").click()
-    );
+  document.getElementById("schedBgColorText").addEventListener("input", () => {
+    if (document.getElementById("schedBgColorText").value.length !== 7) {
+      return;
+    }
+    document.getElementById("schedBgColor").value =
+      document.getElementById("schedBgColorText").value;
+    document.getElementById("schedBgColor").dispatchEvent(new Event("input"));
+  });
   document.getElementById("schedAccentColor").addEventListener("input", () => {
     document.getElementById("schedAccentColorText").value =
       document.getElementById("schedAccentColor").value;
@@ -258,9 +276,16 @@ const scheduleSettingsListeners = () => {
     });
   document
     .getElementById("schedAccentColorText")
-    .addEventListener("click", () =>
-      document.getElementById("schedAccentColor").click()
-    );
+    .addEventListener("input", () => {
+      if (document.getElementById("schedAccentColorText").value.length !== 7) {
+        return;
+      }
+      document.getElementById("schedAccentColor").value =
+        document.getElementById("schedAccentColorText").value;
+      document
+        .getElementById("schedAccentColor")
+        .dispatchEvent(new Event("input"));
+    });
   document.getElementById("schedTextColor").addEventListener("input", () => {
     document.getElementById("schedTextColorText").value =
       document.getElementById("schedTextColor").value;
@@ -279,9 +304,16 @@ const scheduleSettingsListeners = () => {
     });
   document
     .getElementById("schedTextColorText")
-    .addEventListener("click", () =>
-      document.getElementById("schedTextColor").click()
-    );
+    .addEventListener("input", () => {
+      if (document.getElementById("schedTextColorText").value.length !== 7) {
+        return;
+      }
+      document.getElementById("schedTextColor").value =
+        document.getElementById("schedTextColorText").value;
+      document
+        .getElementById("schedTextColor")
+        .dispatchEvent(new Event("input"));
+    });
   document.getElementById("schedBorderColor").addEventListener("input", () => {
     document.getElementById("schedBorderColorText").value =
       document.getElementById("schedBorderColor").value;
@@ -302,9 +334,16 @@ const scheduleSettingsListeners = () => {
     });
   document
     .getElementById("schedBorderColorText")
-    .addEventListener("click", () =>
-      document.getElementById("schedBorderColor").click()
-    );
+    .addEventListener("input", () => {
+      if (document.getElementById("schedBorderColorText").value.length !== 7) {
+        return;
+      }
+      document.getElementById("schedBorderColor").value =
+        document.getElementById("schedBorderColorText").value;
+      document
+        .getElementById("schedBorderColor")
+        .dispatchEvent(new Event("input"));
+    });
 };
 
 /**
