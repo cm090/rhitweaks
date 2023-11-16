@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "4.4",
+  "version": "4.5",
   "permissions": ["storage"],
   "icons": {
     "128": "images/icon.png"
@@ -27,9 +27,6 @@
       "run_at": "document_end"
     }
   ],
-  "background": {
-    "service_worker": "scripts/postinstall.js"
-  },
   "web_accessible_resources": [
     {
       "resources": ["styles/*", "assets/*"],
