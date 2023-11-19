@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "4.5",
+  "version": "4.6",
   "permissions": ["storage"],
   "icons": {
     "128": "images/icon.png"
@@ -35,5 +35,11 @@
         "https://prodwebxe-hv.rose-hulman.edu/*"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "rhitweaks@rhit.cf",
+      "update_url": "https://raw.githubusercontent.com/cm090/rhitweaks/main/firefox-update.json"
+    }
+  }
 }
