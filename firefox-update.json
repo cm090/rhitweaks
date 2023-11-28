@@ -1,6 +1,6 @@
 {
   "addons": {
-    "{rhitweaks@rhit.cf}": {
+    "rhitweaks@rhit.cf": {
       "updates": [
         {
           "version": "4.6",
