@@ -572,7 +572,8 @@ a:hover {
   background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
-.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"]
+.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"],
+.activityiconcontainer img[src="https://moodle.rose-hulman.edu/pluginfile.php/2/course/section/78/github.png"]
 {
   filter: invert(1);
 }
