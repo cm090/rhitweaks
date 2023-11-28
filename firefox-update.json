@@ -4,7 +4,11 @@
       "updates": [
         {
           "version": "4.6",
-          "update_link": "https://github.com/cm090/rhitweaks/releases/download/v4.5/RHITweaks-4.6.xpi"
+          "update_link": "https://github.com/cm090/rhitweaks/releases/download/v4.6/rhitweaks-4.6.xpi"
+        },
+        {
+          "version": "4.7",
+          "update_link": "https://github.com/cm090/rhitweaks/releases/download/v4.7/rhitweaks-4.7.xpi"
         }
       ]
     }

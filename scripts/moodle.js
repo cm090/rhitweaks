@@ -107,12 +107,16 @@ const searchListener = () => {
 
   let pos = 1;
   if (window.location.href.includes("course/")) {
-    courseData.push([
-      "Grades",
-      Array.from(document.querySelectorAll(".more-nav > li"))
-        .find((item) => item.querySelector("a").innerText.includes("Grades"))
-        .querySelector("a").href,
-    ]);
+    try {
+      courseData.push([
+        "Grades",
+        Array.from(document.querySelectorAll(".more-nav > li"))
+          .find((item) => item.querySelector("a").innerText.includes("Grades"))
+          .querySelector("a").href,
+      ]);
+    } catch {
+      // Ignore
+    }
   }
   additionalData.pinnedCourses.forEach((item) =>
     courseData.push([item[1], `/course/view.php?id=${item[0]}`])
@@ -337,7 +341,7 @@ const updateCourseDropdown = () => {
       "#page-wrapper > nav > div.primary-navigation > nav"
     ).onmouseleave = () => div.classList.remove("show");
     div.onmouseleave = () => div.classList.remove("show");
-  } else {
+  } else if (additionalData.pinnedCourses.length > 0) {
     menuItem.style.display = "none";
     additionalData.pinnedCourses.forEach((item) => {
       const li = document.createElement("li");
