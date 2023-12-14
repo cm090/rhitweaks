@@ -28,41 +28,67 @@
       <!-- Main -->
       <div id="main">
         <h1 class="text-center title">RHITweaks</h1>
-        <div class="option">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="moodleEnable"
-          />
-          <label class="form-check-label" for="moodleEnable">
-            Enable Moodle tweaks
-          </label>
-          <br />
+        <div class="option d-flex align-items-center justify-content-between">
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="moodleEnable"
+            />
+            <label class="form-check-label" for="moodleEnable">
+              Moodle tweaks
+            </label>
+          </div>
           <button
             type="button"
-            class="btn btn-danger btn-sm w-100 my-2 settings-btn"
+            class="btn btn-danger btn-sm my-2 settings-btn homepage-btn"
             id="moodleSettings"
+            aria-label="Moodle Settings"
           >
-            Moodle Settings
+            <i class="fa-solid fa-gear"></i>
           </button>
         </div>
-        <div class="option">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="scheduleEnable"
-          />
-          <label class="form-check-label" for="scheduleEnable">
-            Enable schedule lookup tweaks
-          </label>
+        <div class="option d-flex align-items-center justify-content-between">
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="scheduleEnable"
+            />
+            <label class="form-check-label" for="scheduleEnable">
+              Schedule lookup tweaks
+            </label>
+          </div>
           <button
             type="button"
-            class="btn btn-danger btn-sm w-100 my-2 settings-btn"
+            class="btn btn-danger btn-sm my-2 settings-btn homepage-btn"
             id="scheduleSettings"
+            aria-label="Schedule Lookup Settings"
           >
-            Schedule Lookup Settings
+            <i class="fa-solid fa-gear"></i>
+          </button>
+        </div>
+        <div class="option d-flex align-items-center justify-content-between">
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="bannerEnable"
+            />
+            <label class="form-check-label" for="bannerEnable">
+              Banner web tweaks
+            </label>
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm my-2 settings-btn homepage-btn"
+            id="bannerSettings"
+            aria-label="Banner Web Settings"
+          >
+            <i class="fa-solid fa-gear"></i>
           </button>
         </div>
         <button

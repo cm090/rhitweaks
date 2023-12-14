@@ -24,7 +24,7 @@ body {
 
 .option {
   padding: 10px 0;
-  height: 90px;
+  height: 60px;
 }
 
 .title {
@@ -61,4 +61,8 @@ input[type="color"] {
 
 .settings-btn {
   display: none;
+}
+
+.homepage-btn {
+  height: 25px;
 }
