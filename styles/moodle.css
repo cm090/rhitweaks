@@ -193,6 +193,10 @@ div[data-region="grading-navigation-panel"] {
   margin: 0 5px;
 }
 
+.fp-navbar {
+  border-color: rgba(0,0,0,.125);
+}
+
 #region-main > div.region_main_settings_menu_proxy,
 #toggledsection-2 > ul,
 .activity-header,
@@ -492,7 +496,8 @@ body {
   background: var(--card-color) !important;
 }
 
-.popover-region-notifications .popover-region-footer-container {
+.popover-region-notifications .popover-region-footer-container,
+.file-picker .fp-content {
   border-radius: 0 0 0.5rem 0.5rem;
   background: var(--card-color) !important;
 }
@@ -572,7 +577,8 @@ a:hover {
   background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
 }
 
-.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"]
+.activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"],
+.activityiconcontainer img[src="https://moodle.rose-hulman.edu/pluginfile.php/2/course/section/78/github.png"]
 {
   filter: invert(1);
 }
