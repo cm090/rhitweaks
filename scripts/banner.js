@@ -29,6 +29,16 @@ const mainLinks = [
     icon: "fas fa-pen",
     url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/studentGrades",
   },
+  {
+    title: "Financial Aid",
+    icon: "fas fa-dollar-sign",
+    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/financialAid",
+  },
+  {
+    title: "Transcript",
+    icon: "fas fa-file",
+    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/academicTranscript",
+  },
 ];
 
 const extraLinks = [
@@ -86,22 +96,80 @@ const buildLinks = () => {
   template.remove();
 };
 
-document.querySelector("#branding").href =
-  "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
-if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
-  const load = () => {
-    if (!document.querySelector(".loading")) {
-      fetch(chrome.runtime.getURL("assets/banner/home.html"))
-        .then((res) => res.text())
-        .then(
-          (data) =>
-            (document.querySelector(".gen-home-main-view").innerHTML = data)
-        );
-      document.querySelector(".gen-home-main-view").style.height = "unset";
-      setTimeout(buildLinks, 100);
-    } else {
-      setTimeout(load, 100);
+const runApp = () => {
+  if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
+    const load = () => {
+      if (!document.querySelector(".loading")) {
+        fetch(chrome.runtime.getURL("assets/banner/home.html"))
+          .then((res) => res.text())
+          .then(
+            (data) =>
+              (document.querySelector(".gen-home-main-view").innerHTML = data)
+          );
+        setTimeout(buildLinks, 100);
+      } else {
+        setTimeout(load, 100);
+      }
+    };
+    load();
+  }
+
+  document.querySelector("#bannerMenu").addEventListener("click", () => {
+    let back = document.querySelector("#backButton");
+    while (back) {
+      back.click();
+      back = document.querySelector("#backButton");
     }
-  };
-  load();
-}
+    document.querySelector("#list_Banner").click();
+    const changeHomepage = () => {
+      try {
+        if (document.querySelector("#list").innerText === "Banner") {
+          document.querySelector("#list span.menu-common").innerText = "Home";
+          document
+            .querySelectorAll("#list, #list div.menu-item, #list a")
+            .forEach((item) =>
+              item.addEventListener("click", () => {
+                window.location.href =
+                  "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
+                document
+                  .querySelector("#menuContainer")
+                  .classList.remove("show");
+              })
+            );
+        }
+      } catch {
+        // Ignore
+      }
+      if (document.querySelector("#menuList").offsetHeight > 0) {
+        setTimeout(changeHomepage, 100);
+      }
+    };
+    changeHomepage();
+  });
+
+  document.querySelector("#branding").href =
+    "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
+
+  fetch(chrome.runtime.getURL("styles/banner.css"))
+    .then((res) => res.text())
+    .then(
+      (data) =>
+        (document.querySelector("head").innerHTML += `<style>${data}</style>`)
+    );
+};
+
+const getData = () => {
+  chrome.storage.local.get("banner").then((data) => {
+    if (data.banner.enabled) runApp();
+    chrome.storage.local.onChanged.addListener((changes) => {
+      const oldData = changes.banner.oldValue;
+      const newData = changes.banner.newValue;
+      if (oldData.enabled != newData.enabled) {
+        window.location.reload();
+        return;
+      }
+    });
+  });
+};
+
+getData();

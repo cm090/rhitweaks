@@ -1,6 +1,7 @@
 // Constants for buttons and pages
 const moodleEnable = document.getElementById("moodleEnable");
 const scheduleEnable = document.getElementById("scheduleEnable");
+const bannerEnable = document.getElementById("bannerEnable");
 const moodleSettings = document.getElementById("moodleSettings");
 const scheduleSettings = document.getElementById("scheduleSettings");
 const settingsBtn = document.getElementById("additionalSettings");
@@ -15,6 +16,7 @@ const pinnedCoursesSettingsPage = document.getElementById(
 // Local data storage
 window["moodleData"] = {};
 window["scheduleData"] = {};
+window["bannerData"] = {};
 
 // Template data
 window["moodleDataTemplate"] = {
@@ -35,6 +37,9 @@ window["scheduleDataTemplate"] = {
   textColor: "#ffffff",
   borderColor: "#808080",
 };
+window["bannerDataTemplate"] = {
+  enabled: false,
+};
 
 /**
  * Toggles the display of a settings element and updates the corresponding data based on a boolean value.
@@ -42,9 +47,11 @@ window["scheduleDataTemplate"] = {
  * @param data boolean value that determines whether to display or hide the settings for the given selector
  */
 const toggleBtn = (selector, data) => {
-  document.getElementById(`${selector}Settings`).style.display = data
-    ? "block"
-    : "none";
+  if (document.getElementById(`${selector}Settings`)) {
+    document.getElementById(`${selector}Settings`).style.display = data
+      ? "block"
+      : "none";
+  }
   let dataSelector = window[`${selector}Data`];
   dataSelector.enabled = data;
   chrome.storage.local.set({ [selector]: dataSelector });
@@ -467,7 +474,7 @@ const additionalSettingsListeners = () => {
   });
   document.getElementById("export").addEventListener("click", () => {
     let data = { version: chrome.runtime.getManifest().version };
-    chrome.storage.local.get(["moodle", "schedule"], (result) => {
+    chrome.storage.local.get(["moodle", "schedule", "banner"], (result) => {
       data.moodle = result.moodle;
       data.schedule = result.schedule;
       const a = document.createElement("a");
@@ -488,7 +495,7 @@ const additionalSettingsListeners = () => {
   document
     .getElementById("migrateToLocalStorage")
     .addEventListener("click", () => {
-      chrome.storage.sync.get(["moodle", "schedule"], (result) => {
+      chrome.storage.sync.get(["moodle", "schedule", "banner"], (result) => {
         chrome.storage.local.set({
           moodle: result.moodle,
           schedule: result.schedule,
@@ -508,6 +515,9 @@ const listeners = () => {
   );
   scheduleEnable.addEventListener("change", () =>
     toggleBtn("schedule", scheduleEnable.checked)
+  );
+  bannerEnable.addEventListener("change", () =>
+    toggleBtn("banner", bannerEnable.checked)
   );
   moodleSettings.addEventListener("click", () => {
     moodlePage.style.display = "block";
@@ -559,7 +569,7 @@ const listeners = () => {
  * Updates the UI based on retrieved data
  */
 const getStorage = () => {
-  chrome.storage.local.get(["moodle", "schedule"]).then((data) => {
+  chrome.storage.local.get(["moodle", "schedule", "banner"]).then((data) => {
     moodleData = data.moodle;
     scheduleData = data.schedule;
     if (!moodleData) {
@@ -569,6 +579,10 @@ const getStorage = () => {
     if (!scheduleData) {
       scheduleData = scheduleDataTemplate;
       chrome.storage.local.set({ schedule: scheduleData });
+    }
+    if (!bannerData) {
+      bannerData = bannerDataTemplate;
+      chrome.storage.local.set({ banner: bannerData });
     }
     Object.entries(data).forEach((item) => {
       toggleBtn(item[0], item[1].enabled);

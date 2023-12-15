@@ -24,11 +24,14 @@ body {
 
 .option {
   padding: 10px 0;
-  height: 60px;
 }
 
 .title {
   padding-top: 10px;
+}
+
+#main .title {
+  padding-bottom: 5px;
 }
 
 .link {
@@ -63,6 +66,7 @@ input[type="color"] {
   display: none;
 }
 
-.homepage-btn {
+.option button.homepage-btn {
   height: 25px;
+  margin: 0 0 !important;
 }
