@@ -1,11 +1,11 @@
-const data = [
+const mainLinks = [
   {
-    title: "Schedule lookup",
+    title: "Schedule Lookup",
     icon: "fas fa-calendar",
     url: "https://prodwebxe7-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl",
   },
   {
-    title: "Degree evaluation",
+    title: "Degree Evaluation",
     icon: "fas fa-graduation-cap",
     url: "https://dwprod-hv.rose-hulman.edu:9903/RespDashboard/",
   },
@@ -31,9 +31,37 @@ const data = [
   },
 ];
 
+const extraLinks = [
+  {
+    title: "Moodle",
+    icon: "fas fa-graduation-cap",
+    url: "https://moodle.rose-hulman.edu",
+  },
+  {
+    title: "My Rose-Hulman",
+    icon: "fas fa-globe",
+    url: "https://rosehulman.sharepoint.com/sites/MyRH",
+  },
+  {
+    title: "Gradescope",
+    icon: "fas fa-signal",
+    url: "https://www.gradescope.com/",
+  },
+  {
+    title: "Campus Groups",
+    icon: "fas fa-users",
+    url: "https://www.campusgroups.com/shibboleth/rosehulman",
+  },
+  {
+    title: "Menu",
+    icon: "fas fa-utensils",
+    url: "https://rose-hulman.cafebonappetit.com/",
+  },
+];
+
 const buildLinks = () => {
-  const template = document.querySelector("#banner-home-card-template");
-  data.forEach((item) => {
+  let template = document.querySelector("#banner-home-card-template");
+  mainLinks.forEach((item) => {
     const clone = template.content.cloneNode(true);
     clone.querySelector(
       ".card-title"
@@ -41,8 +69,21 @@ const buildLinks = () => {
     clone.querySelector(".card").addEventListener("click", () => {
       window.location.href = item.url;
     });
-    document.querySelector(".banner-home .row").appendChild(clone);
+    document.querySelector("#banner-home").appendChild(clone);
   });
+  template.remove();
+  template = document.querySelector("#banner-extra-links-template");
+  extraLinks.forEach((item) => {
+    const clone = template.content.cloneNode(true);
+    clone.querySelector(
+      ".card-title"
+    ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
+    clone.querySelector(".card").addEventListener("click", () => {
+      window.location.href = item.url;
+    });
+    document.querySelector("#banner-extra-links").appendChild(clone);
+  });
+  template.remove();
 };
 
 document.querySelector("#branding").href =
