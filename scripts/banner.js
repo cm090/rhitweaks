@@ -39,6 +39,16 @@ const mainLinks = [
     icon: "fas fa-file",
     url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/academicTranscript",
   },
+  {
+    title: "Proxy Management",
+    icon: "fas fa-user",
+    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/proxyManagement",
+  },
+  {
+    title: "Direct Deposit",
+    icon: "fas fa-bank",
+    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/directDeposit",
+  },
 ];
 
 const extraLinks = [
