@@ -89,7 +89,7 @@ const buildLinks = () => {
       ".card-title"
     ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
     clone.querySelector(".card").addEventListener("click", () => {
-      window.location.href = item.url;
+      window.open(item.url, "_blank");
     });
     document.querySelector("#banner-extra-links").appendChild(clone);
   });
