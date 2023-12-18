@@ -107,65 +107,74 @@ const buildLinks = () => {
 };
 
 const runApp = () => {
-  if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
-    const load = () => {
-      if (!document.querySelector(".loading")) {
-        fetch(chrome.runtime.getURL("assets/banner/home.html"))
-          .then((res) => res.text())
-          .then(
-            (data) =>
-              (document.querySelector(".gen-home-main-view").innerHTML = data)
-          );
-        setTimeout(buildLinks, 100);
-      } else {
-        setTimeout(load, 100);
-      }
-    };
-    load();
-  }
-
-  document.querySelector("#bannerMenu").addEventListener("click", () => {
-    let back = document.querySelector("#backButton");
-    while (back) {
-      back.click();
-      back = document.querySelector("#backButton");
-    }
-    document.querySelector("#list_Banner").click();
-    const changeHomepage = () => {
-      try {
-        if (document.querySelector("#list").innerText === "Banner") {
-          document.querySelector("#list span.menu-common").innerText = "Home";
-          document
-            .querySelectorAll("#list, #list div.menu-item, #list a")
-            .forEach((item) =>
-              item.addEventListener("click", () => {
-                window.location.href =
-                  "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
-                document
-                  .querySelector("#menuContainer")
-                  .classList.remove("show");
-              })
-            );
+  try {
+    if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
+      const load = () => {
+        if (!document.querySelector(".loading")) {
+          try {
+            fetch(chrome.runtime.getURL("assets/banner/home.html"))
+              .then((res) => res.text())
+              .then(
+                (data) =>
+                  (document.querySelector(".gen-home-main-view").innerHTML =
+                    data)
+              );
+          } catch {
+            // Ignore
+          }
+          setTimeout(buildLinks, 100);
+        } else {
+          setTimeout(load, 100);
         }
-      } catch {
-        // Ignore
-      }
-      if (document.querySelector("#menuList").offsetHeight > 0) {
-        setTimeout(changeHomepage, 100);
-      }
-    };
-    changeHomepage();
-  });
+      };
+      load();
+    }
 
-  document.querySelector("#branding").href =
-    "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
+    document.querySelector("#bannerMenu").addEventListener("click", () => {
+      let back = document.querySelector("#backButton");
+      while (back) {
+        back.click();
+        back = document.querySelector("#backButton");
+      }
+      document.querySelector("#list_Banner").click();
+      const changeHomepage = () => {
+        try {
+          if (document.querySelector("#list").innerText === "Banner") {
+            document.querySelector("#list span.menu-common").innerText = "Home";
+            document
+              .querySelectorAll("#list, #list div.menu-item, #list a")
+              .forEach((item) =>
+                item.addEventListener("click", () => {
+                  window.location.href =
+                    "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
+                  document
+                    .querySelector("#menuContainer")
+                    .classList.remove("show");
+                })
+              );
+          }
+        } catch {
+          // Ignore
+        }
+        if (document.querySelector("#menuList").offsetHeight > 0) {
+          setTimeout(changeHomepage, 100);
+        }
+      };
+      changeHomepage();
+    });
 
-  fetch(chrome.runtime.getURL("styles/banner.css"))
-    .then((res) => res.text())
-    .then(
-      (data) =>
-        (document.querySelector("head").innerHTML += `<style>${data}</style>`)
-    );
+    document.querySelector("#branding").href =
+      "https://bannerssb.rose-hulman.edu/BannerGeneralSsb";
+
+    fetch(chrome.runtime.getURL("styles/banner.css"))
+      .then((res) => res.text())
+      .then(
+        (data) =>
+          (document.querySelector("head").innerHTML += `<style>${data}</style>`)
+      );
+  } catch {
+    setTimeout(runApp, 100);
+  }
 };
 
 const getData = () => {
