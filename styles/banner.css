@@ -49,6 +49,6 @@
   height: unset !important;
 }
 
-#content {
+div[ng-app="generalSsbApp"]#content {
   height: unset !important;
 }
