@@ -2,10 +2,10 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "5.0",
+  "version": "5.1",
   "permissions": ["storage"],
   "icons": {
-    "128": "images/icon.png"
+    "1024": "images/icon.png"
   },
   "action": {
     "default_popup": "popup/popup.html",

@@ -22,7 +22,7 @@ const setStyle = async () => {
   const res = await fetch(url);
   const data = await res.text();
   var s = document.createElement("style");
-  s.innerHTML = data;
+  s.textContent = data;
   document.getElementsByTagName("head")[0].appendChild(s);
   if (document.querySelector(".gradeparent")) {
     const wait = () => {
