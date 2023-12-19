@@ -13,6 +13,10 @@
         {
           "version": "5.0",
           "update_link": "https://github.com/cm090/rhitweaks/releases/download/v5.0/rhitweaks-5.0.xpi"
+        },
+        {
+          "version": "5.1",
+          "update_link": "https://github.com/cm090/rhitweaks/releases/download/v5.1/rhitweaks-5.1.xpi"
         }
       ]
     }

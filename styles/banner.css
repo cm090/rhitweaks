@@ -37,14 +37,18 @@
 }
 
 .banner-home h3 {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 #banner-home {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .gen-home-main-view {
-    background-color: #f6f6f6 !important;
-    height: unset !important;
+  background-color: #f6f6f6 !important;
+  height: unset !important;
+}
+
+#content {
+  height: unset !important;
 }
