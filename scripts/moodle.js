@@ -260,7 +260,7 @@ const updateTimelineFormat = () => {
 const searchCode = async () => {
   if (
     window.location.href.includes("submission") ||
-    window.location.href.includes("#bypass")
+    window.location.hash.includes("bypass")
   ) {
     return Promise.resolve();
   }
@@ -362,7 +362,10 @@ const updateCourseDropdown = () => {
 };
 
 const reloadIfWaiting = () => {
-  if (window.location.pathname !== "/my/") {
+  if (
+    window.location.pathname !== "/my/" ||
+    window.location.hash.includes("bypass")
+  ) {
     return;
   }
   const courseListElement = document.querySelector(
@@ -496,7 +499,7 @@ const start = () => {
     .then(() => {
       updateCourseDropdown();
       navItemsManager();
-      setTimeout(reloadIfWaiting, 3000);
+      setTimeout(reloadIfWaiting, 1500);
     });
 };
 
