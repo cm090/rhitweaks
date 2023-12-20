@@ -262,10 +262,6 @@ input[type="text"] {
   outline: none;
 }
 
-body.modal-open {
-  overflow-y: scroll !important;
-}
-
 .aabtn.focus,
 .aabtn:focus,
 .btn-link.focus,
