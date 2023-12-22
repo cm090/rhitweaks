@@ -39,6 +39,27 @@ const setStyle = async () => {
     };
     wait();
   }
+  document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
+    try {
+      const rules = sheet.sheet.cssRules || sheet.sheet.rules;
+      for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i];
+        if (
+          rule.cssText.includes("maroon") ||
+          rule.cssText.includes("rgb(128, 0, 0)")
+        ) {
+          const newRule = rule.cssText.replace(
+            /maroon|rgb\(128, 0, 0\)/g,
+            "--accent-color"
+          );
+          sheet.sheet.deleteRule(i);
+          sheet.sheet.insertRule(newRule, i);
+        }
+      }
+    } catch {
+      // Ignore
+    }
+  });
   return await Promise.resolve();
 };
 
