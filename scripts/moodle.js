@@ -39,6 +39,27 @@ const setStyle = async () => {
     };
     wait();
   }
+  document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
+    try {
+      const rules = sheet.sheet.cssRules || sheet.sheet.rules;
+      for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i];
+        if (
+          rule.cssText.includes("maroon") ||
+          rule.cssText.includes("rgb(128, 0, 0)")
+        ) {
+          const newRule = rule.cssText.replace(
+            /maroon|rgb\(128, 0, 0\)/g,
+            "--accent-color"
+          );
+          sheet.sheet.deleteRule(i);
+          sheet.sheet.insertRule(newRule, i);
+        }
+      }
+    } catch {
+      // Ignore
+    }
+  });
   return await Promise.resolve();
 };
 
@@ -260,7 +281,7 @@ const updateTimelineFormat = () => {
 const searchCode = async () => {
   if (
     window.location.href.includes("submission") ||
-    window.location.href.includes("#bypass")
+    window.location.hash.includes("bypass")
   ) {
     return Promise.resolve();
   }
@@ -361,6 +382,97 @@ const updateCourseDropdown = () => {
   }
 };
 
+const reloadIfWaiting = () => {
+  if (
+    window.location.pathname !== "/my/" ||
+    window.location.hash.includes("bypass")
+  ) {
+    return;
+  }
+  const courseListElement = document.querySelector(
+    ".block_myoverview [data-region='loading-placeholder-content']"
+  );
+  if (courseListElement) {
+    window.location.reload();
+  }
+};
+
+const navItemsManager = () => {
+  if (!window.location.pathname.includes("/my/courses.php")) {
+    return;
+  }
+  const addNavItems = () => {
+    document
+      .querySelectorAll(
+        ".dashboard-card-deck .dashboard-card, .list-group .course-listitem"
+      )
+      .forEach((card) => {
+        if (card.querySelector(".dropdown-menu").innerHTML.includes("navbar")) {
+          card.querySelector(".dropdown-menu a:last-child").remove();
+        }
+        const navItem = document.createElement("a");
+        navItem.classList.add("dropdown-item");
+        navItem.href = "#";
+        navItem.innerText = additionalData.pinnedCourses.find(
+          (item) => item[0] == card.getAttribute("data-course-id")
+        )
+          ? "Unpin from navbar"
+          : "Pin to navbar";
+        navItem.addEventListener("click", () => {
+          if (navItem.innerText == "Pin to navbar") {
+            let name;
+            try {
+              name = card.querySelector(".coursename .multiline").innerText;
+            } catch {
+              name = card
+                .querySelector(".coursename")
+                .innerText.split("\n")
+                .at(-1);
+            }
+            additionalData.pinnedCourses.push([
+              card.getAttribute("data-course-id"),
+              name.split(" ")[0].search(/(?:\w+\d+)/) !== -1
+                ? name.split(" ")[0]
+                : name,
+            ]);
+          } else {
+            additionalData.pinnedCourses = additionalData.pinnedCourses.filter(
+              (item) => item[0] != card.getAttribute("data-course-id")
+            );
+          }
+          addNavItems();
+          updateCourseDropdown();
+          chrome.storage.local.set({
+            moodle: {
+              ...moodleData,
+              pinnedCourses: additionalData.pinnedCourses,
+            },
+          });
+        });
+        card.querySelector(".dropdown-menu").append(navItem);
+      });
+  };
+  const wait = () => {
+    if (
+      document.querySelector(".dashboard-card-deck .dashboard-card") ||
+      document.querySelector(".course-listitem .coursename")
+    ) {
+      addNavItems();
+    } else {
+      setTimeout(wait, 500);
+    }
+  };
+  document
+    .querySelectorAll(".main-inner a")
+    .forEach((item) =>
+      item.addEventListener("click", () => setTimeout(wait, 500))
+    );
+  document
+    .querySelector(".main-inner .searchbar input")
+    .addEventListener("input", () => setTimeout(wait, 1500));
+  wait();
+};
+
 const start = () => {
   console.log(
     "Starting RHITweaks by cm090\nhttps://github.com/cm090/rhitweaks"
@@ -407,82 +519,8 @@ const start = () => {
     })
     .then(() => {
       updateCourseDropdown();
-      if (!window.location.pathname.includes("/my/courses.php")) {
-        return;
-      }
-      const addNavItems = () => {
-        document
-          .querySelectorAll(
-            ".dashboard-card-deck .dashboard-card, .list-group .course-listitem"
-          )
-          .forEach((card) => {
-            if (
-              card.querySelector(".dropdown-menu").innerHTML.includes("navbar")
-            ) {
-              card.querySelector(".dropdown-menu a:last-child").remove();
-            }
-            const navItem = document.createElement("a");
-            navItem.classList.add("dropdown-item");
-            navItem.href = "#";
-            navItem.innerText = additionalData.pinnedCourses.find(
-              (item) => item[0] == card.getAttribute("data-course-id")
-            )
-              ? "Unpin from navbar"
-              : "Pin to navbar";
-            navItem.addEventListener("click", () => {
-              if (navItem.innerText == "Pin to navbar") {
-                let name;
-                try {
-                  name = card.querySelector(".coursename .multiline").innerText;
-                } catch {
-                  name = card
-                    .querySelector(".coursename")
-                    .innerText.split("\n")
-                    .at(-1);
-                }
-                additionalData.pinnedCourses.push([
-                  card.getAttribute("data-course-id"),
-                  name.split(" ")[0].search(/(?:\w+\d+)/) !== -1
-                    ? name.split(" ")[0]
-                    : name,
-                ]);
-              } else {
-                additionalData.pinnedCourses =
-                  additionalData.pinnedCourses.filter(
-                    (item) => item[0] != card.getAttribute("data-course-id")
-                  );
-              }
-              addNavItems();
-              updateCourseDropdown();
-              chrome.storage.local.set({
-                moodle: {
-                  ...moodleData,
-                  pinnedCourses: additionalData.pinnedCourses,
-                },
-              });
-            });
-            card.querySelector(".dropdown-menu").append(navItem);
-          });
-      };
-      const wait = () => {
-        if (
-          document.querySelector(".dashboard-card-deck .dashboard-card") ||
-          document.querySelector(".course-listitem .coursename")
-        ) {
-          addNavItems();
-        } else {
-          setTimeout(wait, 500);
-        }
-      };
-      document
-        .querySelectorAll(".main-inner a")
-        .forEach((item) =>
-          item.addEventListener("click", () => setTimeout(wait, 500))
-        );
-      document
-        .querySelector(".main-inner .searchbar input")
-        .addEventListener("input", () => setTimeout(wait, 1500));
-      wait();
+      navItemsManager();
+      setTimeout(reloadIfWaiting, 1500);
     });
 };
 

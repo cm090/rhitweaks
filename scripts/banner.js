@@ -7,7 +7,7 @@ const mainLinks = [
   {
     title: "Degree Evaluation",
     icon: "fas fa-graduation-cap",
-    url: "https://dwprod-hv.rose-hulman.edu:9903/RespDashboard/",
+    url: "https://dwprod-hv.rose-hulman.edu:9903/RespDashboard",
   },
   {
     title: "Payments",
@@ -65,7 +65,7 @@ const extraLinks = [
   {
     title: "Gradescope",
     icon: "fas fa-signal",
-    url: "https://www.gradescope.com/",
+    url: "https://www.gradescope.com",
   },
   {
     title: "Campus Groups",
@@ -75,7 +75,12 @@ const extraLinks = [
   {
     title: "Menu",
     icon: "fas fa-utensils",
-    url: "https://rose-hulman.cafebonappetit.com/",
+    url: "https://rose-hulman.cafebonappetit.com",
+  },
+  {
+    title: "Print Release",
+    icon: "fas fa-print",
+    url: "https://print.rose-hulman.edu:9192/mobile/release#printers",
   },
 ];
 

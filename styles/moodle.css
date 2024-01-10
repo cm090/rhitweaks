@@ -25,7 +25,8 @@ body,
     .btn-success,
     .nav-link,
     #user-menu-toggle,
-    .drawertoggle
+    .drawertoggle,
+    .btn-outline-primary
   ) {
   color: unset !important;
 }
@@ -260,10 +261,6 @@ input[type="text"] {
   width: calc(100% - 25px);
   border: none !important;
   outline: none;
-}
-
-body.modal-open {
-  overflow-y: scroll !important;
 }
 
 .aabtn.focus,
