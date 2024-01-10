@@ -25,7 +25,8 @@ body,
     .btn-success,
     .nav-link,
     #user-menu-toggle,
-    .drawertoggle
+    .drawertoggle,
+    .btn-outline-primary
   ) {
   color: unset !important;
 }
