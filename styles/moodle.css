@@ -631,7 +631,7 @@ a:hover {
 .grade-report-user .user-grade thead th,
 .path-grade-report-user .user-grade td.category,
 .grade-report-user .user-grade td.category,
-.path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t)),
+.path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t), .baggb),
 .grade-report-user .user-grade td,
 .path-grade-report-user .user-grade tbody tr,
 .grade-report-user .user-grade tbody tr {

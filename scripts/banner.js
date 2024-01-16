@@ -133,6 +133,8 @@ const runApp = () => {
         }
       };
       load();
+    } else if (window.location.href.includes("logout/timeoutPage")) {
+      window.location.href = "https://bannerweb.rose-hulman.edu/login";
     }
 
     document.querySelector("#bannerMenu").addEventListener("click", () => {

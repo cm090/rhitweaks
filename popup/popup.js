@@ -510,15 +510,33 @@ const additionalSettingsListeners = () => {
  * Adds event listeners to various elements
  */
 const listeners = () => {
-  moodleEnable.addEventListener("change", () =>
-    toggleBtn("moodle", moodleEnable.checked)
-  );
-  scheduleEnable.addEventListener("change", () =>
-    toggleBtn("schedule", scheduleEnable.checked)
-  );
-  bannerEnable.addEventListener("change", () =>
-    toggleBtn("banner", bannerEnable.checked)
-  );
+  moodleEnable.addEventListener("change", () => {
+    toggleBtn("moodle", moodleEnable.checked);
+    if (moodleEnable.checked) {
+      chrome.permissions.request({
+        origins: ["https://moodle.rose-hulman.edu/*"],
+      });
+    }
+  });
+  scheduleEnable.addEventListener("change", () => {
+    toggleBtn("schedule", scheduleEnable.checked);
+    if (scheduleEnable.checked) {
+      chrome.permissions.request({
+        origins: [
+          "https://prodwebxe-hv.rose-hulman.edu/*",
+          "https://prodwebxe7-hv.rose-hulman.edu/*",
+        ],
+      });
+    }
+  });
+  bannerEnable.addEventListener("change", () => {
+    toggleBtn("banner", bannerEnable.checked);
+    if (bannerEnable.checked) {
+      chrome.permissions.request({
+        origins: ["https://bannerssb.rose-hulman.edu/*"],
+      });
+    }
+  });
   moodleSettings.addEventListener("click", () => {
     moodlePage.style.display = "block";
     mainPage.style.display = "none";
@@ -637,12 +655,17 @@ const defaults = (e) => {
   }
 };
 
+const setYear = () => {
+  document.getElementById("year").innerText = `-${new Date().getFullYear()}`;
+};
+
 /**
  * Initializes the program
  */
 const main = () => {
   document.querySelector("#versionNumber").innerText +=
     chrome.runtime.getManifest().version;
+  setYear();
   getStorage();
   reset();
   listeners();
