@@ -655,12 +655,17 @@ const defaults = (e) => {
   }
 };
 
+const setYear = () => {
+  document.getElementById("year").innerText = `-${new Date().getFullYear()}`;
+};
+
 /**
  * Initializes the program
  */
 const main = () => {
   document.querySelector("#versionNumber").innerText +=
     chrome.runtime.getManifest().version;
+  setYear();
   getStorage();
   reset();
   listeners();
