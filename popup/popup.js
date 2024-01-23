@@ -32,7 +32,7 @@ window["moodleDataTemplate"] = {
 };
 window["scheduleDataTemplate"] = {
   enabled: false,
-  bgColor: "#000000",
+  bgColor: "#141414",
   accentColor: "#800000",
   textColor: "#ffffff",
   borderColor: "#808080",
