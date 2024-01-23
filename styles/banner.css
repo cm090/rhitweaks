@@ -52,3 +52,7 @@
 div[ng-app="generalSsbApp"]#content {
   height: unset !important;
 }
+
+thead .column-visibility-menu {
+  height: 40px !important;
+}
