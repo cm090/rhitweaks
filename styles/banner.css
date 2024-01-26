@@ -56,3 +56,7 @@ div[ng-app="generalSsbApp"]#content {
 thead .column-visibility-menu {
   height: 40px !important;
 }
+
+.notification-center-shim {
+  display: none;
+}
