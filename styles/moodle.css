@@ -47,6 +47,11 @@ div#nav-drawer::-webkit-scrollbar,
   display: none !important;
 }
 
+[data-usertour="scroller"] {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none;
+}
+
 .fa-star:before,
 a,
 .btn-link,
