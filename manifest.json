@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "5.3",
+  "version": "5.4",
   "permissions": [
     "storage"
   ],
@@ -63,7 +63,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "rhitweaks@rhit.cf",
-      "update_url": "https://gist.githubusercontent.com/cm090/67f8f886c11fd877d42a00b6e5e88a78/raw/756365bb5d2d0e21ae5a4b2d2721835bc52f4efe/rhitweaks-firefox-update.json"
+      "update_url": "https://gist.githubusercontent.com/cm090/67f8f886c11fd877d42a00b6e5e88a78/raw/rhitweaks-firefox-update.json"
     }
   }
 }

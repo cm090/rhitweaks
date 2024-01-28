@@ -49,6 +49,11 @@ const mainLinks = [
     icon: "fas fa-bank",
     url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/directDeposit",
   },
+  {
+    title: "Action Items",
+    icon: "fas fa-bell",
+    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/aip#/list",
+  },
 ];
 
 const extraLinks = [
