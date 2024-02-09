@@ -136,7 +136,11 @@ class ApiRequest {
 
     fetch(apiCall.url, apiData)
       .then((res) =>
-        res.ok ? res.json() : { success: false, error: res.statusText }
+        res.ok
+          ? res.status === 204
+            ? { success: true }
+            : res.json()
+          : { success: false, error: res.statusText }
       )
       .then((res) => {
         if (res["error-msg"]) {
