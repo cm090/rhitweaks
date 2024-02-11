@@ -51,9 +51,7 @@
       ],
       "matches": [
         "https://print.rhit.cf/*",
-        "https://print.rose-hulman.edu:9192/*",
-        "https://dev.rhprint.pages.dev/*",
-        "http://localhost:3000/*"
+        "https://print.rose-hulman.edu:9192/*"
       ],
       "run_at": "document_end"
     }
@@ -71,9 +69,7 @@
         "https://prodwebxe7-hv.rose-hulman.edu/*",
         "https://bannerssb.rose-hulman.edu/*",
         "https://print.rhit.cf/*",
-        "https://print.rose-hulman.edu:9192/*",
-        "https://dev.rhprint.pages.dev/*",
-        "http://localhost:3000/*"
+        "https://print.rose-hulman.edu:9192/*"
       ]
     }
   ],

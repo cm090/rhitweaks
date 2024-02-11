@@ -13,8 +13,7 @@
     "https://bannerssb.rose-hulman.edu/*",
     "https://print.rhit.cf/*",
     "https://print.rose-hulman.edu:9192/*",
-    "https://dev.rhprint.pages.dev/*",
-    "http://localhost:3000/*"
+    "https://print.rose-hulman.edu/*"
   ],
   "icons": {
     "1024": "images/icon.png"
@@ -62,9 +61,7 @@
       "matches": [
         "https://print.rhit.cf/*",
         "https://print.rose-hulman.edu:9192/*",
-        "https://print.rose-hulman.edu/*",
-        "https://dev.rhprint.pages.dev/*",
-        "http://localhost:3000/*"
+        "https://print.rose-hulman.edu/*"
       ],
       "run_at": "document_end"
     }
@@ -83,9 +80,7 @@
         "https://bannerssb.rose-hulman.edu/*",
         "https://print.rhit.cf/*",
         "https://print.rose-hulman.edu:9192/*",
-        "https://print.rose-hulman.edu/*",
-        "https://dev.rhprint.pages.dev/*",
-        "http://localhost:3000/*"
+        "https://print.rose-hulman.edu/*"
       ]
     }
   ],
