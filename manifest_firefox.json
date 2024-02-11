@@ -6,6 +6,15 @@
   "permissions": [
     "storage"
   ],
+  "host_permissions": [
+    "https://moodle.rose-hulman.edu/*",
+    "https://prodwebxe-hv.rose-hulman.edu/*",
+    "https://prodwebxe7-hv.rose-hulman.edu/*",
+    "https://bannerssb.rose-hulman.edu/*",
+    "https://print.rhit.cf/*",
+    "https://print.rose-hulman.edu:9192/*",
+    "https://print.rose-hulman.edu/*"
+  ],
   "icons": {
     "1024": "images/icon.png"
   },
@@ -51,7 +60,8 @@
       ],
       "matches": [
         "https://print.rhit.cf/*",
-        "https://print.rose-hulman.edu:9192/*"
+        "https://print.rose-hulman.edu:9192/*",
+        "https://print.rose-hulman.edu/*"
       ],
       "run_at": "document_end"
     }
@@ -69,11 +79,20 @@
         "https://prodwebxe7-hv.rose-hulman.edu/*",
         "https://bannerssb.rose-hulman.edu/*",
         "https://print.rhit.cf/*",
-        "https://print.rose-hulman.edu:9192/*"
+        "https://print.rose-hulman.edu:9192/*",
+        "https://print.rose-hulman.edu/*"
       ]
     }
   ],
   "background": {
-    "service_worker": "scripts/print-background.js"
+    "scripts": [
+      "scripts/print-background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "rhitweaks@rhit.cf",
+      "update_url": "https://gist.githubusercontent.com/cm090/67f8f886c11fd877d42a00b6e5e88a78/raw/rhitweaks-firefox-update.json"
+    }
   }
 }

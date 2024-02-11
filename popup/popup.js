@@ -512,30 +512,15 @@ const additionalSettingsListeners = () => {
 const listeners = () => {
   moodleEnable.addEventListener("change", () => {
     toggleBtn("moodle", moodleEnable.checked);
-    if (moodleEnable.checked) {
-      chrome.permissions.request({
-        origins: ["https://moodle.rose-hulman.edu/*"],
-      });
-    }
+    requestHostPermissions();
   });
   scheduleEnable.addEventListener("change", () => {
     toggleBtn("schedule", scheduleEnable.checked);
-    if (scheduleEnable.checked) {
-      chrome.permissions.request({
-        origins: [
-          "https://prodwebxe-hv.rose-hulman.edu/*",
-          "https://prodwebxe7-hv.rose-hulman.edu/*",
-        ],
-      });
-    }
+    requestHostPermissions();
   });
   bannerEnable.addEventListener("change", () => {
     toggleBtn("banner", bannerEnable.checked);
-    if (bannerEnable.checked) {
-      chrome.permissions.request({
-        origins: ["https://bannerssb.rose-hulman.edu/*"],
-      });
-    }
+    requestHostPermissions();
   });
   moodleSettings.addEventListener("click", () => {
     moodlePage.style.display = "block";
@@ -657,6 +642,19 @@ const defaults = (e) => {
 
 const setYear = () => {
   document.getElementById("year").innerText = `-${new Date().getFullYear()}`;
+};
+
+const requestHostPermissions = () => {
+  chrome.permissions.request({
+    origins: [
+      "https://moodle.rose-hulman.edu/*",
+      "https://prodwebxe-hv.rose-hulman.edu/*",
+      "https://prodwebxe7-hv.rose-hulman.edu/*",
+      "https://bannerssb.rose-hulman.edu/*",
+      "https://print.rhit.cf/*",
+      "https://print.rose-hulman.edu:9192/*",
+    ],
+  });
 };
 
 /**
