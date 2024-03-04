@@ -249,32 +249,49 @@ const updateTimelineFormat = () => {
   if (!document.querySelector(".block-timeline")) {
     return Promise.reject();
   }
-  document.querySelectorAll(".block-timeline").forEach((timeline) => {
-    document
-      .querySelectorAll(".timeline-event-list-item small.text-right")
-      .forEach((item) => {
-        const time = item.innerText.split(" ")[0].split(":");
-        if (additionalData.timeFormat == 12) {
-          if (parseInt(time[0]) > 12) {
-            time[0] = parseInt(time[0]) - 12;
-            item.innerText = `${time[0]}:${time[1]} PM`;
-            return;
-          } else if (parseInt(time[0]) == 0) time[0] = 12;
-          item.innerText = `${parseInt(time[0])}:${time[1]} AM`;
-        } else if (item.innerText.split(" ").length > 1) {
-          const half =
-            item.innerText.split(" ")[1] === "AM"
-              ? time[0] === "12"
-                ? -12
-                : 0
-              : 12;
-          item.innerText = `${String(parseInt(time[0]) + half).padStart(
-            2,
-            "0"
-          )}:${time[1]}`;
+  document
+    .querySelectorAll(".timeline-event-list-item small.text-right")
+    .forEach((item) => {
+      const time = item.innerText.split(" ")[0].split(":");
+      if (additionalData.timeFormat == 12) {
+        if (item.innerText.includes("AM") || item.innerText.includes("PM")) {
+          return;
         }
-      });
-  });
+        if (parseInt(time[0]) > 12) {
+          time[0] = parseInt(time[0]) - 12;
+          item.innerText = `${time[0]}:${time[1]} PM`;
+          return;
+        } else if (parseInt(time[0]) == 0) {
+          time[0] = 12;
+        }
+        item.innerText = `${parseInt(time[0])}:${time[1]} AM`;
+      } else if (item.innerText.split(" ").length > 1) {
+        const half =
+          item.innerText.split(" ")[1] === "AM"
+            ? time[0] === "12"
+              ? -12
+              : 0
+            : 12;
+        item.innerText = `${String(parseInt(time[0]) + half).padStart(
+          2,
+          "0"
+        )}:${time[1]}`;
+      }
+    });
+  if (document.querySelector("[data-action='more-events']")) {
+    const btn = document.querySelector("[data-action='more-events']");
+    btn.addEventListener("click", () => {
+      const wait = () => {
+        const btn = document.querySelector("[data-action='more-events']");
+        if (!(btn && btn.disabled)) {
+          setTimeout(updateTimelineFormat, 500);
+        } else {
+          setTimeout(wait, 500);
+        }
+      };
+      wait();
+    });
+  }
   return Promise.resolve();
 };
 
@@ -520,7 +537,7 @@ const start = () => {
     .then(() => {
       updateCourseDropdown();
       navItemsManager();
-      setTimeout(reloadIfWaiting, 1500);
+      setTimeout(reloadIfWaiting, 2000);
     });
 };
 

@@ -541,7 +541,8 @@ a:hover {
 .badge-primary,
 .form-autocomplete-suggestions li:hover,
 .form-autocomplete-suggestions li:focus,
-.form-autocomplete-suggestions li[aria-selected="true"] {
+.form-autocomplete-suggestions li[aria-selected="true"],
+.form-control:focus {
   color: white !important;
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;
@@ -641,7 +642,8 @@ a:hover {
 .path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t), .baggb),
 .grade-report-user .user-grade td,
 .path-grade-report-user .user-grade tbody tr,
-.grade-report-user .user-grade tbody tr {
+.grade-report-user .user-grade tbody tr,
+.form-group {
   background-color: transparent !important;
 }
 

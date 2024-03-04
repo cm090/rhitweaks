@@ -85,7 +85,7 @@ const extraLinks = [
   {
     title: "Print Release",
     icon: "fas fa-print",
-    url: "https://print.rose-hulman.edu:9192/mobile/release#printers",
+    url: "https://print.rhit.cf",
   },
 ];
 
