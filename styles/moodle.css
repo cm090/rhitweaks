@@ -48,7 +48,8 @@ div#nav-drawer::-webkit-scrollbar,
 }
 
 body:not(#page-grade-report-grader-index) [data-usertour="scroller"],
-.drawer [data-usertour="scroller"] {
+.drawer [data-usertour="scroller"],
+html {
   scrollbar-width: none !important;
   -ms-overflow-style: none;
 }
