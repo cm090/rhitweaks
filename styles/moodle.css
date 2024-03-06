@@ -542,8 +542,7 @@ a:hover {
 .badge-primary,
 .form-autocomplete-suggestions li:hover,
 .form-autocomplete-suggestions li:focus,
-.form-autocomplete-suggestions li[aria-selected="true"],
-.form-control:focus {
+.form-autocomplete-suggestions li[aria-selected="true"] {
   color: white !important;
   background-color: var(--accent-color) !important;
   border-color: var(--accent-color) !important;

@@ -439,7 +439,9 @@ const navItemsManager = () => {
           if (navItem.innerText == "Pin to navbar") {
             let name;
             try {
-              name = card.querySelector(".coursename .multiline").innerText;
+              name = card.querySelector(
+                ".coursename .multiline .sr-only"
+              ).innerText;
             } catch {
               name = card
                 .querySelector(".coursename")
