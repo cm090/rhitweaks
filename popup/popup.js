@@ -475,8 +475,9 @@ const additionalSettingsListeners = () => {
   document.getElementById("export").addEventListener("click", () => {
     let data = { version: chrome.runtime.getManifest().version };
     chrome.storage.local.get(["moodle", "schedule", "banner"], (result) => {
-      data.moodle = result.moodle;
-      data.schedule = result.schedule;
+      Object.entries(result).forEach((item) => {
+        data[item[0]] = item[1];
+      });
       const a = document.createElement("a");
       const blob = new Blob([JSON.stringify(data)], {
         type: "application/json",
