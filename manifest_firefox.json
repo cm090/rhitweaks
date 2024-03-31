@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "RHITweaks",
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
-  "version": "6.2",
+  "version": "6.3",
   "permissions": [
     "storage"
   ],

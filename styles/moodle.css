@@ -313,7 +313,8 @@ input:not(#rmtSearchInput):focus,
 .form-autocomplete-selection [data-active-selection="true"],
 .btn:focus,
 .btn.focus,
-.custom-select:focus {
+.custom-select:focus,
+.form-control:focus {
   --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
   box-shadow: 0 0 0 0.2rem var(--bxs-color);
 }
@@ -324,7 +325,8 @@ input:not(#rmtSearchInput):focus,
   left: 4px;
 }
 
-#gridshadebox_content {
+#gridshadebox_content,
+.form-control:focus {
   border-color: var(--accent-color);
 }
 
