@@ -29,6 +29,11 @@ const extraLinks = [
     icon: "fas fa-print",
     url: "https://print.rhit.cf",
   },
+  {
+    title: "Faculty Link Request",
+    icon: "fas fa-plus",
+    url: "https://link.canon.click/rhitweaks/faculty-request",
+  },
 ];
 
 const buildLinks = () => {
