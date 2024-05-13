@@ -5,8 +5,10 @@ const bannerEnable = document.getElementById("bannerEnable");
 const moodleSettings = document.getElementById("moodleSettings");
 const scheduleSettings = document.getElementById("scheduleSettings");
 const settingsBtn = document.getElementById("additionalSettings");
+const bannerBtn = document.getElementById("bannerWebSettings");
 const moodlePage = document.getElementById("moodleSettingsPage");
 const schedulePage = document.getElementById("scheduleSettingsPage");
+const bannerPage = document.getElementById("bannerWebSettingsPage");
 const mainPage = document.getElementById("main");
 const settingsPage = document.getElementById("additionalSettingsPage");
 const pinnedCoursesSettingsPage = document.getElementById(
@@ -39,6 +41,7 @@ window["scheduleDataTemplate"] = {
 };
 window["bannerDataTemplate"] = {
   enabled: false,
+  links: "student",
 };
 
 /**
@@ -429,6 +432,18 @@ const pinnedCoursesSettingsFn = (selected = "") => {
   });
 };
 
+const bannerWebSettingsListeners = () => {
+  chrome.storage.local.get("banner").then((data) => {
+    document.getElementById("selectLinks").value =
+      data.banner.links || bannerDataTemplate.links;
+    bannerData = data.banner;
+  });
+  document.getElementById("selectLinks").addEventListener("change", (e) => {
+    bannerData.links = e.target.value;
+    chrome.storage.local.set({ banner: bannerData });
+  });
+};
+
 /**
  * Adds event listeners to buttons for importing and exporting data in JSON format to and from Chrome storage
  */
@@ -501,6 +516,7 @@ const additionalSettingsListeners = () => {
         chrome.storage.local.set({
           moodle: result.moodle,
           schedule: result.schedule,
+          banner: result.banner,
         });
       });
       chrome.storage.sync.clear();
@@ -557,6 +573,15 @@ const listeners = () => {
     document.getElementById("backBtn").style.display = "";
     document.querySelector(":root").style.height = "";
   });
+  bannerWebSettingsListeners();
+  bannerBtn.addEventListener("click", () => {
+    bannerPage.style.display = "block";
+    mainPage.style.display = "none";
+    document.getElementById("helpBtn").style.display = "none";
+    document.getElementById("reportBtn").style.display = "none";
+    document.getElementById("backBtn").style.display = "";
+    document.querySelector(":root").style.height = "";
+  });
   pinnedCoursesSettingsListeners();
   additionalSettingsListeners();
   document.getElementById("backBtn").addEventListener("click", reset);
@@ -607,6 +632,7 @@ const reset = () => {
   } else {
     moodlePage.style.display = "none";
     schedulePage.style.display = "none";
+    bannerPage.style.display = "none";
     settingsPage.style.display = "none";
     pinnedCoursesSettingsPage.style.display = "none";
     mainPage.style.display = "block";

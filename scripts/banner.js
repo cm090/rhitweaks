@@ -36,8 +36,8 @@ const extraLinks = [
   },
 ];
 
-const buildLinks = () => {
-  fetch(chrome.runtime.getURL("assets/banner/studentLinks.json"))
+const buildLinks = (links) => {
+  fetch(chrome.runtime.getURL(`assets/banner/${links}Links.json`))
     .then((res) => res.text())
     .then((data) => {
       const template = document.querySelector("#banner-home-card-template");
@@ -67,7 +67,7 @@ const buildLinks = () => {
   template.remove();
 };
 
-const runApp = () => {
+const runApp = (links) => {
   try {
     if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
       const load = () => {
@@ -83,7 +83,7 @@ const runApp = () => {
           } catch {
             // Ignore
           }
-          setTimeout(buildLinks, 100);
+          setTimeout(() => buildLinks(links), 100);
         } else {
           setTimeout(load, 100);
         }
@@ -142,7 +142,9 @@ const runApp = () => {
 
 const getData = () => {
   chrome.storage.local.get("banner").then((data) => {
-    if (data.banner.enabled) runApp();
+    if (data.banner.enabled) {
+      runApp(data.banner.links || "student");
+    }
     chrome.storage.local.onChanged.addListener((changes) => {
       const oldData = changes.banner.oldValue;
       const newData = changes.banner.newValue;
@@ -150,6 +152,7 @@ const getData = () => {
         window.location.reload();
         return;
       }
+      runApp(newData.links || "student");
     });
   });
 };

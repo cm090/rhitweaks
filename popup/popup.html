@@ -81,7 +81,15 @@
             <label class="form-check-label" for="bannerEnable">
               Banner web tweaks
             </label>
-          </div>
+        </div>
+        <button
+            type="button"
+            class="btn btn-danger btn-sm my-2 settings-btn homepage-btn"
+            id="bannerWebSettings"
+            aria-label="Schedule Lookup Settings"
+        >
+            <i class="fa-solid fa-gear"></i>
+        </button>
         </div>
         <button
           type="button"
@@ -391,6 +399,19 @@
             <i class="fa-solid fa-rotate-right"></i>
           </button>
         </div>
+      </div>
+      <!-- Banner Web -->
+      <div id="bannerWebSettingsPage" class="settings-page">
+        <h3 class="text-center title">Banner Web Settings</h3>
+        <label for="selectLinks">Links category</label>
+        <select
+          id="selectLinks"
+          class="form-control"
+          title="Links category"
+        >
+        <option value="student">Student</option>
+        <option value="faculty">Faculty (coming soon)</option>
+        </select>
       </div>
       <!-- Settings -->
       <div id="additionalSettingsPage" class="settings-page">
