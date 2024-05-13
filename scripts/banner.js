@@ -1,61 +1,3 @@
-const mainLinks = [
-  {
-    title: "Schedule Lookup",
-    icon: "fas fa-calendar",
-    url: "https://prodwebxe7-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl",
-  },
-  {
-    title: "Degree Evaluation",
-    icon: "fas fa-graduation-cap",
-    url: "https://dwprod-hv.rose-hulman.edu:9903/RespDashboard",
-  },
-  {
-    title: "Payments",
-    icon: "fas fa-credit-card",
-    url: "https://bannerssb.rose-hulman.edu/payment",
-  },
-  {
-    title: "Timesheet",
-    icon: "fas fa-clock",
-    url: "https://bannerssb.rose-hulman.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod",
-  },
-  {
-    title: "Registration",
-    icon: "fas fa-clipboard-list",
-    url: "https://bannerssb.rose-hulman.edu/StudentRegistrationSsb",
-  },
-  {
-    title: "Grades",
-    icon: "fas fa-pen",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/studentGrades",
-  },
-  {
-    title: "Financial Aid",
-    icon: "fas fa-dollar-sign",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/financialAid",
-  },
-  {
-    title: "Transcript",
-    icon: "fas fa-file",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/academicTranscript",
-  },
-  {
-    title: "Proxy Management",
-    icon: "fas fa-user",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/proxyManagement",
-  },
-  {
-    title: "Direct Deposit",
-    icon: "fas fa-bank",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/directDeposit",
-  },
-  {
-    title: "Action Items",
-    icon: "fas fa-bell",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/aip#/list",
-  },
-];
-
 const extraLinks = [
   {
     title: "Moodle",
@@ -87,22 +29,31 @@ const extraLinks = [
     icon: "fas fa-print",
     url: "https://print.rhit.cf",
   },
+  {
+    title: "Faculty Link Request",
+    icon: "fas fa-plus",
+    url: "https://link.canon.click/rhitweaks/faculty-request",
+  },
 ];
 
-const buildLinks = () => {
-  let template = document.querySelector("#banner-home-card-template");
-  mainLinks.forEach((item) => {
-    const clone = template.content.cloneNode(true);
-    clone.querySelector(
-      ".card-title"
-    ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
-    clone.querySelector(".card").addEventListener("click", () => {
-      window.location.href = item.url;
+const buildLinks = (links) => {
+  fetch(chrome.runtime.getURL(`assets/banner/${links}Links.json`))
+    .then((res) => res.text())
+    .then((data) => {
+      const template = document.querySelector("#banner-home-card-template");
+      JSON.parse(data).forEach((item) => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector(
+          ".card-title"
+        ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
+        clone.querySelector(".card").addEventListener("click", () => {
+          window.location.href = item.url;
+        });
+        document.querySelector("#banner-home").appendChild(clone);
+      });
+      template.remove();
     });
-    document.querySelector("#banner-home").appendChild(clone);
-  });
-  template.remove();
-  template = document.querySelector("#banner-extra-links-template");
+  const template = document.querySelector("#banner-extra-links-template");
   extraLinks.forEach((item) => {
     const clone = template.content.cloneNode(true);
     clone.querySelector(
@@ -116,7 +67,7 @@ const buildLinks = () => {
   template.remove();
 };
 
-const runApp = () => {
+const runApp = (links) => {
   try {
     if (window.location.href.includes("BannerGeneralSsb/ssb/general#/home")) {
       const load = () => {
@@ -132,7 +83,7 @@ const runApp = () => {
           } catch {
             // Ignore
           }
-          setTimeout(buildLinks, 100);
+          setTimeout(() => buildLinks(links), 100);
         } else {
           setTimeout(load, 100);
         }
@@ -191,7 +142,9 @@ const runApp = () => {
 
 const getData = () => {
   chrome.storage.local.get("banner").then((data) => {
-    if (data.banner.enabled) runApp();
+    if (data.banner.enabled) {
+      runApp(data.banner.links || "student");
+    }
     chrome.storage.local.onChanged.addListener((changes) => {
       const oldData = changes.banner.oldValue;
       const newData = changes.banner.newValue;
@@ -199,6 +152,7 @@ const getData = () => {
         window.location.reload();
         return;
       }
+      runApp(newData.links || "student");
     });
   });
 };
