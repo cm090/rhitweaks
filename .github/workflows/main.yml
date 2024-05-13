@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - '*'
+      - "*"
   workflow_dispatch:
 
 jobs:
@@ -12,18 +12,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build zip file
+      - name: Build Chrome zip file
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
         with:
-          extensionDir: '/'
-          zipFilePath: 'release.zip'
+          extensionDir: "/"
+          zipFilePath: "release.zip"
 
       - name: Publish to Chrome Web Store
         uses: mobilefirstllc/cws-publish@latest
         with:
-          action: 'publish'
+          action: "publish"
           client_id: ${{ secrets.CLIENT }}
           client_secret: ${{ secrets.SECRET }}
           refresh_token: ${{ secrets.TOKEN }}
           extension_id: ${{ secrets.EXTENSION_ID }}
-          zip_file: 'release.zip'
+          zip_file: "release.zip"
+
+      - name: Prepare Firefox release
+        run: |
+          rm -f release.zip
+          rm -f manifest.json
+          mv manifest_firefox.json manifest.json
+
+      - name: Build Firefox zip file
+        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
+        with:
+          extensionDir: "/"
+          zipFilePath: "release.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: release.zip
