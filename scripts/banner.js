@@ -1,61 +1,3 @@
-const mainLinks = [
-  {
-    title: "Schedule Lookup",
-    icon: "fas fa-calendar",
-    url: "https://prodwebxe7-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl",
-  },
-  {
-    title: "Degree Evaluation",
-    icon: "fas fa-graduation-cap",
-    url: "https://dwprod-hv.rose-hulman.edu:9903/RespDashboard",
-  },
-  {
-    title: "Payments",
-    icon: "fas fa-credit-card",
-    url: "https://bannerssb.rose-hulman.edu/payment",
-  },
-  {
-    title: "Timesheet",
-    icon: "fas fa-clock",
-    url: "https://bannerssb.rose-hulman.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod",
-  },
-  {
-    title: "Registration",
-    icon: "fas fa-clipboard-list",
-    url: "https://bannerssb.rose-hulman.edu/StudentRegistrationSsb",
-  },
-  {
-    title: "Grades",
-    icon: "fas fa-pen",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/studentGrades",
-  },
-  {
-    title: "Financial Aid",
-    icon: "fas fa-dollar-sign",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/financialAid",
-  },
-  {
-    title: "Transcript",
-    icon: "fas fa-file",
-    url: "https://bannerssb.rose-hulman.edu/StudentSelfService/ssb/academicTranscript",
-  },
-  {
-    title: "Proxy Management",
-    icon: "fas fa-user",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/proxyManagement",
-  },
-  {
-    title: "Direct Deposit",
-    icon: "fas fa-bank",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/directDeposit",
-  },
-  {
-    title: "Action Items",
-    icon: "fas fa-bell",
-    url: "https://bannerssb.rose-hulman.edu/BannerGeneralSsb/ssb/aip#/list",
-  },
-];
-
 const extraLinks = [
   {
     title: "Moodle",
@@ -90,19 +32,23 @@ const extraLinks = [
 ];
 
 const buildLinks = () => {
-  let template = document.querySelector("#banner-home-card-template");
-  mainLinks.forEach((item) => {
-    const clone = template.content.cloneNode(true);
-    clone.querySelector(
-      ".card-title"
-    ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
-    clone.querySelector(".card").addEventListener("click", () => {
-      window.location.href = item.url;
+  fetch(chrome.runtime.getURL("assets/banner/studentLinks.json"))
+    .then((res) => res.text())
+    .then((data) => {
+      const template = document.querySelector("#banner-home-card-template");
+      JSON.parse(data).forEach((item) => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector(
+          ".card-title"
+        ).innerHTML = `<i class="${item.icon}"></i> ${item.title}`;
+        clone.querySelector(".card").addEventListener("click", () => {
+          window.location.href = item.url;
+        });
+        document.querySelector("#banner-home").appendChild(clone);
+      });
+      template.remove();
     });
-    document.querySelector("#banner-home").appendChild(clone);
-  });
-  template.remove();
-  template = document.querySelector("#banner-extra-links-template");
+  const template = document.querySelector("#banner-extra-links-template");
   extraLinks.forEach((item) => {
     const clone = template.content.cloneNode(true);
     clone.querySelector(
