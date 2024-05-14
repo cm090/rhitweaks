@@ -1,4 +1,3 @@
-// Constants for buttons and pages
 const moodleEnable = document.getElementById("moodleEnable");
 const scheduleEnable = document.getElementById("scheduleEnable");
 const bannerEnable = document.getElementById("bannerEnable");
@@ -16,12 +15,10 @@ const pinnedCoursesSettingsPage = document.getElementById(
   "pinnedCoursesSettingsPage"
 );
 
-// Local data storage
 window["moodleData"] = {};
 window["scheduleData"] = {};
 window["bannerData"] = {};
 
-// Template data
 window["moodleDataTemplate"] = {
   enabled: false,
   bgColor: "#000000",
@@ -45,26 +42,18 @@ window["bannerDataTemplate"] = {
   links: "student",
 };
 
-/**
- * Toggles the display of a settings element and updates the corresponding data based on a boolean value.
- * @param selector the name of a setting or feature that the toggle button controls
- * @param data boolean value that determines whether to display or hide the settings for the given selector
- */
 const toggleBtn = (selector, data) => {
   if (document.getElementById(`${selector}Settings`)) {
     document.getElementById(`${selector}Settings`).style.display = data
       ? "block"
       : "none";
   }
-  let dataSelector = window[`${selector}Data`];
+  const dataSelector = window[`${selector}Data`];
   dataSelector.enabled = data;
   chrome.storage.local.set({ [selector]: dataSelector });
 };
 
-/**
- * Retrieves Moodle settings from Chrome storage and sets the corresponding values in the HTML document
- */
-const moodleSettingsFn = () => {
+const moodleSettingsFn = () =>
   chrome.storage.local.get("moodle").then((data) => {
     document.getElementById("bgColor").value =
       data.moodle.bgColor || moodleDataTemplate.bgColor;
@@ -90,11 +79,7 @@ const moodleSettingsFn = () => {
       data.moodle.timeFormat || moodleDataTemplate.timeFormat;
     moodleData = data.moodle;
   });
-};
 
-/**
- * Sets event listeners for various HTML elements and updates the moodleData object and Chrome storage accordingly
- */
 const moodleSettingsListeners = () => {
   document.getElementById("bgColor").addEventListener("input", () => {
     document.getElementById("bgColorText").value =
@@ -216,10 +201,7 @@ const moodleSettingsListeners = () => {
     });
 };
 
-/**
- * Retrieves schedule settings from Chrome storage and sets the corresponding values in the HTML document
- */
-const scheduleSettingsFn = () => {
+const scheduleSettingsFn = () =>
   chrome.storage.local.get("schedule").then((data) => {
     document.getElementById("schedBgColor").value =
       data.schedule.bgColor || scheduleDataTemplate.bgColor;
@@ -239,11 +221,7 @@ const scheduleSettingsFn = () => {
       document.getElementById("schedBorderColor").value;
     scheduleData = data.schedule;
   });
-};
 
-/**
- * Adds event listeners for various HTML elements and updates the scheduleData object and Chrome storage accordingly
- */
 const scheduleSettingsListeners = () => {
   document.getElementById("schedBgColor").addEventListener("input", () => {
     document.getElementById("schedBgColorText").value =
@@ -357,9 +335,6 @@ const scheduleSettingsListeners = () => {
     });
 };
 
-/**
- * Adds event listeners for modifying the pinned courses menu
- */
 const pinnedCoursesSettingsListeners = () => {
   document
     .getElementById("selectCourseDisplay")
@@ -392,7 +367,9 @@ const pinnedCoursesSettingsListeners = () => {
   document
     .getElementById("deleteCourseFromList")
     .addEventListener("click", () => {
-      if (document.getElementById("selectCourse").selectedIndex === 0) return;
+      if (document.getElementById("selectCourse").selectedIndex === 0) {
+        return;
+      }
       if (confirm("Are you sure you want to remove this course?")) {
         const index = document.getElementById("selectCourse").selectedIndex - 1;
         moodleData.pinnedCourses.splice(index, 1);
@@ -410,9 +387,6 @@ const pinnedCoursesSettingsListeners = () => {
   });
 };
 
-/**
- * Retrieves pinned courses settings from Chrome storage and sets the corresponding values in the HTML document
- */
 const pinnedCoursesSettingsFn = (selected = "") => {
   document.getElementById("resetBtn").style.display = "none";
   chrome.storage.local.get("moodle").then((data) => {
@@ -445,9 +419,6 @@ const bannerWebSettingsListeners = () => {
   });
 };
 
-/**
- * Adds event listeners to buttons for importing and exporting data in JSON format to and from Chrome storage
- */
 const additionalSettingsListeners = () => {
   document.getElementById("import").addEventListener("click", () => {
     const fileSelector = document.createElement("input");
@@ -455,7 +426,7 @@ const additionalSettingsListeners = () => {
     fileSelector.accept = "application/json";
     fileSelector.addEventListener("change", (e) => {
       const file = e.target.files[0];
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = (data) => {
         let contents;
         try {
@@ -464,7 +435,14 @@ const additionalSettingsListeners = () => {
           alert("Invalid file selected");
           return;
         }
-        if (!contents.moodle || !contents.schedule || !contents.version) {
+        if (
+          !(
+            contents.moodle &&
+            contents.schedule &&
+            contents.banner &&
+            contents.version
+          )
+        ) {
           alert("Invalid file selected");
           return;
         }
@@ -490,7 +468,7 @@ const additionalSettingsListeners = () => {
     fileSelector.remove();
   });
   document.getElementById("export").addEventListener("click", () => {
-    let data = { version: chrome.runtime.getManifest().version };
+    const data = { version: chrome.runtime.getManifest().version };
     chrome.storage.local.get(["moodle", "schedule", "banner"], (result) => {
       Object.entries(result).forEach((item) => {
         data[item[0]] = item[1];
@@ -508,9 +486,6 @@ const additionalSettingsListeners = () => {
   });
 };
 
-/**
- * Adds event listeners to various elements
- */
 const listeners = () => {
   moodleEnable.addEventListener("change", () => {
     toggleBtn("moodle", moodleEnable.checked);
@@ -570,19 +545,19 @@ const listeners = () => {
   additionalSettingsListeners();
   document.getElementById("backBtn").addEventListener("click", reset);
   document.getElementById("resetBtn").addEventListener("click", defaults);
-  document.getElementById("helpBtn").addEventListener("click", () => {
-    window.open("https://link.canon.click/rhitweaks/wiki");
-  });
-  document.getElementById("reportBtn").addEventListener("click", () => {
-    window.open("https://link.canon.click/rhitweaks/issues");
-  });
+  document
+    .getElementById("helpBtn")
+    .addEventListener("click", () =>
+      window.open("https://link.canon.click/rhitweaks/wiki")
+    );
+  document
+    .getElementById("reportBtn")
+    .addEventListener("click", () =>
+      window.open("https://link.canon.click/rhitweaks/issues")
+    );
 };
 
-/**
- * Retrieves data from Chrome storage and sets default values if the data is not present
- * Updates the UI based on retrieved data
- */
-const getStorage = () => {
+const getStorage = () =>
   chrome.storage.local.get(["moodle", "schedule", "banner"]).then((data) => {
     Object.entries(data).forEach((item) => {
       window[item[0] + "Data"] = item[1];
@@ -602,11 +577,7 @@ const getStorage = () => {
       chrome.storage.local.set({ banner: bannerData });
     }
   });
-};
 
-/**
- * Resets the display and visibility of certain elements
- */
 const reset = () => {
   if (pinnedCoursesSettingsPage.style.display === "block") {
     pinnedCoursesSettingsPage.style.display = "none";
@@ -632,11 +603,10 @@ const reset = () => {
   }
 };
 
-/**
- * Sets default settings object and calls a corresponding function based on the page selector
- */
 const defaults = (e) => {
-  if (!confirm("Are you sure you want to reset all settings?")) return;
+  if (!confirm("Are you sure you want to reset all settings?")) {
+    return;
+  }
   let selector = e.target.getAttribute("page");
   let dataSelector = window[`${selector}DataTemplate`];
   dataSelector.enabled = true;
@@ -651,11 +621,10 @@ const defaults = (e) => {
   }
 };
 
-const setYear = () => {
-  document.getElementById("year").innerText = `-${new Date().getFullYear()}`;
-};
+const setYear = () =>
+  (document.getElementById("year").innerText = `-${new Date().getFullYear()}`);
 
-const requestHostPermissions = () => {
+const requestHostPermissions = () =>
   chrome.permissions.request({
     origins: [
       "https://moodle.rose-hulman.edu/*",
@@ -666,11 +635,7 @@ const requestHostPermissions = () => {
       "https://print.rose-hulman.edu:9192/*",
     ],
   });
-};
 
-/**
- * Initializes the program
- */
 const main = () => {
   document.querySelector("#versionNumber").innerText +=
     chrome.runtime.getManifest().version;
