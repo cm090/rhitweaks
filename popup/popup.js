@@ -506,23 +506,6 @@ const additionalSettingsListeners = () => {
       a.remove();
     });
   });
-  chrome.storage.sync.getBytesInUse().then((b) => {
-    document.getElementById("migrateToLocalStorage").style.display =
-      b > 0 ? "block" : "none";
-  });
-  document
-    .getElementById("migrateToLocalStorage")
-    .addEventListener("click", () => {
-      chrome.storage.sync.get(["moodle", "schedule", "banner"], (result) => {
-        chrome.storage.local.set({
-          moodle: result.moodle,
-          schedule: result.schedule,
-          banner: result.banner,
-        });
-      });
-      chrome.storage.sync.clear();
-      document.getElementById("migrateToLocalStorage").style.display = "none";
-    });
 };
 
 /**
