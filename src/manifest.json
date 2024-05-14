@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "RHITweaks",
+    "permissions": [
+        "storage"
+    ],
+    "icons": {
+        "1024": "content/images/icon.png"
+    },
+    "action": {
+        "default_popup": "pages/popup/index.html"
+    }
+}
