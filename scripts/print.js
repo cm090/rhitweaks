@@ -1,13 +1,12 @@
 const injectScript = (path) => {
   const node = document.getElementsByTagName("body")[0];
-  let script = document.createElement("script");
+  const script = document.createElement("script");
   script.setAttribute("type", "text/javascript");
   script.setAttribute("src", chrome.runtime.getURL(path));
   node.appendChild(script);
 };
 
 const main = () => {
-  // Create event listeners for getting and setting Chrome storage
   document.addEventListener("chromeStorageSet", ({ detail }) =>
     chrome.storage.local.set({ print: JSON.parse(detail).data })
   );
@@ -21,14 +20,14 @@ const main = () => {
       );
     })
   );
-  chrome.storage.local.onChanged.addListener((changes) => {
-    const data = changes.print;
+  chrome.storage.local.onChanged.addListener((changes) =>
     document.dispatchEvent(
-      new CustomEvent("chromeStorageRequest", { detail: JSON.stringify(data) })
-    );
-  });
+      new CustomEvent("chromeStorageRequest", {
+        detail: JSON.stringify(changes.print),
+      })
+    )
+  );
 
-  // Inject scripts to appropriate pages
   if (window.location.hostname === "print.rose-hulman.edu") {
     injectScript("assets/print/papercut.js");
   } else {

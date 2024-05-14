@@ -140,7 +140,7 @@ const runApp = (links) => {
   }
 };
 
-const getData = () => {
+const getData = () =>
   chrome.storage.local.get("banner").then((data) => {
     if (data.banner.enabled) {
       runApp(data.banner.links || "student");
@@ -155,6 +155,5 @@ const getData = () => {
       runApp(newData.links || "student");
     });
   });
-};
 
 getData();

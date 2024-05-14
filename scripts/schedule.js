@@ -1,4 +1,4 @@
-const printListener = () => {
+const printListener = () =>
   document.addEventListener("keydown", (e) => {
     if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == "p") {
       e.preventDefault();
@@ -6,11 +6,10 @@ const printListener = () => {
       location.reload();
     }
   });
-};
 
 const getData = () => {
   chrome.storage.local.get("schedule").then((data) => {
-    let root = document.querySelector(":root");
+    const root = document.querySelector(":root");
     root.style.setProperty("--bg-color", data.schedule.bgColor || "#000000");
     root.style.setProperty(
       "--accent-color",
@@ -33,7 +32,7 @@ const getData = () => {
       window.location.reload();
       return;
     }
-    let root = document.querySelector(":root");
+    const root = document.querySelector(":root");
     root.style.setProperty("--bg-color", newData.bgColor || "#000000");
     root.style.setProperty("--accent-color", newData.accentColor || "#800000");
     root.style.setProperty("--text-color", newData.textColor || "#ffffff");

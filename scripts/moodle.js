@@ -18,7 +18,7 @@ const additionalData = {
 };
 
 const setStyle = async () => {
-  let url = chrome.runtime.getURL("styles/moodle.css");
+  const url = chrome.runtime.getURL("styles/moodle.css");
   const res = await fetch(url);
   const data = await res.text();
   var s = document.createElement("style");
@@ -418,7 +418,7 @@ const navItemsManager = () => {
   if (!window.location.pathname.includes("/my/courses.php")) {
     return;
   }
-  const addNavItems = () => {
+  const addNavItems = () =>
     document
       .querySelectorAll(
         ".dashboard-card-deck .dashboard-card, .list-group .course-listitem"
@@ -470,7 +470,6 @@ const navItemsManager = () => {
         });
         card.querySelector(".dropdown-menu").append(navItem);
       });
-  };
   const wait = () => {
     if (
       document.querySelector(".dashboard-card-deck .dashboard-card") ||
@@ -546,7 +545,7 @@ const start = () => {
 const storageListeners = () => {
   chrome.storage.local.get("moodle").then((data) => {
     moodleData = data.moodle;
-    let root = document.querySelector(":root");
+    const root = document.querySelector(":root");
     root.style.setProperty(
       "--bg-color",
       data.moodle.bgColor || defaults.bgColor
@@ -584,7 +583,7 @@ const storageListeners = () => {
       return;
     }
     moodleData = newData;
-    let root = document.querySelector(":root");
+    const root = document.querySelector(":root");
     root.style.setProperty("--bg-color", newData.bgColor || defaults.bgColor);
     root.style.setProperty(
       "--card-color",
