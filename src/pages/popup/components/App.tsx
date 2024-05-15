@@ -3,6 +3,7 @@ import { Page } from '../../../types';
 import HomePage from './HomePage';
 import MoodleSettingsPage from './MoodleSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
+import BannerSettingsPage from './BannerSettingsPage';
 
 const App = (): JSX.Element => {
   const [activePage, setActivePage] = useState<Page>('home');
@@ -15,6 +16,7 @@ const App = (): JSX.Element => {
     case 'scheduleSettings':
       return <ScheduleSettingsPage setPage={setActivePage} />;
     case 'bannerSettings':
+      return <BannerSettingsPage setPage={setActivePage} />;
     case 'pinnedCoursesSettings':
     case 'additionalSettings':
       return <div>Coming soon</div>;
