@@ -1,4 +1,4 @@
-type HexValue = `#${string}`;
+export type HexValue = `#${string}`;
 
 export interface MoodleData {
   enabled: boolean;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Page } from '../../../types';
+import BannerSettingsPage from './BannerSettingsPage';
 import HomePage from './HomePage';
 import MoodleSettingsPage from './MoodleSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
-import BannerSettingsPage from './BannerSettingsPage';
 
 const App = (): JSX.Element => {
   const [activePage, setActivePage] = useState<Page>('home');
