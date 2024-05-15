@@ -5,7 +5,7 @@ import SettingsWrapper from './SettingsWrapper';
 interface BannerSettingsPageProps {
   setPage: (page: Page) => void;
   data: BannerData;
-  setData: (data: BannerData) => void;
+  setData: React.Dispatch<React.SetStateAction<BannerData>>;
 }
 
 const BannerSettingsPage = (props: BannerSettingsPageProps): JSX.Element => {

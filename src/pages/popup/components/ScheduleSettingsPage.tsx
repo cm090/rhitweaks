@@ -5,7 +5,7 @@ import SettingsWrapper from './SettingsWrapper';
 interface ScheduleSettingsPageProps {
   setPage: (page: Page) => void;
   data: ScheduleData;
-  setData: (data: ScheduleData) => void;
+  setData: React.Dispatch<React.SetStateAction<ScheduleData>>;
 }
 
 const ScheduleSettingsPage = (

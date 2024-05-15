@@ -1,5 +1,5 @@
 import { Box, Button, ButtonGroup, Link, Sheet, Typography } from '@mui/joy';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BannerData, MoodleData, Page, ScheduleData } from '../../../types';
 import ToggleItem from './ToggleItem';
 
@@ -25,19 +25,6 @@ interface HomePageProps {
 
 const HomePage = (props: HomePageProps): JSX.Element => {
   const [version] = useState<string>(chrome.runtime.getManifest().version);
-
-  useEffect(
-    () =>
-      chrome.storage.sync.get(
-        ['moodleData', 'scheduleData', 'bannerData'],
-        (result) => {
-          props.setData.setMoodleData(result.moodleData);
-          props.setData.setScheduleData(result.scheduleData);
-          props.setData.setBannerData(result.bannerData);
-        },
-      ),
-    [],
-  );
 
   return (
     <Sheet

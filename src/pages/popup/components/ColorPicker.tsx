@@ -8,17 +8,21 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { HexValue } from '../../../types';
 
 interface ColorPickerProps {
   label: string;
+  data: HexValue;
+  setData: (data: HexValue) => void;
 }
 
 const ColorPicker = (props: ColorPickerProps): JSX.Element => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-  const [color, setColor] = useState<HexValue>('#000000');
+  const [color, setColor] = useState<HexValue>(props.data);
+
+  useEffect(() => props.setData(color), [color]);
 
   return (
     <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
