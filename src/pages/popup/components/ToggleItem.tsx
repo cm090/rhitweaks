@@ -48,7 +48,7 @@ const ToggleItem = (props: ToggleItemProps): JSX.Element => {
         variant="solid"
         label={`${props.name} tweaks`}
         onChange={(e) => updateVisibility(e.target.checked)}
-        checked={data.enabled}
+        checked={data.enabled ?? false}
       />
       {data.enabled && (
         <IconButton
