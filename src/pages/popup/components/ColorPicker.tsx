@@ -21,18 +21,26 @@ interface ColorPickerProps {
 const ColorPicker = (props: ColorPickerProps): JSX.Element => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [color, setColor] = useState<HexValue>(props.data);
+  const [valid, setValid] = useState<boolean>(true);
 
-  useEffect(() => props.setData(color), [color]);
+  useEffect(() => {
+    if (valid) {
+      props.setData(color);
+    }
+  }, [color, valid]);
 
   return (
     <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
       <FormLabel>{props.label}</FormLabel>
       <Input
         variant="outlined"
-        color={color.match(/^#([A-Fa-f0-9]{6})$/) ? 'neutral' : 'danger'}
+        color={color.match(/^#([A-Fa-f0-9]{3}){1,2}$/) ? 'neutral' : 'danger'}
         value={color}
-        onChange={(e) => setColor(e.target.value as HexValue)}
-        slotProps={{ input: { pattern: '^#([A-Fa-f0-9]{6})$', maxLength: 7 } }}
+        onChange={(e) => {
+          setValid(e.target.validity.valid);
+          setColor(e.target.value as HexValue);
+        }}
+        slotProps={{ input: { pattern: '^#([A-Fa-f0-9]{3}){1,2}$', maxLength: 7 } }}
         sx={{ '--Input-focusedThickness': '0px' }}
         endDecorator={
           <Button
@@ -58,7 +66,10 @@ const ColorPicker = (props: ColorPickerProps): JSX.Element => {
           <Typography level="h4">{props.label}</Typography>
           <HexColorPicker
             color={color}
-            onChange={(e) => setColor(e as HexValue)}
+            onChange={(e) => {
+              setValid(true);
+              setColor(e as HexValue);
+            }}
             style={{ width: '100%' }}
           />
         </ModalDialog>
