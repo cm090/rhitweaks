@@ -1,9 +1,10 @@
-import { Button, ButtonGroup, Sheet, Typography } from '@mui/joy';
+import { Box, Button, ButtonGroup, Link, Sheet, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
+import { BannerData, MoodleData, ScheduleData } from '../../../types';
 import ToggleItem, { StorageKeys } from './ToggleItem';
-import { MoodleData, ScheduleData, BannerData } from '../../../types';
 
 const App = (): JSX.Element => {
+  const [version] = useState<string>(chrome.runtime.getManifest().version);
   const [moodleData, setMoodleData] = useState<MoodleData>({} as MoodleData);
   const [scheduleData, setScheduleData] = useState<ScheduleData>(
     {} as ScheduleData,
@@ -24,29 +25,49 @@ const App = (): JSX.Element => {
   );
 
   return (
-    <Sheet>
+    <Sheet
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <Typography level="h2" textAlign="center">
         RHITweaks
       </Typography>
-      <ToggleItem name={StorageKeys.MOODLE} data={moodleData} />
-      <ToggleItem name={StorageKeys.SCHEDULE} data={scheduleData} />
-      <ToggleItem name={StorageKeys.BANNER} data={bannerData} />
-      <Button color="neutral" sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%' }}>
+        <ToggleItem name={StorageKeys.MOODLE} data={moodleData} />
+        <ToggleItem name={StorageKeys.SCHEDULE} data={scheduleData} />
+        <ToggleItem name={StorageKeys.BANNER} data={bannerData} />
+      </Box>
+      <Button color="neutral" sx={{ width: '100%', marginBlock: '10px' }}>
         Additional settings
       </Button>
-      <ButtonGroup>
-        <Button variant="outlined" color="neutral">
+      <ButtonGroup sx={{ marginBlock: '10px' }}>
+        <Button
+          variant="outlined"
+          color="neutral"
+          onClick={() => window.open('https://link.canon.click/rhitweaks/wiki')}
+        >
           Docs
         </Button>
-        <Button variant="outlined" color="neutral">
+        <Button
+          variant="outlined"
+          color="neutral"
+          onClick={() =>
+            window.open('https://link.canon.click/rhitweaks/issues')
+          }
+        >
           Report a problem
         </Button>
       </ButtonGroup>
       <Typography level="body-sm" textAlign="center">
-        Version
+        Version {version}
       </Typography>
       <Typography level="body-sm" textAlign="center">
-        &copy; 2023 Canon Maranda
+        &copy; 2023-{new Date().getFullYear()}{' '}
+        <Link
+          color="neutral"
+          onClick={() => window.open('https://about.canon.click')}
+        >
+          Canon Maranda
+        </Link>
       </Typography>
     </Sheet>
   );
