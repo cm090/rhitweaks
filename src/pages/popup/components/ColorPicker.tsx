@@ -2,6 +2,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  IconButton,
   Input,
   Modal,
   ModalClose,
@@ -11,9 +12,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { HexValue } from '../../../types';
+import { Refresh } from '@mui/icons-material';
 
 interface ColorPickerProps {
   label: string;
+  defaultValue: HexValue;
   data: HexValue;
   setData: (data: HexValue) => void;
 }
@@ -40,21 +43,31 @@ const ColorPicker = (props: ColorPickerProps): JSX.Element => {
           setValid(e.target.validity.valid);
           setColor(e.target.value as HexValue);
         }}
-        slotProps={{ input: { pattern: '^#([A-Fa-f0-9]{3}){1,2}$', maxLength: 7 } }}
+        slotProps={{
+          input: { pattern: '^#([A-Fa-f0-9]{3}){1,2}$', maxLength: 7 },
+        }}
         sx={{ '--Input-focusedThickness': '0px' }}
         endDecorator={
-          <Button
-            variant="outlined"
-            color="neutral"
-            onClick={() => setDisplayColorPicker(true)}
-            sx={{
-              backgroundColor: color,
-              '&:hover': {
+          <>
+            <IconButton
+              onClick={() => setColor(props.defaultValue)}
+              sx={{ marginRight: '2px' }}
+            >
+              <Refresh />
+            </IconButton>
+            <Button
+              variant="outlined"
+              color="neutral"
+              onClick={() => setDisplayColorPicker(true)}
+              sx={{
                 backgroundColor: color,
-              },
-              borderWidth: '2px',
-            }}
-          />
+                '&:hover': {
+                  backgroundColor: color,
+                },
+                borderWidth: '2px',
+              }}
+            />
+          </>
         }
       />
       <Modal
