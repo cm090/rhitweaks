@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Page } from '../../../types';
 import HomePage from './HomePage';
+import MoodleSettingsPage from './MoodleSettingsPage';
 
 const App = (): JSX.Element => {
   const [activePage, setActivePage] = useState<Page>('home');
@@ -9,6 +10,7 @@ const App = (): JSX.Element => {
     case 'home':
       return <HomePage setPage={setActivePage} />;
     case 'moodleSettings':
+      return <MoodleSettingsPage setPage={setActivePage} />;
     case 'pinnedCoursesSettings':
     case 'scheduleSettings':
     case 'bannerSettings':
