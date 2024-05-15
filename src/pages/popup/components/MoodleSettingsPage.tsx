@@ -1,9 +1,11 @@
 import React from 'react';
-import { Page } from '../../../types';
+import { MoodleData, Page } from '../../../types';
 import ColorPicker from './ColorPicker';
 import SettingsWrapper from './SettingsWrapper';
 
 interface MoodleSettingsPageProps {
+  data: MoodleData;
+  setData: (data: MoodleData) => void;
   setPage: (page: Page) => void;
 }
 

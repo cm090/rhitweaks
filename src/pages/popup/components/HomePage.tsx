@@ -10,42 +10,30 @@ export enum StorageKeys {
 }
 
 interface HomePageProps {
+  data: {
+    moodleData: MoodleData;
+    scheduleData: ScheduleData;
+    bannerData: BannerData;
+  };
+  setData: {
+    setMoodleData: (data: MoodleData) => void;
+    setScheduleData: (data: ScheduleData) => void;
+    setBannerData: (data: BannerData) => void;
+  };
   setPage: (page: Page) => void;
 }
 
 const HomePage = (props: HomePageProps): JSX.Element => {
   const [version] = useState<string>(chrome.runtime.getManifest().version);
-  const [moodleData, setMoodleData] = useState<MoodleData>({
-    enabled: false,
-    bgColor: '#000000',
-    textColor: '#1d2125',
-    cardColor: '#eeeeee',
-    accentColor: '#800000',
-    sbColor: '#000000',
-    timeFormat: 12,
-    pinnedCoursesDisplay: 'dropdown',
-    pinnedCourses: [],
-  });
-  const [scheduleData, setScheduleData] = useState<ScheduleData>({
-    enabled: false,
-    bgColor: '#141414',
-    accentColor: '#800000',
-    textColor: '#ffffff',
-    borderColor: '#808080',
-  });
-  const [bannerData, setBannerData] = useState<BannerData>({
-    enabled: false,
-    links: 'student',
-  });
 
   useEffect(
     () =>
       chrome.storage.sync.get(
         ['moodleData', 'scheduleData', 'bannerData'],
         (result) => {
-          setMoodleData(result.moodleData);
-          setScheduleData(result.scheduleData);
-          setBannerData(result.bannerData);
+          props.setData.setMoodleData(result.moodleData);
+          props.setData.setScheduleData(result.scheduleData);
+          props.setData.setBannerData(result.bannerData);
         },
       ),
     [],
@@ -61,17 +49,17 @@ const HomePage = (props: HomePageProps): JSX.Element => {
       <Box sx={{ width: '100%' }}>
         <ToggleItem
           name={StorageKeys.MOODLE}
-          data={moodleData}
+          data={props.data.moodleData}
           setPage={props.setPage}
         />
         <ToggleItem
           name={StorageKeys.SCHEDULE}
-          data={scheduleData}
+          data={props.data.scheduleData}
           setPage={props.setPage}
         />
         <ToggleItem
           name={StorageKeys.BANNER}
-          data={bannerData}
+          data={props.data.bannerData}
           setPage={props.setPage}
         />
       </Box>
