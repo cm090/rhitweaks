@@ -1,17 +1,13 @@
 import { Settings } from '@mui/icons-material';
 import { Box, Checkbox, IconButton } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
-import { StorageData } from '../../../types';
+import { Page, StorageData } from '../../../types';
+import { StorageKeys } from './HomePage';
 
 interface ToggleItemProps {
   name: StorageKeys;
   data: StorageData;
-}
-
-export enum StorageKeys {
-  MOODLE = 'Moodle',
-  SCHEDULE = 'Schedule lookup',
-  BANNER = 'Banner',
+  setPage: (page: Page) => void;
 }
 
 const ToggleItem = (props: ToggleItemProps): JSX.Element => {
@@ -56,6 +52,11 @@ const ToggleItem = (props: ToggleItemProps): JSX.Element => {
           color="primary"
           size="sm"
           sx={{ borderRadius: '50%' }}
+          onClick={() =>
+            props.setPage(
+              `${props.name.split(' ')[0].toLowerCase()}Settings` as Page,
+            )
+          }
         >
           <Settings />
         </IconButton>

@@ -26,3 +26,11 @@ export interface BannerData {
 }
 
 export type StorageData = MoodleData | ScheduleData | BannerData;
+
+export type Page =
+  | 'home'
+  | 'pinnedCoursesSettings'
+  | 'additionalSettings'
+  | 'moodleSettings'
+  | 'scheduleSettings'
+  | 'bannerSettings';
