@@ -13,9 +13,7 @@
     "content_scripts": [
         {
             "js": [
-                "content/moodle/moodle.ts",
-                "content/common/bootstrap.min.js",
-                "content/common/jquery.min.js"
+                "content/moodle/moodle.ts"
             ],
             "matches": [
                 "https://moodle.rose-hulman.edu/*"

@@ -8,11 +8,8 @@ const courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 let moodleData: MoodleData = {} as MoodleData;
 
 const setStyle = async () => {
-  const url = chrome.runtime.getURL(styles);
-  const res = await fetch(url);
-  const data = await res.text();
   const s = document.createElement('style');
-  s.textContent = data;
+  s.textContent = styles;
   document.getElementsByTagName('head')[0].appendChild(s);
   if (document.querySelector('.gradeparent')) {
     const wait = () => {
@@ -32,22 +29,26 @@ const setStyle = async () => {
   }
   document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
     if (sheet) {
-      const rules =
-        (sheet as HTMLStyleElement).sheet!.cssRules ||
-        (sheet as HTMLStyleElement).sheet!.rules;
-      for (let i = 0; i < rules.length; i++) {
-        const rule = rules[i];
-        if (
-          rule.cssText.includes('maroon') ||
-          rule.cssText.includes('rgb(128, 0, 0)')
-        ) {
-          const newRule = rule.cssText.replace(
-            /maroon|rgb\(128, 0, 0\)/g,
-            '--accent-color',
-          );
-          (sheet as HTMLStyleElement).sheet!.deleteRule(i);
-          (sheet as HTMLStyleElement).sheet!.insertRule(newRule, i);
+      try {
+        const rules =
+          (sheet as HTMLStyleElement).sheet!.cssRules ||
+          (sheet as HTMLStyleElement).sheet!.rules;
+        for (let i = 0; i < rules.length; i++) {
+          const rule = rules[i];
+          if (
+            rule.cssText.includes('maroon') ||
+            rule.cssText.includes('rgb(128, 0, 0)')
+          ) {
+            const newRule = rule.cssText.replace(
+              /maroon|rgb\(128, 0, 0\)/g,
+              '--accent-color',
+            );
+            (sheet as HTMLStyleElement).sheet!.deleteRule(i);
+            (sheet as HTMLStyleElement).sheet!.insertRule(newRule, i);
+          }
         }
+      } catch (e) {
+        // Ignore
       }
     }
   });
@@ -85,10 +86,8 @@ const addButtons = async () => {
     return Promise.reject();
   }
   if (document.querySelector('#page-content')!.clientWidth > 850) {
-    const res = await fetch(chrome.runtime.getURL(headerButtons));
-    const data = await res.text();
     const element = document.querySelector('#page-content');
-    element!.innerHTML = data + element!.innerHTML;
+    element!.innerHTML = headerButtons + element!.innerHTML;
   }
   onresize = () => checkButtons();
   return await Promise.resolve();
@@ -310,12 +309,10 @@ const searchCode = async () => {
   ) {
     return Promise.resolve();
   }
-  const res = await fetch(chrome.runtime.getURL(searchModal));
-  const data = await res.text();
   if (document.querySelector('#page-header')) {
-    document.querySelector('#page-header')!.innerHTML += data;
+    document.querySelector('#page-header')!.innerHTML += searchModal;
   } else {
-    document.querySelector('footer')!.innerHTML += data;
+    document.querySelector('footer')!.innerHTML += searchModal;
   }
   searchListener();
   waitForJQuery();
@@ -555,7 +552,7 @@ const start = () => {
     .then(() => {
       updateCourseDropdown();
       navItemsManager();
-      setTimeout(reloadIfWaiting, 2000);
+      setTimeout(reloadIfWaiting, 5000);
     });
 };
 
@@ -563,12 +560,12 @@ const moodleLoader = () => {
   chrome.storage.local.get('moodleData', (data) => {
     moodleData = { ...moodleDefaults, ...data.moodleData };
     const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', data.moodle.bgColor);
-    root.style.setProperty('--card-color', data.moodle.cardColor);
-    root.style.setProperty('--accent-color', data.moodle.accentColor);
-    root.style.setProperty('--sidebar-color', data.moodle.sbColor);
-    root.style.setProperty('--text-color', data.moodle.textColor);
-    if (data.moodle.enabled && document.getElementById('page-wrapper')) {
+    root.style.setProperty('--bg-color', moodleData.bgColor);
+    root.style.setProperty('--card-color', moodleData.cardColor);
+    root.style.setProperty('--accent-color', moodleData.accentColor);
+    root.style.setProperty('--sidebar-color', moodleData.sbColor);
+    root.style.setProperty('--text-color', moodleData.textColor);
+    if (moodleData.enabled && document.getElementById('page-wrapper')) {
       start();
     }
   });
