@@ -16,9 +16,9 @@ interface HomePageProps {
     bannerData: BannerData;
   };
   setData: {
-    setMoodleData: (data: MoodleData) => void;
-    setScheduleData: (data: ScheduleData) => void;
-    setBannerData: (data: BannerData) => void;
+    setMoodleData: React.Dispatch<React.SetStateAction<MoodleData>>;
+    setScheduleData: React.Dispatch<React.SetStateAction<ScheduleData>>;
+    setBannerData: React.Dispatch<React.SetStateAction<BannerData>>;
   };
   setPage: (page: Page) => void;
 }
@@ -36,17 +36,26 @@ const HomePage = (props: HomePageProps): JSX.Element => {
       <Box sx={{ width: '100%' }}>
         <ToggleItem
           name={StorageKeys.MOODLE}
-          data={props.data.moodleData}
+          data={props.data.moodleData.enabled}
+          setData={(enabled) =>
+            props.setData.setMoodleData((data) => ({ ...data, enabled }))
+          }
           setPage={props.setPage}
         />
         <ToggleItem
           name={StorageKeys.SCHEDULE}
-          data={props.data.scheduleData}
+          data={props.data.scheduleData.enabled}
+          setData={(enabled) =>
+            props.setData.setScheduleData((data) => ({ ...data, enabled }))
+          }
           setPage={props.setPage}
         />
         <ToggleItem
           name={StorageKeys.BANNER}
-          data={props.data.bannerData}
+          data={props.data.bannerData.enabled}
+          setData={(enabled) =>
+            props.setData.setBannerData((data) => ({ ...data, enabled }))
+          }
           setPage={props.setPage}
         />
       </Box>

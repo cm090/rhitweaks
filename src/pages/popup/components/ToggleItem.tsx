@@ -1,36 +1,17 @@
 import { Settings } from '@mui/icons-material';
 import { Box, Checkbox, IconButton } from '@mui/joy';
-import React, { useEffect, useState } from 'react';
-import { Page, StorageData } from '../../../types';
+import React from 'react';
+import { Page } from '../../../types';
 import { StorageKeys } from './HomePage';
 
 interface ToggleItemProps {
   name: StorageKeys;
-  data: StorageData;
+  data: boolean;
+  setData: (data: boolean) => void;
   setPage: (page: Page) => void;
 }
 
 const ToggleItem = (props: ToggleItemProps): JSX.Element => {
-  const [data, setData] = useState<StorageData>(
-    props.data ?? ({} as StorageData),
-  );
-
-  const updateVisibility = (enabled: boolean) => {
-    chrome.storage.sync.set(
-      {
-        [`${props.name.split(' ')[0].toLowerCase()}Data`]: {
-          ...props.data,
-          enabled,
-        },
-      },
-      () => {
-        setData((data) => ({ ...data, enabled }));
-      },
-    );
-  };
-
-  useEffect(() => setData(props.data), [props.data]);
-
   return (
     <Box
       sx={{
@@ -43,10 +24,10 @@ const ToggleItem = (props: ToggleItemProps): JSX.Element => {
       <Checkbox
         variant="solid"
         label={`${props.name} tweaks`}
-        onChange={(e) => updateVisibility(e.target.checked)}
-        checked={data.enabled ?? false}
+        onChange={(e) => props.setData(e.target.checked)}
+        checked={props.data ?? false}
       />
-      {data.enabled && (
+      {props.data && (
         <IconButton
           variant="solid"
           color="primary"

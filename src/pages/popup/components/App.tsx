@@ -11,6 +11,7 @@ import MoodleSettingsPage from './MoodleSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
 
 const App = (): JSX.Element => {
+  const [ready, setReady] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<Page>('home');
   const [moodleData, setMoodleData] = useState<MoodleData>(moodleDefaults);
   const [scheduleData, setScheduleData] =
@@ -19,16 +20,20 @@ const App = (): JSX.Element => {
 
   useEffect(
     () =>
-      chrome.storage.sync.get(
-        ['moodleData', 'scheduleData', 'bannerData'],
-        (result) => {
-          setMoodleData((data) => ({ ...data, ...result.moodleData }));
-          setScheduleData((data) => ({ ...data, ...result.scheduleData }));
-          setBannerData((data) => ({ ...data, ...result.bannerData }));
-        },
-      ),
+      chrome.storage.local.get(null, (result) => {
+        setMoodleData((data) => ({ ...data, ...result.moodleData }));
+        setScheduleData((data) => ({ ...data, ...result.scheduleData }));
+        setBannerData((data) => ({ ...data, ...result.bannerData }));
+        setReady(true);
+      }),
     [],
   );
+
+  useEffect(() => {
+    if (ready) {
+      chrome.storage.local.set({ moodleData, scheduleData, bannerData });
+    }
+  }, [moodleData, scheduleData, bannerData]);
 
   switch (activePage) {
     case 'home':
