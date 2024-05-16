@@ -9,5 +9,18 @@
     },
     "action": {
         "default_popup": "pages/popup/index.html"
-    }
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "content/moodle/moodle.ts",
+                "content/common/bootstrap.min.js",
+                "content/common/jquery.min.js"
+            ],
+            "matches": [
+                "https://moodle.rose-hulman.edu/*"
+            ],
+            "run_at": "document_end"
+        }
+    ]
 }

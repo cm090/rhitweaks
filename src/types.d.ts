@@ -1,3 +1,5 @@
+declare module "*.css";
+
 export type HexValue = `#${string}`;
 
 export interface MoodleData {
