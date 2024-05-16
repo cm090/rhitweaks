@@ -1,3 +1,4 @@
+import { moodleDefaults } from '../../defaults';
 import { MoodleData } from '../../types';
 import headerButtons from './header-buttons.html';
 import searchModal from './search-modal.html';
@@ -560,7 +561,7 @@ const start = () => {
 
 const moodleLoader = () => {
   chrome.storage.local.get('moodleData', (data) => {
-    moodleData = data.moodleData;
+    moodleData = { ...moodleDefaults, ...data.moodleData };
     const root = document.querySelector(':root') as HTMLElement;
     root.style.setProperty('--bg-color', data.moodle.bgColor);
     root.style.setProperty('--card-color', data.moodle.cardColor);
