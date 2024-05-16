@@ -1,3 +1,5 @@
+import * as bootstrap from 'bootstrap';
+import $ from 'jquery';
 import { moodleDefaults } from '../../defaults';
 import { MoodleData } from '../../types';
 import headerButtons from './header-buttons.html';
@@ -182,7 +184,7 @@ const searchListener = () => {
         ).click();
         (document.querySelector('#rmtSearchInput') as HTMLInputElement).value =
           '';
-        $('#rmtSearch').modal('hide');
+        bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['hide']);
       }
     });
 
@@ -232,7 +234,10 @@ const searchListener = () => {
       createList('');
       (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
         '';
-      $('#rmtSearch').modal('show');
+      bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
+      setTimeout(() => {
+        (document.getElementById('rmtSearchInput') as HTMLInputElement).focus();
+      }, 500);
     }
   });
   if (document.querySelector('nav .simplesearchform')) {
@@ -242,7 +247,12 @@ const searchListener = () => {
         createList('');
         (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
           '';
-        $('#rmtSearch').modal('show');
+        bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
+        setTimeout(() => {
+          (
+            document.getElementById('rmtSearchInput') as HTMLInputElement
+          ).focus();
+        }, 500);
       });
   }
   return Promise.resolve();
@@ -315,43 +325,18 @@ const searchCode = async () => {
     document.querySelector('footer')!.innerHTML += searchModal;
   }
   searchListener();
-  waitForJQuery();
+  setupCourseEvals();
   return await Promise.resolve();
 };
 
-const waitForJQuery = () => {
-  try {
-    $('#rmtSearch').on('shown.bs.modal', () => {
-      (
-        document.querySelector(
-          '#rmtSearch .modal-body input',
-        ) as HTMLButtonElement
-      ).focus();
-      $('#rmtResultList').slideDown({
-        start: function () {
-          $(this).css({
-            display: 'block',
-          });
-        },
-        duration: 200,
+const setupCourseEvals = () => {
+  if (document.querySelector('#ek-widget > ul.evalkit-widget-links > li > a')) {
+    document
+      .querySelector('#ek-widget > ul.evalkit-widget-links > li > a')!
+      .addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open((e.target as HTMLLinkElement).href, '_blank');
       });
-    });
-    $('#rmtSearch').on('show.bs.modal', () => {
-      (document.querySelector('#rmtResultList') as HTMLElement).style.display =
-        'none';
-    });
-    if (
-      document.querySelector('#ek-widget > ul.evalkit-widget-links > li > a')
-    ) {
-      document
-        .querySelector('#ek-widget > ul.evalkit-widget-links > li > a')!
-        .addEventListener('click', (e) => {
-          e.preventDefault();
-          window.open((e.target as HTMLLinkElement).href, '_blank');
-        });
-    }
-  } catch (e) {
-    setTimeout(waitForJQuery, 500);
   }
 };
 
