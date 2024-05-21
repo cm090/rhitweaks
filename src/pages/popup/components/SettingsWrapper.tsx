@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from '@mui/joy';
+import { ArrowLeft } from '@mui/icons-material';
+import { Box, IconButton, Stack, Typography } from '@mui/joy';
 import React from 'react';
 
 interface SettingsWrapperProps {
@@ -12,13 +13,26 @@ const SettingsWrapper = (props: SettingsWrapperProps): JSX.Element => {
     <Box
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <Typography level="h3" textAlign="center">
-        {props.page} Settings
-      </Typography>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ width: '100%' }}
+      >
+        <IconButton
+          size="sm"
+          color="primary"
+          variant="plain"
+          onClick={props.back}
+        >
+          <ArrowLeft />
+        </IconButton>
+        <Typography level="h3" textAlign="center" sx={{ fontSize: '19px' }}>
+          {props.page} Settings
+        </Typography>
+        <Box sx={{ width: '32px' }} />
+      </Stack>
       {props.children}
-      <Button size="sm" color="neutral" onClick={props.back}>
-        Back
-      </Button>
     </Box>
   );
 };

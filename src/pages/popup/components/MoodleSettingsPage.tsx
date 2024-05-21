@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Option, Select } from '@mui/joy';
+import { Button, FormControl, FormLabel, Option, Select } from '@mui/joy';
 import React from 'react';
 import { moodleDefaults } from '../../../defaults';
 import { MoodleData, Page } from '../../../types';
@@ -50,20 +50,31 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
         label="Sidebar color"
         defaultValue={moodleDefaults.sbColor}
         data={props.data.sbColor}
-        setData={(sbColor) => props.setData((prevData) => ({ ...prevData, sbColor }))}
+        setData={(sbColor) =>
+          props.setData((prevData) => ({ ...prevData, sbColor }))
+        }
       />
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
         <FormLabel>Timeline format</FormLabel>
         <Select
           value={props.data.timeFormat}
           onChange={(_, timeFormat) =>
-            props.setData((prevData) => ({ ...prevData, timeFormat } as MoodleData))
+            props.setData(
+              (prevData) => ({ ...prevData, timeFormat } as MoodleData),
+            )
           }
         >
           <Option value={12}>12 hour (AM/PM)</Option>
           <Option value={24}>24 hour</Option>
         </Select>
       </FormControl>
+      <Button
+        color="neutral"
+        sx={{ width: '100%', marginBlock: '10px' }}
+        onClick={() => props.setPage('pinnedCoursesSettings')}
+      >
+        Pinned courses
+      </Button>
     </SettingsWrapper>
   );
 };
