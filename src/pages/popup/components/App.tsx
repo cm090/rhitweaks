@@ -8,6 +8,7 @@ import { BannerData, MoodleData, Page, ScheduleData } from '../../../types';
 import BannerSettingsPage from './BannerSettingsPage';
 import HomePage from './HomePage';
 import MoodleSettingsPage from './MoodleSettingsPage';
+import PinnedCoursesSettingsPage from './PinnedCoursesSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
 
 const App = (): JSX.Element => {
@@ -72,6 +73,13 @@ const App = (): JSX.Element => {
         />
       );
     case 'pinnedCoursesSettings':
+      return (
+        <PinnedCoursesSettingsPage
+          data={bannerData}
+          setData={setBannerData}
+          setPage={setActivePage}
+        />
+      );
     case 'additionalSettings':
       return <div>Coming soon</div>;
   }
