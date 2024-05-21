@@ -18,14 +18,16 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
         label="Background color"
         defaultValue={moodleDefaults.bgColor}
         data={props.data.bgColor}
-        setData={(bgColor) => props.setData((data) => ({ ...data, bgColor }))}
+        setData={(bgColor) =>
+          props.setData((prevData) => ({ ...prevData, bgColor }))
+        }
       />
       <ColorPicker
         label="Text color"
         defaultValue={moodleDefaults.textColor}
         data={props.data.textColor}
         setData={(textColor) =>
-          props.setData((data) => ({ ...data, textColor }))
+          props.setData((prevData) => ({ ...prevData, textColor }))
         }
       />
       <ColorPicker
@@ -33,7 +35,7 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
         defaultValue={moodleDefaults.cardColor}
         data={props.data.cardColor}
         setData={(cardColor) =>
-          props.setData((data) => ({ ...data, cardColor }))
+          props.setData((prevData) => ({ ...prevData, cardColor }))
         }
       />
       <ColorPicker
@@ -41,21 +43,21 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
         defaultValue={moodleDefaults.accentColor}
         data={props.data.accentColor}
         setData={(accentColor) =>
-          props.setData((data) => ({ ...data, accentColor }))
+          props.setData((prevData) => ({ ...prevData, accentColor }))
         }
       />
       <ColorPicker
         label="Sidebar color"
         defaultValue={moodleDefaults.sbColor}
         data={props.data.sbColor}
-        setData={(sbColor) => props.setData((data) => ({ ...data, sbColor }))}
+        setData={(sbColor) => props.setData((prevData) => ({ ...prevData, sbColor }))}
       />
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
         <FormLabel>Timeline format</FormLabel>
         <Select
           value={props.data.timeFormat}
           onChange={(_, timeFormat) =>
-            props.setData((data) => ({ ...data, timeFormat } as MoodleData))
+            props.setData((prevData) => ({ ...prevData, timeFormat } as MoodleData))
           }
         >
           <Option value={12}>12 hour (AM/PM)</Option>

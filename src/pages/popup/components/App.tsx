@@ -21,9 +21,12 @@ const App = (): JSX.Element => {
   useEffect(
     () =>
       chrome.storage.local.get(null, (result) => {
-        setMoodleData((data) => ({ ...data, ...result.moodleData }));
-        setScheduleData((data) => ({ ...data, ...result.scheduleData }));
-        setBannerData((data) => ({ ...data, ...result.bannerData }));
+        setMoodleData((prevData) => ({ ...prevData, ...result.moodleData }));
+        setScheduleData((prevData) => ({
+          ...prevData,
+          ...result.scheduleData,
+        }));
+        setBannerData((prevData) => ({ ...prevData, ...result.bannerData }));
         setReady(true);
       }),
     [],
