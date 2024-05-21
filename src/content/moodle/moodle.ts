@@ -461,9 +461,7 @@ const navItemsManager = () => {
           addNavItems();
           updateCourseDropdown();
           chrome.storage.local.set({
-            moodle: {
-              moodleData,
-            },
+            moodleData,
           });
         });
         card.querySelector('.dropdown-menu')!.append(navItem);

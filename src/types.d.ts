@@ -2,6 +2,11 @@ declare module "*.css";
 
 export type HexValue = `#${string}`;
 
+export interface Course {
+  id: string;
+  name: string;
+}
+
 export interface MoodleData {
   enabled: boolean;
   bgColor: HexValue;
@@ -11,7 +16,7 @@ export interface MoodleData {
   sbColor: HexValue;
   timeFormat: 12 | 24;
   pinnedCoursesDisplay: 'dropdown' | 'header';
-  pinnedCourses: { name: string; id: string }[];
+  pinnedCourses: Course[];
 }
 
 export interface ScheduleData {
