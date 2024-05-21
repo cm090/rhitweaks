@@ -75,8 +75,8 @@ const App = (): JSX.Element => {
     case 'pinnedCoursesSettings':
       return (
         <PinnedCoursesSettingsPage
-          data={bannerData}
-          setData={setBannerData}
+          data={moodleData}
+          setData={setMoodleData}
           setPage={setActivePage}
         />
       );
