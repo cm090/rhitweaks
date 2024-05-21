@@ -38,7 +38,10 @@ const HomePage = (props: HomePageProps): JSX.Element => {
           name={StorageKeys.MOODLE}
           data={props.data.moodleData.enabled}
           setData={(enabled) =>
-            props.setData.setMoodleData((data) => ({ ...data, enabled }))
+            props.setData.setMoodleData((prevData) => ({
+              ...prevData,
+              enabled,
+            }))
           }
           setPage={props.setPage}
         />
@@ -46,7 +49,10 @@ const HomePage = (props: HomePageProps): JSX.Element => {
           name={StorageKeys.SCHEDULE}
           data={props.data.scheduleData.enabled}
           setData={(enabled) =>
-            props.setData.setScheduleData((data) => ({ ...data, enabled }))
+            props.setData.setScheduleData((prevData) => ({
+              ...prevData,
+              enabled,
+            }))
           }
           setPage={props.setPage}
         />
@@ -54,7 +60,10 @@ const HomePage = (props: HomePageProps): JSX.Element => {
           name={StorageKeys.BANNER}
           data={props.data.bannerData.enabled}
           setData={(enabled) =>
-            props.setData.setBannerData((data) => ({ ...data, enabled }))
+            props.setData.setBannerData((prevData) => ({
+              ...prevData,
+              enabled,
+            }))
           }
           setPage={props.setPage}
         />

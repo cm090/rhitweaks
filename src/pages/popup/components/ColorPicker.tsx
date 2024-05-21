@@ -30,7 +30,7 @@ const ColorPicker = (props: ColorPickerProps): JSX.Element => {
     if (valid) {
       props.setData(color);
     }
-  }, [color, valid]);
+  }, [color, valid, props]);
 
   return (
     <FormControl sx={{ width: '100%', marginBottom: '10px' }}>

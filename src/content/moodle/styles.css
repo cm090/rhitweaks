@@ -5,6 +5,7 @@
   --primary: var(--accent-color);
   --sidebar-color: #4e4e4e;
   --text-color: #1d2125;
+  --hover-color: color-mix(in srgb, var(--accent-color), #000000);
 }
 
 body,
@@ -71,7 +72,7 @@ a:not([role='menuitem']):not(
     .courseindex-chevron
   ):hover,
 .btn-link:hover {
-  color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  color: var(--hover-color) !important;
 }
 
 .btn-primary,
@@ -93,8 +94,8 @@ a:not([role='menuitem']):not(
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background: color-mix(in srgb, var(--accent-color), #000000) !important;
-  border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  background: var(--hover-color) !important;
+  border-color: var(--hover-color) !important;
 }
 
 .section,
@@ -519,7 +520,7 @@ body {
 }
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), #000000);
+  color: var(--hover-color);
 }
 
 #sticky-footer {
@@ -553,7 +554,7 @@ a:hover {
 .activity-add,
 .block-add {
   background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
-  border-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  border-color: var(--hover-color) !important;
 }
 
 .report-navigation .singleselect {
@@ -581,7 +582,7 @@ a:hover {
 }
 
 .activityiconcontainer {
-  background-color: color-mix(in srgb, var(--accent-color), #000000) !important;
+  background-color: var(--hover-color) !important;
 }
 
 .activityiconcontainer img[src="https://support.vitalsource.com/hc/article_attachments/360020979753/Install175.png"],
