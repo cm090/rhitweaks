@@ -25,12 +25,13 @@ const ColorPicker = (props: ColorPickerProps): JSX.Element => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [color, setColor] = useState<HexValue>(props.data);
   const [valid, setValid] = useState<boolean>(true);
+  const setData = props.setData;
 
   useEffect(() => {
     if (valid) {
-      props.setData(color);
+      setData(color);
     }
-  }, [color, valid, props]);
+  }, [color, valid]);
 
   return (
     <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
