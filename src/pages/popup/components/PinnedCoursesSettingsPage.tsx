@@ -1,4 +1,5 @@
-import { FormControl, FormLabel, Option, Select } from '@mui/joy';
+import { Delete } from '@mui/icons-material';
+import { FormControl, FormLabel, IconButton, Input, Option, Select } from '@mui/joy';
 import React from 'react';
 import { Course, MoodleData, Page } from '../../../types';
 import SettingsWrapper from './SettingsWrapper';
@@ -50,6 +51,23 @@ const PinnedCoursesSettingsPage = (
             </Option>
           ))}
         </Select>
+      </FormControl>
+      <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
+        <FormLabel>Label</FormLabel>
+        <Input
+          variant="outlined"
+          value={selectedCourse?.name}
+          onChange={() => null}
+          endDecorator={
+            <>
+              <IconButton
+                onClick={() => null}
+              >
+                <Delete />
+              </IconButton>
+            </>
+          }
+        />
       </FormControl>
     </SettingsWrapper>
   );
