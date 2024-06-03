@@ -10,8 +10,6 @@ import applyStyle from './modules/setStyle';
 import addSearchModal from './modules/siteSearch';
 import formatTimeline from './modules/timelineFormat';
 
-let moodleData: MoodleData = {} as MoodleData;
-
 const reloadPageIfNecessary = () => {
   if (
     window.location.pathname !== '/my/' ||
@@ -29,37 +27,34 @@ const reloadPageIfNecessary = () => {
 
 const configureMoodle = () => {
   chrome.storage.local.get('moodleData', (data) => {
-    moodleData = { ...moodleDefaults, ...data.moodleData };
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', moodleData.bgColor);
-    root.style.setProperty('--card-color', moodleData.cardColor);
-    root.style.setProperty('--accent-color', moodleData.accentColor);
-    root.style.setProperty('--sidebar-color', moodleData.sbColor);
-    root.style.setProperty('--text-color', moodleData.textColor);
+    const moodleData = { ...moodleDefaults, ...data.moodleData };
+    setStyleProperties(moodleData);
     if (moodleData.enabled && document.getElementById('page-wrapper')) {
-      initialize();
+      initialize(moodleData);
     }
   });
   chrome.storage.local.onChanged.addListener((changes) => {
-    const oldData = changes.moodleData.oldValue;
-    const newData = changes.moodleData.newValue;
+    const { oldValue: oldData, newValue: newData } = changes.moodleData;
     if (oldData.enabled != newData.enabled) {
       window.location.reload();
       return;
     }
-    moodleData = newData;
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', newData.bgColor);
-    root.style.setProperty('--card-color', newData.cardColor);
-    root.style.setProperty('--accent-color', newData.accentColor);
-    root.style.setProperty('--sidebar-color', newData.sbColor);
-    root.style.setProperty('--text-color', newData.textColor);
-    buildCourseDropdown(moodleData);
-    formatTimeline(moodleData).catch(() => null);
+    setStyleProperties(newData);
+    buildCourseDropdown(newData);
+    formatTimeline(newData).catch(() => null);
   });
 };
 
-const initialize = () => {
+const setStyleProperties = (data: MoodleData) => {
+  const root = document.querySelector(':root') as HTMLElement;
+  root.style.setProperty('--bg-color', data.bgColor);
+  root.style.setProperty('--card-color', data.cardColor);
+  root.style.setProperty('--accent-color', data.accentColor);
+  root.style.setProperty('--sidebar-color', data.sbColor);
+  root.style.setProperty('--text-color', data.textColor);
+};
+
+const initialize = (moodleData: MoodleData) => {
   console.log(
     'Starting RHITweaks by cm090\nhttps://github.com/cm090/rhitweaks',
   );
