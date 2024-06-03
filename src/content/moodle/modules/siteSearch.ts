@@ -15,6 +15,8 @@ interface BootstrapModal {
   };
 }
 
+const courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
+
 const addSearchModal = async (
   moodleData: MoodleData,
   bootstrap: BootstrapModal,
@@ -28,7 +30,7 @@ const addSearchModal = async (
   }
   if (document.querySelector('#page-header')) {
     document.querySelector('#page-header')!.innerHTML += searchModal;
-  } else {
+  } else if (document.querySelector('footer')) {
     document.querySelector('footer')!.innerHTML += searchModal;
   }
   setupSearchModal(moodleData, bootstrap, $);
@@ -41,26 +43,7 @@ const setupSearchModal = (
   bootstrap: BootstrapModal,
   $: JQueryStatic,
 ) => {
-  const courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
-  const wait = () => {
-    const navItems = document.querySelectorAll(
-      '#course-index .courseindex-section',
-    );
-    if (navItems) {
-      navItems.forEach((item) => {
-        const header = item.querySelector(
-          '.courseindex-section-title .courseindex-link',
-        );
-        courseData.push([
-          (header as HTMLElement).innerText,
-          (header as HTMLLinkElement).href,
-        ]);
-      });
-    } else {
-      setTimeout(wait, 500);
-    }
-  };
-  wait();
+  addClassSidebarItems();
 
   let pos = 1;
   if (window.location.href.includes('course/')) {
@@ -196,6 +179,28 @@ const setupSearchModal = (
       });
   }
   return Promise.resolve();
+};
+
+const addClassSidebarItems = () => {
+  const wait = () => {
+    const navItems = document.querySelectorAll(
+      '#course-index .courseindex-section',
+    );
+    if (navItems) {
+      navItems.forEach((item) => {
+        const header = item.querySelector(
+          '.courseindex-section-title .courseindex-link',
+        );
+        courseData.push([
+          (header as HTMLElement).innerText,
+          (header as HTMLLinkElement).href,
+        ]);
+      });
+    } else {
+      setTimeout(wait, 500);
+    }
+  };
+  wait();
 };
 
 const initializeCourseEvaluations = () => {
