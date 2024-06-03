@@ -10,39 +10,23 @@ import applyStyle from './modules/setStyle';
 import addSearchModal from './modules/siteSearch';
 import formatTimeline from './modules/timelineFormat';
 
-const reloadPageIfNecessary = () => {
-  if (
-    window.location.pathname !== '/my/' ||
-    window.location.hash.includes('bypass')
-  ) {
-    return;
-  }
-  const courseListElement = document.querySelector(
-    ".block_myoverview [data-region='loading-placeholder-content']",
-  );
-  if (courseListElement) {
-    window.location.reload();
-  }
+const configureMoodle = () => {
+  handleMoodlePageInitialization();
+  handleMoodlePageUpdate();
 };
 
-const configureMoodle = () => {
-  chrome.storage.local.get('moodleData', (data) => {
-    const moodleData = { ...moodleDefaults, ...data.moodleData };
-    setStyleProperties(moodleData);
-    if (moodleData.enabled && document.getElementById('page-wrapper')) {
-      initialize(moodleData);
-    }
-  });
-  chrome.storage.local.onChanged.addListener((changes) => {
-    const { oldValue: oldData, newValue: newData } = changes.moodleData;
-    if (oldData.enabled != newData.enabled) {
-      window.location.reload();
-      return;
-    }
-    setStyleProperties(newData);
-    buildCourseDropdown(newData);
-    formatTimeline(newData).catch(() => null);
-  });
+const handleMoodlePageInitialization = () => {
+  try {
+    chrome.storage.local.get('moodleData', (data) => {
+      const moodleData = { ...moodleDefaults, ...data.moodleData };
+      setStyleProperties(moodleData);
+      if (moodleData.enabled && document.getElementById('page-wrapper')) {
+        initialize(moodleData);
+      }
+    });
+  } catch (e) {
+    console.error('RHITweaks > Error initializing Moodle page', e);
+  }
 };
 
 const setStyleProperties = (data: MoodleData) => {
@@ -103,6 +87,39 @@ const initialize = (moodleData: MoodleData) => {
       addNavItemListeners(moodleData, buildCourseDropdown);
       setTimeout(reloadPageIfNecessary, 5000);
     });
+};
+
+const reloadPageIfNecessary = () => {
+  if (
+    window.location.pathname !== '/my/' ||
+    window.location.hash.includes('bypass')
+  ) {
+    return;
+  }
+  if (
+    document.querySelector(
+      ".block_myoverview [data-region='loading-placeholder-content']",
+    )
+  ) {
+    window.location.reload();
+  }
+};
+
+const handleMoodlePageUpdate = () => {
+  try {
+    chrome.storage.local.onChanged.addListener((changes) => {
+      const { oldValue: oldData, newValue: newData } = changes.moodleData;
+      if (oldData.enabled != newData.enabled) {
+        window.location.reload();
+        return;
+      }
+      setStyleProperties(newData);
+      buildCourseDropdown(newData);
+      formatTimeline(newData).catch(() => null);
+    });
+  } catch (e) {
+    console.error('RHITweaks > Error updating Moodle page', e);
+  }
 };
 
 configureMoodle();
