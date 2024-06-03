@@ -8,55 +8,6 @@ import searchModal from './search-modal.html';
 const courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 let moodleData: MoodleData = {} as MoodleData;
 
-const setStyle = async () => {
-  import('./styles.css').then(() => {
-    document
-      .querySelectorAll('style,link[rel="stylesheet"]')
-      .forEach((sheet) => {
-        if (sheet) {
-          try {
-            const rules =
-              (sheet as HTMLStyleElement).sheet!.cssRules ||
-              (sheet as HTMLStyleElement).sheet!.rules;
-            for (let i = 0; i < rules.length; i++) {
-              const rule = rules[i];
-              if (
-                rule.cssText.includes('maroon') ||
-                rule.cssText.includes('rgb(128, 0, 0)')
-              ) {
-                const newRule = rule.cssText.replace(
-                  /maroon|rgb\(128, 0, 0\)/g,
-                  '--accent-color',
-                );
-                (sheet as HTMLStyleElement).sheet!.deleteRule(i);
-                (sheet as HTMLStyleElement).sheet!.insertRule(newRule, i);
-              }
-            }
-          } catch (e) {
-            // Ignore
-          }
-        }
-      });
-  });
-  if (document.querySelector('.gradeparent')) {
-    const wait = () => {
-      const shortcuts = document.querySelector('#available_shortcuts_popup');
-      const page = document.querySelector('#page');
-      if (shortcuts && page) {
-        (shortcuts as HTMLElement).style.display = 'none';
-        (page as HTMLElement).style.marginBottom = '62px';
-        document
-          .querySelectorAll('.drawercontent')
-          .forEach((item) => item.classList.add('onGradebookPage'));
-      } else {
-        setTimeout(wait, 500);
-      }
-    };
-    wait();
-  }
-  return await Promise.resolve();
-};
-
 const modifyURL = () => {
   if (
     ((window.location.pathname.length < 2 && !window.location.search) ||
@@ -488,6 +439,38 @@ const navItemsManager = () => {
   wait();
 };
 
+const moodleLoader = () => {
+  chrome.storage.local.get('moodleData', (data) => {
+    moodleData = { ...moodleDefaults, ...data.moodleData };
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--bg-color', moodleData.bgColor);
+    root.style.setProperty('--card-color', moodleData.cardColor);
+    root.style.setProperty('--accent-color', moodleData.accentColor);
+    root.style.setProperty('--sidebar-color', moodleData.sbColor);
+    root.style.setProperty('--text-color', moodleData.textColor);
+    if (moodleData.enabled && document.getElementById('page-wrapper')) {
+      start();
+    }
+  });
+  chrome.storage.local.onChanged.addListener((changes) => {
+    const oldData = changes.moodleData.oldValue;
+    const newData = changes.moodleData.newValue;
+    if (oldData.enabled != newData.enabled) {
+      window.location.reload();
+      return;
+    }
+    moodleData = newData;
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--bg-color', newData.bgColor);
+    root.style.setProperty('--card-color', newData.cardColor);
+    root.style.setProperty('--accent-color', newData.accentColor);
+    root.style.setProperty('--sidebar-color', newData.sbColor);
+    root.style.setProperty('--text-color', newData.textColor);
+    updateCourseDropdown();
+    updateTimelineFormat().catch(() => null);
+  });
+};
+
 const start = () => {
   console.log(
     'Starting RHITweaks by cm090\nhttps://github.com/cm090/rhitweaks',
@@ -539,36 +522,57 @@ const start = () => {
     });
 };
 
-const moodleLoader = () => {
-  chrome.storage.local.get('moodleData', (data) => {
-    moodleData = { ...moodleDefaults, ...data.moodleData };
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', moodleData.bgColor);
-    root.style.setProperty('--card-color', moodleData.cardColor);
-    root.style.setProperty('--accent-color', moodleData.accentColor);
-    root.style.setProperty('--sidebar-color', moodleData.sbColor);
-    root.style.setProperty('--text-color', moodleData.textColor);
-    if (moodleData.enabled && document.getElementById('page-wrapper')) {
-      start();
+const setStyle = async () => {
+  import('./styles.css').then(replaceAccentColor);
+  styleGradeBookPage();
+  return await Promise.resolve();
+};
+
+const replaceAccentColor = () => {
+  document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
+    if (sheet) {
+      try {
+        const rules =
+          (sheet as HTMLStyleElement).sheet!.cssRules ||
+          (sheet as HTMLStyleElement).sheet!.rules;
+        for (let i = 0; i < rules.length; i++) {
+          const rule = rules[i];
+          if (
+            rule.cssText.includes('maroon') ||
+            rule.cssText.includes('rgb(128, 0, 0)')
+          ) {
+            const newRule = rule.cssText.replace(
+              /maroon|rgb\(128, 0, 0\)/g,
+              '--accent-color',
+            );
+            (sheet as HTMLStyleElement).sheet!.deleteRule(i);
+            (sheet as HTMLStyleElement).sheet!.insertRule(newRule, i);
+          }
+        }
+      } catch (e) {
+        // Ignore
+      }
     }
   });
-  chrome.storage.local.onChanged.addListener((changes) => {
-    const oldData = changes.moodleData.oldValue;
-    const newData = changes.moodleData.newValue;
-    if (oldData.enabled != newData.enabled) {
-      window.location.reload();
-      return;
-    }
-    moodleData = newData;
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', newData.bgColor);
-    root.style.setProperty('--card-color', newData.cardColor);
-    root.style.setProperty('--accent-color', newData.accentColor);
-    root.style.setProperty('--sidebar-color', newData.sbColor);
-    root.style.setProperty('--text-color', newData.textColor);
-    updateCourseDropdown();
-    updateTimelineFormat().catch(() => null);
-  });
+};
+
+const styleGradeBookPage = () => {
+  if (document.querySelector('.gradeparent')) {
+    const wait = () => {
+      const shortcuts = document.querySelector('#available_shortcuts_popup');
+      const page = document.querySelector('#page');
+      if (shortcuts && page) {
+        (shortcuts as HTMLElement).style.display = 'none';
+        (page as HTMLElement).style.marginBottom = '62px';
+        document
+          .querySelectorAll('.drawercontent')
+          .forEach((item) => item.classList.add('onGradebookPage'));
+      } else {
+        setTimeout(wait, 500);
+      }
+    };
+    wait();
+  }
 };
 
 moodleLoader();
