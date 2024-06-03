@@ -6,16 +6,21 @@ const addButtonsToPageContent = async () => {
   }
   if (document.querySelector('#page-content')!.clientWidth > 850) {
     const element = document.querySelector('#page-content');
-    element!.innerHTML = headerButtons + element!.innerHTML;
+    if (element) {
+      element.innerHTML = headerButtons + element.innerHTML;
+    }
   }
   onresize = () => checkButtons();
   return await Promise.resolve();
 };
 
-const checkButtons = () =>
-  ((document.querySelector('#rmtButtons') as HTMLElement).style.display =
-    document.querySelector('#page-content')!.clientWidth <= 850
-      ? 'none'
-      : 'flex');
+const checkButtons = () => {
+  const buttons = document.querySelector('#rmtButtons');
+  const page = document.querySelector('#page-content');
+  if (buttons && page) {
+    (buttons as HTMLElement).style.display =
+      page.clientWidth <= 850 ? 'none' : 'flex';
+  }
+};
 
 export default addButtonsToPageContent;
