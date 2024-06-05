@@ -12,7 +12,10 @@ const transformUrl = () => {
       link.target = '_blank';
     }
   });
-  if (document.querySelector('.navbar .navbar-brand')) {
+  if (
+    document.querySelector('.navbar .navbar-brand') &&
+    !window.location.pathname.includes('/my')
+  ) {
     (document.querySelector('.navbar .navbar-brand') as HTMLLinkElement).href =
       '/my';
   }

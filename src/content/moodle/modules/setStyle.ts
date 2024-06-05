@@ -1,30 +1,23 @@
-const applyStyle = async () => {
-  import('../styles.css').then(replaceAccentColor);
-  styleGradeBookPage();
-  return await Promise.resolve();
-};
+const applyStyle = async () =>
+  import('../styles.css').then(() => {
+    replaceAccentColor();
+    styleGradeBookPage();
+  });
 
 const replaceAccentColor = () => {
   document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
     if (sheet) {
       try {
-        const rules =
-          (sheet as HTMLStyleElement).sheet!.cssRules ||
-          (sheet as HTMLStyleElement).sheet!.rules;
-        for (let i = 0; i < rules.length; i++) {
-          const rule = rules[i];
-          if (
-            rule.cssText.includes('maroon') ||
-            rule.cssText.includes('rgb(128, 0, 0)')
-          ) {
-            const newRule = rule.cssText.replace(
-              /maroon|rgb\(128, 0, 0\)/g,
-              '--accent-color',
-            );
-            (sheet as HTMLStyleElement).sheet!.deleteRule(i);
-            (sheet as HTMLStyleElement).sheet!.insertRule(newRule, i);
-          }
+        const styleSheet = (sheet as HTMLLinkElement).sheet;
+        if (!styleSheet) {
+          return;
         }
+        const rules = styleSheet.cssRules || styleSheet.rules;
+        const newRules = Array.from(rules).map((rule) =>
+          rule.cssText.replace(/maroon|rgb\(128, 0, 0\)/g, '--accent-color'),
+        );
+        Array(rules).forEach((_, index) => styleSheet.deleteRule(index));
+        newRules.forEach((rule) => styleSheet.insertRule(rule));
       } catch (e) {
         // Ignore
       }
