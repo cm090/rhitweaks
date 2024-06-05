@@ -1,6 +1,9 @@
-import { MoodleData } from '../../../types';
+import { Course, MoodleData } from '../../../types';
 
-const buildCourseDropdown = (moodleData: MoodleData) => {
+const buildCourseDropdown = ({
+  pinnedCourses,
+  pinnedCoursesDisplay,
+}: MoodleData) => {
   const menuItem = document.querySelector('.navbar-nav [data-key="mycourses"]');
   if (menuItem) {
     (menuItem as HTMLElement).style.display = '';
@@ -8,24 +11,24 @@ const buildCourseDropdown = (moodleData: MoodleData) => {
       .querySelectorAll('.custom-courses')
       .forEach((item) => item.remove());
   }
-  if (moodleData.pinnedCoursesDisplay === 'dropdown') {
-    displayCoursesInDropdown(moodleData, menuItem as HTMLElement);
-  } else if (moodleData.pinnedCourses.length > 0) {
-    displayCoursesInNavbar(moodleData, menuItem as HTMLElement);
+  if (pinnedCoursesDisplay === 'dropdown') {
+    displayCoursesInDropdown(pinnedCourses, menuItem as HTMLElement);
+  } else if (pinnedCourses.length > 0) {
+    displayCoursesInNavbar(pinnedCourses, menuItem as HTMLElement);
   }
 };
 
 const displayCoursesInDropdown = (
-  moodleData: MoodleData,
+  pinnedCourses: Course[],
   menuItem: HTMLElement,
 ) => {
   const div = document.createElement('div');
   div.classList.add('dropdown-menu', 'custom-courses');
-  if (moodleData.pinnedCourses.length == 0) {
+  if (pinnedCourses.length == 0) {
     div.innerHTML =
       '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
   } else {
-    moodleData.pinnedCourses.forEach((item) => {
+    pinnedCourses.forEach((item) => {
       const a = document.createElement('a');
       a.classList.add('dropdown-item');
       a.href = `/course/view.php?id=${item.id}`;
@@ -45,11 +48,11 @@ const displayCoursesInDropdown = (
 };
 
 const displayCoursesInNavbar = (
-  moodleData: MoodleData,
+  pinnedCourses: Course[],
   menuItem: HTMLElement,
 ) => {
   (menuItem as HTMLElement).style.display = 'none';
-  moodleData.pinnedCourses.forEach((item) => {
+  pinnedCourses.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add('nav-item', 'custom-courses');
     const a = document.createElement('a');

@@ -1,12 +1,12 @@
 import { MoodleData } from '../../../types';
 
-const formatTimeline = (moodleData: MoodleData) => {
+const formatTimeline = ({ timeFormat }: MoodleData) => {
   if (!document.querySelector('.block-timeline')) {
     return Promise.reject();
   }
   document
     .querySelectorAll('.timeline-event-list-item small.text-right')
-    .forEach((item) => formatTimelineElement(item as HTMLElement, moodleData));
+    .forEach((item) => formatTimelineElement(item as HTMLElement, timeFormat));
   if (document.querySelector("[data-action='more-events']")) {
     const btn = document.querySelector(
       "[data-action='more-events']",
@@ -26,9 +26,9 @@ const formatTimeline = (moodleData: MoodleData) => {
   return Promise.resolve();
 };
 
-const formatTimelineElement = (item: HTMLElement, moodleData: MoodleData) => {
+const formatTimelineElement = (item: HTMLElement, timeFormat: 12 | 24) => {
   const time = (item as HTMLElement).innerText.split(' ')[0].split(':');
-  if (moodleData.timeFormat == 12) {
+  if (timeFormat == 12) {
     if (
       (item as HTMLElement).innerText.includes('AM') ||
       (item as HTMLElement).innerText.includes('PM')

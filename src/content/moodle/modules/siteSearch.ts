@@ -1,4 +1,4 @@
-import { MoodleData } from '../../../types';
+import { Course, MoodleData } from '../../../types';
 import searchModal from '../search-modal.html';
 
 interface BootstrapModal {
@@ -18,7 +18,7 @@ interface BootstrapModal {
 const courseData = [['Dashboard', 'https://moodle.rose-hulman.edu/my']];
 
 const addSearchModal = async (
-  moodleData: MoodleData,
+  { pinnedCourses }: MoodleData,
   bootstrap: BootstrapModal,
   $: JQueryStatic,
 ) => {
@@ -33,13 +33,13 @@ const addSearchModal = async (
   } else if (document.querySelector('footer')) {
     document.querySelector('footer')!.innerHTML += searchModal;
   }
-  setupSearchModal(moodleData, bootstrap, $);
+  setupSearchModal(pinnedCourses, bootstrap, $);
   initializeCourseEvaluations();
   return await Promise.resolve();
 };
 
 const setupSearchModal = (
-  moodleData: MoodleData,
+  pinnedCourses: Course[],
   bootstrap: BootstrapModal,
   $: JQueryStatic,
 ) => {
@@ -60,7 +60,7 @@ const setupSearchModal = (
       // Ignore
     }
   }
-  moodleData.pinnedCourses.forEach((item) =>
+  pinnedCourses.forEach((item) =>
     courseData.push([item.name, `/course/view.php?id=${item.id}`]),
   );
   courseData.push(
