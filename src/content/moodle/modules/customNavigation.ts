@@ -12,58 +12,54 @@ const addNavItemListeners = (
     return;
   }
   const addNavItems = () => {
-    document
-      .querySelectorAll(
+    for (const card of Array.from(
+      document.querySelectorAll(
         '.dashboard-card-deck .dashboard-card, .list-group .course-listitem',
+      ),
+    )) {
+      if (card.querySelector('.dropdown-menu')!.innerHTML.includes('navbar')) {
+        card.querySelector('.dropdown-menu a:last-child')!.remove();
+      }
+      const navItem = document.createElement('a');
+      navItem.classList.add('dropdown-item');
+      navItem.href = '#';
+      navItem.innerText = pinnedCourses.find(
+        (item) => item.id == card.getAttribute('data-course-id'),
       )
-      .forEach((card) => {
-        if (
-          card.querySelector('.dropdown-menu')!.innerHTML.includes('navbar')
-        ) {
-          card.querySelector('.dropdown-menu a:last-child')!.remove();
-        }
-        const navItem = document.createElement('a');
-        navItem.classList.add('dropdown-item');
-        navItem.href = '#';
-        navItem.innerText = pinnedCourses.find(
-          (item) => item.id == card.getAttribute('data-course-id'),
-        )
-          ? 'Unpin from navbar'
-          : 'Pin to navbar';
-        navItem.addEventListener('click', () => {
-          if (navItem.innerText == 'Pin to navbar') {
-            let name;
-            if (card.querySelector('.coursename .multiline .sr-only')) {
-              name = (
-                card.querySelector(
-                  '.coursename .multiline .sr-only',
-                ) as HTMLElement
-              ).innerText;
-            } else {
-              name = (
-                card.querySelector('.coursename') as HTMLElement
-              ).innerText
-                .split('\n')
-                .at(-1);
-            }
-            pinnedCourses.push({
-              id: card.getAttribute('data-course-id') as string,
-              name:
-                name!.split(' ')[0].search(/(?:\w+\d+)/) !== -1
-                  ? name!.split(' ')[0]
-                  : (name as string),
-            });
+        ? 'Unpin from navbar'
+        : 'Pin to navbar';
+      navItem.addEventListener('click', () => {
+        if (navItem.innerText == 'Pin to navbar') {
+          let name;
+          if (card.querySelector('.coursename .multiline .sr-only')) {
+            name = (
+              card.querySelector(
+                '.coursename .multiline .sr-only',
+              ) as HTMLElement
+            ).innerText;
           } else {
-            pinnedCourses = pinnedCourses.filter(
-              (item) => item.id != card.getAttribute('data-course-id'),
-            );
+            name = (card.querySelector('.coursename') as HTMLElement).innerText
+              .split('\n')
+              .at(-1);
           }
-          addNavItems();
-          updateCourseDropdown(pinnedCourses, pinnedCoursesDisplay);
-          setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
-        });
-        card.querySelector('.dropdown-menu')!.append(navItem);
+          pinnedCourses.push({
+            id: card.getAttribute('data-course-id') as string,
+            name:
+              name!.split(' ')[0].search(/(?:\w+\d+)/) !== -1
+                ? name!.split(' ')[0]
+                : (name as string),
+          });
+        } else {
+          pinnedCourses = pinnedCourses.filter(
+            (item) => item.id != card.getAttribute('data-course-id'),
+          );
+        }
+        addNavItems();
+        updateCourseDropdown(pinnedCourses, pinnedCoursesDisplay);
+        setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
       });
+      card.querySelector('.dropdown-menu')!.append(navItem);
+    }
   };
   const wait = () => {
     if (
@@ -75,11 +71,9 @@ const addNavItemListeners = (
       setTimeout(wait, 500);
     }
   };
-  document
-    .querySelectorAll('.main-inner a')
-    .forEach((item) =>
-      item.addEventListener('click', () => setTimeout(wait, 500)),
-    );
+  for (const item of Array.from(document.querySelectorAll('.main-inner a'))) {
+    item.addEventListener('click', () => setTimeout(wait, 500));
+  }
   document
     .querySelector('.main-inner .searchbar input')!
     .addEventListener('input', () => setTimeout(wait, 1500));

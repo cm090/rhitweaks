@@ -60,9 +60,9 @@ const setupSearchModal = (
       // Ignore
     }
   }
-  pinnedCourses.forEach((item) =>
-    courseData.push([item.name, `/course/view.php?id=${item.id}`]),
-  );
+  for (const item of pinnedCourses) {
+    courseData.push([item.name, `/course/view.php?id=${item.id}`]);
+  }
   courseData.push(
     ['My Rose-Hulman', 'https://rosehulman.sharepoint.com/sites/MyRH'],
     ['Banner Web', 'https://bannerweb.rose-hulman.edu/login'],
@@ -115,7 +115,7 @@ const setupSearchModal = (
     pos = 1;
     let i = 0;
     document.getElementById('rmtResultList')!.innerHTML = '';
-    courseData.forEach((item) => {
+    for (const item of courseData) {
       if (item[0].length <= 1) {
         return;
       }
@@ -134,7 +134,7 @@ const setupSearchModal = (
       if (i == 5) {
         return;
       }
-    });
+    }
     if (value.length > 0) {
       document.getElementById(
         'rmtResultList',
@@ -187,7 +187,7 @@ const addClassSidebarItems = () => {
       '#course-index .courseindex-section',
     );
     if (navItems) {
-      navItems.forEach((item) => {
+      for (const item of Array.from(navItems)) {
         const header = item.querySelector(
           '.courseindex-section-title .courseindex-link',
         );
@@ -195,7 +195,7 @@ const addClassSidebarItems = () => {
           (header as HTMLElement).innerText,
           (header as HTMLLinkElement).href,
         ]);
-      });
+      }
     } else {
       setTimeout(wait, 500);
     }

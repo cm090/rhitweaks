@@ -4,9 +4,11 @@ const formatTimeline = ({ timeFormat }: MoodleData) => {
   if (!document.querySelector('.block-timeline')) {
     return Promise.reject();
   }
-  document
-    .querySelectorAll('.timeline-event-list-item small.text-right')
-    .forEach((item) => formatTimelineElement(item as HTMLElement, timeFormat));
+  for (const item of Array.from(
+    document.querySelectorAll('.timeline-event-list-item small.text-right'),
+  )) {
+    formatTimelineElement(item as HTMLElement, timeFormat);
+  }
   if (document.querySelector("[data-action='more-events']")) {
     const btn = document.querySelector(
       "[data-action='more-events']",

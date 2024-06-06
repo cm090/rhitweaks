@@ -6,12 +6,12 @@ const transformUrl = () => {
   ) {
     window.location.pathname = '/my';
   }
-  document.querySelectorAll('a').forEach((link) => {
+  for (const link of Array.from(document.querySelectorAll('a'))) {
     if (link.href.includes('?forcedownload=1')) {
       link.href = link.href.split('?forcedownload')[0];
       link.target = '_blank';
     }
-  });
+  }
   if (
     document.querySelector('.navbar .navbar-brand') &&
     !window.location.pathname.includes('/my')

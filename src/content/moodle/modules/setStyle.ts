@@ -5,7 +5,9 @@ const applyStyle = async () =>
   });
 
 const replaceAccentColor = () => {
-  document.querySelectorAll('style,link[rel="stylesheet"]').forEach((sheet) => {
+  for (const sheet of Array.from(
+    document.querySelectorAll('style,link[rel="stylesheet"]'),
+  )) {
     if (sheet) {
       try {
         const styleSheet = (sheet as HTMLLinkElement).sheet;
@@ -17,12 +19,14 @@ const replaceAccentColor = () => {
           rule.cssText.replace(/maroon|rgb\(128, 0, 0\)/g, '--accent-color'),
         );
         Array(rules).forEach((_, index) => styleSheet.deleteRule(index));
-        newRules.forEach((rule) => styleSheet.insertRule(rule));
+        for (const rule of newRules) {
+          styleSheet.insertRule(rule);
+        }
       } catch (e) {
         // Ignore
       }
     }
-  });
+  }
 };
 
 const styleGradeBookPage = () => {
@@ -33,9 +37,11 @@ const styleGradeBookPage = () => {
       if (shortcuts && page) {
         (shortcuts as HTMLElement).style.display = 'none';
         (page as HTMLElement).style.marginBottom = '62px';
-        document
-          .querySelectorAll('.drawercontent')
-          .forEach((item) => item.classList.add('onGradebookPage'));
+        for (const item of Array.from(
+          document.querySelectorAll('.drawercontent'),
+        )) {
+          item.classList.add('onGradebookPage');
+        }
       } else {
         setTimeout(wait, 500);
       }

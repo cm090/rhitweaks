@@ -7,9 +7,11 @@ const buildCourseDropdown = ({
   const menuItem = document.querySelector('.navbar-nav [data-key="mycourses"]');
   if (menuItem) {
     (menuItem as HTMLElement).style.display = '';
-    document
-      .querySelectorAll('.custom-courses')
-      .forEach((item) => item.remove());
+    for (const item of Array.from(
+      document.querySelectorAll('.custom-courses'),
+    )) {
+      item.remove();
+    }
   }
   if (pinnedCoursesDisplay === 'dropdown') {
     displayCoursesInDropdown(pinnedCourses, menuItem as HTMLElement);
@@ -28,13 +30,13 @@ const displayCoursesInDropdown = (
     div.innerHTML =
       '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
   } else {
-    pinnedCourses.forEach((item) => {
+    for (const item of pinnedCourses) {
       const a = document.createElement('a');
       a.classList.add('dropdown-item');
       a.href = `/course/view.php?id=${item.id}`;
       a.innerText = item.name;
       div.appendChild(a);
-    });
+    }
   }
   document.querySelector('body')!.appendChild(div);
   menuItem.onmouseenter = () => div.classList.add('show');
@@ -52,7 +54,7 @@ const displayCoursesInNavbar = (
   menuItem: HTMLElement,
 ) => {
   (menuItem as HTMLElement).style.display = 'none';
-  pinnedCourses.forEach((item) => {
+  for (const item of pinnedCourses) {
     const li = document.createElement('li');
     li.classList.add('nav-item', 'custom-courses');
     const a = document.createElement('a');
@@ -64,7 +66,7 @@ const displayCoursesInNavbar = (
     a.innerText = item.name;
     li.appendChild(a);
     document.querySelector('.primary-navigation .moremenu ul')!.appendChild(li);
-  });
+  }
 };
 
 export default buildCourseDropdown;
