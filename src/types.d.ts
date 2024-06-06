@@ -1,4 +1,4 @@
-declare module "*.css";
+declare module '*.css';
 
 export type HexValue = `#${string}`;
 

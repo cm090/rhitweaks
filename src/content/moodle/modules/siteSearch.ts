@@ -1,4 +1,4 @@
-import { Course, MoodleData } from '../../../types';
+import { MoodleData } from '../../../types';
 import searchModal from '../search-modal.html';
 
 interface BootstrapModal {
@@ -39,7 +39,7 @@ const addSearchModal = async (
 };
 
 const setupSearchModal = (
-  pinnedCourses: Course[],
+  pinnedCourses: MoodleData['pinnedCourses'],
   bootstrap: BootstrapModal,
   $: JQueryStatic,
 ) => {

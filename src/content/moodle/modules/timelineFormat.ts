@@ -26,7 +26,10 @@ const formatTimeline = ({ timeFormat }: MoodleData) => {
   return Promise.resolve();
 };
 
-const formatTimelineElement = (item: HTMLElement, timeFormat: 12 | 24) => {
+const formatTimelineElement = (
+  item: HTMLElement,
+  timeFormat: MoodleData['timeFormat'],
+) => {
   const time = (item as HTMLElement).innerText.split(' ')[0].split(':');
   if (timeFormat == 12) {
     if (

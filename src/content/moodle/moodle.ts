@@ -2,6 +2,7 @@ import * as bootstrap from 'bootstrap';
 import $ from 'jquery';
 import { moodleDefaults } from '../../defaults';
 import { MoodleData } from '../../types';
+import { DataType, getDataObject, onDataChanged } from '../common/chromeData';
 import addButtonsToPageContent from './modules/addButtons';
 import buildCourseDropdown from './modules/courseDropdown';
 import addNavItemListeners from './modules/customNavigation';
@@ -17,8 +18,8 @@ const configureMoodle = () => {
 
 const handleMoodlePageInitialization = () => {
   try {
-    chrome.storage.local.get('moodleData', (data) => {
-      const moodleData = { ...moodleDefaults, ...data.moodleData };
+    getDataObject(DataType.MoodleData).then((data) => {
+      const moodleData = { ...moodleDefaults, ...data };
       setStyleProperties(moodleData);
       if (moodleData.enabled && document.getElementById('page-wrapper')) {
         initialize(moodleData);
@@ -84,7 +85,13 @@ const initialize = (moodleData: MoodleData) => {
     })
     .then(() => {
       buildCourseDropdown(moodleData);
-      addNavItemListeners(moodleData, buildCourseDropdown);
+      addNavItemListeners(moodleData, (pinnedCourses, pinnedCoursesDisplay) =>
+        buildCourseDropdown({
+          ...moodleData,
+          pinnedCourses,
+          pinnedCoursesDisplay,
+        }),
+      );
       setTimeout(reloadPageIfNecessary, 5000);
     });
 };
@@ -105,21 +112,15 @@ const reloadPageIfNecessary = () => {
   }
 };
 
-const handleMoodlePageUpdate = () => {
-  try {
-    chrome.storage.local.onChanged.addListener((changes) => {
-      const { oldValue: oldData, newValue: newData } = changes.moodleData;
-      if (oldData.enabled != newData.enabled) {
-        window.location.reload();
-        return;
-      }
-      setStyleProperties(newData);
-      buildCourseDropdown(newData);
-      formatTimeline(newData).catch(() => null);
-    });
-  } catch (e) {
-    console.error('RHITweaks > Error updating Moodle page', e);
-  }
-};
+const handleMoodlePageUpdate = () =>
+  onDataChanged(DataType.MoodleData, (oldData, newData) => {
+    if (oldData.enabled != newData.enabled) {
+      window.location.reload();
+      return;
+    }
+    setStyleProperties(newData as MoodleData);
+    buildCourseDropdown(newData as MoodleData);
+    formatTimeline(newData as MoodleData).catch(() => null);
+  });
 
 configureMoodle();

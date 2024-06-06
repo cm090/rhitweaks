@@ -1,4 +1,4 @@
-import { Course, MoodleData } from '../../../types';
+import { MoodleData } from '../../../types';
 
 const buildCourseDropdown = ({
   pinnedCourses,
@@ -19,7 +19,7 @@ const buildCourseDropdown = ({
 };
 
 const displayCoursesInDropdown = (
-  pinnedCourses: Course[],
+  pinnedCourses: MoodleData['pinnedCourses'],
   menuItem: HTMLElement,
 ) => {
   const div = document.createElement('div');
@@ -48,7 +48,7 @@ const displayCoursesInDropdown = (
 };
 
 const displayCoursesInNavbar = (
-  pinnedCourses: Course[],
+  pinnedCourses: MoodleData['pinnedCourses'],
   menuItem: HTMLElement,
 ) => {
   (menuItem as HTMLElement).style.display = 'none';

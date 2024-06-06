@@ -1,8 +1,12 @@
 import { MoodleData } from '../../../types';
+import { DataType, setDataObject } from '../../common/chromeData';
 
 const addNavItemListeners = (
-  moodleData: MoodleData,
-  updateCourseDropdown: (moodleData: MoodleData) => void,
+  { pinnedCourses, pinnedCoursesDisplay }: MoodleData,
+  updateCourseDropdown: (
+    pinnedCourses: MoodleData['pinnedCourses'],
+    pinnedCoursesDisplay: MoodleData['pinnedCoursesDisplay'],
+  ) => void,
 ) => {
   if (!window.location.pathname.includes('/my/courses.php')) {
     return;
@@ -21,7 +25,7 @@ const addNavItemListeners = (
         const navItem = document.createElement('a');
         navItem.classList.add('dropdown-item');
         navItem.href = '#';
-        navItem.innerText = moodleData.pinnedCourses.find(
+        navItem.innerText = pinnedCourses.find(
           (item) => item.id == card.getAttribute('data-course-id'),
         )
           ? 'Unpin from navbar'
@@ -42,7 +46,7 @@ const addNavItemListeners = (
                 .split('\n')
                 .at(-1);
             }
-            moodleData.pinnedCourses.push({
+            pinnedCourses.push({
               id: card.getAttribute('data-course-id') as string,
               name:
                 name!.split(' ')[0].search(/(?:\w+\d+)/) !== -1
@@ -50,15 +54,13 @@ const addNavItemListeners = (
                   : (name as string),
             });
           } else {
-            moodleData.pinnedCourses = moodleData.pinnedCourses.filter(
+            pinnedCourses = pinnedCourses.filter(
               (item) => item.id != card.getAttribute('data-course-id'),
             );
           }
           addNavItems();
-          updateCourseDropdown(moodleData);
-          chrome.storage.local.set({
-            moodleData,
-          });
+          updateCourseDropdown(pinnedCourses, pinnedCoursesDisplay);
+          setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
         });
         card.querySelector('.dropdown-menu')!.append(navItem);
       });

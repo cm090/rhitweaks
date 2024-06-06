@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getAllData, setAllData } from '../../../content/common/chromeData';
 import {
   bannerDefaults,
   moodleDefaults,
@@ -19,23 +20,21 @@ const App = (): JSX.Element => {
     useState<ScheduleData>(scheduleDefaults);
   const [bannerData, setBannerData] = useState<BannerData>(bannerDefaults);
 
-  useEffect(
-    () =>
-      chrome.storage.local.get(null, (result) => {
-        setMoodleData((prevData) => ({ ...prevData, ...result.moodleData }));
-        setScheduleData((prevData) => ({
-          ...prevData,
-          ...result.scheduleData,
-        }));
-        setBannerData((prevData) => ({ ...prevData, ...result.bannerData }));
-        setReady(true);
-      }),
-    [],
-  );
+  useEffect(() => {
+    getAllData().then((result) => {
+      setMoodleData((prevData) => ({ ...prevData, ...result.moodleData }));
+      setScheduleData((prevData) => ({
+        ...prevData,
+        ...result.scheduleData,
+      }));
+      setBannerData((prevData) => ({ ...prevData, ...result.bannerData }));
+      setReady(true);
+    });
+  }, []);
 
   useEffect(() => {
     if (ready) {
-      chrome.storage.local.set({ moodleData, scheduleData, bannerData });
+      setAllData({ moodleData, scheduleData, bannerData });
     }
   }, [moodleData, scheduleData, bannerData]);
 
