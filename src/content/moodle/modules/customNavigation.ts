@@ -1,16 +1,28 @@
 import { MoodleData } from '../../../types';
-import { DataType, setDataObject } from '../../common/chromeData';
+import {
+  DataType,
+  getDataItem,
+  onDataChanged,
+  setDataObject,
+} from '../../common/chromeData';
 
-const addNavItemListeners = (
-  { pinnedCourses, pinnedCoursesDisplay }: MoodleData,
-  updateCourseDropdown: (
-    pinnedCourses: MoodleData['pinnedCourses'],
-    pinnedCoursesDisplay: MoodleData['pinnedCoursesDisplay'],
-  ) => void,
-) => {
+const initializeNavItemListeners = () => {
   if (!window.location.pathname.includes('/my/courses.php')) {
     return;
   }
+  getDataItem(DataType.MoodleData, 'pinnedCourses').then((pinnedCourses) =>
+    updateNavItemButtons(pinnedCourses as MoodleData['pinnedCourses']),
+  );
+  onDataChanged(DataType.MoodleData, (oldData, newData) => {
+    const oldCourses = (oldData as MoodleData).pinnedCourses;
+    const newCourses = (newData as MoodleData).pinnedCourses;
+    if (oldCourses != newCourses) {
+      updateNavItemButtons(newCourses);
+    }
+  });
+};
+
+const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
   const addNavItems = () => {
     for (const card of Array.from(
       document.querySelectorAll(
@@ -55,7 +67,6 @@ const addNavItemListeners = (
           );
         }
         addNavItems();
-        updateCourseDropdown(pinnedCourses, pinnedCoursesDisplay);
         setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
       });
       card.querySelector('.dropdown-menu')!.append(navItem);
@@ -80,4 +91,4 @@ const addNavItemListeners = (
   wait();
 };
 
-export default addNavItemListeners;
+export default initializeNavItemListeners;

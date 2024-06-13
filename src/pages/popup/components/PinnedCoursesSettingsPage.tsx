@@ -1,7 +1,16 @@
 import { Delete } from '@mui/icons-material';
-import { FormControl, FormLabel, IconButton, Input, Option, Select } from '@mui/joy';
-import React from 'react';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Input,
+  Option,
+  Select,
+} from '@mui/joy';
+import React, { useState } from 'react';
 import { Course, MoodleData, Page } from '../../../types';
+import ResetWarningDialog from './ResetWarningDialog';
 import SettingsWrapper from './SettingsWrapper';
 
 interface PinnedCoursesSettingsPageProps {
@@ -13,7 +22,8 @@ interface PinnedCoursesSettingsPageProps {
 const PinnedCoursesSettingsPage = (
   props: PinnedCoursesSettingsPageProps,
 ): JSX.Element => {
-  const [selectedCourse, setSelectedCourse] = React.useState<Course>();
+  const [selectedCourse, setSelectedCourse] = useState<Course>();
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
 
   return (
     <SettingsWrapper
@@ -60,15 +70,31 @@ const PinnedCoursesSettingsPage = (
           onChange={() => null}
           endDecorator={
             <>
-              <IconButton
-                onClick={() => null}
-              >
+              <IconButton onClick={() => null}>
                 <Delete />
               </IconButton>
             </>
           }
         />
       </FormControl>
+      <Button
+        color="danger"
+        sx={{ width: '100%', marginBlock: '10px' }}
+        onClick={() => setResetDialogOpen(true)}
+      >
+        Clear pinned courses
+      </Button>
+      <ResetWarningDialog
+        open={resetDialogOpen}
+        setOpen={setResetDialogOpen}
+        onConfirm={() =>
+          props.setData((prevData) => ({
+            ...prevData,
+            pinnedCourses: [],
+          }))
+        }
+        dataType="pinned courses"
+      />
     </SettingsWrapper>
   );
 };

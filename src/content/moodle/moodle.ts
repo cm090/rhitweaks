@@ -5,7 +5,7 @@ import { MoodleData } from '../../types';
 import { DataType, getDataObject, onDataChanged } from '../common/chromeData';
 import addButtonsToPageContent from './modules/addButtons';
 import buildCourseDropdown from './modules/courseDropdown';
-import addNavItemListeners from './modules/customNavigation';
+import initializeNavItemListeners from './modules/customNavigation';
 import transformUrl from './modules/modifyUrl';
 import applyStyle from './modules/setStyle';
 import addSearchModal from './modules/siteSearch';
@@ -85,13 +85,7 @@ const initialize = (moodleData: MoodleData) => {
     })
     .then(() => {
       buildCourseDropdown(moodleData);
-      addNavItemListeners(moodleData, (pinnedCourses, pinnedCoursesDisplay) =>
-        buildCourseDropdown({
-          ...moodleData,
-          pinnedCourses,
-          pinnedCoursesDisplay,
-        }),
-      );
+      initializeNavItemListeners();
       setTimeout(reloadPageIfNecessary, 5000);
     });
 };
