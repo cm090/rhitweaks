@@ -28,10 +28,13 @@ const addSearchModal = async (
   ) {
     return Promise.resolve();
   }
-  if (document.querySelector('#page-header')) {
-    document.querySelector('#page-header')!.innerHTML += searchModal;
-  } else if (document.querySelector('footer')) {
-    document.querySelector('footer')!.innerHTML += searchModal;
+
+  const header = document.querySelector('#page-header');
+  const footer = document.querySelector('footer');
+  if (header) {
+    header.innerHTML += searchModal;
+  } else if (footer) {
+    footer.innerHTML += searchModal;
   }
   setupSearchModal(pinnedCourses, bootstrap, $);
   initializeCourseEvaluations();

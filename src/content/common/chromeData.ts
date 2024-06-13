@@ -19,6 +19,11 @@ type ValueType =
   | BannerData[keyof BannerData]
   | ScheduleData[keyof ScheduleData];
 
+type Listener = {
+  scope: DataType;
+  callback: (oldData: StorageData, newData: StorageData) => void;
+};
+
 const getAllData = (): Promise<DataObject> =>
   new Promise((resolve, reject) => {
     try {
@@ -73,19 +78,27 @@ const setDataObject = (scope: DataType, key: KeyType, value: ValueType) =>
     }),
   );
 
-const onDataChanged = (
-  scope: DataType,
-  callback: (oldData: StorageData, newData: StorageData) => void,
-) =>
-  chrome.storage.local.onChanged.addListener((changes) =>
-    callback(changes[scope].oldValue, changes[scope].newValue),
-  );
+const dataListeners: Listener[] = [];
+
+const onDataChanged = (scope: DataType, callback: Listener['callback']) =>
+  dataListeners.push({ scope, callback });
+
+chrome.storage.local.onChanged.addListener((changes) => {
+  for (const listener of dataListeners) {
+    if (changes[listener.scope]) {
+      listener.callback(
+        changes[listener.scope].oldValue,
+        changes[listener.scope].newValue,
+      );
+    }
+  }
+});
 
 export {
   getAllData,
-  getDataObject,
   getDataItem,
+  getDataObject,
+  onDataChanged,
   setAllData,
   setDataObject,
-  onDataChanged,
 };

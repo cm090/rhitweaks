@@ -36,7 +36,7 @@ const App = (): JSX.Element => {
     if (ready) {
       setAllData({ moodleData, scheduleData, bannerData });
     }
-  }, [moodleData, scheduleData, bannerData]);
+  }, [ready, moodleData, scheduleData, bannerData]);
 
   switch (activePage) {
     case 'home':
