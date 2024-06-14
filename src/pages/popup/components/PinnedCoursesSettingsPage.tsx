@@ -22,8 +22,29 @@ interface PinnedCoursesSettingsPageProps {
 const PinnedCoursesSettingsPage = (
   props: PinnedCoursesSettingsPageProps,
 ): JSX.Element => {
-  const [selectedCourse, setSelectedCourse] = useState<Course>();
+  const emptyCourse: Course = { id: '', name: '' };
+  const [selectedCourse, setSelectedCourse] = useState<Course>(emptyCourse);
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const updateCourseName = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
+    setSelectedCourse((prevCourse) => {
+      const updatedCourse = { ...prevCourse, name: target.value } as Course;
+      props.setData((prevData) => ({
+        ...prevData,
+        pinnedCourses: prevData.pinnedCourses.map((course) =>
+          course.id === selectedCourse?.id ? updatedCourse : course,
+        ),
+      }));
+      return updatedCourse;
+    });
+  const deleteSelectedCourse = () => {
+    props.setData((prevData) => ({
+      ...prevData,
+      pinnedCourses: prevData.pinnedCourses.filter(
+        (course) => course.id !== selectedCourse?.id,
+      ),
+    }));
+    setSelectedCourse(emptyCourse);
+  };
 
   return (
     <SettingsWrapper
@@ -51,12 +72,13 @@ const PinnedCoursesSettingsPage = (
           value={selectedCourse?.id ?? ''}
           onChange={(_, course) =>
             setSelectedCourse(
-              props.data.pinnedCourses.find((c) => c.id === course),
+              props.data.pinnedCourses.find((c) => c.id === course) ??
+                emptyCourse,
             )
           }
         >
           {props.data.pinnedCourses.map((course) => (
-            <Option key={course.id} value={course.id}>
+            <Option key={course.id} value={course.id} sx={{ width: 'inherit' }}>
               {course.name}
             </Option>
           ))}
@@ -66,11 +88,15 @@ const PinnedCoursesSettingsPage = (
         <FormLabel>Label</FormLabel>
         <Input
           variant="outlined"
+          disabled={!selectedCourse.id}
           value={selectedCourse?.name}
-          onChange={() => null}
+          onChange={updateCourseName}
           endDecorator={
             <>
-              <IconButton onClick={() => null}>
+              <IconButton
+                onClick={deleteSelectedCourse}
+                disabled={!selectedCourse.id}
+              >
                 <Delete />
               </IconButton>
             </>
