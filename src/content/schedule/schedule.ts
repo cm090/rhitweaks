@@ -15,13 +15,14 @@ const printListener = () =>
   });
 
 const getData = () => {
-  getDataObject(DataType.ScheduleData).then((data) => {
-    const scheduleData = { ...scheduleDefaults, ...data };
-    buildStyleProperties(scheduleData);
-    if (scheduleData.enabled) {
-      runApp(true);
-    }
-  });
+  getDataObject(DataType.ScheduleData)
+    .then((data) => {
+      const scheduleData = { ...scheduleDefaults, ...data };
+      attemptAppStart(scheduleData);
+    })
+    .catch(() => {
+      attemptAppStart(scheduleDefaults);
+    });
   onDataChanged(DataType.ScheduleData, (oldData, newData) => {
     if (oldData.enabled != newData.enabled) {
       window.location.reload();
@@ -29,6 +30,13 @@ const getData = () => {
     }
     buildStyleProperties(newData as ScheduleData);
   });
+};
+
+const attemptAppStart = (scheduleData: ScheduleData) => {
+  buildStyleProperties(scheduleData);
+  if (scheduleData.enabled) {
+    runApp(true);
+  }
 };
 
 const buildStyleProperties = (data: ScheduleData) => {
@@ -101,9 +109,10 @@ const runApp = (allowPrint: boolean) => {
   setTimeout(() => {
     const signOut = document.getElementById('signOut');
     if (signOut) {
-      signOut.onclick = () =>
-        (window.location.href =
-          'https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl');
+      signOut.onclick = () => {
+        window.location.href =
+          'https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/CASlogout.pl?url=https%3A%2F%2Fprodwebxe-hv.rose-hulman.edu%3A443%2Fregweb-cgi%2Freg-sched.pl';
+      };
       try {
         const downloadRoster = document.getElementById('downloadRoster');
         if (downloadRoster) {

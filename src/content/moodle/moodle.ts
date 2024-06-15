@@ -17,16 +17,20 @@ const configureMoodle = () => {
 };
 
 const handleMoodlePageInitialization = () => {
-  try {
-    getDataObject(DataType.MoodleData).then((data) => {
+  getDataObject(DataType.MoodleData)
+    .then((data) => {
       const moodleData = { ...moodleDefaults, ...data };
-      setStyleProperties(moodleData);
-      if (moodleData.enabled && document.getElementById('page-wrapper')) {
-        initialize(moodleData);
-      }
+      attemptAppStart(moodleData);
+    })
+    .catch(() => {
+      attemptAppStart(moodleDefaults);
     });
-  } catch (e) {
-    console.error('RHITweaks > Error initializing Moodle page', e);
+};
+
+const attemptAppStart = (moodleData: MoodleData) => {
+  setStyleProperties(moodleData);
+  if (moodleData.enabled && document.getElementById('page-wrapper')) {
+    initialize(moodleData);
   }
 };
 
