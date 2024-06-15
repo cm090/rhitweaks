@@ -19,6 +19,16 @@
                 "https://moodle.rose-hulman.edu/*"
             ],
             "run_at": "document_end"
+        },
+        {
+            "js": [
+                "content/schedule/schedule.ts"
+            ],
+            "matches": [
+                "https://prodwebxe-hv.rose-hulman.edu/*",
+                "https://prodwebxe7-hv.rose-hulman.edu/*"
+            ],
+            "run_at": "document_end"
         }
     ]
 }
