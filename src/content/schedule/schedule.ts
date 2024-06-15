@@ -1,5 +1,6 @@
 import { scheduleDefaults } from '../../defaults';
-import { DataType, getDataObject } from '../common/chromeData';
+import { ScheduleData } from '../../types';
+import { DataType, getDataObject, onDataChanged } from '../common/chromeData';
 import detailPage from './detail-page.html';
 import homePage from './home-page.html';
 import lookupPage from './lookup-page.html';
@@ -16,28 +17,26 @@ const printListener = () =>
 const getData = () => {
   getDataObject(DataType.ScheduleData).then((data) => {
     const scheduleData = { ...scheduleDefaults, ...data };
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', scheduleData.bgColor);
-    root.style.setProperty('--accent-color', scheduleData.accentColor);
-    root.style.setProperty('--text-color', scheduleData.textColor);
-    root.style.setProperty('--border-color', scheduleData.borderColor);
+    buildStyleProperties(scheduleData);
     if (scheduleData.enabled) {
       runApp(true);
     }
   });
-  chrome.storage.local.onChanged.addListener((changes) => {
-    const oldData = changes.schedule.oldValue;
-    const newData = changes.schedule.newValue;
+  onDataChanged(DataType.ScheduleData, (oldData, newData) => {
     if (oldData.enabled != newData.enabled) {
       window.location.reload();
       return;
     }
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--bg-color', newData.bgColor || '#000000');
-    root.style.setProperty('--accent-color', newData.accentColor || '#800000');
-    root.style.setProperty('--text-color', newData.textColor || '#ffffff');
-    root.style.setProperty('--border-color', newData.borderColor || '#808080');
+    buildStyleProperties(newData as ScheduleData);
   });
+};
+
+const buildStyleProperties = (data: ScheduleData) => {
+  const root = document.querySelector(':root') as HTMLElement;
+  root.style.setProperty('--bg-color', data.bgColor);
+  root.style.setProperty('--accent-color', data.accentColor);
+  root.style.setProperty('--text-color', data.textColor);
+  root.style.setProperty('--border-color', data.borderColor);
 };
 
 const setStyles = () => {
@@ -63,34 +62,30 @@ const setStyles = () => {
       }
     }
   } else if (document.title.includes('Course Matrix View')) {
-    const body = document.querySelector('body');
-    if (body) {
-      body.innerHTML = matrixPage + body.innerHTML;
-    }
-    if (htmlElement) {
-      htmlElement.setAttribute('page', 'matrix');
-    }
+    appendToPage(htmlElement, matrixPage, 'matrix');
   } else if (document.querySelectorAll('table').length > 1) {
-    const body = document.querySelector('body');
-    if (body) {
-      body.innerHTML = detailPage + body.innerHTML;
-    }
-    if (htmlElement) {
-      htmlElement.setAttribute('page', 'detail');
-    }
+    appendToPage(htmlElement, detailPage, 'detail');
   } else if (document.title.includes('Schedule Options')) {
-    const body = document.querySelector('body');
-    if (body) {
-      body.innerHTML = lookupPage + body.innerHTML;
-    }
-    if (htmlElement) {
-      htmlElement.setAttribute('page', 'lookup');
-    }
+    appendToPage(htmlElement, lookupPage, 'lookup');
   }
   import('./styles.css');
   document.querySelectorAll('table').forEach((table) => {
     table.setAttribute('bgcolor', '');
   });
+};
+
+const appendToPage = (
+  htmlElement: HTMLElement | null,
+  module: string,
+  pageAttribute: string,
+) => {
+  const body = document.querySelector('body');
+  if (body) {
+    body.innerHTML = module + body.innerHTML;
+  }
+  if (htmlElement) {
+    htmlElement.setAttribute('page', pageAttribute);
+  }
 };
 
 const runApp = (allowPrint: boolean) => {
