@@ -32,19 +32,15 @@ export default {
     chromeExtension(),
     // Adds a Chrome extension reloader during watch mode
     simpleReloader(),
-    resolve(),
+    resolve({ browser: true }),
     commonjs(),
-    typescript(),
+    typescript({ tsconfig: './tsconfig.json' }),
     // Empties the output dir before a new build
     emptyDir(),
     // Outputs a zip file in ./releases
     isProduction && zip({ dir: 'releases' }),
     preserveDirectives(),
-    postcss({
-      extensions: ['.css'],
-    }),
-    html({
-      include: '**/*.html',
-    }),
+    postcss({ extensions: ['.css'] }),
+    html({ include: '**/*.html' }),
   ],
 };

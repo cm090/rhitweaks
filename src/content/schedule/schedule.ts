@@ -1,10 +1,50 @@
 import { scheduleDefaults } from '../../defaults';
-import { ScheduleData } from '../../types';
-import { DataType, getDataObject, onDataChanged } from '../common/chromeData';
+import { ScheduleData, StorageData } from '../../types';
 import detailPage from './detail-page.html';
 import homePage from './home-page.html';
 import lookupPage from './lookup-page.html';
 import matrixPage from './matrix-page.html';
+
+export enum DataType {
+  MoodleData = 'moodleData',
+  ScheduleData = 'scheduleData',
+  BannerData = 'bannerData',
+}
+
+type Listener = {
+  scope: DataType;
+  callback: (oldData: StorageData, newData: StorageData) => void;
+};
+
+const getDataObject = (scope: DataType): Promise<StorageData> =>
+  new Promise((resolve, reject) => {
+    try {
+      chrome.storage.local.get(scope, (data) => {
+        if (!data[scope]) {
+          throw new Error('Data not found');
+        }
+        resolve(data[scope]);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+const dataListeners: Listener[] = [];
+
+const onDataChanged = (scope: DataType, callback: Listener['callback']) =>
+  dataListeners.push({ scope, callback });
+
+chrome.storage.local.onChanged.addListener((changes) => {
+  for (const listener of dataListeners) {
+    if (changes[listener.scope]) {
+      listener.callback(
+        changes[listener.scope].oldValue,
+        changes[listener.scope].newValue,
+      );
+    }
+  }
+});
 
 const printListener = () =>
   document.addEventListener('keydown', (e) => {
