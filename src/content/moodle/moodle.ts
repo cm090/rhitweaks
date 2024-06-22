@@ -2,7 +2,12 @@ import * as bootstrap from 'bootstrap';
 import $ from 'jquery';
 import { moodleDefaults } from '../../defaults';
 import { MoodleData } from '../../types';
-import { DataType, getDataObject, onDataChanged } from '../common/chromeData';
+import {
+  DataType,
+  getDataObject,
+  onDataChanged,
+  removeChangeListeners,
+} from '../common/chromeData';
 import addButtonsToPageContent from './modules/addButtons';
 import buildCourseDropdown from './modules/courseDropdown';
 import initializeNavItemListeners from './modules/customNavigation';
@@ -12,6 +17,7 @@ import addSearchModal from './modules/siteSearch';
 import formatTimeline from './modules/timelineFormat';
 
 const configureMoodle = () => {
+  removeChangeListeners();
   handleMoodlePageInitialization();
   handleMoodlePageUpdate();
 };

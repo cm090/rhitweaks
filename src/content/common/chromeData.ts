@@ -83,6 +83,9 @@ const dataListeners: Listener[] = [];
 const onDataChanged = (scope: DataType, callback: Listener['callback']) =>
   dataListeners.push({ scope, callback });
 
+const removeChangeListeners = () =>
+  dataListeners.splice(0, dataListeners.length);
+
 chrome.storage.local.onChanged.addListener((changes) => {
   for (const listener of dataListeners) {
     if (changes[listener.scope]) {
@@ -99,6 +102,7 @@ export {
   getDataItem,
   getDataObject,
   onDataChanged,
+  removeChangeListeners,
   setAllData,
   setDataObject,
 };

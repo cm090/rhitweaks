@@ -50,7 +50,8 @@ const printListener = () =>
   document.addEventListener('keydown', (e) => {
     if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'p') {
       e.preventDefault();
-      window.location.assign(window.location.href + '#print');
+      window.location.hash = 'print';
+      window.location.reload();
     }
   });
 
@@ -75,7 +76,7 @@ const getData = () => {
 const attemptAppStart = (scheduleData: ScheduleData) => {
   buildStyleProperties(scheduleData);
   if (scheduleData.enabled) {
-    runApp(true);
+    runApp();
   }
 };
 
@@ -136,12 +137,10 @@ const appendToPage = (
   }
 };
 
-const runApp = (allowPrint: boolean) => {
-  if (window.location.hash == '#print' && allowPrint) {
+const runApp = () => {
+  if (window.location.hash == '#print') {
     window.print();
-    window.history.back();
-    runApp(false);
-    return;
+    window.location.hash = '';
   }
   printListener();
   setStyles();
