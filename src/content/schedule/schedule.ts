@@ -5,25 +5,16 @@ import homePage from './home-page.html';
 import lookupPage from './lookup-page.html';
 import matrixPage from './matrix-page.html';
 
-export enum DataType {
-  MoodleData = 'moodleData',
-  ScheduleData = 'scheduleData',
-  BannerData = 'bannerData',
-}
+type Listener = (oldData: StorageData, newData: StorageData) => void;
 
-type Listener = {
-  scope: DataType;
-  callback: (oldData: StorageData, newData: StorageData) => void;
-};
-
-const getDataObject = (scope: DataType): Promise<StorageData> =>
+const getDataObject = (): Promise<StorageData> =>
   new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.get(scope, (data) => {
-        if (!data[scope]) {
+      chrome.storage.local.get('scheduleData', (data) => {
+        if (!data.scheduleData) {
           throw new Error('Data not found');
         }
-        resolve(data[scope]);
+        resolve(data.scheduleData);
       });
     } catch (e) {
       reject(e);
@@ -32,16 +23,12 @@ const getDataObject = (scope: DataType): Promise<StorageData> =>
 
 const dataListeners: Listener[] = [];
 
-const onDataChanged = (scope: DataType, callback: Listener['callback']) =>
-  dataListeners.push({ scope, callback });
+const onDataChanged = (callback: Listener) => dataListeners.push(callback);
 
 chrome.storage.local.onChanged.addListener((changes) => {
   for (const listener of dataListeners) {
-    if (changes[listener.scope]) {
-      listener.callback(
-        changes[listener.scope].oldValue,
-        changes[listener.scope].newValue,
-      );
+    if (changes.scheduleData) {
+      listener(changes.scheduleData.oldValue, changes.scheduleData.newValue);
     }
   }
 });
@@ -56,7 +43,7 @@ const printListener = () =>
   });
 
 const getData = () => {
-  getDataObject(DataType.ScheduleData)
+  getDataObject()
     .then((data) => {
       const scheduleData = { ...scheduleDefaults, ...data };
       attemptAppStart(scheduleData);
@@ -64,7 +51,7 @@ const getData = () => {
     .catch(() => {
       attemptAppStart(scheduleDefaults);
     });
-  onDataChanged(DataType.ScheduleData, (oldData, newData) => {
+  onDataChanged((oldData, newData) => {
     if (oldData.enabled != newData.enabled) {
       window.location.reload();
       return;

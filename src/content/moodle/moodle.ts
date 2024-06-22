@@ -17,7 +17,7 @@ import addSearchModal from './modules/siteSearch';
 import formatTimeline from './modules/timelineFormat';
 
 const configureMoodle = () => {
-  removeChangeListeners();
+  removeChangeListeners(DataType.MoodleData);
   handleMoodlePageInitialization();
   handleMoodlePageUpdate();
 };

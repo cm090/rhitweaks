@@ -83,8 +83,12 @@ const dataListeners: Listener[] = [];
 const onDataChanged = (scope: DataType, callback: Listener['callback']) =>
   dataListeners.push({ scope, callback });
 
-const removeChangeListeners = () =>
-  dataListeners.splice(0, dataListeners.length);
+const removeChangeListeners = (scope: DataType) =>
+  dataListeners
+    .filter((listener) => listener.scope === scope)
+    .forEach((listener) =>
+      dataListeners.splice(dataListeners.indexOf(listener), 1),
+    );
 
 chrome.storage.local.onChanged.addListener((changes) => {
   for (const listener of dataListeners) {
