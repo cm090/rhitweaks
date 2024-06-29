@@ -29,6 +29,15 @@
                 "https://prodwebxe7-hv.rose-hulman.edu/*"
             ],
             "run_at": "document_end"
+        },
+        {
+            "js": [
+                "content/banner/banner.ts"
+            ],
+            "matches": [
+                "https://bannerssb.rose-hulman.edu/*"
+            ],
+            "run_at": "document_end"
         }
     ]
 }

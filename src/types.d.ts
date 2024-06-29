@@ -41,3 +41,9 @@ export type Page =
   | 'moodleSettings'
   | 'scheduleSettings'
   | 'bannerSettings';
+
+export interface BannerLink {
+  title: string;
+  icon: string;
+  url: string;
+}
