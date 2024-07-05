@@ -56,10 +56,8 @@ const PinnedCoursesSettingsPage = (
         <Select
           value={props.data.pinnedCoursesDisplay}
           onChange={(_, pinnedCoursesDisplay) =>
-            props.setData(
-              (prevData) =>
-                ({ ...prevData, pinnedCoursesDisplay } as MoodleData),
-            )
+            pinnedCoursesDisplay &&
+            props.setData((prevData) => ({ ...prevData, pinnedCoursesDisplay }))
           }
         >
           <Option value="dropdown">Dropdown</Option>

@@ -59,9 +59,8 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
         <Select
           value={props.data.timeFormat}
           onChange={(_, timeFormat) =>
-            props.setData(
-              (prevData) => ({ ...prevData, timeFormat } as MoodleData),
-            )
+            timeFormat &&
+            props.setData((prevData) => ({ ...prevData, timeFormat }))
           }
         >
           <Option value={12}>12 hour (AM/PM)</Option>
