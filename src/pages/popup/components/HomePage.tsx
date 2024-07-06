@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Link, Sheet, Typography } from '@mui/joy';
 import React, { useState } from 'react';
-import { BannerData, MoodleData, Page, ScheduleData } from '../../../types';
+import { ExtensionData, Page, SetExtensionData } from '../../../types';
 import ToggleItem from './ToggleItem';
 
 export enum StorageKeys {
@@ -10,16 +10,8 @@ export enum StorageKeys {
 }
 
 interface HomePageProps {
-  data: {
-    moodleData: MoodleData;
-    scheduleData: ScheduleData;
-    bannerData: BannerData;
-  };
-  setData: {
-    setMoodleData: React.Dispatch<React.SetStateAction<MoodleData>>;
-    setScheduleData: React.Dispatch<React.SetStateAction<ScheduleData>>;
-    setBannerData: React.Dispatch<React.SetStateAction<BannerData>>;
-  };
+  data: ExtensionData;
+  setData: SetExtensionData;
   setPage: (page: Page) => void;
 }
 

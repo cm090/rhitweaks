@@ -32,6 +32,18 @@ export interface BannerData {
   links: 'student' | 'faculty';
 }
 
+export type ExtensionData = {
+  moodleData: MoodleData;
+  scheduleData: ScheduleData;
+  bannerData: BannerData;
+};
+
+export type SetExtensionData = {
+  setMoodleData: React.Dispatch<React.SetStateAction<MoodleData>>;
+  setScheduleData: React.Dispatch<React.SetStateAction<ScheduleData>>;
+  setBannerData: React.Dispatch<React.SetStateAction<BannerData>>;
+};
+
 export type StorageData = MoodleData | ScheduleData | BannerData;
 
 export type Page =

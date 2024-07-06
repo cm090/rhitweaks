@@ -24,7 +24,7 @@ const BannerSettingsPage = (props: BannerSettingsPageProps): JSX.Element => {
           <Option value="faculty">Faculty (in progress)</Option>
         </Select>
       </FormControl>
-      <Box sx={{ marginBlock: '50px' }} />
+      <Box sx={{ height: '100px' }} />
     </SettingsWrapper>
   );
 };

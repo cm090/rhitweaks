@@ -6,12 +6,12 @@ import {
   scheduleDefaults,
 } from '../../../defaults';
 import { BannerData, MoodleData, Page, ScheduleData } from '../../../types';
+import AdditionalSettingsPage from './AdditionalSettingsPage';
 import BannerSettingsPage from './BannerSettingsPage';
 import HomePage from './HomePage';
 import MoodleSettingsPage from './MoodleSettingsPage';
 import PinnedCoursesSettingsPage from './PinnedCoursesSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
-import AdditionalSettingsPage from './AdditionalSettingsPage';
 
 const App = (): JSX.Element => {
   const [ready, setReady] = useState<boolean>(false);
@@ -81,7 +81,17 @@ const App = (): JSX.Element => {
         />
       );
     case 'additionalSettings':
-      return <AdditionalSettingsPage setPage={setActivePage} />;
+      return (
+        <AdditionalSettingsPage
+          data={{ moodleData, bannerData, scheduleData }}
+          setData={{
+            setMoodleData,
+            setBannerData,
+            setScheduleData,
+          }}
+          setPage={setActivePage}
+        />
+      );
   }
 };
 

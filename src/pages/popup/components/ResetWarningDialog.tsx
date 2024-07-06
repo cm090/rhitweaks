@@ -13,7 +13,8 @@ interface ResetWarningDialogProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onConfirm: () => void;
-  dataType: string;
+  dataType?: string;
+  isAllData?: boolean;
 }
 
 const ResetWarningDialog = (props: ResetWarningDialogProps): JSX.Element => {
@@ -28,11 +29,12 @@ const ResetWarningDialog = (props: ResetWarningDialogProps): JSX.Element => {
   return (
     <Modal open={open} onClose={closeDialog}>
       <ModalDialog variant="outlined" role="alertdialog">
-        <DialogTitle>Reset {props.dataType} data</DialogTitle>
+        <DialogTitle>Reset {props.dataType ?? 'all'} data</DialogTitle>
         <Divider />
         <DialogContent>
-          Are you sure you want to reset your {props.dataType} data? This cannot
-          be undone.
+          Are you sure you want to reset {props.isAllData ? 'all ' : ''}your{' '}
+          {props.dataType ? `${props.dataType} ` : ''}data? This cannot be
+          undone.
         </DialogContent>
         <DialogActions>
           <Button
