@@ -11,6 +11,19 @@ interface ToggleItemProps {
   setPage: (page: Page) => void;
 }
 
+const requestHostPermissions = () => {
+  chrome.permissions.request({
+    origins: [
+      'https://moodle.rose-hulman.edu/*',
+      'https://prodwebxe-hv.rose-hulman.edu/*',
+      'https://prodwebxe7-hv.rose-hulman.edu/*',
+      'https://bannerssb.rose-hulman.edu/*',
+      'https://print.rhit.cf/*',
+      'https://print.rose-hulman.edu:9192/*',
+    ],
+  });
+};
+
 const ToggleItem = (props: ToggleItemProps): JSX.Element => {
   return (
     <Box
@@ -24,7 +37,12 @@ const ToggleItem = (props: ToggleItemProps): JSX.Element => {
       <Checkbox
         variant="solid"
         label={`${props.name} tweaks`}
-        onChange={(e) => props.setData(e.target.checked)}
+        onChange={(e) => {
+          if (e.target.checked) {
+            requestHostPermissions();
+          }
+          props.setData(e.target.checked);
+        }}
         checked={props.data ?? false}
       />
       {props.data && (
