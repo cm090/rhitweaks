@@ -38,6 +38,30 @@
                 "https://bannerssb.rose-hulman.edu/*"
             ],
             "run_at": "document_end"
+        },
+        {
+            "js": [
+                "content/print/print.ts"
+            ],
+            "matches": [
+                "https://print.rhit.cf/*",
+                "https://print.rose-hulman.edu:9192/*"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "service_worker": "background.ts"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "content/print/modules/*"
+            ],
+            "matches": [
+                "https://print.rhit.cf/*",
+                "https://print.rose-hulman.edu:9192/*"
+            ]
         }
     ]
 }
