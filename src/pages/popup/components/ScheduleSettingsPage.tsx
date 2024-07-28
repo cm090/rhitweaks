@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { scheduleDefaults } from '../../../defaults';
 import { Page, ScheduleData } from '../../../types';
 import ColorPicker from './ColorPicker';
@@ -10,9 +10,7 @@ interface ScheduleSettingsPageProps {
   setData: React.Dispatch<React.SetStateAction<ScheduleData>>;
 }
 
-const ScheduleSettingsPage = (
-  props: ScheduleSettingsPageProps,
-): JSX.Element => {
+const ScheduleSettingsPage = (props: ScheduleSettingsPageProps): ReactNode => {
   return (
     <SettingsWrapper page="Schedule Lookup" back={() => props.setPage('home')}>
       <ColorPicker

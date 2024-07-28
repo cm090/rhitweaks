@@ -1,5 +1,6 @@
 import { BannerData, MoodleData, ScheduleData, StorageData } from '../../types';
 
+// noinspection JSUnusedGlobalSymbols
 export enum DataType {
   MoodleData = 'moodleData',
   ScheduleData = 'scheduleData',

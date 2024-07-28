@@ -1,62 +1,67 @@
+/*noinspection CssUnusedSymbol*/
 #branding {
-  background-image: url(https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png);
-  background-size: contain;
+    background-image: url(https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png);
+    background-size: contain;
 }
 
 #header-main-section {
-  background-color: #800000;
-  border: none;
+    background-color: #800000;
+    border: none;
 }
 
+/*noinspection CssUnusedSymbol*/
 #header-main-section-east-part #userDiv {
-  background-color: unset;
+    background-color: unset;
 }
 
 .banner-home {
-  margin: 1rem;
+    margin: 1rem;
 }
 
 .banner-home .card {
-  margin-bottom: 1rem;
-  transition: all 0.2s ease-in-out;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease-in-out;
 }
 
 .banner-home .card:hover {
-  box-shadow: 0 0 0 0.2rem #80000040;
-  transform: scale(1.01);
-  cursor: pointer;
+    box-shadow: 0 0 0 0.2rem #80000040;
+    transform: scale(1.01);
+    cursor: pointer;
 }
 
 .banner-home .card-title {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
+/*noinspection CssUnusedSymbol*/
 .banner-home .fa,
 .banner-home .fas {
-  width: 25px;
+    width: 25px;
 }
 
 .banner-home h3 {
-  margin-left: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 #banner-home {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
+/*noinspection CssUnusedSymbol*/
 .gen-home-main-view {
-  background-color: #f6f6f6 !important;
-  height: unset !important;
+    background-color: #f6f6f6 !important;
+    height: unset !important;
 }
 
 div[ng-app='generalSsbApp']#content {
-  height: unset !important;
+    height: unset !important;
 }
 
 thead .column-visibility-menu {
-  height: 40px !important;
+    height: 40px !important;
 }
 
+/*noinspection CssUnusedSymbol*/
 .notification-center-shim {
-  display: none;
+    display: none;
 }

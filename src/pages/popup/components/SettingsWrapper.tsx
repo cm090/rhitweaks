@@ -1,6 +1,6 @@
 import { ArrowLeft } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/joy';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface SettingsWrapperProps {
   page: string;
@@ -8,7 +8,7 @@ interface SettingsWrapperProps {
   children?: React.ReactNode;
 }
 
-const SettingsWrapper = (props: SettingsWrapperProps): JSX.Element => {
+const SettingsWrapper = (props: SettingsWrapperProps): ReactNode => {
   return (
     <Box
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}

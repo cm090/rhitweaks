@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { getAllData, setAllData } from '../../../content/common/chromeData';
 import {
   bannerDefaults,
@@ -13,7 +13,7 @@ import MoodleSettingsPage from './MoodleSettingsPage';
 import PinnedCoursesSettingsPage from './PinnedCoursesSettingsPage';
 import ScheduleSettingsPage from './ScheduleSettingsPage';
 
-const App = (): JSX.Element => {
+const App = (): ReactNode => {
   const [ready, setReady] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<Page>('home');
   const [moodleData, setMoodleData] = useState<MoodleData>(moodleDefaults);
@@ -35,7 +35,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if (ready) {
-      setAllData({ moodleData, scheduleData, bannerData });
+      void setAllData({ moodleData, scheduleData, bannerData });
     }
   }, [ready, moodleData, scheduleData, bannerData]);
 

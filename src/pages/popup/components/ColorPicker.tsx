@@ -9,7 +9,7 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { HexValue } from '../../../types';
 import { Refresh } from '@mui/icons-material';
@@ -21,7 +21,7 @@ interface ColorPickerProps {
   setData: (data: HexValue) => void;
 }
 
-const ColorPicker = (props: ColorPickerProps): JSX.Element => {
+const ColorPicker = (props: ColorPickerProps): ReactNode => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [color, setColor] = useState<HexValue>(props.data);
   const [valid, setValid] = useState<boolean>(true);

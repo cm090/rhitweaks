@@ -1,67 +1,67 @@
 {
-    "manifest_version": 3,
-    "name": "RHITweaks",
-    "permissions": [
-        "storage"
-    ],
-    "icons": {
-        "1024": "content/images/icon.png"
+  "manifest_version": 3,
+  "name": "RHITweaks",
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "1024": "content/images/icon.png"
+  },
+  "action": {
+    "default_popup": "pages/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content/moodle/moodle.ts"
+      ],
+      "matches": [
+        "https://moodle.rose-hulman.edu/*"
+      ],
+      "run_at": "document_end"
     },
-    "action": {
-        "default_popup": "pages/popup/index.html"
+    {
+      "js": [
+        "content/schedule/schedule.ts"
+      ],
+      "matches": [
+        "https://prodwebxe-hv.rose-hulman.edu/*",
+        "https://prodwebxe7-hv.rose-hulman.edu/*"
+      ],
+      "run_at": "document_end"
     },
-    "content_scripts": [
-        {
-            "js": [
-                "content/moodle/moodle.ts"
-            ],
-            "matches": [
-                "https://moodle.rose-hulman.edu/*"
-            ],
-            "run_at": "document_end"
-        },
-        {
-            "js": [
-                "content/schedule/schedule.ts"
-            ],
-            "matches": [
-                "https://prodwebxe-hv.rose-hulman.edu/*",
-                "https://prodwebxe7-hv.rose-hulman.edu/*"
-            ],
-            "run_at": "document_end"
-        },
-        {
-            "js": [
-                "content/banner/banner.ts"
-            ],
-            "matches": [
-                "https://bannerssb.rose-hulman.edu/*"
-            ],
-            "run_at": "document_end"
-        },
-        {
-            "js": [
-                "content/print/print.ts"
-            ],
-            "matches": [
-                "https://print.rhit.cf/*",
-                "https://print.rose-hulman.edu:9192/*"
-            ],
-            "run_at": "document_end"
-        }
-    ],
-    "background": {
-        "service_worker": "background.ts"
+    {
+      "js": [
+        "content/banner/banner.ts"
+      ],
+      "matches": [
+        "https://bannerssb.rose-hulman.edu/*"
+      ],
+      "run_at": "document_end"
     },
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "content/print/modules/*"
-            ],
-            "matches": [
-                "https://print.rhit.cf/*",
-                "https://print.rose-hulman.edu:9192/*"
-            ]
-        }
-    ]
+    {
+      "js": [
+        "content/print/print.ts"
+      ],
+      "matches": [
+        "https://print.rhit.cf/*",
+        "https://print.rose-hulman.edu:9192/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.ts"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/print/modules/*"
+      ],
+      "matches": [
+        "https://print.rhit.cf/*",
+        "https://print.rose-hulman.edu:9192/*"
+      ]
+    }
+  ]
 }

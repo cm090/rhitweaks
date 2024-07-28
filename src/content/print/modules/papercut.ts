@@ -56,7 +56,7 @@ class ApiRequest {
 
   /**
    * Checks request data to prepare API call.
-   * @param request request headers
+   * @param req request headers
    */
   #runCall = (req: Event) => {
     const request = JSON.parse((req as CustomEvent).detail);
@@ -64,6 +64,7 @@ class ApiRequest {
       if (request === null || !request.isRequest) {
         return;
       } else if (!request.data.username) {
+        // noinspection ExceptionCaughtLocallyJS
         throw 'User is null';
       } else if (request.method === 'logout') {
         this.#performLogOut();

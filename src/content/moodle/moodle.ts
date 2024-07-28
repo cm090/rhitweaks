@@ -56,7 +56,7 @@ const initialize = (moodleData: MoodleData) => {
   transformUrl()
     .then(() => {
       console.log('RHITweaks > Finished URL check');
-      applyStyle();
+      void applyStyle();
     })
     .then(() => {
       console.log('RHITweaks > Custom styles activated');

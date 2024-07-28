@@ -4,10 +4,10 @@ import {
   extendTheme,
   getInitColorSchemeScript,
 } from '@mui/joy/styles';
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import App from './App';
 
-const ThemeHandler = (): JSX.Element => {
+const ThemeHandler = (): ReactNode => {
   const setColorScheme = () => {
     const themeColor =
       window.matchMedia &&

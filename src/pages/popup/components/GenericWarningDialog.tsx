@@ -7,7 +7,7 @@ import {
   Modal,
   ModalDialog,
 } from '@mui/joy';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface GenericWarningDialogProps {
   open: boolean;
@@ -16,9 +16,7 @@ interface GenericWarningDialogProps {
   isError?: boolean;
 }
 
-const GenericWarningDialog = (
-  props: GenericWarningDialogProps,
-): JSX.Element => {
+const GenericWarningDialog = (props: GenericWarningDialogProps): ReactNode => {
   return (
     <Modal open={props.open} onClose={() => props.setOpen(false)}>
       <ModalDialog variant="outlined" role="alertdialog">

@@ -57,7 +57,7 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
           pinnedCourses.push({
             id: card.getAttribute('data-course-id') as string,
             name:
-              name!.split(' ')[0].search(/(?:\w+\d+)/) !== -1
+              name!.split(' ')[0].search(/\w+\d+/) !== -1
                 ? name!.split(' ')[0]
                 : (name as string),
           });
@@ -67,7 +67,7 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
           );
         }
         addNavItems();
-        setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
+        void setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
       });
       card.querySelector('.dropdown-menu')!.append(navItem);
     }

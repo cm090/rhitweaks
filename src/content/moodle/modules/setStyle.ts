@@ -1,3 +1,5 @@
+// noinspection JSDeprecatedSymbols
+
 const applyStyle = async () =>
   import('../styles.css').then(() => {
     replaceAccentColor();

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 declare module '*.css';
 
 export type HexValue = `#${string}`;
@@ -39,9 +41,9 @@ export type ExtensionData = {
 };
 
 export type SetExtensionData = {
-  setMoodleData: React.Dispatch<React.SetStateAction<MoodleData>>;
-  setScheduleData: React.Dispatch<React.SetStateAction<ScheduleData>>;
-  setBannerData: React.Dispatch<React.SetStateAction<BannerData>>;
+  setMoodleData: Dispatch<SetStateAction<MoodleData>>;
+  setScheduleData: Dispatch<SetStateAction<ScheduleData>>;
+  setBannerData: Dispatch<SetStateAction<BannerData>>;
 };
 
 export type StorageData = MoodleData | ScheduleData | BannerData;

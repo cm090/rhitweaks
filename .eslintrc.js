@@ -20,6 +20,6 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'semi': ['error', 'always'],
+    semi: ['error', 'always'],
   },
 };

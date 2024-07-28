@@ -143,15 +143,14 @@ const runApp = () => {
         const downloadRoster = document.getElementById('downloadRoster');
         if (downloadRoster) {
           downloadRoster.onclick = () => {
-            const courseName = (
-              prompt('Enter course name with section number (ex. MA111-01)') ??
-              ''
-            ).toUpperCase();
             (
               document.querySelectorAll(
                 '#courseRosterDownload input',
               )[0] as HTMLInputElement
-            ).value = courseName;
+            ).value = (
+              prompt('Enter course name with section number (ex. MA111-01)') ??
+              ''
+            ).toUpperCase();
             (
               document.querySelectorAll(
                 '#courseRosterDownload input',

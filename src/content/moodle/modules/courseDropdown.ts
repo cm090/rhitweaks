@@ -27,6 +27,7 @@ const displayCoursesInDropdown = (
   const div = document.createElement('div');
   div.classList.add('dropdown-menu', 'custom-courses');
   if (pinnedCourses.length == 0) {
+    // noinspection HtmlUnknownTarget
     div.innerHTML =
       '<p class="mx-2 mb-0">No pinned courses<br />Add one <a href="/my/courses.php">here</a></p>';
   } else {

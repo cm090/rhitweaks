@@ -1,5 +1,5 @@
 import { Box, Button, ButtonGroup } from '@mui/joy';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   bannerDefaults,
   moodleDefaults,
@@ -31,7 +31,7 @@ const updateBorderColor = (
 
 const AdditionalSettingsPage = (
   props: AdditionalSettingsPageProps,
-): JSX.Element => {
+): ReactNode => {
   const [warningDialogOpen, setWarningDialogOpen] = useState(false);
   const [warningMessage, setWarningMessage] = useState('');
   const [warningIsError, setWarningIsError] = useState(false);
@@ -75,6 +75,7 @@ const AdditionalSettingsPage = (
             contents.version
           )
         ) {
+          // noinspection ExceptionCaughtLocallyJS
           throw new Error();
         }
       } catch (e) {

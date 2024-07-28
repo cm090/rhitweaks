@@ -1,6 +1,6 @@
 import { Settings } from '@mui/icons-material';
 import { Box, Checkbox, IconButton } from '@mui/joy';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Page } from '../../../types';
 import { StorageKeys } from './HomePage';
 
@@ -12,7 +12,7 @@ interface ToggleItemProps {
 }
 
 const requestHostPermissions = () => {
-  chrome.permissions.request({
+  void chrome.permissions.request({
     origins: [
       'https://moodle.rose-hulman.edu/*',
       'https://prodwebxe-hv.rose-hulman.edu/*',
@@ -24,7 +24,7 @@ const requestHostPermissions = () => {
   });
 };
 
-const ToggleItem = (props: ToggleItemProps): JSX.Element => {
+const ToggleItem = (props: ToggleItemProps): ReactNode => {
   return (
     <Box
       sx={{

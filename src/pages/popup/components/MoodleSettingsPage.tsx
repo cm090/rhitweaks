@@ -1,5 +1,5 @@
 import { Button, FormControl, FormLabel, Option, Select } from '@mui/joy';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { moodleDefaults } from '../../../defaults';
 import { MoodleData, Page } from '../../../types';
 import ColorPicker from './ColorPicker';
@@ -11,7 +11,7 @@ interface MoodleSettingsPageProps {
   setPage: (page: Page) => void;
 }
 
-const MoodleSettingsPage = (props: MoodleSettingsPageProps): JSX.Element => {
+const MoodleSettingsPage = (props: MoodleSettingsPageProps): ReactNode => {
   return (
     <SettingsWrapper page="Moodle" back={() => props.setPage('home')}>
       <ColorPicker

@@ -1,5 +1,5 @@
 import { Box, FormControl, FormLabel, Option, Select } from '@mui/joy';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { BannerData, Page } from '../../../types';
 import SettingsWrapper from './SettingsWrapper';
 
@@ -9,7 +9,7 @@ interface BannerSettingsPageProps {
   setData: React.Dispatch<React.SetStateAction<BannerData>>;
 }
 
-const BannerSettingsPage = (props: BannerSettingsPageProps): JSX.Element => {
+const BannerSettingsPage = (props: BannerSettingsPageProps): ReactNode => {
   return (
     <SettingsWrapper page="Banner" back={() => props.setPage('home')}>
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>

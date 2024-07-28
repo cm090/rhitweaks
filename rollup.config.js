@@ -15,6 +15,7 @@ import preserveDirectives from 'rollup-preserve-directives';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+// noinspection JSUnusedGlobalSymbols
 export default {
   input: 'src/manifest.json',
   output: {
@@ -30,7 +31,7 @@ export default {
       preventAssignment: true,
     }),
     chromeExtension(),
-    // Adds a Chrome extension reloader during watch mode
+    // Reloads extension during watch mode
     simpleReloader(),
     resolve({ browser: true }),
     commonjs(),

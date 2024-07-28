@@ -36,6 +36,7 @@ const addSearchModal = async (
   } else if (footer) {
     footer.innerHTML += searchModal;
   }
+  // noinspection ES6MissingAwait
   setupSearchModal(pinnedCourses, bootstrap, $);
   initializeCourseEvaluations();
   return await Promise.resolve();
@@ -46,6 +47,18 @@ const setupSearchModal = (
   bootstrap: BootstrapModal,
   $: JQueryStatic,
 ) => {
+  const resetInput = () => {
+    {
+      createList('');
+      (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
+        '';
+      bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
+      setTimeout(() => {
+        (document.getElementById('rmtSearchInput') as HTMLInputElement).focus();
+      }, 500);
+    }
+  };
+
   addClassSidebarItems();
 
   let pos = 1;
@@ -157,29 +170,13 @@ const setupSearchModal = (
   createList('');
   document.addEventListener('keydown', (e) => {
     if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k') {
-      createList('');
-      (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
-        '';
-      bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
-      setTimeout(() => {
-        (document.getElementById('rmtSearchInput') as HTMLInputElement).focus();
-      }, 500);
+      resetInput();
     }
   });
   if (document.querySelector('nav .simplesearchform')) {
     document
       .querySelector('nav .simplesearchform')!
-      .addEventListener('click', () => {
-        createList('');
-        (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
-          '';
-        bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
-        setTimeout(() => {
-          (
-            document.getElementById('rmtSearchInput') as HTMLInputElement
-          ).focus();
-        }, 500);
-      });
+      .addEventListener('click', resetInput);
   }
   return Promise.resolve();
 };

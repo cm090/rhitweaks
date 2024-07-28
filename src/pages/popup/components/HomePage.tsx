@@ -1,5 +1,5 @@
 import { Box, Button, ButtonGroup, Link, Sheet, Typography } from '@mui/joy';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { ExtensionData, Page, SetExtensionData } from '../../../types';
 import ToggleItem from './ToggleItem';
 
@@ -15,7 +15,7 @@ interface HomePageProps {
   setPage: (page: Page) => void;
 }
 
-const HomePage = (props: HomePageProps): JSX.Element => {
+const HomePage = (props: HomePageProps): ReactNode => {
   const [version] = useState<string>(chrome.runtime.getManifest().version);
 
   return (

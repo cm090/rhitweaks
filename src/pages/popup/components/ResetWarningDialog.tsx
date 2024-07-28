@@ -7,7 +7,7 @@ import {
   Modal,
   ModalDialog,
 } from '@mui/joy';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 interface ResetWarningDialogProps {
   open: boolean;
@@ -17,7 +17,7 @@ interface ResetWarningDialogProps {
   isAllData?: boolean;
 }
 
-const ResetWarningDialog = (props: ResetWarningDialogProps): JSX.Element => {
+const ResetWarningDialog = (props: ResetWarningDialogProps): ReactNode => {
   const [open, setOpen] = useState(props.open);
   const closeDialog = () => {
     setOpen(false);

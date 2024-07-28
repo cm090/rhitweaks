@@ -8,7 +8,7 @@ import {
   Option,
   Select,
 } from '@mui/joy';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Course, MoodleData, Page } from '../../../types';
 import ResetWarningDialog from './ResetWarningDialog';
 import SettingsWrapper from './SettingsWrapper';
@@ -21,7 +21,7 @@ interface PinnedCoursesSettingsPageProps {
 
 const PinnedCoursesSettingsPage = (
   props: PinnedCoursesSettingsPageProps,
-): JSX.Element => {
+): ReactNode => {
   const emptyCourse: Course = { id: '', name: '' };
   const [selectedCourse, setSelectedCourse] = useState<Course>(emptyCourse);
   const [resetDialogOpen, setResetDialogOpen] = useState(false);

@@ -45,9 +45,11 @@ const encodeUtf8 = (s: string) => {
       );
       break;
   }
+  // noinspection JSDeprecatedSymbols
   return unescape(encodeURIComponent(x.join('')));
 };
 
+// noinspection JSUnusedGlobalSymbols
 class ApiExtension {
   logIn = (username: string, password: string) =>
     this.#performApiCall('login', {
