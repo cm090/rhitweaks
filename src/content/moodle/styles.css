@@ -118,12 +118,7 @@ div[role='main'],
     justify-content: center;
 }
 
-#page-header,
-> div.w-100,
-> div.d-flex.align-items-center,
-> div.mr-auto,
-> div,
-> div,
+#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
 #page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
     flex-grow: 0 !important;
     text-align: center;

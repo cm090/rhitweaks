@@ -47,13 +47,7 @@ input[type='reset'] {
 }
 
 :not(html[page='home']) body > form > table > tbody > tr:nth-child(1) > td,
-:not(html[page='home']),
-body,
-table,
-> tbody,
-> tr:nth-child(2),
-> td.bw70,
-> a:nth-child(5),
+:not(html[page='home']) body table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(5),
 html[page='detail'] body > table > tbody > tr:nth-child(1) > td,
 html[page='matrix'] body > table > tbody > tr:nth-child(1) > td {
     display: none;
@@ -76,28 +70,9 @@ body > p {
     margin: 0;
 }
 
-html[page='matrix'],
-body,
-> table,
-> tbody,
-> tr:nth-child(2),
-> td.bw70,
-> a:nth-child(2),
-html[page='detail'],
-body,
-> table,
-> tbody,
-> tr:nth-child(2),
-> td.bw70,
-> a:nth-child(2),
-html[page='lookup'],
-body,
-> form,
-> table,
-> tbody,
-> tr:nth-child(2),
-> td.bw70,
-> a:nth-child(2) {
+html[page='matrix'] body > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
+html[page='detail'] body > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
+html[page='lookup'] body > form > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2) {
     background: var(--text-color) !important;
     color: var(--bg-color) !important;
     text-decoration: none;
