@@ -6,7 +6,7 @@ const encodeUtf8 = (s: string) => {
   function _getbyte(s: string, i: number) {
     const x = s.charCodeAt(i);
     if (x > 255) {
-      throw 'INVALID_CHARACTER_ERR: DOM Exception 5';
+      throw new Error('INVALID_CHARACTER_ERR: DOM Exception 5');
     }
     return x;
   }

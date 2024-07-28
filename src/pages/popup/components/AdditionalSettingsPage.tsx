@@ -24,7 +24,9 @@ const updateBorderColor = (
     return;
   }
   button.style.backgroundColor = 'green';
-  setTimeout(() => (button.style.background = ''), 2000);
+  setTimeout(() => {
+    button.style.background = '';
+  }, 2000);
 };
 
 const AdditionalSettingsPage = (
