@@ -18,7 +18,8 @@ interface ColorPickerProps {
   label: string;
   defaultValue: HexValue;
   data: HexValue;
-  setData: (data: HexValue) => void;
+  setData: (key: string, data: HexValue) => void;
+  key: string;
 }
 
 const ColorPicker = (props: ColorPickerProps): ReactNode => {
@@ -29,7 +30,7 @@ const ColorPicker = (props: ColorPickerProps): ReactNode => {
 
   useEffect(() => {
     if (valid) {
-      setData(color);
+      setData(props.key, color);
     }
   }, [color, valid]);
 

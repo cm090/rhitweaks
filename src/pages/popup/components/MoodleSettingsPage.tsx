@@ -12,47 +12,45 @@ interface MoodleSettingsPageProps {
 }
 
 const MoodleSettingsPage = (props: MoodleSettingsPageProps): ReactNode => {
+  const updateData = (key: string, value: string) =>
+    props.setData((prevData) => ({ ...prevData, [key]: value }));
+
   return (
     <SettingsWrapper page="Moodle" back={() => props.setPage('home')}>
       <ColorPicker
         label="Background color"
         defaultValue={moodleDefaults.bgColor}
         data={props.data.bgColor}
-        setData={(bgColor) =>
-          props.setData((prevData) => ({ ...prevData, bgColor }))
-        }
+        key="bgColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Text color"
         defaultValue={moodleDefaults.textColor}
         data={props.data.textColor}
-        setData={(textColor) =>
-          props.setData((prevData) => ({ ...prevData, textColor }))
-        }
+        key="textColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Card color"
         defaultValue={moodleDefaults.cardColor}
         data={props.data.cardColor}
-        setData={(cardColor) =>
-          props.setData((prevData) => ({ ...prevData, cardColor }))
-        }
+        key="cardColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Accent color"
         defaultValue={moodleDefaults.accentColor}
         data={props.data.accentColor}
-        setData={(accentColor) =>
-          props.setData((prevData) => ({ ...prevData, accentColor }))
-        }
+        key="accentColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Sidebar color"
         defaultValue={moodleDefaults.sbColor}
         data={props.data.sbColor}
-        setData={(sbColor) =>
-          props.setData((prevData) => ({ ...prevData, sbColor }))
-        }
+        key="sbColor"
+        setData={updateData}
       />
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
         <FormLabel>Timeline format</FormLabel>

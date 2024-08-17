@@ -11,39 +11,38 @@ interface ScheduleSettingsPageProps {
 }
 
 const ScheduleSettingsPage = (props: ScheduleSettingsPageProps): ReactNode => {
+  const updateData = (key: string, value: string) =>
+    props.setData((prevData) => ({ ...prevData, [key]: value }));
+
   return (
     <SettingsWrapper page="Schedule Lookup" back={() => props.setPage('home')}>
       <ColorPicker
         label="Background color"
         defaultValue={scheduleDefaults.bgColor}
         data={props.data.bgColor}
-        setData={(bgColor) =>
-          props.setData((prevData) => ({ ...prevData, bgColor }))
-        }
+        key="bgColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Accent color"
         defaultValue={scheduleDefaults.accentColor}
         data={props.data.accentColor}
-        setData={(accentColor) =>
-          props.setData((prevData) => ({ ...prevData, accentColor }))
-        }
+        key="accentColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Text color"
         defaultValue={scheduleDefaults.textColor}
         data={props.data.textColor}
-        setData={(textColor) =>
-          props.setData((prevData) => ({ ...prevData, textColor }))
-        }
+        key="textColor"
+        setData={updateData}
       />
       <ColorPicker
         label="Border color"
         defaultValue={scheduleDefaults.borderColor}
         data={props.data.borderColor}
-        setData={(borderColor) =>
-          props.setData((prevData) => ({ ...prevData, borderColor }))
-        }
+        key="borderColor"
+        setData={updateData}
       />
     </SettingsWrapper>
   );
