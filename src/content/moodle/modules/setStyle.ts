@@ -1,10 +1,10 @@
 // noinspection JSDeprecatedSymbols
 
-const applyStyle = async () =>
-  import('../styles.css').then(() => {
-    replaceAccentColor();
-    styleGradeBookPage();
-  });
+const applyStyle = async () => {
+  await import('../styles.css');
+  replaceAccentColor();
+  styleGradeBookPage();
+};
 
 const replaceAccentColor = () => {
   for (const sheet of Array.from(
