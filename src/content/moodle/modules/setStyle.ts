@@ -32,24 +32,28 @@ const replaceAccentColor = () => {
 };
 
 const styleGradeBookPage = () => {
-  if (document.querySelector('.gradeparent')) {
-    const wait = () => {
-      const shortcuts = document.querySelector('#available_shortcuts_popup');
-      const page = document.querySelector('#page');
-      if (shortcuts && page) {
-        (shortcuts as HTMLElement).style.display = 'none';
-        (page as HTMLElement).style.marginBottom = '62px';
-        for (const item of Array.from(
-          document.querySelectorAll('.drawercontent'),
-        )) {
-          item.classList.add('onGradebookPage');
+  const observer = new MutationObserver((mutations) =>
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        const gradebook = document.querySelector('.gradeparent');
+        if (!gradebook) {
+          return;
         }
-      } else {
-        setTimeout(wait, 500);
+        const shortcuts = document.querySelector('#available-shortcuts-popup');
+        if (shortcuts) {
+          (shortcuts as HTMLElement).style.display = 'none';
+        }
+        const page = document.querySelector('#page');
+        if (page) {
+          (page as HTMLElement).style.marginBottom = '62px';
+        }
+        document
+          .querySelectorAll('.drawercontent')
+          .forEach((item) => item.classList.add('onGradebookPage'));
       }
-    };
-    wait();
-  }
+    }),
+  );
+  observer.observe(document.body, { childList: true, subtree: true });
 };
 
 export default applyStyle;
