@@ -9,11 +9,10 @@ import App from './App';
 
 const ThemeHandler = (): ReactNode => {
   const setColorScheme = () => {
-    const themeColor =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
+    const themeColor = window.matchMedia?.('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light';
     document.documentElement.setAttribute('data-joy-color-scheme', themeColor);
   };
 
