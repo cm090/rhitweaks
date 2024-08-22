@@ -1,0 +1,102 @@
+<!--suppress JSUnresolvedLibraryURL, HtmlDeprecatedAttribute, JSDeprecatedSymbols -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://prodwebxe-hv.rose-hulman.edu/regweb/rhit_menu.css" type="text/css" />
+  <link rel="stylesheet" href="https://prodwebxe-hv.rose-hulman.edu/regweb/rhit_sched.css" type="text/css" />
+  <title>Schedule Lookup</title>
+
+  <script type="text/javascript">
+    // noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols
+    function cancelAction(evt) {
+      return false;
+    }
+  </script>
+</head>
+
+<body>
+<div class="header">
+  <div>
+    <img src="https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png"
+         alt="Rose-Hulman Institute of Technology" height="30" />
+    <h3>Schedule Lookup</h3>
+  </div>
+  <div>
+    <button type="button" id="signOut">Sign out</button>
+  </div>
+</div>
+<form name="InputForm" action="https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl" method="POST">
+  <div class="checkbox">
+    Use Exact Match for Search:
+    <input title="Exact match" type="checkbox" name="match" value="1" />
+  </div>
+  <div class="input-area">
+    <div>
+      <select title="Quarter" name="termcode" id="quarters"></select>
+      <select title="View" name="view">
+        <option value="tgrid">Table &amp; Term Grid</option>
+        <option value="fgrid">Table &amp; Finals Grid</option>
+        <option value="table">Table Only</option>
+        <option value="matrix">Course Matrix</option>
+      </select>
+    </div>
+    <div>
+      <input title="Username" placeholder="Username" type="text" name="id1" maxlength="10"
+             onkeypress="if (event.keyCode === 13) this.form.bt1.click();" />
+      <input type="submit" name="bt1" value="ID/Username"
+             onclick="if (this.form.id1.value === '') { this.form.id1.focus(); return false; } else return true;" />
+    </div>
+    <div>
+      <input title="Room" placeholder="Room number" type="text" name="id4" maxlength="6"
+             onkeypress="if (event.keyCode === 13) this.form.bt4.click();" />
+      <input type="submit" name="bt4" value="Room"
+             onclick="if (this.form.id4.value === '') { this.form.id4.focus(); return false; } else return true;" />
+    </div>
+    <div>
+      <input title="Course ID" placeholder="Course ID" type="text" name="id5" maxlength="30"
+             onkeypress="if (event.keyCode === 13) this.form.bt5.click();" />
+      <input type="submit" name="bt5" value="Course"
+             onclick="if (this.form.id5.value === '') { this.form.id5.focus(); return false; } else return true;" />
+    </div>
+    <div>
+      <select title="Department" name="deptid"
+              onkeypress="if (event.keyCode === 13) this.form.deptbt.click();">
+        <option value="" disabled selected>Department</option>
+        <option value="BBE">Biology &amp; Biomedical Engineering</option>
+        <option value="CHE">Chemical Engineering</option>
+        <option value="CHEM">Chemistry &amp; Biochemistry</option>
+        <option value="CE">Civil &amp; Environmental Engineering</option>
+        <option value="CSSE">Computer Science &amp; Software Engineering</option>
+        <option value="ECE">Electrical &amp; Computer Engineering</option>
+        <option value="ENGD">Engineering Design</option>
+        <option value="EMGT">Engineering Management</option>
+        <option value="HSSA">Humanities, Social Sciences, &amp; Arts</option>
+        <option value="MA">Math</option>
+        <option value="ME">Mechanical Engineering</option>
+        <option value="PHOE">Physics &amp; Optical Engineering</option>
+      </select>
+      <input type="submit" name="deptbt" value="Dept"
+             onclick="if (this.form.deptid.value === '') { this.form.deptid.focus(); return false; } else return true;" />
+    </div>
+  </div>
+  <div class="buttons">
+    <input class="actionButton" type="submit" name="matrix" value="Class Schedule Options" />
+    <input class="actionButton" type="submit" name="ad_hoc" value="Ad-hoc Group Schedules" />
+  </div>
+  <br />
+  <div class="buttons">
+    <button class="actionButton" type="button" id="downloadRoster">
+      Download Class Roster
+    </button>
+    <button class="actionButton" type="button"
+            onclick="window.location.href = 'https://prodwebxe-hv.rose-hulman.edu/regweb-cgi/reg-sched.pl'">
+      Reset Schedule Lookup Page
+    </button>
+  </div>
+</form>
+<!--suppress HtmlUnknownTarget -->
+<form action="/regweb-cgi/reg-download.pl" method="POST" id="courseRosterDownload">
+  <input type="hidden" name="id" />
+  <input id="courseRosterDownloadButton" type="submit" value="Download" name="download" />
+</form>
+</body>

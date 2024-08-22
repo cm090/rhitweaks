@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: dcarbone/install-jq-action@v2.1.0
 
-      - name: Build Chrome zip file
-        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
-        with:
-          extensionDir: "/"
-          zipFilePath: "release.zip"
-
+      - name: Build extension
+        run: |
+          npm i
+          npm run release
+          mv releases/*.zip release.zip
+      
       - name: Publish to Chrome Web Store
         uses: mobilefirstllc/cws-publish@latest
         with:
@@ -29,15 +31,12 @@ jobs:
           zip_file: "release.zip"
 
       - name: Prepare Firefox release
-        run: |
-          rm -f release.zip
-          rm -f manifest.json
-          mv manifest_firefox.json manifest.json
+        run: bash compatibility/firefox-modification.sh
 
       - name: Build Firefox zip file
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
         with:
-          extensionDir: "/"
+          extensionDir: "/dist/"
           zipFilePath: "release.zip"
 
       - name: Upload artifact

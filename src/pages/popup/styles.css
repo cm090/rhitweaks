@@ -1,0 +1,7 @@
+html {
+    width: 300px;
+}
+
+#root > div {
+    padding: 10px;
+}
