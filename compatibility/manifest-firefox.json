@@ -10,7 +10,7 @@
   ],
   "background": {
     "scripts": [
-      "scripts/print-background.js"
+      "background.js"
     ]
   },
   "browser_specific_settings": {
