@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp compatibilty/manifest-firefox.json dist
+cp compatibility/manifest-firefox.json dist
 # shellcheck disable=SC2164
 cd dist
 
