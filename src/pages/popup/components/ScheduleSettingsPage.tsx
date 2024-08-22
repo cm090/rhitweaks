@@ -20,28 +20,28 @@ const ScheduleSettingsPage = (props: ScheduleSettingsPageProps): ReactNode => {
         label="Background color"
         defaultValue={scheduleDefaults.bgColor}
         data={props.data.bgColor}
-        key="bgColor"
+        dataKey="bgColor"
         setData={updateData}
       />
       <ColorPicker
         label="Accent color"
         defaultValue={scheduleDefaults.accentColor}
         data={props.data.accentColor}
-        key="accentColor"
+        dataKey="accentColor"
         setData={updateData}
       />
       <ColorPicker
         label="Text color"
         defaultValue={scheduleDefaults.textColor}
         data={props.data.textColor}
-        key="textColor"
+        dataKey="textColor"
         setData={updateData}
       />
       <ColorPicker
         label="Border color"
         defaultValue={scheduleDefaults.borderColor}
         data={props.data.borderColor}
-        key="borderColor"
+        dataKey="borderColor"
         setData={updateData}
       />
     </SettingsWrapper>

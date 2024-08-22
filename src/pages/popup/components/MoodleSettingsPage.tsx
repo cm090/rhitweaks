@@ -21,35 +21,35 @@ const MoodleSettingsPage = (props: MoodleSettingsPageProps): ReactNode => {
         label="Background color"
         defaultValue={moodleDefaults.bgColor}
         data={props.data.bgColor}
-        key="bgColor"
+        dataKey="bgColor"
         setData={updateData}
       />
       <ColorPicker
         label="Text color"
         defaultValue={moodleDefaults.textColor}
         data={props.data.textColor}
-        key="textColor"
+        dataKey="textColor"
         setData={updateData}
       />
       <ColorPicker
         label="Card color"
         defaultValue={moodleDefaults.cardColor}
         data={props.data.cardColor}
-        key="cardColor"
+        dataKey="cardColor"
         setData={updateData}
       />
       <ColorPicker
         label="Accent color"
         defaultValue={moodleDefaults.accentColor}
         data={props.data.accentColor}
-        key="accentColor"
+        dataKey="accentColor"
         setData={updateData}
       />
       <ColorPicker
         label="Sidebar color"
         defaultValue={moodleDefaults.sbColor}
         data={props.data.sbColor}
-        key="sbColor"
+        dataKey="sbColor"
         setData={updateData}
       />
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
