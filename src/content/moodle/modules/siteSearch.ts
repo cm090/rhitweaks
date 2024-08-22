@@ -36,8 +36,7 @@ const addSearchModal = async (
   } else if (footer) {
     footer.innerHTML += searchModal;
   }
-  // noinspection ES6MissingAwait
-  setupSearchModal(pinnedCourses, bootstrap, $);
+  void setupSearchModal(pinnedCourses, bootstrap, $);
   initializeCourseEvaluations();
   return await Promise.resolve();
 };
@@ -48,15 +47,12 @@ const setupSearchModal = (
   $: JQueryStatic,
 ) => {
   const resetInput = () => {
-    {
-      createList('');
-      (document.getElementById('rmtSearchInput') as HTMLInputElement).value =
-        '';
-      bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
-      setTimeout(() => {
-        (document.getElementById('rmtSearchInput') as HTMLInputElement).focus();
-      }, 500);
-    }
+    createList('');
+    (document.getElementById('rmtSearchInput') as HTMLInputElement).value = '';
+    bootstrap.Modal.jQueryInterface.apply($('#rmtSearch'), ['show']);
+    setTimeout(() => {
+      (document.getElementById('rmtSearchInput') as HTMLInputElement).focus();
+    }, 500);
   };
 
   addClassSidebarItems();
@@ -139,15 +135,21 @@ const setupSearchModal = (
         if (item[1].includes('#section-')) {
           document.getElementById(
             'rmtResultList',
-          )!.innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}';window.location.reload()">${item[0]}</div>`;
+          )!.innerHTML += `<div style="margin:0" onclick="window.location='${
+            item[1]
+          }';window.location.reload()" class=${i === 0 ? 'active' : ''}>${
+            item[0]
+          }</div>`;
         } else {
           document.getElementById(
             'rmtResultList',
-          )!.innerHTML += `<div style="margin:0" onclick="window.location='${item[1]}'">${item[0]}</div>`;
+          )!.innerHTML += `<div style="margin:0" onclick="window.location='${
+            item[1]
+          }'" class=${i === 0 ? 'active' : ''}>${item[0]}</div>`;
         }
         i++;
       }
-      if (i == 5) {
+      if (i === 5) {
         return;
       }
     }
@@ -156,11 +158,8 @@ const setupSearchModal = (
         'rmtResultList',
       )!.innerHTML += `<div style="margin:0" onclick="window.location='https://moodle.rose-hulman.edu/search/index.php?q=${
         (document.getElementById('rmtSearchInput') as HTMLInputElement).value
-      }'">More results</div>`;
+      }'" class=${i === 0 ? 'active' : ''}>More results</div>`;
     }
-    document
-      .querySelector('#rmtSearch #rmtResultList div:first-child')!
-      .classList.add('active');
   };
   document
     .getElementById('rmtSearchInput')!
@@ -182,11 +181,12 @@ const setupSearchModal = (
 };
 
 const addClassSidebarItems = () => {
-  const wait = () => {
+  const observer = new MutationObserver(() => {
     const navItems = document.querySelectorAll(
       '#course-index .courseindex-section',
     );
     if (navItems) {
+      observer.disconnect();
       for (const item of Array.from(navItems)) {
         const header = item.querySelector(
           '.courseindex-section-title .courseindex-link',
@@ -196,11 +196,9 @@ const addClassSidebarItems = () => {
           (header as HTMLLinkElement).href,
         ]);
       }
-    } else {
-      setTimeout(wait, 500);
     }
-  };
-  wait();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 };
 
 const initializeCourseEvaluations = () => {
