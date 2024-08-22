@@ -9,7 +9,8 @@ on:
       publish_to_chrome:
         description: 'Publish release to Chrome Web Store'
         required: true
-        default: 'true'
+        default: true
+        type: boolean
 
 jobs:
   build:
@@ -26,7 +27,7 @@ jobs:
           mv releases/*.zip release.zip
       
       - name: Publish to Chrome Web Store
-        if: ${{ github.event.inputs.publish_to_chrome == 'true' }}
+        if: ${{ github.event.inputs.publish_to_chrome }}
         uses: mobilefirstllc/cws-publish@latest
         with:
           action: "publish"
