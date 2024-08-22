@@ -31,7 +31,7 @@ jobs:
           zip_file: "release.zip"
 
       - name: Prepare Firefox release
-        run: bash compatibility/firefox-modification.sh
+        run: bash compatibility/firefox-modifications.sh
 
       - name: Build Firefox zip file
         uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
