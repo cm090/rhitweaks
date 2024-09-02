@@ -24,13 +24,25 @@ const initializeNavItemListeners = () => {
 
 const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
   const addNavItems = () => {
-    for (const card of Array.from(
+    let items = Array.from(
       document.querySelectorAll(
-        '.dashboard-card-deck .dashboard-card, .list-group .course-listitem',
+        '[data-region="courses-view"] .card-grid > div > div',
       ),
-    )) {
-      if (card.querySelector('.dropdown-menu')!.innerHTML.includes('navbar')) {
-        card.querySelector('.dropdown-menu a:last-child')!.remove();
+    );
+    if (!items.length) {
+      items = Array.from(
+        document.querySelectorAll(
+          '[data-region="courses-view"] .list-group > li',
+        ),
+      );
+    }
+    for (const card of items) {
+      const dropdown = card.querySelector('.dropdown-menu');
+      if (!dropdown) {
+        continue;
+      }
+      if (dropdown.innerHTML.includes('navbar')) {
+        dropdown.querySelector('a:last-child')!.remove();
       }
       const navItem = document.createElement('a');
       navItem.classList.add('dropdown-item');
@@ -69,12 +81,12 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
         addNavItems();
         void setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
       });
-      card.querySelector('.dropdown-menu')!.append(navItem);
+      dropdown.append(navItem);
     }
   };
   const wait = () => {
     if (
-      document.querySelector('.dashboard-card-deck .dashboard-card') ||
+      document.querySelector('.course-card .coursename') ||
       document.querySelector('.course-listitem .coursename')
     ) {
       addNavItems();
