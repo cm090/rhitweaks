@@ -27,7 +27,7 @@ jobs:
           mv releases/*.zip release.zip
       
       - name: Publish to Chrome Web Store
-        if: ${{ github.event.inputs.publish_to_chrome == 'true' }}
+        if: ${{ github.event.inputs.publish_to_chrome != 'false' }}
         uses: mobilefirstllc/cws-publish@latest
         with:
           action: "publish"
