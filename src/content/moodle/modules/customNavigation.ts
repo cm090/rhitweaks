@@ -7,7 +7,7 @@ import {
 } from '../../common/chromeData';
 
 const initializeNavItemListeners = () => {
-  if (!window.location.pathname.includes('/my/courses.php')) {
+  if (!window.location.pathname.includes('/my/courses')) {
     return;
   }
   getDataItem(DataType.MoodleData, 'pinnedCourses').then((pinnedCourses) =>
@@ -84,23 +84,16 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
       dropdown.append(navItem);
     }
   };
-  const wait = () => {
+  const refresh = () => {
     if (
       document.querySelector('.course-card .coursename') ||
       document.querySelector('.course-listitem .coursename')
     ) {
       addNavItems();
-    } else {
-      setTimeout(wait, 500);
     }
+    setTimeout(refresh, 500);
   };
-  for (const item of Array.from(document.querySelectorAll('.main-inner a'))) {
-    item.addEventListener('click', () => setTimeout(wait, 500));
-  }
-  document
-    .querySelector('.main-inner .searchbar input')!
-    .addEventListener('input', () => setTimeout(wait, 1500));
-  wait();
+  refresh();
 };
 
 export default initializeNavItemListeners;
