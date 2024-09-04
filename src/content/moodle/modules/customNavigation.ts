@@ -7,7 +7,7 @@ import {
 } from '../../common/chromeData';
 
 const initializeNavItemListeners = () => {
-  if (!window.location.pathname.includes('/my/courses.php')) {
+  if (!window.location.pathname.includes('/my/courses')) {
     return;
   }
   getDataItem(DataType.MoodleData, 'pinnedCourses').then((pinnedCourses) =>

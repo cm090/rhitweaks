@@ -438,8 +438,9 @@ a.autolink,
 
 .custom-courses.dropdown-menu {
     position: absolute !important;
-    top: 54px;
+    top: 50px;
     left: 420px;
+    z-index: 2000;
 }
 
 .thegrid {

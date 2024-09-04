@@ -42,11 +42,8 @@ const displayCoursesInDropdown = (
   document.querySelector('body')!.appendChild(div);
   menuItem.onmouseenter = () => div.classList.add('show');
   div.onmouseenter = () => div.classList.add('show');
-  (
-    document.querySelector(
-      '#page-wrapper > nav > div.primary-navigation > nav',
-    ) as HTMLDivElement
-  ).onmouseleave = () => div.classList.remove('show');
+  (document.querySelector('.navbar') as HTMLDivElement).onmouseleave = () =>
+    div.classList.remove('show');
   div.onmouseleave = () => div.classList.remove('show');
 };
 
