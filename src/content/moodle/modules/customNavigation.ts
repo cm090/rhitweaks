@@ -23,7 +23,10 @@ const initializeNavItemListeners = () => {
 };
 
 const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
-  const addNavItems = () => {
+  const addNavItems = (shouldUpdate = true) => {
+    if (!shouldUpdate) {
+      return;
+    }
     let items = Array.from(
       document.querySelectorAll(
         '[data-region="courses-view"] .card-grid > div > div',
@@ -45,8 +48,7 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
         dropdown.querySelector('a:last-child')!.remove();
       }
       const navItem = document.createElement('a');
-      navItem.classList.add('dropdown-item');
-      navItem.href = '#';
+      navItem.classList.add('dropdown-item', 'navbar-control');
       navItem.innerText = pinnedCourses.find(
         (item) => item.id == card.getAttribute('data-course-id'),
       )
@@ -81,19 +83,33 @@ const updateNavItemButtons = (pinnedCourses: MoodleData['pinnedCourses']) => {
         addNavItems();
         void setDataObject(DataType.MoodleData, 'pinnedCourses', pinnedCourses);
       });
+      if (dropdown.innerHTML.includes('navbar')) {
+        dropdown.querySelector('a:last-child')!.remove();
+      }
       dropdown.append(navItem);
     }
   };
-  const refresh = () => {
-    if (
-      document.querySelector('.course-card .coursename') ||
-      document.querySelector('.course-listitem .coursename')
-    ) {
-      addNavItems();
+
+  const listObserver = new MutationObserver((mutations) => {
+    if (!mutations.length) {
+      return;
     }
-    setTimeout(refresh, 500);
-  };
-  refresh();
+
+    let shouldUpdate = true;
+    document
+      .querySelectorAll('[data-region="courses-view"] .dropdown-menu')
+      .forEach((element) => {
+        const menuObserver = new MutationObserver(() => {
+          shouldUpdate = !element.checkVisibility();
+        });
+        menuObserver.observe(element, { attributes: true });
+      });
+    setTimeout(() => addNavItems(shouldUpdate), 500);
+  });
+  listObserver.observe(
+    document.querySelector('[data-region="courses-view"]')!,
+    { subtree: true, childList: true },
+  );
 };
 
 export default initializeNavItemListeners;

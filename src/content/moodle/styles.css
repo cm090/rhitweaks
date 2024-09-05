@@ -704,3 +704,7 @@ a:not(
     justify-content: start;
     display: block;
 }
+
+.dropdown-item.navbar-control {
+    cursor: pointer !important;
+}
