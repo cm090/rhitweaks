@@ -437,7 +437,7 @@ a.autolink,
 }
 
 .custom-courses.dropdown-menu {
-    position: absolute !important;
+    position: fixed !important;
     top: 50px;
     left: 420px;
     z-index: 2000;
