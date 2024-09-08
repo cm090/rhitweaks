@@ -210,8 +210,9 @@ div[data-region='grading-navigation-panel'] {
 .bg-light,
 .bg-white,
 .activity-item .description div,
-.activity-item.hiddenactivity,
-input[type='text'] {
+input[type='text'],
+.card .list-group-item,
+.activity-item {
     background: transparent !important;
 }
 
@@ -237,7 +238,8 @@ input[type='text'] {
     border-top-color: #6f6f6f !important;
 }
 
-#rmtSearch .modal-content {
+#rmtSearch .modal-content,
+.course-section-header .btn {
     background: transparent !important;
     border: none !important;
 }
@@ -312,7 +314,7 @@ input:not(#rmtSearchInput):focus,
 .custom-select:focus,
 .form-control:focus {
     --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
-    box-shadow: 0 0 0 0.2rem var(--bxs-color);
+    box-shadow: 0 0 0 0.2rem var(--bxs-color) !important;
 }
 
 .text-info[title='Help with Cookies must be enabled in your browser']::before {
@@ -326,7 +328,8 @@ input:not(#rmtSearchInput):focus,
     border-color: var(--accent-color);
 }
 
-.course-content ul.gridicons li.currentselected .icon_content {
+.course-content ul.gridicons li.currentselected .icon_content,
+.section_goto .icon {
     color: var(--accent-color) !important;
 }
 
@@ -352,10 +355,6 @@ a.autolink,
     display: flex !important;
 }
 
-.card .list-group-item {
-    background: transparent !important;
-}
-
 .drawers .block_myoverview > .card-body {
     padding: 1rem !important;
 }
@@ -379,11 +378,14 @@ a.autolink,
     top: 18px;
 }
 
-.drawerheader button.drawertoggle {
+.drawerheader button.btn.drawertoggle,
+#courseindexdrawercontrols button {
     background: white;
     color: black !important;
     height: 26px;
     width: 26px;
+    border-radius: 0.5rem !important;
+    padding: 0 !important;
 }
 
 .drawercontent {
@@ -707,4 +709,20 @@ a:not(
 
 .dropdown-item.navbar-control {
     cursor: pointer !important;
+}
+
+.activityicon {
+    filter: invert(1) !important;
+}
+
+.page-header-image {
+    margin-right: 10px;
+}
+
+.dragdrop-question p, .dragdrop-choice {
+    overflow: auto !important;
+}
+
+.course-section-header .btn {
+    outline-color: var(--accent-color) !important;
 }
