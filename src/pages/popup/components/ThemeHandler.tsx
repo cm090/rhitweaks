@@ -16,38 +16,29 @@ const ThemeHandler = (): ReactNode => {
     document.documentElement.setAttribute('data-joy-color-scheme', themeColor);
   };
 
+  const primaryPalette = {
+    50: '#ffffff',
+    100: '#f5f3f4',
+    200: '#d3d3d3',
+    300: '#b1a7a6',
+    400: '#e5383b',
+    500: '#ba181b',
+    600: '#a4161a',
+    700: '#660708',
+    800: '#161a1d',
+    900: '#0b090a',
+  };
+
   const theme = extendTheme({
     colorSchemes: {
       light: {
         palette: {
-          primary: {
-            50: '#ffffff',
-            100: '#f5f3f4',
-            200: '#d3d3d3',
-            300: '#b1a7a6',
-            400: '#e5383b',
-            500: '#ba181b',
-            600: '#a4161a',
-            700: '#660708',
-            800: '#161a1d',
-            900: '#0b090a',
-          },
+          primary: primaryPalette,
         },
       },
       dark: {
         palette: {
-          primary: {
-            50: '#ffffff',
-            100: '#f5f3f4',
-            200: '#d3d3d3',
-            300: '#b1a7a6',
-            400: '#e5383b',
-            500: '#ba181b',
-            600: '#a4161a',
-            700: '#660708',
-            800: '#161a1d',
-            900: '#0b090a',
-          },
+          primary: primaryPalette,
         },
       },
     },
