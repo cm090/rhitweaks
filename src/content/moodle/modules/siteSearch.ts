@@ -183,18 +183,16 @@ const setupSearchModal = (
 const addClassSidebarItems = () => {
   const observer = new MutationObserver(() => {
     const navItems = document.querySelectorAll(
-      '#course-index .courseindex-section',
+      '#course-index .courseindex-section-title .courseindex-link',
     );
     if (navItems) {
       observer.disconnect();
       for (const item of Array.from(navItems)) {
-        const header = item.querySelector(
-          '.courseindex-section-title .courseindex-link',
-        );
-        courseData.push([
-          (header as HTMLElement).innerText,
-          (header as HTMLLinkElement).href,
-        ]);
+        const navItem = item as HTMLLinkElement;
+        if (!navItem.innerText.length) {
+          continue;
+        }
+        courseData.push([navItem.innerText, navItem.href]);
       }
     }
   });
