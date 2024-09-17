@@ -1,7 +1,11 @@
 // noinspection JSDeprecatedSymbols
 
-const applyStyle = async () => {
-  await import('../styles.css');
+const applyStyle = () => {
+  document.body.classList.add('rhitweaks-enabled');
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    '<style>html {scrollbar-width: none !important; -ms-overflow-style: none;}</style>',
+  );
   replaceAccentColor();
   styleGradeBookPage();
 };

@@ -61,7 +61,7 @@ const runApp = (links: BannerData['links']) => {
     const logo = document.querySelector('#branding') as HTMLAnchorElement;
     logo.href = 'https://bannerssb.rose-hulman.edu/BannerGeneralSsb';
 
-    import('./styles.css');
+    document.body.classList.add('rhitweaks-enabled');
   } catch {
     setTimeout(() => runApp(links), 100);
   }
