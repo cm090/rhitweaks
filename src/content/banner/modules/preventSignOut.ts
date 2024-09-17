@@ -1,17 +1,21 @@
 const preventSignOut = () => {
   const observer = new MutationObserver(() => {
+    const notification = document.querySelector(
+      '.notification-center-message-with-prompts .notification-item-message',
+    );
+    const button = document.querySelector(
+      '.notification-center-message-with-prompts .notification-flyout-item.primary',
+    );
+    if (!notification) {
+      return;
+    }
     if (
-      (
-        document.querySelector(
-          '.notification-center-message-with-prompts .notification-item-message',
-        ) as HTMLElement
-      ).innerText.includes('Would you like to logout now?')
+      (notification as HTMLElement).innerText.includes(
+        'Would you like to logout now?',
+      ) &&
+      button
     ) {
-      (
-        document.querySelector(
-          '.notification-center-message-with-prompts .notification-flyout-item.primary',
-        ) as HTMLButtonElement
-      ).click();
+      (button as HTMLButtonElement).click();
     }
   });
   observer.observe(document.body, {
