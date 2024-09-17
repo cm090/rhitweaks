@@ -5,6 +5,7 @@ import additionalLinks from './modules/additionalLinks';
 import bannerDataHandler from './modules/bannerData';
 import facultyLinks from './modules/facultyLinks';
 import studentLinks from './modules/studentLinks';
+import preventSignOut from './modules/preventSignOut';
 
 const buildLinks = (links: BannerLink[]) => {
   const homeCardTemplate = document.querySelector(
@@ -55,6 +56,7 @@ const runApp = (links: BannerData['links']) => {
   try {
     addHomepageLinks(links);
     handleSidebarMenu();
+    preventSignOut();
 
     const logo = document.querySelector('#branding') as HTMLAnchorElement;
     logo.href = 'https://bannerssb.rose-hulman.edu/BannerGeneralSsb';
