@@ -603,9 +603,10 @@ body.rhitweaks-enabled .activityiconcontainer .fa {
 
 body.rhitweaks-enabled .custom-control-input:not(:disabled):active ~ .custom-control-label::before,
 body.rhitweaks-enabled .custom-control-input:focus ~ .custom-control-label::before,
-body.rhitweaks-enabled .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: white !important;
-    border-color: transparent !important;
+body.rhitweaks-enabled .custom-control-input:checked ~ .custom-control-label::before,
+body.rhitweaks-enabled .custom-switch .custom-control-input:not(:checked) ~ .custom-control-label::before {
+    background: white !important;
+    border-color: var(--card-color) !important;
     box-shadow: none !important;
 }
 
@@ -697,7 +698,7 @@ body.rhitweaks-enabled .path-grade-report-user .user-grade .column-itemname.bagg
     padding-left: 24px !important;
 }
 
-body.rhitweaks-enabled .path-grade-report-user .user-grade tbody tr.spacer {
+body.rhitweaks-enabled table .spacer {
     height: 0 !important;
 }
 
