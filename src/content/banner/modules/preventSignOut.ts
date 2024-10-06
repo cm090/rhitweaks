@@ -16,6 +16,7 @@ const preventSignOut = () => {
       button
     ) {
       (button as HTMLButtonElement).click();
+      window.location.reload();
     }
   });
   observer.observe(document.body, {
