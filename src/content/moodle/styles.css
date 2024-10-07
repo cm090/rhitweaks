@@ -225,7 +225,7 @@ body.rhitweaks-enabled #rmtSearch .modal-dialog {
 
 body.rhitweaks-enabled #rmtSearch .modal-body,
 body.rhitweaks-enabled #rmtSearch .modal-footer {
-    background: #000000dd;
+    background: rgba(0, 0, 0, 0.87);
 }
 
 body.rhitweaks-enabled #rmtSearch .modal-body {
