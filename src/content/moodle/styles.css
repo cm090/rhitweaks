@@ -8,20 +8,20 @@
     --hover-color: color-mix(in srgb, var(--accent-color), #000000);
 }
 
-body,
-.block .block-cards span.categoryname,
-.block .block-cards .btn-link,
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link,
-.course-section-header .btn,
-.generaltable,
-.generaltable tbody tr:hover,
-.path-grade-report-user .user-grade td.category a.toggle-category:not(:hover) i,
-.grade-report-user .user-grade td.category a.toggle-category:not(:hover) i {
+body.rhitweaks-enabled,
+body.rhitweaks-enabled .block .block-cards span.categoryname,
+body.rhitweaks-enabled .block .block-cards .btn-link,
+body.rhitweaks-enabled .nav-tabs .nav-link.active,
+body.rhitweaks-enabled .nav-tabs .nav-item.show .nav-link,
+body.rhitweaks-enabled .course-section-header .btn,
+body.rhitweaks-enabled .generaltable,
+body.rhitweaks-enabled .generaltable tbody tr:hover,
+body.rhitweaks-enabled .path-grade-report-user .user-grade td.category a.toggle-category:not(:hover) i,
+body.rhitweaks-enabled .grade-report-user .user-grade td.category a.toggle-category:not(:hover) i {
     color: var(--text-color) !important;
 }
 
-.btn:not(
+body.rhitweaks-enabled .btn:not(
     .btn-primary,
     .btn-success,
     .nav-link,
@@ -32,37 +32,36 @@ body,
     color: unset !important;
 }
 
-.gradereport-grader-table {
+body.rhitweaks-enabled .gradereport-grader-table {
     color: black !important;
 }
 
-#ek-overlay,
-#ek-modal,
-div#nav-drawer::-webkit-scrollbar,
-.evalkit-widget-surveys,
-.usernav li:first-child,
-#usernavigation .divider,
-#searchform-navbar,
-#page-footer > div:nth-child(1) > button,
-.drawercontent::-webkit-scrollbar {
+body.rhitweaks-enabled #ek-overlay,
+body.rhitweaks-enabled #ek-modal,
+body.rhitweaks-enabled div#nav-drawer::-webkit-scrollbar,
+body.rhitweaks-enabled .evalkit-widget-surveys,
+body.rhitweaks-enabled .usernav li:first-child,
+body.rhitweaks-enabled #usernavigation .divider,
+body.rhitweaks-enabled #searchform-navbar,
+body.rhitweaks-enabled #page-footer > div:nth-child(1) > button,
+body.rhitweaks-enabled .drawercontent::-webkit-scrollbar {
     display: none !important;
 }
 
-body:not(#page-grade-report-grader-index) [data-usertour='scroller'],
-.drawer [data-usertour='scroller'],
-html {
+body.rhitweaks-enabled:not(#page-grade-report-grader-index) [data-usertour='scroller'],
+body.rhitweaks-enabled .drawer [data-usertour='scroller'] {
     scrollbar-width: none !important;
     -ms-overflow-style: none;
 }
 
-.fa-star:before,
-a,
-.btn-link,
-.page-link {
+body.rhitweaks-enabled .fa-star:before,
+body.rhitweaks-enabled a:not(.btn-primary, .dropdown-item),
+body.rhitweaks-enabled .btn-link,
+body.rhitweaks-enabled .page-link {
     color: var(--accent-color);
 }
 
-a:not([role='menuitem']):not(
+body.rhitweaks-enabled a:not([role='menuitem']):not(
     .list-group-item,
     .list-group-item span,
     .navbar a,
@@ -71,113 +70,113 @@ a:not([role='menuitem']):not(
     .courseindex-link,
     .courseindex-chevron
   ):hover,
-.btn-link:hover {
+body.rhitweaks-enabled .btn-link:hover {
     color: var(--hover-color) !important;
 }
 
-.btn-primary,
-#available_shortcuts_tab,
-#available_shortcuts_inner,
-.dropdown-item:active,
-.dropdown-item:hover,
-.dropdown-item:focus,
-.dropdown-item:focus-within,
-.badge-info {
+body.rhitweaks-enabled .btn-primary,
+body.rhitweaks-enabled #available_shortcuts_tab,
+body.rhitweaks-enabled #available_shortcuts_inner,
+body.rhitweaks-enabled .dropdown-item:active,
+body.rhitweaks-enabled .dropdown-item:hover,
+body.rhitweaks-enabled .dropdown-item:focus,
+body.rhitweaks-enabled .dropdown-item:focus-within,
+body.rhitweaks-enabled .badge-info {
     background: var(--accent-color) !important;
     border-color: var(--accent-color);
 }
 
-.dropdown-item.active {
+body.rhitweaks-enabled .dropdown-item.active {
     background-color: color-mix(in srgb, var(--accent-color), #00000070);
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
+body.rhitweaks-enabled .btn-primary:hover,
+body.rhitweaks-enabled .btn-primary:focus,
+body.rhitweaks-enabled .btn-primary:active {
     background: var(--hover-color) !important;
     border-color: var(--hover-color) !important;
 }
 
-.section,
-.card,
-#gridshadebox_content,
-.secondary-navigation nav,
-.secondary-navigation ul:not(.dropdown-menu),
-.message-app,
-div[role='main'],
-.login-container {
+body.rhitweaks-enabled .section,
+body.rhitweaks-enabled .card,
+body.rhitweaks-enabled #gridshadebox_content,
+body.rhitweaks-enabled .secondary-navigation nav,
+body.rhitweaks-enabled .secondary-navigation ul:not(.dropdown-menu),
+body.rhitweaks-enabled .message-app,
+body.rhitweaks-enabled div[role='main'],
+body.rhitweaks-enabled .login-container {
     background: var(--card-color) !important;
 }
 
-.section-summary.main {
+body.rhitweaks-enabled .section-summary.main {
     /*noinspection CssNonIntegerLengthInPixels*/
     border: 0.25px solid gray !important;
 }
 
-.secondary-navigation ul {
+body.rhitweaks-enabled .secondary-navigation ul {
     justify-content: center;
 }
 
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
-#page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
+body.rhitweaks-enabled #page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto > div > div,
+body.rhitweaks-enabled #page-header > div.w-100 > div.d-flex.align-items-center > div.mr-auto {
     flex-grow: 0 !important;
     text-align: center;
 }
 
-#page-header {
+body.rhitweaks-enabled #page-header {
     margin-top: 20px;
     max-width: 100% !important;
 }
 
-body,
-#nav-drawer,
-#page-login-index #page,
-#sticky-footer {
+body.rhitweaks-enabled,
+body.rhitweaks-enabled #nav-drawer,
+body.rhitweaks-enabled #page-login-index #page,
+body.rhitweaks-enabled #sticky-footer {
     background: var(--bg-color) !important;
 }
 
-.calendar_event_course {
+body.rhitweaks-enabled .calendar_event_course {
     background: color-mix(in srgb, var(--accent-color), transparent 85%);
 }
 
-#nav-drawer .list-group-item.active {
+body.rhitweaks-enabled #nav-drawer .list-group-item.active {
     background: var(--accent-color) !important;
     border-color: var(--accent-color);
 }
 
-.d-inline-block.mr-3 > button {
+body.rhitweaks-enabled .d-inline-block.mr-3 > button {
     background-color: #00000000 !important;
     border: none;
     color: white;
 }
 
 @media (min-width: 770px) {
-    .navbar-brand {
+    body.rhitweaks-enabled .navbar-brand {
         background: url('https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png') no-repeat 0 0 !important;
         background-size: 240px !important;
         margin-top: 14px !important;
     }
 }
 
-input,
-select {
+body.rhitweaks-enabled input,
+body.rhitweaks-enabled select {
     border: 1px solid gray !important;
 }
 
-#goto-top-link > a > i {
+body.rhitweaks-enabled #goto-top-link > a > i {
     margin: 0 !important;
 }
 
-#goto-top-link a {
+body.rhitweaks-enabled #goto-top-link a {
     top: 20px;
     right: 5px;
 }
 
-#page-footer {
+body.rhitweaks-enabled #page-footer {
     margin: 10px;
 }
 
-nav.navbar.fixed-top {
+body.rhitweaks-enabled nav.navbar.fixed-top {
     background-color: color-mix(
             in srgb,
             var(--accent-color),
@@ -188,79 +187,79 @@ nav.navbar.fixed-top {
     backdrop-filter: blur(5px);
 }
 
-div[data-region='grade-actions-panel'],
-div[data-region='grading-navigation-panel'] {
+body.rhitweaks-enabled div[data-region='grade-actions-panel'],
+body.rhitweaks-enabled div[data-region='grading-navigation-panel'] {
     background: white;
 }
 
-.fp-viewbar.btn-group a {
+body.rhitweaks-enabled .fp-viewbar.btn-group a {
     margin: 0 5px;
 }
 
-.fp-navbar {
+body.rhitweaks-enabled .fp-navbar {
     border-color: rgba(0, 0, 0, 0.125);
 }
 
-#region-main > div.region_main_settings_menu_proxy,
-#toggledsection-2 > ul,
-.activity-header,
-#region-main,
-.dashboard-card-footer,
-.activity-altcontent,
-.bg-light,
-.bg-white,
-.activity-item .description div,
-input[type='text'],
-.card .list-group-item,
-.activity-item {
+body.rhitweaks-enabled #region-main > div.region_main_settings_menu_proxy,
+body.rhitweaks-enabled #toggledsection-2 > ul,
+body.rhitweaks-enabled .activity-header,
+body.rhitweaks-enabled #region-main,
+body.rhitweaks-enabled .dashboard-card-footer,
+body.rhitweaks-enabled .activity-altcontent,
+body.rhitweaks-enabled .bg-light,
+body.rhitweaks-enabled .bg-white,
+body.rhitweaks-enabled .activity-item .description div,
+body.rhitweaks-enabled input[type='text'],
+body.rhitweaks-enabled .card .list-group-item,
+body.rhitweaks-enabled .activity-item {
     background: transparent !important;
 }
 
-#nav-drawer > nav > ul > li > a > div.ml-1 {
+body.rhitweaks-enabled #nav-drawer > nav > ul > li > a > div.ml-1 {
     margin-left: 0 !important;
 }
 
-#rmtSearch .modal-dialog {
+body.rhitweaks-enabled #rmtSearch .modal-dialog {
     top: 100px;
 }
 
-#rmtSearch .modal-body,
-#rmtSearch .modal-footer {
-    background: #000000dd;
+body.rhitweaks-enabled #rmtSearch .modal-body,
+body.rhitweaks-enabled #rmtSearch .modal-footer {
+    background: rgba(0, 0, 0, 0.87);
 }
 
-#rmtSearch .modal-body {
+body.rhitweaks-enabled #rmtSearch .modal-body {
     border-radius: 12px 12px 0 0;
 }
 
-#rmtSearch .modal-footer {
+body.rhitweaks-enabled #rmtSearch .modal-footer {
     border-radius: 0 0 12px 12px;
     border-top-color: #6f6f6f !important;
 }
 
-#rmtSearch .modal-content,
-.course-section-header .btn {
+body.rhitweaks-enabled #rmtSearch .modal-content,
+body.rhitweaks-enabled .course-section-header .btn {
     background: transparent !important;
     border: none !important;
 }
 
-#rmtSearch #rmtResultList div {
+body.rhitweaks-enabled #rmtSearch #rmtResultList div {
     padding: 8px !important;
     color: white;
 }
 
-#rmtSearch #rmtResultList div.active {
+body.rhitweaks-enabled #rmtSearch #rmtResultList div.active {
     background: var(--accent-color);
     border-radius: 4px;
 }
 
-#rmtSearch #rmtResultList div.active::after {
+body.rhitweaks-enabled #rmtSearch #rmtResultList div.active::after {
     content: 'Enter';
     color: #ffffffa6;
     float: right;
 }
 
-#rmtSearch #rmtSearchInput {
+body.rhitweaks-enabled #rmtSearch #rmtSearchInput {
     background: transparent;
     color: white;
     width: calc(100% - 25px);
@@ -268,118 +267,118 @@ input[type='text'],
     outline: none;
 }
 
-.aabtn.focus,
-.aabtn:focus,
-.btn-link.focus,
-.btn-link:focus,
-.nav-link.focus,
-.nav-link:focus,
-.editor_atto_toolbar button.focus,
-.editor_atto_toolbar button:focus,
-[role='button'].focus,
-[role='button']:focus,
-.list-group-item-action.focus,
-.list-group-item-action:focus,
-input[type='checkbox'].focus,
-input[type='checkbox']:focus,
-input[type='radio'].focus,
-input[type='radio']:focus,
-input[type='file'].focus,
-input[type='file']:focus,
-input[type='image'].focus,
-input[type='image']:focus,
-.sr-only-focusable.focus,
-.sr-only-focusable:focus,
-a.dropdown-toggle.focus,
-a.dropdown-toggle:focus,
-.modal-dialog[tabindex='0'].focus .modal-content,
-.modal-dialog[tabindex='0']:focus .modal-content,
-.moodle-dialogue-base .closebutton.focus,
-.moodle-dialogue-base .closebutton:focus,
-button.close.focus,
-button.close:focus,
-.form-autocomplete-selection.focus,
-.form-autocomplete-selection:focus,
-[role='treeitem']:not([aria-expanded='true']).focus,
-[role='treeitem']:not([aria-expanded='true']):focus,
-button:focus,
-select:focus,
-input:not(#rmtSearchInput):focus,
-.atto_toolbar_row:focus,
-.editor_atto_content:focus,
-.form-autocomplete-suggestions li[aria-selected='true'],
-.form-autocomplete-selection [data-active-selection='true'],
-.btn:focus,
-.btn.focus,
-.custom-select:focus,
-.form-control:focus {
+body.rhitweaks-enabled .aabtn.focus,
+body.rhitweaks-enabled .aabtn:focus,
+body.rhitweaks-enabled .btn-link.focus,
+body.rhitweaks-enabled .btn-link:focus,
+body.rhitweaks-enabled .nav-link.focus,
+body.rhitweaks-enabled .nav-link:focus,
+body.rhitweaks-enabled .editor_atto_toolbar button.focus,
+body.rhitweaks-enabled .editor_atto_toolbar button:focus,
+body.rhitweaks-enabled [role='button'].focus,
+body.rhitweaks-enabled [role='button']:focus,
+body.rhitweaks-enabled .list-group-item-action.focus,
+body.rhitweaks-enabled .list-group-item-action:focus,
+body.rhitweaks-enabled input[type='checkbox'].focus,
+body.rhitweaks-enabled input[type='checkbox']:focus,
+body.rhitweaks-enabled input[type='radio'].focus,
+body.rhitweaks-enabled input[type='radio']:focus,
+body.rhitweaks-enabled input[type='file'].focus,
+body.rhitweaks-enabled input[type='file']:focus,
+body.rhitweaks-enabled input[type='image'].focus,
+body.rhitweaks-enabled input[type='image']:focus,
+body.rhitweaks-enabled .sr-only-focusable.focus,
+body.rhitweaks-enabled .sr-only-focusable:focus,
+body.rhitweaks-enabled a.dropdown-toggle.focus,
+body.rhitweaks-enabled a.dropdown-toggle:focus,
+body.rhitweaks-enabled .modal-dialog[tabindex='0'].focus .modal-content,
+body.rhitweaks-enabled .modal-dialog[tabindex='0']:focus .modal-content,
+body.rhitweaks-enabled .moodle-dialogue-base .closebutton.focus,
+body.rhitweaks-enabled .moodle-dialogue-base .closebutton:focus,
+body.rhitweaks-enabled button.close.focus,
+body.rhitweaks-enabled button.close:focus,
+body.rhitweaks-enabled .form-autocomplete-selection.focus,
+body.rhitweaks-enabled .form-autocomplete-selection:focus,
+body.rhitweaks-enabled [role='treeitem']:not([aria-expanded='true']).focus,
+body.rhitweaks-enabled [role='treeitem']:not([aria-expanded='true']):focus,
+body.rhitweaks-enabled button:focus,
+body.rhitweaks-enabled select:focus,
+body.rhitweaks-enabled input:not(#rmtSearchInput):focus,
+body.rhitweaks-enabled .atto_toolbar_row:focus,
+body.rhitweaks-enabled .editor_atto_content:focus,
+body.rhitweaks-enabled .form-autocomplete-suggestions li[aria-selected='true'],
+body.rhitweaks-enabled .form-autocomplete-selection [data-active-selection='true'],
+body.rhitweaks-enabled .btn:focus,
+body.rhitweaks-enabled .btn.focus,
+body.rhitweaks-enabled .custom-select:focus,
+body.rhitweaks-enabled .form-control:focus {
     --bxs-color: color-mix(in srgb, var(--accent-color), transparent 25%);
     box-shadow: 0 0 0 0.2rem var(--bxs-color) !important;
 }
 
-.text-info[title='Help with Cookies must be enabled in your browser']::before {
+body.rhitweaks-enabled .text-info[title='Help with Cookies must be enabled in your browser']::before {
     color: white;
     position: relative;
     left: 4px;
 }
 
-#gridshadebox_content,
-.form-control:focus {
+body.rhitweaks-enabled #gridshadebox_content,
+body.rhitweaks-enabled .form-control:focus {
     border-color: var(--accent-color);
 }
 
-.course-content ul.gridicons li.currentselected .icon_content,
-.section_goto .icon {
+body.rhitweaks-enabled .course-content ul.gridicons li.currentselected .icon_content,
+body.rhitweaks-enabled .section_goto .icon {
     color: var(--accent-color) !important;
 }
 
-.generalbox a:not(.btn-primary),
-.contentwithoutlink a,
-.contentafterlink a,
-a.autolink,
-.posting a {
+body.rhitweaks-enabled .generalbox a:not(.btn-primary),
+body.rhitweaks-enabled .contentwithoutlink a,
+body.rhitweaks-enabled .contentafterlink a,
+body.rhitweaks-enabled a.autolink,
+body.rhitweaks-enabled .posting a {
     color: color-mix(in srgb, var(--accent-color), #555) !important;
 }
 
-.course-content .current::before,
-.courseindex .courseindex-section.current {
+body.rhitweaks-enabled .course-content .current::before,
+body.rhitweaks-enabled .courseindex .courseindex-section.current {
     border-left: var(--accent-color) 4px solid;
 }
 
-.course-content .current,
-.main-inner {
+body.rhitweaks-enabled .course-content .current,
+body.rhitweaks-enabled .main-inner {
     background: var(--card-color) !important;
 }
 
-.simplesearchform a.btn-open {
+body.rhitweaks-enabled .simplesearchform a.btn-open {
     display: flex !important;
 }
 
-.drawers .block_myoverview > .card-body {
+body.rhitweaks-enabled .drawers .block_myoverview > .card-body {
     padding: 1rem !important;
 }
 
-.drawer {
+body.rhitweaks-enabled .drawer {
     background: color-mix(in srgb, var(--sidebar-color), transparent 30%);
     margin-top: -4px;
     height: 100%;
 }
 
 @media (max-width: 992px) {
-    .drawer {
+    body.rhitweaks-enabled .drawer {
         margin-top: 0 !important;
     }
 }
 
-.drawerheader {
+body.rhitweaks-enabled .drawerheader {
     height: 0 !important;
     position: relative;
     z-index: 1;
     top: 18px;
 }
 
-.drawerheader button.btn.drawertoggle,
-#courseindexdrawercontrols button {
+body.rhitweaks-enabled .drawerheader button.btn.drawertoggle,
+body.rhitweaks-enabled #courseindexdrawercontrols button {
     background: white;
     color: black !important;
     height: 26px;
@@ -388,48 +387,48 @@ a.autolink,
     padding: 0 !important;
 }
 
-.drawercontent {
+body.rhitweaks-enabled .drawercontent {
     height: 100% !important;
     padding-top: 0;
     margin-top: 0;
 }
 
-.drawercontent > nav,
-.drawercontent > section {
+body.rhitweaks-enabled .drawercontent > nav,
+body.rhitweaks-enabled .drawercontent > section {
     margin-top: 35px !important;
     margin-bottom: 65px;
 }
 
-#page.drawers {
+body.rhitweaks-enabled #page.drawers {
     margin-top: 0 !important;
     padding-top: 56px !important;
     height: 100%;
 }
 
-.courseindex-item a {
+body.rhitweaks-enabled .courseindex-item a {
     color: white !important;
 }
 
-.courseindex-item:hover:not(.pageitem) {
+body.rhitweaks-enabled .courseindex-item:hover:not(.pageitem) {
     background-color: color-mix(in srgb, var(--accent-color), transparent 50%);
 }
 
-.header-maxwidth {
+body.rhitweaks-enabled .header-maxwidth {
     margin-left: 0 !important;
 }
 
-.page-header-headings {
+body.rhitweaks-enabled .page-header-headings {
     display: flex;
     align-items: center;
 }
 
-.navbar-light .navbar-nav .nav-link:hover,
-.secondary-navigation .navigation .nav-tabs .nav-link:hover {
+body.rhitweaks-enabled .navbar-light .navbar-nav .nav-link:hover,
+body.rhitweaks-enabled .secondary-navigation .navigation .nav-tabs .nav-link:hover {
     background-color: transparent !important;
 }
 
-.navbar-light .navbar-nav .nav-link:not([data-action='opensearch']):hover,
-.secondary-navigation .navigation .nav-tabs .nav-link:hover {
+body.rhitweaks-enabled .navbar-light .navbar-nav .nav-link:not([data-action='opensearch']):hover,
+body.rhitweaks-enabled .secondary-navigation .navigation .nav-tabs .nav-link:hover {
     border-bottom-color: color-mix(
             in srgb,
             var(--accent-color),
@@ -438,243 +437,244 @@ a.autolink,
     transition: 0.2s;
 }
 
-.custom-courses.dropdown-menu {
+body.rhitweaks-enabled .custom-courses.dropdown-menu {
     position: fixed !important;
     top: 50px;
     left: 420px;
     z-index: 2000;
 }
 
-.thegrid {
+body.rhitweaks-enabled .thegrid {
     justify-content: center !important;
 }
 
-.grid-image.card-img-bottom {
+body.rhitweaks-enabled .grid-image.card-img-bottom {
     background: white !important;
 }
 
-#sticky-footer label,
-.navbar-light .navbar-nav .nav-link:hover {
+body.rhitweaks-enabled #sticky-footer label,
+body.rhitweaks-enabled .navbar-light .navbar-nav .nav-link:hover {
     color: white !important;
 }
 
-#page.drawers::-webkit-scrollbar {
+body.rhitweaks-enabled #page.drawers::-webkit-scrollbar {
     width: 0;
 }
 
-#page.drawers::-webkit-scrollbar-track {
+body.rhitweaks-enabled #page.drawers::-webkit-scrollbar-track {
     background: var(--bg-color);
     border: 2px solid white;
     border-radius: 0.5rem;
 }
 
-#page.drawers::-webkit-scrollbar-thumb,
-#page.drawers::-webkit-scrollbar-thumb:hover,
-#page.drawers::-webkit-scrollbar-thumb:active {
+body.rhitweaks-enabled #page.drawers::-webkit-scrollbar-thumb,
+body.rhitweaks-enabled #page.drawers::-webkit-scrollbar-thumb:hover,
+body.rhitweaks-enabled #page.drawers::-webkit-scrollbar-thumb:active {
     border: none;
     background: var(--accent-color);
 }
 
-#page {
+body.rhitweaks-enabled #page {
     flex-grow: 1;
     scrollbar-color: var(--accent-color) var(--bg-color) !important;
 }
 
-.courseindex .courseindex-item.pageitem,
-.courseindex .courseindex-item.pageitem:hover,
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+body.rhitweaks-enabled .courseindex .courseindex-item.pageitem,
+body.rhitweaks-enabled .courseindex .courseindex-item.pageitem:hover,
+body.rhitweaks-enabled .nav-pills .nav-link.active,
+body.rhitweaks-enabled .nav-pills .show > .nav-link {
     background: var(--accent-color) !important;
 }
 
-body {
+body.rhitweaks-enabled {
     -webkit-user-select: auto;
     user-select: auto;
 }
 
-.drawer-right-toggle {
+body.rhitweaks-enabled .drawer-right-toggle {
     margin-right: 0 !important;
 }
 
-.popover-region-notifications .popover-region-container {
+body.rhitweaks-enabled .popover-region-notifications .popover-region-container {
     border-radius: 0.5rem;
     top: 56px;
     background: var(--card-color) !important;
 }
 
-.popover-region-notifications .popover-region-footer-container,
-.file-picker .fp-content {
+body.rhitweaks-enabled .popover-region-notifications .popover-region-footer-container,
+body.rhitweaks-enabled .file-picker .fp-content {
     border-radius: 0 0 0.5rem 0.5rem;
     background: var(--card-color) !important;
 }
 
-.content-item-container:hover,
-.maincalendar .calendarmonth td.today .day-number-circle {
+body.rhitweaks-enabled .content-item-container:hover,
+body.rhitweaks-enabled .maincalendar .calendarmonth td.today .day-number-circle {
     background-color: var(--accent-color) !important;
 }
 
-.moremenu .nav-link.active {
+body.rhitweaks-enabled .moremenu .nav-link.active {
     border-bottom-color: var(--accent-color) !important;
 }
 
-a:hover {
+body.rhitweaks-enabled a:not(.btn-primary, .dropdown-item):hover {
     color: var(--hover-color);
 }
 
-#sticky-footer {
+body.rhitweaks-enabled #sticky-footer {
     height: 50px;
     border-top: 0 !important;
 }
 
-.onGradebookPage {
+body.rhitweaks-enabled .onGradebookPage {
     height: calc(100% + 52px) !important;
 }
 
-.btn-outline-primary {
+body.rhitweaks-enabled .btn-outline-primary {
     color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
 }
 
-.btn-outline-primary:not(:disabled):not(.disabled):active,
-.btn-outline-primary:not(:disabled):not(.disabled).active,
-.show > .btn-outline-primary.dropdown-toggle,
-.btn-outline-primary:hover,
-.page-item.active .page-link,
-.badge-primary,
-.form-autocomplete-suggestions li:hover,
-.form-autocomplete-suggestions li:focus,
-.form-autocomplete-suggestions li[aria-selected='true'] {
+body.rhitweaks-enabled .btn-outline-primary:not(:disabled):not(.disabled):active,
+body.rhitweaks-enabled .btn-outline-primary:not(:disabled):not(.disabled).active,
+body.rhitweaks-enabled .show > .btn-outline-primary.dropdown-toggle,
+body.rhitweaks-enabled .btn-outline-primary:hover,
+body.rhitweaks-enabled .page-item.active .page-link,
+body.rhitweaks-enabled .badge-primary,
+body.rhitweaks-enabled .form-autocomplete-suggestions li:hover,
+body.rhitweaks-enabled .form-autocomplete-suggestions li:focus,
+body.rhitweaks-enabled .form-autocomplete-suggestions li[aria-selected='true'] {
     color: white !important;
     background-color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
 }
 
-.activity-add,
-.block-add {
+body.rhitweaks-enabled .activity-add,
+body.rhitweaks-enabled .block-add {
     background-color: color-mix(in srgb, var(--accent-color), #ffffff) !important;
     border-color: var(--hover-color) !important;
 }
 
-.report-navigation .singleselect {
+body.rhitweaks-enabled .report-navigation .singleselect {
     display: flex !important;
 }
 
-.report-navigation .pagination {
+body.rhitweaks-enabled .report-navigation .pagination {
     margin: 0 !important;
 }
 
-.report-navigation > .container > .ml-auto {
+body.rhitweaks-enabled .report-navigation > .container > .ml-auto {
     align-content: center;
     flex-wrap: wrap;
 }
 
-.report-navigation .previous,
-.report-navigation .next {
+body.rhitweaks-enabled .report-navigation .previous,
+body.rhitweaks-enabled .report-navigation .next {
     height: 25px;
 }
 
-.editor_atto_content_wrap,
-.activity-item .description div,
-.que .info {
+body.rhitweaks-enabled .editor_atto_content_wrap,
+body.rhitweaks-enabled .activity-item .description div,
+body.rhitweaks-enabled .que .info {
     border-radius: 0.5rem;
 }
 
-.activityiconcontainer {
+body.rhitweaks-enabled .activityiconcontainer {
     background-color: var(--hover-color) !important;
 }
 
-.activityiconcontainer img {
+body.rhitweaks-enabled .activityiconcontainer img {
     filter: invert(1);
 }
 
-.timeline-event-list-item .timeline-name .text-right {
+body.rhitweaks-enabled .timeline-event-list-item .timeline-name .text-right {
     width: 55px !important;
 }
 
-.editor_atto_content:focus,
-.form-autocomplete-suggestions li[aria-selected='true'],
-.form-autocomplete-selection [data-active-selection='true'] {
+body.rhitweaks-enabled .editor_atto_content:focus,
+body.rhitweaks-enabled .form-autocomplete-suggestions li[aria-selected='true'],
+body.rhitweaks-enabled .form-autocomplete-selection [data-active-selection='true'] {
     border-color: transparent !important;
 }
 
-.activityiconcontainer .fa {
+body.rhitweaks-enabled .activityiconcontainer .fa {
     color: white;
     position: relative;
 }
 
-.custom-control-input:not(:disabled):active ~ .custom-control-label::before,
-.custom-control-input:focus ~ .custom-control-label::before,
-.custom-control-input:checked ~ .custom-control-label::before {
-    background-color: white !important;
-    border-color: transparent !important;
+body.rhitweaks-enabled .custom-control-input:not(:disabled):active ~ .custom-control-label::before,
+body.rhitweaks-enabled .custom-control-input:focus ~ .custom-control-label::before,
+body.rhitweaks-enabled .custom-control-input:checked ~ .custom-control-label::before,
+body.rhitweaks-enabled .custom-switch .custom-control-input:not(:checked) ~ .custom-control-label::before {
+    background: white !important;
+    border-color: var(--card-color) !important;
     box-shadow: none !important;
 }
 
-#available_shortcuts_tab,
-#available_shortcuts_inner {
+body.rhitweaks-enabled #available_shortcuts_tab,
+body.rhitweaks-enabled #available_shortcuts_inner {
     border-radius: 0.5rem 0 0;
 }
 
-#available_shortcuts_tab {
+body.rhitweaks-enabled #available_shortcuts_tab {
     font-size: 0 !important;
 }
 
-#available_shortcuts_tab:before {
+body.rhitweaks-enabled #available_shortcuts_tab:before {
     content: '+';
     font-size: 16px;
 }
 
-#available_shortcuts_popup {
+body.rhitweaks-enabled #available_shortcuts_popup {
     background-color: transparent !important;
     border: none !important;
 }
 
-.available_shortcuts_items {
+body.rhitweaks-enabled .available_shortcuts_items {
     margin-bottom: 4px;
 }
 
-.user-report-container,
-.path-grade-report-user .user-grade thead th,
-.grade-report-user .user-grade thead th,
-.path-grade-report-user .user-grade td.category,
-.grade-report-user .user-grade td.category,
-.path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t), .baggb),
-.grade-report-user .user-grade td,
-.path-grade-report-user .user-grade tbody tr,
-.grade-report-user .user-grade tbody tr,
-.form-group {
+body.rhitweaks-enabled .user-report-container,
+body.rhitweaks-enabled .path-grade-report-user .user-grade thead th,
+body.rhitweaks-enabled .grade-report-user .user-grade thead th,
+body.rhitweaks-enabled .path-grade-report-user .user-grade td.category,
+body.rhitweaks-enabled .grade-report-user .user-grade td.category,
+body.rhitweaks-enabled .path-grade-report-user .user-grade td:not(.b1b, .b2b:not(.b1t), .baggb),
+body.rhitweaks-enabled .grade-report-user .user-grade td,
+body.rhitweaks-enabled .path-grade-report-user .user-grade tbody tr,
+body.rhitweaks-enabled .grade-report-user .user-grade tbody tr,
+body.rhitweaks-enabled .form-group {
     background-color: transparent !important;
 }
 
-.format-grid .thegrid .grid-image img {
+body.rhitweaks-enabled .format-grid .thegrid .grid-image img {
     max-width: 95%;
     max-height: 99%;
 }
 
-.card-header:first-child {
+body.rhitweaks-enabled .card-header:first-child {
     text-align: center;
 }
 
-.activity-item .description .course-description-item {
+body.rhitweaks-enabled .activity-item .description .course-description-item {
     /*noinspection CssNonIntegerLengthInPixels*/
     border: 0.25px solid gray;
     padding-block: 1rem;
 }
 
-.activity-item .description .course-description-item:nth-child(2) {
+body.rhitweaks-enabled .activity-item .description .course-description-item:nth-child(2) {
     margin-top: 5px;
 }
 
-.description .course-description-item .description-inner {
+body.rhitweaks-enabled .description .course-description-item .description-inner {
     border-bottom: none !important;
     padding: 0;
 }
 
-.message-app .simplesearchform .btn .icon {
+body.rhitweaks-enabled .message-app .simplesearchform .btn .icon {
     color: black;
 }
 
-a:not(.courseindex-link, .btn):focus {
+body.rhitweaks-enabled a:not(.courseindex-link, .btn):focus {
     background-color: color-mix(
             in srgb,
             var(--accent-color),
@@ -684,7 +684,7 @@ a:not(.courseindex-link, .btn):focus {
     box-shadow: none !important;
 }
 
-a:not(
+body.rhitweaks-enabled a:not(
     .courseindex-link,
     .dropdown-item,
     .nav-link,
@@ -694,35 +694,36 @@ a:not(
     border-radius: 0.5rem;
 }
 
-.path-grade-report-user .user-grade .column-itemname.baggt {
+body.rhitweaks-enabled .path-grade-report-user .user-grade .column-itemname.baggt {
     padding-left: 24px !important;
 }
 
-.path-grade-report-user .user-grade tbody tr.spacer {
+body.rhitweaks-enabled table .spacer {
     height: 0 !important;
 }
 
-#rmtResultList {
+body.rhitweaks-enabled #rmtResultList {
     justify-content: start;
     display: block;
 }
 
-.dropdown-item.navbar-control {
+body.rhitweaks-enabled .dropdown-item.navbar-control {
     cursor: pointer !important;
 }
 
-.activityicon {
+body.rhitweaks-enabled .activityicon {
     filter: invert(1) !important;
 }
 
-.page-header-image {
+body.rhitweaks-enabled .page-header-image {
     margin-right: 10px;
 }
 
-.dragdrop-question p, .dragdrop-choice {
+body.rhitweaks-enabled .dragdrop-question p,
+body.rhitweaks-enabled .dragdrop-choice {
     overflow: auto !important;
 }
 
-.course-section-header .btn {
+body.rhitweaks-enabled .course-section-header .btn {
     outline-color: var(--accent-color) !important;
 }

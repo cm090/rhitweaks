@@ -1,67 +1,62 @@
-/*noinspection CssUnusedSymbol*/
-#branding {
+body.rhitweaks-enabled #branding {
     background-image: url(https://www.rose-hulman.edu/assets/images/rose-hulman-video-logo.png);
     background-size: contain;
 }
 
-#header-main-section {
+body.rhitweaks-enabled #header-main-section {
     background-color: #800000;
     border: none;
 }
 
-/*noinspection CssUnusedSymbol*/
-#header-main-section-east-part #userDiv {
+body.rhitweaks-enabled #header-main-section-east-part #userDiv {
     background-color: unset;
 }
 
-.banner-home {
+body.rhitweaks-enabled .banner-home {
     margin: 1rem;
 }
 
-.banner-home .card {
+body.rhitweaks-enabled .banner-home .card {
     margin-bottom: 1rem;
     transition: all 0.2s ease-in-out;
 }
 
-.banner-home .card:hover {
+body.rhitweaks-enabled .banner-home .card:hover {
     box-shadow: 0 0 0 0.2rem #80000040;
     transform: scale(1.01);
     cursor: pointer;
 }
 
-.banner-home .card-title {
+body.rhitweaks-enabled .banner-home .card-title {
     margin-bottom: 0;
 }
 
-/*noinspection CssUnusedSymbol*/
-.banner-home .fa,
-.banner-home .fas {
+body.rhitweaks-enabled .banner-home .fa,
+body.rhitweaks-enabled .banner-home .fas {
     width: 25px;
 }
 
-.banner-home h3 {
+body.rhitweaks-enabled .banner-home h3 {
     margin-left: 0.5rem;
 }
 
-#banner-home {
+body.rhitweaks-enabled #banner-home {
     margin-bottom: 2rem;
 }
 
-/*noinspection CssUnusedSymbol*/
-.gen-home-main-view {
+body.rhitweaks-enabled .gen-home-main-view {
     background-color: #f6f6f6 !important;
     height: unset !important;
 }
 
-div[ng-app='generalSsbApp']#content {
+body.rhitweaks-enabled div[ng-app='generalSsbApp']#content {
     height: unset !important;
 }
 
-thead .column-visibility-menu {
+body.rhitweaks-enabled thead .column-visibility-menu {
     height: 40px !important;
 }
 
-/*noinspection CssUnusedSymbol*/
-.notification-center-shim {
+body.rhitweaks-enabled .notification-center-shim {
     display: none;
 }

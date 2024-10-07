@@ -104,7 +104,7 @@ const setStyles = () => {
   } else if (document.title.includes('Schedule Options')) {
     appendToPage(htmlElement, lookupPage, 'lookup');
   }
-  import('./styles.css');
+  document.body.classList.add('rhitweaks-enabled');
   document.querySelectorAll('table').forEach((table) => {
     table.setAttribute('bgcolor', '');
   });

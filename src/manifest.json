@@ -15,6 +15,9 @@
       "js": [
         "content/moodle/moodle.ts"
       ],
+      "css": [
+        "content/moodle/styles.css"
+      ],
       "matches": [
         "https://moodle.rose-hulman.edu/*"
       ],
@@ -23,6 +26,9 @@
     {
       "js": [
         "content/schedule/schedule.ts"
+      ],
+      "css": [
+        "content/schedule/styles.css"
       ],
       "matches": [
         "https://prodwebxe-hv.rose-hulman.edu/*",
@@ -33,6 +39,9 @@
     {
       "js": [
         "content/banner/banner.ts"
+      ],
+      "css": [
+        "content/banner/styles.css"
       ],
       "matches": [
         "https://bannerssb.rose-hulman.edu/*"

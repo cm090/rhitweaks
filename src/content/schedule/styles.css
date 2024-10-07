@@ -5,12 +5,12 @@
     --border-color: #808080;
 }
 
-body {
+body.rhitweaks-enabled {
     margin: 0;
     background-color: var(--bg-color);
 }
 
-.header {
+body.rhitweaks-enabled .header {
     background-color: color-mix(
             in srgb,
             var(--accent-color),
@@ -24,20 +24,20 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-.header h3 {
+body.rhitweaks-enabled .header h3 {
     margin: 5px 0 0;
     color: var(--text-color);
 }
 
-.header div:last-child {
+body.rhitweaks-enabled .header div:last-child {
     margin: auto 0;
     display: flex;
     justify-content: flex-end;
 }
 
-.header button,
-input[type='submit'],
-input[type='reset'] {
+body.rhitweaks-enabled .header button,
+body.rhitweaks-enabled input[type='submit'],
+body.rhitweaks-enabled input[type='reset'] {
     background-color: var(--text-color);
     color: var(--bg-color);
     border: none;
@@ -46,33 +46,33 @@ input[type='reset'] {
     cursor: pointer;
 }
 
-:not(html[page='home']) body > form > table > tbody > tr:nth-child(1) > td,
-:not(html[page='home']) body table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(5),
-html[page='detail'] body > table > tbody > tr:nth-child(1) > td,
-html[page='matrix'] body > table > tbody > tr:nth-child(1) > td {
+:not(html[page='home']) body.rhitweaks-enabled > form > table > tbody > tr:nth-child(1) > td,
+:not(html[page='home']) body.rhitweaks-enabled table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(5),
+html[page='detail'] body.rhitweaks-enabled > table > tbody > tr:nth-child(1) > td,
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:nth-child(1) > td {
     display: none;
 }
 
-td,
-th,
-a {
+body.rhitweaks-enabled td,
+body.rhitweaks-enabled th,
+body.rhitweaks-enabled a {
     background-color: transparent !important;
     color: var(--text-color) !important;
 }
 
-body > table {
+body.rhitweaks-enabled > table {
     padding: 10px;
     border: none !important;
 }
 
-body > p {
+body.rhitweaks-enabled > p {
     padding: 10px;
     margin: 0;
 }
 
-html[page='matrix'] body > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
-html[page='detail'] body > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
-html[page='lookup'] body > form > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2) {
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
+html[page='detail'] body.rhitweaks-enabled > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2),
+html[page='lookup'] body.rhitweaks-enabled > form > table > tbody > tr:nth-child(2) > td.bw70 > a:nth-child(2) {
     background: var(--text-color) !important;
     color: var(--bg-color) !important;
     text-decoration: none;
@@ -82,24 +82,24 @@ html[page='lookup'] body > form > table > tbody > tr:nth-child(2) > td.bw70 > a:
     top: 20px;
 }
 
-html[page='matrix'] p > table,
-html[page='detail'] p > table {
+html[page='matrix'] body.rhitweaks-enabled p > table,
+html[page='detail'] body.rhitweaks-enabled p > table {
     border-collapse: collapse;
     border-radius: 8px;
     border-style: hidden;
     box-shadow: 0 0 0 1px var(--border-color);
 }
 
-html[page='home'] table {
+html[page='home'] body.rhitweaks-enabled table {
     margin: 20px auto auto;
 }
 
-html[page='home'] table td {
+html[page='home'] body.rhitweaks-enabled table td {
     background-color: transparent !important;
     color: var(--text-color) !important;
 }
 
-html[page='home'] select {
+html[page='home'] body.rhitweaks-enabled select {
     background-color: var(--text-color);
     color: var(--bg-color);
     border: none;
@@ -113,7 +113,7 @@ html[page='home'] select {
     font-size: 14px;
 }
 
-html[page='home'] form input {
+html[page='home'] body.rhitweaks-enabled form input {
     background-color: var(--text-color);
     color: var(--bg-color);
     border: none;
@@ -124,8 +124,8 @@ html[page='home'] form input {
     font-size: 14px;
 }
 
-html[page='home'] form input[type='submit'],
-html[page='home'] form button {
+html[page='home'] body.rhitweaks-enabled form input[type='submit'],
+html[page='home'] body.rhitweaks-enabled form button {
     background-color: var(--accent-color) !important;
     color: var(--text-color) !important;
     border: none;
@@ -140,30 +140,30 @@ html[page='home'] form button {
     font-size: 14px;
 }
 
-html[page='home'] .input-area {
+html[page='home'] body.rhitweaks-enabled .input-area {
     width: min-content;
     margin: auto;
 }
 
-html[page='home'] .input-area div {
+html[page='home'] body.rhitweaks-enabled .input-area div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 10px;
 }
 
-html[page='home'] .checkbox {
+html[page='home'] body.rhitweaks-enabled .checkbox {
     margin: 20px auto 5px;
     display: flex;
     justify-content: center;
     color: var(--text-color) !important;
 }
 
-html[page='home'] .checkbox input {
+html[page='home'] body.rhitweaks-enabled .checkbox input {
     width: min-content;
     margin: 0 5px;
 }
 
-html[page='home'] .buttons {
+html[page='home'] body.rhitweaks-enabled .buttons {
     /*noinspection CssInvalidPropertyValue*/
     width: -moz-fit-content;
     width: fit-content;
@@ -172,7 +172,7 @@ html[page='home'] .buttons {
     align-items: center;
 }
 
-html[page='home'] .buttons .actionButton {
+html[page='home'] body.rhitweaks-enabled .buttons .actionButton {
     width: 210px !important;
     color: var(--text-color);
     background: transparent !important;
@@ -180,15 +180,16 @@ html[page='home'] .buttons .actionButton {
     transition: 0.2s;
 }
 
-html[page='home'] .buttons .actionButton:hover {
+html[page='home'] body.rhitweaks-enabled .buttons .actionButton:hover {
     background: var(--accent-color) !important;
 }
 
-hr {
+body.rhitweaks-enabled hr {
     border-color: var(--border-color);
 }
 
-html[page='lookup'] input:not(input[type='submit'], input[type='reset']) {
+html[page='lookup'] body.rhitweaks-enabled input:not(input[type='submit'],
+body.rhitweaks-enabled input[type='reset']) {
     background: transparent;
     color: var(--text-color);
     border-radius: 8px;
@@ -196,27 +197,27 @@ html[page='lookup'] input:not(input[type='submit'], input[type='reset']) {
     padding: 2px 5px;
 }
 
-html[page='lookup'] h5 {
+html[page='lookup'] body.rhitweaks-enabled h5 {
     font-size: 14px;
     margin: 5px 2px;
 }
 
-html[page='matrix'] body > table > tbody > tr:first-child > th:first-child {
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:first-child > th:first-child {
     border-radius: 8px 0 0;
 }
 
-html[page='matrix'] body > table > tbody > tr:first-child > th:last-child {
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:first-child > th:last-child {
     border-radius: 0 8px 0 0;
 }
 
-html[page='matrix'] body > table > tbody > tr:last-child > td:first-child {
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:last-child > td:first-child {
     border-radius: 0 0 0 8px;
 }
 
-html[page='matrix'] body > table > tbody > tr:last-child > td:last-child {
+html[page='matrix'] body.rhitweaks-enabled > table > tbody > tr:last-child > td:last-child {
     border-radius: 0 0 8px;
 }
 
-#courseRosterDownloadButton {
+body.rhitweaks-enabled #courseRosterDownloadButton {
     display: none;
 }
