@@ -96,24 +96,7 @@ const initialize = (moodleData: MoodleData) => {
     .then(() => {
       buildCourseDropdown(moodleData);
       initializeNavItemListeners();
-      setTimeout(reloadPageIfNecessary, 5000);
     });
-};
-
-const reloadPageIfNecessary = () => {
-  if (
-    window.location.pathname !== '/my/' ||
-    window.location.hash.includes('bypass')
-  ) {
-    return;
-  }
-  if (
-    document.querySelector(
-      ".block_myoverview [data-region='loading-placeholder-content']",
-    )
-  ) {
-    window.location.reload();
-  }
 };
 
 const handleMoodlePageUpdate = () =>
