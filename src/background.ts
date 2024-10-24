@@ -19,29 +19,41 @@ chrome.storage.local.onChanged.addListener((res) => {
   }
 });
 
-const moodleHomepageComponents = ['timeline', 'myoverview'];
-chrome.tabs.onUpdated.addListener(
-  (tabId, changeInfo, tab) =>
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (
     changeInfo.status === 'complete' &&
     tab.url !== undefined &&
-    tab.url.includes('moodle.rose-hulman.edu/my') &&
+    tab.url.includes('moodle.rose-hulman.edu/my')
+  ) {
     void chrome.scripting.executeScript({
       target: { tabId: tabId, allFrames: true },
       world: 'MAIN',
       func: (): void => {
-        let script = '';
-        moodleHomepageComponents.forEach((component) => {
-          const element = document.querySelector(`.block-${component}`);
-          if (!element) {
-            return;
-          }
-          script += `require(['jquery', 'block_${component}/main'], function ($, Main) {
-              Main.init($('#${element.id}'));
-            });`;
-        });
-        const scriptElement = document.createElement('script');
-        scriptElement.textContent = script;
-        document.body.appendChild(scriptElement);
+        const moodleComponents = [
+          'timeline',
+          'myoverview',
+          'recentlyaccesseditems',
+          'recentlyaccessedcourses',
+        ];
+        const loadMoodleComponents = () => {
+          let script = '';
+          moodleComponents.forEach((component) => {
+            const element = document.querySelector(`.block-${component}`);
+            if (!element) {
+              return;
+            }
+            script += `require(['jquery', 'block_${component}/main'], function ($, Main) { Main.init($('#${element.id}')); });`;
+          });
+          const scriptElement = document.createElement('script');
+          scriptElement.textContent = script;
+          document.body.appendChild(scriptElement);
+          setTimeout(() => {
+            scriptElement.remove();
+          }, 500);
+        };
+        loadMoodleComponents();
+        setTimeout(loadMoodleComponents, 1000);
       },
-    }),
-);
+    });
+  }
+});
