@@ -4,7 +4,7 @@ cp compatibility/manifest-firefox.json dist
 # shellcheck disable=SC2164
 cd dist
 
-jq "del(.background, .host-permissions)" manifest.json > manifest-temp.json
+jq "del(.background)" manifest.json > manifest-temp.json
 jq -s '.[0] * .[1]' manifest-temp.json manifest-firefox.json > manifest.json
 rm manifest-*.json
 
