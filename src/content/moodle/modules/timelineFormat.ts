@@ -4,27 +4,17 @@ const formatTimeline = ({ timeFormat }: MoodleData) => {
   if (!document.querySelector('.block-timeline')) {
     return Promise.reject();
   }
-  for (const item of Array.from(
-    document.querySelectorAll('.timeline-event-list-item small.text-right'),
-  )) {
-    formatTimelineElement(item as HTMLElement, timeFormat);
-  }
-  if (document.querySelector("[data-action='more-events']")) {
-    const btn = document.querySelector(
-      "[data-action='more-events']",
-    ) as HTMLButtonElement;
-    btn.addEventListener('click', () => {
-      const wait = () => {
-        const btn = document.querySelector("[data-action='more-events']");
-        if (!(btn && (btn as HTMLButtonElement).disabled)) {
-          setTimeout(formatTimeline, 500);
-        } else {
-          setTimeout(wait, 500);
-        }
-      };
-      wait();
-    });
-  }
+
+  const formatAllElements = () =>
+    Array.from(
+      document.querySelectorAll('.timeline-event-list-item small.text-right'),
+    ).forEach((item) => formatTimelineElement(item as HTMLElement, timeFormat));
+
+  const observer = new MutationObserver(formatAllElements);
+  observer.observe(document.querySelector('[data-region=timeline-view]')!, {
+    childList: true,
+    subtree: true,
+  });
   return Promise.resolve();
 };
 
