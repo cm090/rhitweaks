@@ -101,13 +101,17 @@ const initialize = (moodleData: MoodleData) => {
 
 const handleMoodlePageUpdate = () =>
   onDataChanged(DataType.MoodleData, (oldData, newData) => {
-    if (oldData.enabled != newData.enabled) {
+    if (
+      oldData.enabled != newData.enabled ||
+      (window.location.pathname.startsWith('/my') &&
+        (oldData as MoodleData).timeFormat !=
+          (newData as MoodleData).timeFormat)
+    ) {
       window.location.reload();
       return;
     }
     setStyleProperties(newData as MoodleData);
     buildCourseDropdown(newData as MoodleData);
-    formatTimeline(newData as MoodleData).catch(() => null);
   });
 
 configureMoodle();

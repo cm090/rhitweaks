@@ -44,7 +44,8 @@ body.rhitweaks-enabled .usernav li:first-child,
 body.rhitweaks-enabled #usernavigation .divider,
 body.rhitweaks-enabled #searchform-navbar,
 body.rhitweaks-enabled #page-footer > div:nth-child(1) > button,
-body.rhitweaks-enabled .drawercontent::-webkit-scrollbar {
+body.rhitweaks-enabled .drawercontent::-webkit-scrollbar,
+body.rhitweaks-enabled .moodle-dialogue-exception {
     display: none !important;
 }
 
@@ -81,7 +82,8 @@ body.rhitweaks-enabled .dropdown-item:active,
 body.rhitweaks-enabled .dropdown-item:hover,
 body.rhitweaks-enabled .dropdown-item:focus,
 body.rhitweaks-enabled .dropdown-item:focus-within,
-body.rhitweaks-enabled .badge-info {
+body.rhitweaks-enabled .badge-info,
+body.rhitweaks-enabled .bg-primary {
     background: var(--accent-color) !important;
     border-color: var(--accent-color);
 }
