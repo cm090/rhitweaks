@@ -9,6 +9,7 @@ const formatTimeline = ({ timeFormat }: MoodleData) => {
     Array.from(
       document.querySelectorAll('.timeline-event-list-item small.text-right'),
     ).forEach((item) => formatTimelineElement(item as HTMLElement, timeFormat));
+  formatAllElements();
 
   const observer = new MutationObserver(formatAllElements);
   observer.observe(document.querySelector('[data-region=timeline-view]')!, {
