@@ -722,7 +722,8 @@ body.rhitweaks-enabled .page-header-image {
 }
 
 body.rhitweaks-enabled .dragdrop-question p,
-body.rhitweaks-enabled .dragdrop-choice {
+body.rhitweaks-enabled .dragdrop-choice,
+body.rhitweaks-enabled.lockscroll {
     overflow: auto !important;
 }
 
