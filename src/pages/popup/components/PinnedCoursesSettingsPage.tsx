@@ -114,7 +114,7 @@ const PinnedCoursesSettingsPage = (
                 overflowX: 'hidden',
                 overflowY: 'scroll',
                 scrollbarWidth: 'thin',
-                border: `1px solid ${theme.palette.neutral.outlinedDisabledBorder}`,
+                border: `1px solid ${theme.palette.divider}`,
                 borderRadius: `${theme.radius.md} 0 0 ${theme.radius.md}`,
               })}
             >
@@ -141,6 +141,7 @@ const PinnedCoursesSettingsPage = (
         color="danger"
         sx={{ width: '100%', marginBlock: '10px' }}
         onClick={() => setResetDialogOpen(true)}
+        disabled={!props.data.pinnedCourses.length}
       >
         Clear pinned courses
       </Button>

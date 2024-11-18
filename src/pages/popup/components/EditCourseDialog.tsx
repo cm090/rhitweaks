@@ -22,19 +22,34 @@ interface EditCourseDialogProps {
 const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
   const [courseName, setCourseName] = useState(props.open?.name);
 
+  const handleSubmit = () => {
+    if (courseName && courseName.length) {
+      props.onConfirm({ ...props.open, name: courseName } as Course);
+    }
+    props.setOpen(false);
+    setCourseName(undefined);
+  };
+
   return (
     <Modal open={props.open != undefined} onClose={() => props.setOpen(false)}>
       <ModalDialog variant="outlined" role="alertdialog">
         <DialogTitle>Edit course</DialogTitle>
         <Divider />
         <DialogContent>
-          <FormControl>
-            <FormLabel>Course name</FormLabel>
-            <Input
-              value={courseName ?? props.open?.name ?? ''}
-              onChange={(e) => setCourseName(e.target.value)}
-            />
-          </FormControl>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <FormControl>
+              <FormLabel>Course name</FormLabel>
+              <Input
+                value={courseName ?? props.open?.name ?? ''}
+                onChange={(e) => setCourseName(e.target.value)}
+              />
+            </FormControl>
+          </form>
         </DialogContent>
         <DialogActions>
           <Button
@@ -44,14 +59,7 @@ const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
           >
             Cancel
           </Button>
-          <Button
-            variant="solid"
-            onClick={() => {
-              props.onConfirm({ ...props.open, name: courseName } as Course);
-              props.setOpen(false);
-              setCourseName(undefined);
-            }}
-          >
+          <Button variant="solid" onClick={handleSubmit}>
             Save
           </Button>
         </DialogActions>
