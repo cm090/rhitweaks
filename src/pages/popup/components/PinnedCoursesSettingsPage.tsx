@@ -1,12 +1,8 @@
-import { Delete, Edit } from '@mui/icons-material';
 import {
   Button,
   FormControl,
   FormLabel,
-  IconButton,
   List,
-  ListItem,
-  ListItemContent,
   Option,
   Select,
   Typography,
@@ -17,6 +13,20 @@ import ResetWarningDialog from './ResetWarningDialog';
 import SettingsWrapper from './SettingsWrapper';
 import EditCourseDialog from './EditCourseDialog';
 import RemoveCourseDialog from './RemoveCourseDialog';
+import CourseListItem from './CourseListItem';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 interface PinnedCoursesSettingsPageProps {
   setPage: (page: Page) => void;
@@ -30,6 +40,29 @@ const PinnedCoursesSettingsPage = (
   const [editCourseDialog, setEditCourseDialog] = useState<Course>();
   const [removeCourseDialog, setRemoveCourseDialog] = useState<Course>();
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+  );
+
+  const handleDragEnd = ({ active, over }: DragEndEvent) =>
+    active.id !== over?.id &&
+    props.setData((prevData) => {
+      const oldIndex = prevData.pinnedCourses.indexOf(
+        prevData.pinnedCourses.find((course) => course.id === active.id)!,
+      );
+      const newIndex = prevData.pinnedCourses.indexOf(
+        prevData.pinnedCourses.find((course) => course.id === over?.id)!,
+      );
+
+      return {
+        ...prevData,
+        pinnedCourses: arrayMove(prevData.pinnedCourses, oldIndex, newIndex),
+      };
+    });
 
   const updateCourseName = (current?: Course) =>
     current &&
@@ -70,30 +103,36 @@ const PinnedCoursesSettingsPage = (
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
         <FormLabel>Edit courses</FormLabel>
         {props.data.pinnedCourses.length ? (
-          <List sx={{ maxHeight: 150, overflow: 'auto' }}>
-            {props.data.pinnedCourses.map((course) => (
-              <ListItem key={course.id}>
-                <ListItemContent>
-                  <Typography
-                    title={course.name}
-                    sx={{
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {course.name}
-                  </Typography>
-                </ListItemContent>
-                <IconButton onClick={() => setEditCourseDialog(course)}>
-                  <Edit />
-                </IconButton>
-                <IconButton onClick={() => setRemoveCourseDialog(course)}>
-                  <Delete />
-                </IconButton>
-              </ListItem>
-            ))}
-          </List>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <List
+              sx={(theme) => ({
+                maxHeight: 150,
+                overflowX: 'hidden',
+                overflowY: 'scroll',
+                scrollbarWidth: 'thin',
+                border: `1px solid ${theme.palette.neutral.outlinedDisabledBorder}`,
+                borderRadius: `${theme.radius.md} 0 0 ${theme.radius.md}`,
+              })}
+            >
+              <SortableContext
+                items={props.data.pinnedCourses.map((course) => course.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {props.data.pinnedCourses.map((course) => (
+                  <CourseListItem
+                    course={course}
+                    onEdit={setEditCourseDialog}
+                    onRemove={setRemoveCourseDialog}
+                    key={course.id}
+                  />
+                ))}
+              </SortableContext>
+            </List>
+          </DndContext>
         ) : (
           <Typography>No pinned courses</Typography>
         )}
