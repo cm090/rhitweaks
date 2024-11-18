@@ -10,28 +10,31 @@ import {
   Modal,
   ModalDialog,
 } from '@mui/joy';
-import React, { ReactNode, useState } from 'react';
+import React, { memo, ReactNode, useEffect, useState } from 'react';
 import { Course } from '../../../types';
 
 interface EditCourseDialogProps {
-  open?: Course;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onConfirm: (course?: Course) => void;
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  course?: Course;
+  onConfirm: (value: string) => void;
 }
 
 const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
-  const [courseName, setCourseName] = useState(props.open?.name);
+  const [courseName, setCourseName] = useState<string>();
+
+  useEffect(() => setCourseName(props.course?.name), [props.course]);
 
   const handleSubmit = () => {
-    if (courseName && courseName.length) {
-      props.onConfirm({ ...props.open, name: courseName } as Course);
+    if (courseName && courseName.trim().length) {
+      props.onConfirm(courseName.trim());
     }
     props.setOpen(false);
     setCourseName(undefined);
   };
 
   return (
-    <Modal open={props.open != undefined} onClose={() => props.setOpen(false)}>
+    <Modal open={props.open} onClose={() => props.setOpen(false)}>
       <ModalDialog variant="outlined" role="alertdialog">
         <DialogTitle>Edit course</DialogTitle>
         <Divider />
@@ -45,13 +48,16 @@ const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
             <FormControl>
               <FormLabel>Course name</FormLabel>
               <Input
-                value={courseName ?? props.open?.name ?? ''}
+                value={courseName ?? ''}
                 onChange={(e) => setCourseName(e.target.value)}
               />
             </FormControl>
           </form>
         </DialogContent>
         <DialogActions>
+          <Button variant="solid" onClick={handleSubmit}>
+            Save
+          </Button>
           <Button
             variant="plain"
             color="neutral"
@@ -59,13 +65,10 @@ const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
           >
             Cancel
           </Button>
-          <Button variant="solid" onClick={handleSubmit}>
-            Save
-          </Button>
         </DialogActions>
       </ModalDialog>
     </Modal>
   );
 };
 
-export default EditCourseDialog;
+export default memo(EditCourseDialog);

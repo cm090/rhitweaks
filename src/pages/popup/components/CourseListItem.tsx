@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Course } from '../../../types';
@@ -55,4 +55,4 @@ const CourseListItem = (props: CourseListItemProps) => {
   );
 };
 
-export default CourseListItem;
+export default memo(CourseListItem);

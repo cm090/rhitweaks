@@ -7,30 +7,31 @@ import {
   Modal,
   ModalDialog,
 } from '@mui/joy';
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { Course } from '../../../types';
 
 interface RemoveCourseDialogProps {
-  open?: Course;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onConfirm: (course?: Course) => void;
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  course?: Course;
+  onConfirm: () => void;
 }
 
 const RemoveCourseDialog = (props: RemoveCourseDialogProps): ReactNode => (
-  <Modal open={props.open != undefined} onClose={() => props.setOpen(false)}>
+  <Modal open={props.open} onClose={() => props.setOpen(false)}>
     <ModalDialog variant="outlined" role="alertdialog">
       <DialogTitle>Remove course</DialogTitle>
       <Divider />
       <DialogContent>
-        Are you sure you want to remove {props.open?.name ?? ''}? This cannot be
-        undone.
+        Are you sure you want to remove {props.course?.name ?? 'this course'}?
+        This cannot be undone.
       </DialogContent>
       <DialogActions>
         <Button
           variant="solid"
           color="danger"
           onClick={() => {
-            props.onConfirm(props.open);
+            props.onConfirm();
             props.setOpen(false);
           }}
         >
@@ -48,4 +49,4 @@ const RemoveCourseDialog = (props: RemoveCourseDialogProps): ReactNode => (
   </Modal>
 );
 
-export default RemoveCourseDialog;
+export default memo(RemoveCourseDialog);

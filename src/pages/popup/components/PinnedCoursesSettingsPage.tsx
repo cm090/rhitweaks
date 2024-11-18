@@ -146,14 +146,16 @@ const PinnedCoursesSettingsPage = (
         Clear pinned courses
       </Button>
       <EditCourseDialog
-        open={editCourseDialog}
+        open={editCourseDialog !== undefined}
         setOpen={() => setEditCourseDialog(undefined)}
-        onConfirm={updateCourseName}
+        course={editCourseDialog}
+        onConfirm={(name) => updateCourseName({ ...editCourseDialog!, name })}
       />
       <RemoveCourseDialog
-        open={removeCourseDialog}
+        open={removeCourseDialog !== undefined}
         setOpen={() => setRemoveCourseDialog(undefined)}
-        onConfirm={deleteCourse}
+        course={removeCourseDialog}
+        onConfirm={() => deleteCourse(removeCourseDialog)}
       />
       <ResetWarningDialog
         open={resetDialogOpen}
