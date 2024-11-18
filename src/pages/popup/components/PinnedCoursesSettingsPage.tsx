@@ -1,17 +1,22 @@
-import { Delete } from '@mui/icons-material';
+import { Delete, Edit } from '@mui/icons-material';
 import {
   Button,
   FormControl,
   FormLabel,
   IconButton,
-  Input,
+  List,
+  ListItem,
+  ListItemContent,
   Option,
   Select,
+  Typography,
 } from '@mui/joy';
 import React, { ReactNode, useState } from 'react';
 import { Course, MoodleData, Page } from '../../../types';
 import ResetWarningDialog from './ResetWarningDialog';
 import SettingsWrapper from './SettingsWrapper';
+import EditCourseDialog from './EditCourseDialog';
+import RemoveCourseDialog from './RemoveCourseDialog';
 
 interface PinnedCoursesSettingsPageProps {
   setPage: (page: Page) => void;
@@ -22,29 +27,27 @@ interface PinnedCoursesSettingsPageProps {
 const PinnedCoursesSettingsPage = (
   props: PinnedCoursesSettingsPageProps,
 ): ReactNode => {
-  const emptyCourse: Course = { id: '', name: '' };
-  const [selectedCourse, setSelectedCourse] = useState<Course>(emptyCourse);
+  const [editCourseDialog, setEditCourseDialog] = useState<Course>();
+  const [removeCourseDialog, setRemoveCourseDialog] = useState<Course>();
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
-  const updateCourseName = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-    setSelectedCourse((prevCourse) => {
-      const updatedCourse = { ...prevCourse, name: target.value } as Course;
-      props.setData((prevData) => ({
-        ...prevData,
-        pinnedCourses: prevData.pinnedCourses.map((course) =>
-          course.id === selectedCourse?.id ? updatedCourse : course,
-        ),
-      }));
-      return updatedCourse;
-    });
-  const deleteSelectedCourse = () => {
+
+  const updateCourseName = (current?: Course) =>
+    current &&
+    props.setData((prevData) => ({
+      ...prevData,
+      pinnedCourses: prevData.pinnedCourses.map((course) =>
+        course.id === current.id ? current : course,
+      ),
+    }));
+
+  const deleteCourse = (current?: Course) =>
+    current &&
     props.setData((prevData) => ({
       ...prevData,
       pinnedCourses: prevData.pinnedCourses.filter(
-        (course) => course.id !== selectedCourse?.id,
+        (course) => course.id !== current?.id,
       ),
     }));
-    setSelectedCourse(emptyCourse);
-  };
 
   return (
     <SettingsWrapper
@@ -65,41 +68,35 @@ const PinnedCoursesSettingsPage = (
         </Select>
       </FormControl>
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
-        <FormLabel>Edit course</FormLabel>
-        <Select
-          value={selectedCourse?.id ?? ''}
-          onChange={(_, course) =>
-            setSelectedCourse(
-              props.data.pinnedCourses.find((c) => c.id === course) ??
-                emptyCourse,
-            )
-          }
-        >
-          {props.data.pinnedCourses.map((course) => (
-            <Option key={course.id} value={course.id} sx={{ width: 'inherit' }}>
-              {course.name}
-            </Option>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
-        <FormLabel>Label</FormLabel>
-        <Input
-          variant="outlined"
-          disabled={!selectedCourse.id}
-          value={selectedCourse?.name}
-          onChange={updateCourseName}
-          endDecorator={
-            <>
-              <IconButton
-                onClick={deleteSelectedCourse}
-                disabled={!selectedCourse.id}
-              >
-                <Delete />
-              </IconButton>
-            </>
-          }
-        />
+        <FormLabel>Edit courses</FormLabel>
+        {props.data.pinnedCourses.length ? (
+          <List sx={{ maxHeight: 150, overflow: 'auto' }}>
+            {props.data.pinnedCourses.map((course) => (
+              <ListItem key={course.id}>
+                <ListItemContent>
+                  <Typography
+                    title={course.name}
+                    sx={{
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {course.name}
+                  </Typography>
+                </ListItemContent>
+                <IconButton onClick={() => setEditCourseDialog(course)}>
+                  <Edit />
+                </IconButton>
+                <IconButton onClick={() => setRemoveCourseDialog(course)}>
+                  <Delete />
+                </IconButton>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <Typography>No pinned courses</Typography>
+        )}
       </FormControl>
       <Button
         color="danger"
@@ -108,6 +105,16 @@ const PinnedCoursesSettingsPage = (
       >
         Clear pinned courses
       </Button>
+      <EditCourseDialog
+        open={editCourseDialog}
+        setOpen={() => setEditCourseDialog(undefined)}
+        onConfirm={updateCourseName}
+      />
+      <RemoveCourseDialog
+        open={removeCourseDialog}
+        setOpen={() => setRemoveCourseDialog(undefined)}
+        onConfirm={deleteCourse}
+      />
       <ResetWarningDialog
         open={resetDialogOpen}
         setOpen={setResetDialogOpen}
