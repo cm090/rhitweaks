@@ -1,17 +1,32 @@
-import { Delete } from '@mui/icons-material';
 import {
   Button,
   FormControl,
   FormLabel,
-  IconButton,
-  Input,
+  List,
   Option,
   Select,
+  Typography,
 } from '@mui/joy';
 import React, { ReactNode, useState } from 'react';
 import { Course, MoodleData, Page } from '../../../types';
 import ResetWarningDialog from './ResetWarningDialog';
 import SettingsWrapper from './SettingsWrapper';
+import EditCourseDialog from './EditCourseDialog';
+import RemoveCourseDialog from './RemoveCourseDialog';
+import CourseListItem from './CourseListItem';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 interface PinnedCoursesSettingsPageProps {
   setPage: (page: Page) => void;
@@ -22,29 +37,50 @@ interface PinnedCoursesSettingsPageProps {
 const PinnedCoursesSettingsPage = (
   props: PinnedCoursesSettingsPageProps,
 ): ReactNode => {
-  const emptyCourse: Course = { id: '', name: '' };
-  const [selectedCourse, setSelectedCourse] = useState<Course>(emptyCourse);
+  const [editCourseDialog, setEditCourseDialog] = useState<Course>();
+  const [removeCourseDialog, setRemoveCourseDialog] = useState<Course>();
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
-  const updateCourseName = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-    setSelectedCourse((prevCourse) => {
-      const updatedCourse = { ...prevCourse, name: target.value } as Course;
-      props.setData((prevData) => ({
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+  );
+
+  const handleDragEnd = ({ active, over }: DragEndEvent) =>
+    active.id !== over?.id &&
+    props.setData((prevData) => {
+      const oldIndex = prevData.pinnedCourses.findIndex(
+        (course) => course.id === active.id,
+      );
+      const newIndex = prevData.pinnedCourses.findIndex(
+        (course) => course.id === over?.id,
+      );
+
+      return {
         ...prevData,
-        pinnedCourses: prevData.pinnedCourses.map((course) =>
-          course.id === selectedCourse?.id ? updatedCourse : course,
-        ),
-      }));
-      return updatedCourse;
+        pinnedCourses: arrayMove(prevData.pinnedCourses, oldIndex, newIndex),
+      };
     });
-  const deleteSelectedCourse = () => {
+
+  const updateCourseName = (current?: Course) =>
+    current &&
+    props.setData((prevData) => ({
+      ...prevData,
+      pinnedCourses: prevData.pinnedCourses.map((course) =>
+        course.id === current.id ? current : course,
+      ),
+    }));
+
+  const deleteCourse = (current?: Course) =>
+    current &&
     props.setData((prevData) => ({
       ...prevData,
       pinnedCourses: prevData.pinnedCourses.filter(
-        (course) => course.id !== selectedCourse?.id,
+        (course) => course.id !== current?.id,
       ),
     }));
-    setSelectedCourse(emptyCourse);
-  };
 
   return (
     <SettingsWrapper
@@ -65,49 +101,62 @@ const PinnedCoursesSettingsPage = (
         </Select>
       </FormControl>
       <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
-        <FormLabel>Edit course</FormLabel>
-        <Select
-          value={selectedCourse?.id ?? ''}
-          onChange={(_, course) =>
-            setSelectedCourse(
-              props.data.pinnedCourses.find((c) => c.id === course) ??
-                emptyCourse,
-            )
-          }
-        >
-          {props.data.pinnedCourses.map((course) => (
-            <Option key={course.id} value={course.id} sx={{ width: 'inherit' }}>
-              {course.name}
-            </Option>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl sx={{ width: '100%', marginBottom: '10px' }}>
-        <FormLabel>Label</FormLabel>
-        <Input
-          variant="outlined"
-          disabled={!selectedCourse.id}
-          value={selectedCourse?.name}
-          onChange={updateCourseName}
-          endDecorator={
-            <>
-              <IconButton
-                onClick={deleteSelectedCourse}
-                disabled={!selectedCourse.id}
+        <FormLabel>Edit courses</FormLabel>
+        {props.data.pinnedCourses.length ? (
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <List
+              sx={(theme) => ({
+                maxHeight: 150,
+                overflowX: 'hidden',
+                overflowY: 'scroll',
+                scrollbarWidth: 'thin',
+                border: `1px solid ${theme.palette.divider}`,
+                borderRadius: `${theme.radius.md} 0 0 ${theme.radius.md}`,
+              })}
+            >
+              <SortableContext
+                items={props.data.pinnedCourses.map((course) => course.id)}
+                strategy={verticalListSortingStrategy}
               >
-                <Delete />
-              </IconButton>
-            </>
-          }
-        />
+                {props.data.pinnedCourses.map((course) => (
+                  <CourseListItem
+                    course={course}
+                    onEdit={setEditCourseDialog}
+                    onRemove={setRemoveCourseDialog}
+                    key={course.id}
+                  />
+                ))}
+              </SortableContext>
+            </List>
+          </DndContext>
+        ) : (
+          <Typography>No pinned courses</Typography>
+        )}
       </FormControl>
       <Button
         color="danger"
         sx={{ width: '100%', marginBlock: '10px' }}
         onClick={() => setResetDialogOpen(true)}
+        disabled={!props.data.pinnedCourses.length}
       >
         Clear pinned courses
       </Button>
+      <EditCourseDialog
+        open={editCourseDialog !== undefined}
+        setOpen={() => setEditCourseDialog(undefined)}
+        course={editCourseDialog}
+        onConfirm={(name) => updateCourseName({ ...editCourseDialog!, name })}
+      />
+      <RemoveCourseDialog
+        open={removeCourseDialog !== undefined}
+        setOpen={() => setRemoveCourseDialog(undefined)}
+        course={removeCourseDialog}
+        onConfirm={() => deleteCourse(removeCourseDialog)}
+      />
       <ResetWarningDialog
         open={resetDialogOpen}
         setOpen={setResetDialogOpen}
