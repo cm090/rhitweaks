@@ -51,11 +51,11 @@ const PinnedCoursesSettingsPage = (
   const handleDragEnd = ({ active, over }: DragEndEvent) =>
     active.id !== over?.id &&
     props.setData((prevData) => {
-      const oldIndex = prevData.pinnedCourses.indexOf(
-        prevData.pinnedCourses.find((course) => course.id === active.id)!,
+      const oldIndex = prevData.pinnedCourses.findIndex(
+        (course) => course.id === active.id,
       );
-      const newIndex = prevData.pinnedCourses.indexOf(
-        prevData.pinnedCourses.find((course) => course.id === over?.id)!,
+      const newIndex = prevData.pinnedCourses.findIndex(
+        (course) => course.id === over?.id,
       );
 
       return {
