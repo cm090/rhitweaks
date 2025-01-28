@@ -727,6 +727,7 @@ body.rhitweaks-enabled.lockscroll {
     overflow: auto !important;
 }
 
-body.rhitweaks-enabled .course-section-header .btn {
+body.rhitweaks-enabled .course-section-header .btn,
+body.rhitweaks-enabled .btn.btn-icon.icons-collapse-expand:hover {
     outline-color: var(--accent-color) !important;
 }
