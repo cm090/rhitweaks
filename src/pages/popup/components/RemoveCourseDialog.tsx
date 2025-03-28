@@ -1,6 +1,4 @@
 import {
-  Button,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
@@ -9,6 +7,7 @@ import {
 } from '@mui/joy';
 import React, { memo, ReactNode } from 'react';
 import { Course } from '../../../types';
+import { DialogActions } from './DialogActions';
 
 interface RemoveCourseDialogProps {
   open: boolean;
@@ -26,27 +25,15 @@ const RemoveCourseDialog = (props: RemoveCourseDialogProps): ReactNode => (
         Are you sure you want to remove {props.course?.name ?? 'this course'}?
         This cannot be undone.
       </DialogContent>
-      <DialogActions>
-        <Button
-          variant="solid"
-          color="danger"
-          onClick={() => {
-            props.onConfirm();
-            props.setOpen(false);
-          }}
-        >
-          Remove
-        </Button>
-        <Button
-          variant="plain"
-          color="neutral"
-          onClick={() => props.setOpen(false)}
-        >
-          Cancel
-        </Button>
-      </DialogActions>
+      <DialogActions
+        actionText="Remove"
+        onConfirm={() => {
+          props.onConfirm();
+          props.setOpen(false);
+        }}
+        onCancel={() => props.setOpen(false)}
+      />
     </ModalDialog>
   </Modal>
 );
-
 export default memo(RemoveCourseDialog);
