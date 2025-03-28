@@ -31,8 +31,10 @@ const formatTimelineElement = (
     ) {
       return;
     }
-    if (parseInt(time[0]) > 12) {
-      time[0] = parseInt(time[0]) - 12 + '';
+    if (parseInt(time[0]) >= 12) {
+      if (parseInt(time[0]) > 12) {
+        time[0] = parseInt(time[0]) - 12 + '';
+      }
       (item as HTMLElement).innerText = `${time[0]}:${time[1]} PM`;
       return;
     } else if (parseInt(time[0]) == 0) {
