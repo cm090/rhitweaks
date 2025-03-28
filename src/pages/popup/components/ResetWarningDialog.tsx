@@ -1,6 +1,4 @@
 import {
-  Button,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
@@ -8,6 +6,7 @@ import {
   ModalDialog,
 } from '@mui/joy';
 import React, { ReactNode } from 'react';
+import { DialogActions } from './DialogActions';
 
 interface ResetWarningDialogProps {
   open: boolean;
@@ -26,25 +25,14 @@ const ResetWarningDialog = (props: ResetWarningDialogProps): ReactNode => (
         Are you sure you want to reset {props.isAllData ? 'all ' : ''}your{' '}
         {props.dataType ? `${props.dataType} ` : ''}data? This cannot be undone.
       </DialogContent>
-      <DialogActions>
-        <Button
-          variant="solid"
-          color="danger"
-          onClick={() => {
-            props.onConfirm();
-            props.setOpen(false);
-          }}
-        >
-          Reset
-        </Button>
-        <Button
-          variant="plain"
-          color="neutral"
-          onClick={() => props.setOpen(false)}
-        >
-          Cancel
-        </Button>
-      </DialogActions>
+      <DialogActions
+        actionText="Reset"
+        onConfirm={() => {
+          props.onConfirm();
+          props.setOpen(false);
+        }}
+        onCancel={() => props.setOpen(false)}
+      />
     </ModalDialog>
   </Modal>
 );

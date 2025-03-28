@@ -1,6 +1,4 @@
 import {
-  Button,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
@@ -12,6 +10,7 @@ import {
 } from '@mui/joy';
 import React, { memo, ReactNode, useEffect, useState } from 'react';
 import { Course } from '../../../types';
+import { DialogActions } from './DialogActions';
 
 interface EditCourseDialogProps {
   open: boolean;
@@ -54,18 +53,12 @@ const EditCourseDialog = (props: EditCourseDialogProps): ReactNode => {
             </FormControl>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button variant="solid" onClick={handleSubmit}>
-            Save
-          </Button>
-          <Button
-            variant="plain"
-            color="neutral"
-            onClick={() => props.setOpen(false)}
-          >
-            Cancel
-          </Button>
-        </DialogActions>
+        <DialogActions
+          actionText="Save"
+          onConfirm={handleSubmit}
+          onCancel={() => props.setOpen(false)}
+          colorPrimary={true}
+        />
       </ModalDialog>
     </Modal>
   );
