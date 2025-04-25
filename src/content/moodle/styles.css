@@ -387,11 +387,13 @@ body.rhitweaks-enabled #courseindexdrawercontrols button {
     width: 26px;
     border-radius: 0.5rem !important;
     padding: 0 !important;
+    margin-top: 5px;
 }
 
 body.rhitweaks-enabled .drawercontent {
     height: 100% !important;
-    padding-top: 0;
+    padding-top: 12px;
+    padding-bottom: 50px;
     margin-top: 0;
 }
 
