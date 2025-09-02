@@ -15,8 +15,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "rhitweaks@rhit.cf",
-      "update_url": "https://gist.githubusercontent.com/cm090/67f8f886c11fd877d42a00b6e5e88a78/raw/rhitweaks-firefox-update.json"
+      "id": "rhitweaks@rhit.cf"
     }
   }
 }
