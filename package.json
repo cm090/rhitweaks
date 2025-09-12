@@ -1,6 +1,6 @@
 {
   "name": "rhitweaks",
-  "version": "7.3.4",
+  "version": "7.3.5",
   "private": true,
   "description": "Customize the look and feel of RHIT pages (https://github.com/cm090/rhitweaks)",
   "author": "Canon Maranda",
@@ -16,8 +16,6 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.18",
     "@mui/joy": "^5.0.0-beta.36",
-    "bootstrap": "^5.3.3",
-    "jquery": "^3.7.1",
     "prettier": "^2.8.8",
     "react": "^18.3.1",
     "react-colorful": "^5.6.1",

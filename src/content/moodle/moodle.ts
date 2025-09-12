@@ -1,5 +1,3 @@
-import * as bootstrap from 'bootstrap';
-import $ from 'jquery';
 import { moodleDefaults } from '../../defaults';
 import { MoodleData } from '../../types';
 import {
@@ -13,7 +11,6 @@ import buildCourseDropdown from './modules/courseDropdown';
 import initializeNavItemListeners from './modules/customNavigation';
 import transformUrl from './modules/modifyUrl';
 import applyStyle from './modules/setStyle';
-import addSearchModal from './modules/siteSearch';
 import formatTimeline from './modules/timelineFormat';
 
 const configureMoodle = () => {
@@ -83,15 +80,6 @@ const initialize = (moodleData: MoodleData) => {
       if (document.querySelector('.block_timeline')) {
         wait();
       }
-    })
-    .then(() => {
-      document.addEventListener('keydown', (e) => {
-        if (!e.repeat && (e.ctrlKey || e.metaKey) && e.key == 'k') {
-          e.preventDefault();
-        }
-      });
-      setTimeout(() => addSearchModal(moodleData, bootstrap, $), 2000);
-      console.log('RHITweaks > Search program ready, press Ctrl+K to use');
     })
     .then(() => {
       buildCourseDropdown(moodleData);

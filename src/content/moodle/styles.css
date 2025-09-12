@@ -42,7 +42,6 @@ body.rhitweaks-enabled div#nav-drawer::-webkit-scrollbar,
 body.rhitweaks-enabled .evalkit-widget-surveys,
 body.rhitweaks-enabled .usernav li:first-child,
 body.rhitweaks-enabled #usernavigation .divider,
-body.rhitweaks-enabled #searchform-navbar,
 body.rhitweaks-enabled #page-footer > div:nth-child(1) > button,
 body.rhitweaks-enabled .drawercontent::-webkit-scrollbar,
 body.rhitweaks-enabled .moodle-dialogue-exception {
@@ -83,7 +82,8 @@ body.rhitweaks-enabled .dropdown-item:hover,
 body.rhitweaks-enabled .dropdown-item:focus,
 body.rhitweaks-enabled .dropdown-item:focus-within,
 body.rhitweaks-enabled .badge-info,
-body.rhitweaks-enabled .bg-primary {
+body.rhitweaks-enabled .bg-primary,
+body.rhitweaks-enabled #searchform-navbar {
     background: var(--accent-color) !important;
     border-color: var(--accent-color);
 }
@@ -221,52 +221,9 @@ body.rhitweaks-enabled #nav-drawer > nav > ul > li > a > div.ml-1 {
     margin-left: 0 !important;
 }
 
-body.rhitweaks-enabled #rmtSearch .modal-dialog {
-    top: 100px;
-}
-
-body.rhitweaks-enabled #rmtSearch .modal-body,
-body.rhitweaks-enabled #rmtSearch .modal-footer {
-    background: rgba(0, 0, 0, 0.87);
-}
-
-body.rhitweaks-enabled #rmtSearch .modal-body {
-    border-radius: 12px 12px 0 0;
-}
-
-body.rhitweaks-enabled #rmtSearch .modal-footer {
-    border-radius: 0 0 12px 12px;
-    border-top-color: #6f6f6f !important;
-}
-
-body.rhitweaks-enabled #rmtSearch .modal-content,
 body.rhitweaks-enabled .course-section-header .btn {
     background: transparent !important;
     border: none !important;
-}
-
-body.rhitweaks-enabled #rmtSearch #rmtResultList div {
-    padding: 8px !important;
-    color: white;
-}
-
-body.rhitweaks-enabled #rmtSearch #rmtResultList div.active {
-    background: var(--accent-color);
-    border-radius: 4px;
-}
-
-body.rhitweaks-enabled #rmtSearch #rmtResultList div.active::after {
-    content: 'Enter';
-    color: #ffffffa6;
-    float: right;
-}
-
-body.rhitweaks-enabled #rmtSearch #rmtSearchInput {
-    background: transparent;
-    color: white;
-    width: calc(100% - 25px);
-    border: none !important;
-    outline: none;
 }
 
 body.rhitweaks-enabled .aabtn.focus,
@@ -305,7 +262,7 @@ body.rhitweaks-enabled [role='treeitem']:not([aria-expanded='true']).focus,
 body.rhitweaks-enabled [role='treeitem']:not([aria-expanded='true']):focus,
 body.rhitweaks-enabled button:focus,
 body.rhitweaks-enabled select:focus,
-body.rhitweaks-enabled input:not(#rmtSearchInput):focus,
+body.rhitweaks-enabled input:focus,
 body.rhitweaks-enabled .atto_toolbar_row:focus,
 body.rhitweaks-enabled .editor_atto_content:focus,
 body.rhitweaks-enabled .form-autocomplete-suggestions li[aria-selected='true'],
@@ -348,7 +305,8 @@ body.rhitweaks-enabled .courseindex .courseindex-section.current {
 }
 
 body.rhitweaks-enabled .course-content .current,
-body.rhitweaks-enabled .main-inner {
+body.rhitweaks-enabled .main-inner,
+body.rhitweaks-enabled #searchform-navbar input {
     background: var(--card-color) !important;
 }
 
@@ -522,6 +480,11 @@ body.rhitweaks-enabled .moremenu .nav-link.active {
 
 body.rhitweaks-enabled a:not(.btn-primary, .dropdown-item):hover {
     color: var(--hover-color);
+}
+
+#usernavigation a:hover,
+#usernavigation div.popover-region-toggle:hover {
+    background: color-mix(in srgb, var(--hover-color) 90%, white 10%) !important;
 }
 
 body.rhitweaks-enabled #sticky-footer {
@@ -732,4 +695,18 @@ body.rhitweaks-enabled.lockscroll {
 body.rhitweaks-enabled .course-section-header .btn,
 body.rhitweaks-enabled .btn.btn-icon.icons-collapse-expand:hover {
     outline-color: var(--accent-color) !important;
+}
+
+body.rhitweaks-enabled #searchform-navbar input {
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+body.rhitweaks-enabled #searchform-navbar .btn-close {
+    position: absolute;
+    left: 260px;
+    background-color: var(--card-color) !important;
+    border-radius: 50%;
+    height: 24px;
+    top: 2.5px;
+    opacity: 1;
 }
