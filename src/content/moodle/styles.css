@@ -669,11 +669,6 @@ body.rhitweaks-enabled table .spacer {
     height: 0 !important;
 }
 
-body.rhitweaks-enabled #rmtResultList {
-    justify-content: start;
-    display: block;
-}
-
 body.rhitweaks-enabled .dropdown-item.navbar-control {
     cursor: pointer !important;
 }
