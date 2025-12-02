@@ -21,8 +21,8 @@ A clear and concise description of what the bug is.
 **Severity**
 How much does the bug impact you?
 - [ ] Low: minor styling issue or inconvenience
-- [x] Medium: causes some problems but there's a workaround
-- [ ] High: extension must be disabled to use as intended
+- [x] Medium: causes some problems but there's a workaround (e.g. turning off the extension)
+- [ ] High: an extension-exclusive feature does not function as expected
 - [ ] Extreme: an unexpected action is taken by the extension automatically
 
 **To Reproduce**
@@ -43,4 +43,4 @@ If applicable, add screenshots to help explain your problem.
  - Extension version [e.g. 7.3.2]
 
 **Additional context**
-Add any other context about the problem here (don't include any personal or sensitive information!).
+Add any other context about the problem here (don't include any personal or sensitive information!)
